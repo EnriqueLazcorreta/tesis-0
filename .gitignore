@@ -129,3 +129,13 @@ sympy-plots-for-*.tex/
 *.log
 
 *.gz
+
+Lazcorreta.Tesis.aux
+
+Lazcorreta.Tesis.log
+
+Lazcorreta.Tesis.synctex.gz
+
+Lazcorreta.Tesis.toc
+
+*.toc
