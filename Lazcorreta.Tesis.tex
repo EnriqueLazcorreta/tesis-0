@@ -1,12 +1,20 @@
 \documentclass[utf8]{book}
 \usepackage[utf8]{inputenc}
 \usepackage{hyperref}
+\usepackage[spanish]{babel}
 
 
 \begin{document}
 Hola, tesis doctoral en informática !!!
 \newpage
 
+\section*{Agradecimientos}
+\input{agradecimiento}
+\newpage
+
+
+Este es el índice de mi último informe: 
+\input{borrar/tesis-Enrique-2015}
 \tableofcontents
 
 \chapter*{Argumentación}
@@ -18,18 +26,29 @@ Hola, tesis doctoral en informática !!!
 
 \chapter{Sistemas de Recomendación Web}
 \label{chap:SRW}
+\input{contenido/srw}
 
 
 
 
-\chapter{Catálogos}
+\chapter{Minería de Reglas de Asociación (ARM)}
+\label{chap:arm}
+\input{contenido/arm}
+
+
+
+
+\chapter{ARM sobre Catálogos}
 \label{chap:catalogos}
+\input{contenido/catalogos}
 
 
 
 
 \chapter{Conclusiones y Trabajo Futuro}
 \label{chap:conclusiones-y-trabajo-futuro}
+\input{contenido/conclusiones}
+\input{contenido/trabajo-futuro}
 
 
 
