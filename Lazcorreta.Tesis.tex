@@ -1,10 +1,21 @@
 \documentclass[utf8]{book}
 \usepackage[utf8]{inputenc}
+
+%minted es un paquete interesante para colorear código. He de instalarlo bien con python para que funcione
+\usepackage{minted}
+%\usepackage{listings}
+
+%Por lo visto hyperref tiene la opción de indicar impresión a doble cara... pero no la encuentro.
 \usepackage{hyperref}
 \usepackage[spanish]{babel}
 
 
 \begin{document}
+
+%\lstset{language=C++}
+
+
+
 Hola, tesis doctoral en informática !!!
 \newpage
 
@@ -24,14 +35,14 @@ Este es el índice de mi último informe:
 
 
 
-\chapter{Sistemas de Recomendación Web}
+\chapter[SRW]{Sistemas de Recomendación Web}
 \label{chap:SRW}
 \input{contenido/srw}
 
 
 
 
-\chapter{Minería de Reglas de Asociación (ARM)}
+\chapter[ARM]{Minería de Reglas de Asociación (ARM)}
 \label{chap:arm}
 \input{contenido/arm}
 
@@ -59,6 +70,10 @@ Este es el índice de mi último informe:
 \chapter{Código}
 \label{apdx:codigo}
 \input{apendice/codigo}
+
+\chapter{Datos utilizados}
+\label{apdx:datos-utilizados}
+\input{apendice/datos-utilizados}
 
 \listoffigures
 
