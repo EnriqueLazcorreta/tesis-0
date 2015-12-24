@@ -1,4 +1,4 @@
-\BOOKMARK [0][-]{chapter.1}{Sistemas de Recomendaci\363n Web}{}% 1
+\BOOKMARK [0][-]{chapter.1}{SRW}{}% 1
 \BOOKMARK [1][-]{section.1.1}{Personalizaci\363n de la Web}{chapter.1}% 2
 \BOOKMARK [1][-]{section.1.2}{Miner\355a de Uso Web}{chapter.1}% 3
 \BOOKMARK [2][-]{subsection.1.2.1}{DATOS}{section.1.2}% 4
@@ -15,7 +15,7 @@
 \BOOKMARK [2][-]{subsection.1.4.1}{Actas de HCII\22005}{section.1.4}% 15
 \BOOKMARK [2][-]{subsection.1.4.2}{Actas de Interacci\363n\22005}{section.1.4}% 16
 \BOOKMARK [2][-]{subsection.1.4.3}{Actas de SICO\22005}{section.1.4}% 17
-\BOOKMARK [0][-]{chapter.2}{Miner\355a de Reglas de Asociaci\363n \(ARM\)}{}% 18
+\BOOKMARK [0][-]{chapter.2}{ARM}{}% 18
 \BOOKMARK [1][-]{section.2.1}{Conceptos b\341sicos}{chapter.2}% 19
 \BOOKMARK [2][-]{subsection.2.1.1}{Tipo de Datos}{section.2.1}% 20
 \BOOKMARK [2][-]{subsection.2.1.2}{Primeros algoritmos}{section.2.1}% 21
@@ -52,3 +52,7 @@
 \BOOKMARK [1][-]{section.Alph2.1}{Sistemas de Recomendaci\363n Web}{appendix.Alph2}% 52
 \BOOKMARK [1][-]{section.Alph2.2}{Miner\355a de Reglas de Asociaci\363n}{appendix.Alph2}% 53
 \BOOKMARK [1][-]{section.Alph2.3}{Cat\341logos}{appendix.Alph2}% 54
+\BOOKMARK [0][-]{appendix.Alph3}{Datos utilizados}{}% 55
+\BOOKMARK [1][-]{section.Alph3.1}{Sistemas de Recomendaci\363n Web}{appendix.Alph3}% 56
+\BOOKMARK [1][-]{section.Alph3.2}{Miner\355a de Reglas de Asociaci\363n}{appendix.Alph3}% 57
+\BOOKMARK [1][-]{section.Alph3.3}{Cat\341logos}{appendix.Alph3}% 58

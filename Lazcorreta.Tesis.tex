@@ -1,13 +1,39 @@
 \documentclass[utf8]{book}
+\usepackage[spanish]{babel}
 \usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
 
 %minted es un paquete interesante para colorear código. He de instalarlo bien con python para que funcione
-\usepackage{minted}
+%\usepackage{minted}
+\usepackage{inconsolata}
+
+\usepackage{color}
+\definecolor{bluekeywords}{rgb}{0.13,0.13,1}
+\definecolor{greencomments}{rgb}{0,0.5,0}
+\definecolor{redstrings}{rgb}{0.9,0,0}
+
 %\usepackage{listings}
+\usepackage{listingsutf8}
+%inputencoding=utf8/latin1
+\lstset{language=[Sharp]C,
+  showspaces=false,
+  showtabs=false,
+  breaklines=true,
+  showstringspaces=false,
+  breakatwhitespace=true,
+%  escapeinside={(*@}{@*)},
+  escapeinside={\%*}{*)},
+  commentstyle=\color{greencomments},
+  keywordstyle=\color{bluekeywords},
+  stringstyle=\color{redstrings},
+  basicstyle=\ttfamily,
+  extendedchars=true,
+%  inputencoding=utf8,
+  literate={á}{{\'a}}1 {´A}{{\'A}}1 {ã}{{\~a}}1 {é}{{\'e}}1 {´E}{{\'E}}1 {í}{{\'i}}1 {´I}{{\'I}}1 {ó}{{\'o}}1 {´O}{{\'O}}1 {ú}{{\'u}}1 {´U}{{\'U}}1
+}
 
 %Por lo visto hyperref tiene la opción de indicar impresión a doble cara... pero no la encuentro.
-\usepackage{hyperref}
-\usepackage[spanish]{babel}
+\usepackage[pdfduplex=DuplexFlipLongEdge]{hyperref}
 
 
 \begin{document}
