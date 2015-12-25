@@ -1,10 +1,63 @@
 \documentclass[utf8]{book}
-\usepackage[spanish]{babel}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
 
-%minted es un paquete interesante para colorear código. He de instalarlo bien con python para que funcione
-%\usepackage{minted}
+%\usepackage[utf8]{inputenc}
+%\usepackage[T1]{fontenc}
+%\usepackage[spanish]{babel}
+
+\include{include/generico}
+%<- BORRAR
+%%%%%%%%%%%
+%%%%%%%%%%%%%%
+%\setlength\paperheight {224mm}%
+%\setlength\paperwidth  {174mm}
+%\usepackage{blindtext}
+\newcommand{\borrar}[2][red]{
+   \marginpar{
+      \begin{minipage}{50pt}
+         \footnotesize\color{#1}\noindent #2
+      \end{minipage}
+   }
+}
+\newcommand{\sinRevisar}{
+   \borrar{
+      \begin{tabular}{c}
+         *********\\
+         SECCI\'ON\\
+         SIN\\
+         REVISAR\\
+         **********
+      \end{tabular}
+   }
+}
+\newcommand{\sinTerminar}{
+   \borrar{
+      \begin{tabular}{c}
+         ***********\\
+         SECCI\'ON\\
+         SIN\\
+         TERMINAR\\
+         ************
+      \end{tabular}
+   }
+}
+\newcommand{\ABIERTO}{\borrar[white]{\colorbox{red}{ABIERTO}}}
+
+% \usepackage{fixme}
+\newcommand{\tab}[1][15]{\rule{#1pt}{0pt}}
+
+\newcommand{\yMas}{{\color{green}\colorbox{red}{\ldots y más.}}}
+
+\newcommand{\indice}[1]{\emph{#1}\index{#1}\xspace}
+
+%%Para imprimir en dinA4 con marcas de corte
+% \usepackage[a4,frame,center]{crop}
+
+%%%%%%%%%%%%%%%
+%%%%%%%%%%%%
+%-> !BORRAR
+\include{include/comandos}
+\include{include/indice-alfabetico}
+
 \usepackage{inconsolata}
 
 \usepackage{color}
@@ -14,7 +67,6 @@
 
 %\usepackage{listings}
 \usepackage{listingsutf8}
-%inputencoding=utf8/latin1
 \lstset{language=[Sharp]C,
   showspaces=false,
   showtabs=false,
@@ -34,6 +86,7 @@
 
 %Por lo visto hyperref tiene la opción de indicar impresión a doble cara... pero no la encuentro.
 \usepackage[pdfduplex=DuplexFlipLongEdge]{hyperref}
+
 
 
 \begin{document}
@@ -75,9 +128,9 @@ Este es el índice de mi último informe:
 
 
 
-\chapter{ARM sobre Catálogos}
-\label{chap:catalogos}
-\input{contenido/catalogos}
+\chapter{ARM para Clasificación}
+\label{chap:clasificacion}
+\input{contenido/clasificacion}
 
 
 
@@ -105,6 +158,36 @@ Este es el índice de mi último informe:
 
 \listoftables
 
+%\listofalgorithms
+%\addcontentsline{toc}{chapter}{Índice de algoritmos}
+
+\listoftheorems
+\addcontentsline{toc}{chapter}{Índice de definiciones}
+
+
+\lstlistoflistings
+\addcontentsline{toc}{chapter}{Índice de listados}
+
+% {
+\cleardoublepage
+% \small
+% \stepcounter{chapter}
+\phantomsection
+\printindex
+% }
+
+\chapter{Sobre la bibliografía}
+\thispagestyle{empty}
+%\input{./include/bibliografia}
+
+
+\setcounter{footnote}{0}
+% \bibliography{bib/TesisEnriqueLazcorreta,bib/CitanApriori2}
+%\defaultbibliographystyle{alpha} %alphadin
+% \bibliographystyle{plainnat} %plainnat alpha unsrtnat abbrvnat apalike-es
+% \thispagestyle{empty}
+\printbibliography
+\addcontentsline{toc}{chapter}{Bibliografía}
 
 
 \end{document}

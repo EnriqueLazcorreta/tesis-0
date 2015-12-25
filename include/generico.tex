@@ -1,0 +1,365 @@
+% !TEX root = ../Lazcorreta.Tesis.tex
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{times}
+%\usepackage{lmodern}
+
+
+
+%Diseño de contenido
+
+
+%Formato de la clase amsart.cls, menos restrictivo que book en la colocación de flotantes
+\setcounter{topnumber}{4}
+\setcounter{bottomnumber}{4}
+\setcounter{totalnumber}{4}
+\setcounter{dbltopnumber}{4}
+\renewcommand{\topfraction}{.97}
+\renewcommand{\bottomfraction}{.97}
+\renewcommand{\textfraction}{.03}
+\renewcommand{\floatpagefraction}{.9}
+\renewcommand{\dbltopfraction}{.97}
+\renewcommand{\dblfloatpagefraction}{.9}
+\setlength{\floatsep}{12pt plus 6pt minus 4pt}
+\setlength{\textfloatsep}{15pt plus 8pt minus 5pt}
+\setlength{\intextsep}{12pt plus 6pt minus 4pt}
+\setlength{\dblfloatsep}{12pt plus 6pt minus 4pt}
+\setlength{\dbltextfloatsep}{15pt plus 8pt minus 5pt}
+
+
+\usepackage[clearempty]{titlesec}
+%\titleformat{name=\chapter}
+
+%\titleformat
+%{\chapter} % command
+%[display] % shape
+%{\bfseries\Large\itshape} % format
+%{Story No. \ \thechapter} % label
+%{0.5ex} % sep
+%{
+    %\rule{\textwidth}{1pt}
+    %\vspace{1ex}
+    %\centering
+%} % before-code
+%[
+%\vspace{-0.5ex}%
+%\rule{\textwidth}{0.3pt}
+%] % after-code
+ %
+ %
+%\titleformat{\section}[wrap]
+%{\normalfont\bfseries}
+%{\thesection.}{0.5em}{}
+ %
+%\titlespacing{\section}{12pc}{1.5ex plus .1ex minus .2ex}{1pc}
+
+
+
+
+% %TODO: Probando makeidx, que tiene que cargar después que hyperref
+% \usepackage{makeidx}
+% %TODO: Probando imakeidx, que tiene que cargar antes que hyperref
+% % \usepackage{imakeidx}
+% \usepackage{esindex}
+% \usepackage{romanidx} %Incompatible con imakeidx
+
+
+
+
+
+
+
+%Bibliografía
+%\usepackage[round, sort, numbers]{natbib}
+%\usepackage[authoryear,sort&compress]{natbib}
+% \usepackage[authoryear,round]{natbib}
+% \usepackage[backend=bibtex]{biblatex}
+%He usado la información de http://tex.stackexchange.com/questions/44040/biblatex-biber-texmaker-miktex para configurar TeXMaker correctamente, quitando .aux de la llamada a biber en el comando BibTeX
+\usepackage[
+   backend=biber,
+   hyperref=true,
+   natbib=true,
+   url=false,
+   doi=false,
+   isbn=false,
+   backref=true,
+   style=authoryear,
+   maxcitenames=3,
+   maxbibnames=100,
+   block=none]{biblatex}
+% \bibliography{./bib/TesisEnriqueLazcorreta.bib,./bib/CitanApriori2}
+% \addbibresource{bib/TesisEnriqueLazcorreta.bib,bib/CitanApriori2.bib}
+% \bibliography{bib/TesisEnriqueLazcorreta,bib/CitanApriori2}
+\bibliography{./bib/TesisEnriqueLazcorreta}
+%\bibpunct{[}{]}{,}{n}{}{;}
+\usepackage{csquotes}
+
+%\usepackage{bibunits} %Para escribir bibliografías en capítulos...
+%
+%\let\stdthebibliography\thebibliography
+%\renewcommand{\thebibliography}{%
+%\let\chapter\section
+%\stdthebibliography}
+
+
+
+
+%TODO: Probando makeidx, que tiene que cargar después que hyperref
+\usepackage{makeidx}
+%TODO: Probando imakeidx, que tiene que cargar antes que hyperref
+% \usepackage{imakeidx}
+\usepackage{esindex}
+%\usepackage{romanidx} %Incompatible con imakeidx
+
+
+
+
+
+%Diseño de la página física
+
+\usepackage[paperheight = 224mm,
+            paperwidth = 174mm,
+            inner = 2.2cm,%2
+            outer = 2.8cm,%2.3
+            bottom = 2cm,%2.5
+            % margin=2cm,
+            marginparwidth=1.7cm,
+            marginparsep=0.3cm,
+            columnsep=1cm
+            ]
+            {geometry}
+
+
+
+
+% Hay que ponerlo después de geometry para que estén ya fijadas las dimensiones del papel...
+\usepackage[Bjornstrup]{fncychap} %Cabeceras de capítulos
+
+
+
+
+
+
+
+%\usepackage[spanish,activeacute]{babel}
+%\usepackage[english,spanish,es-lcroman,es-noindentfirst]{babel}  %es-lcroman permite añadir entradas al índice en frontmatter
+\usepackage[spanish]{babel}
+
+
+
+
+
+
+
+%Hyperenlaces en .pdf
+
+\usepackage[
+            pdftex,
+            plainpages = false, 
+            pdfpagelabels, 
+            %pdfpagelayout = useoutlines,
+            %bookmarks,
+            %bookmarksopen = true,
+            %bookmarksnumbered = true,
+            breaklinks = true,
+            %linktocpage,
+            % pagebackref, %LO HE COMENTADO PARA PROBAR biblatex
+            colorlinks = false,  % was true
+            linkcolor = blue,
+            urlcolor  = blue,
+            citecolor = red,
+            anchorcolor = green,
+            hyperindex = true,
+            hyperfigures,
+            pdfduplex=DuplexFlipLongEdge
+            ]
+            {hyperref} 
+ 
+\hypersetup{
+            % bookmarksopen=true,
+            % bookmarksopenlevel=3    % Muestra X niveles abiertos al inicio
+            % bookmarksdepth=3        % Crea X niveles en bookmarks del pdf
+            % bookmarks=true,         % show bookmarks bar
+            % unicode=false,          % non-Latin characters in Acrobat’s bookmarks
+            pdftoolbar=true,        % show Acrobat’s toolbar?
+            pdfmenubar=true,        % show Acrobat’s menu?
+            pdffitwindow=false,     % window fit to page when opened
+            pdfstartview={FitH},    % fits the width of the page to the window
+            pdftitle = {Análisis eficiente de catálogos mediante reglas de asociación},
+            pdfauthor={Enrique Lazcorreta Puigmartí},     % author
+            pdfsubject={Tesis doctoral - Universidad Miguel Hernández de Elche},   % subject of the document
+            % pdfcreator={Creator},   % creator of the document
+            % pdfproducer={Producer}, % producer of the document
+            pdfkeywords={Sistemas de Recomendación Web} {Personalización de la Web} {Reglas de Asociación}, % list of keywords
+            pdfnewwindow=true,      % links in new PDF window
+            % colorlinks=false,       % false: boxed links; true: colored links
+            % linkcolor=red,          % color of internal links (change box color with linkbordercolor)
+            % citecolor=green,        % color of links to bibliography
+            % filecolor=magenta,      % color of file links
+            % urlcolor=cyan           % color of external links
+}
+
+\usepackage[%open,%
+            openlevel=1,%
+            %atend%
+           ]{bookmark}%[2011/12/02]
+
+
+
+
+
+
+
+
+
+
+
+
+%Tabla de contenidos
+\usepackage[nottoc]{tocbibind}
+ 
+
+
+
+
+
+%Gráficos
+%\usepackage{graphics} % for improved inclusion of graphics
+\usepackage{wrapfig} % to include figure with text wrapping around it
+
+\usepackage[pdftex]{graphicx}
+\DeclareGraphicsExtensions{.png,.jpg,.jpeg,.pdf} %GIF doesn't work??
+\pdfcompresslevel=9
+\graphicspath{{./imagen/}%
+              {./1-SRW/imagen/}%
+              {./1-SRW/imagen/PNG/}%
+              {./2-ARM/imagen/}%
+              {./3-ARMCatalogos/imagen/}%
+              {./4-ConclusionesYTrabajoFuturo/imagen/}%
+				 }
+
+\usepackage{tikz}
+%\usetikzlibrary{arrows}
+\usetikzlibrary{calc,fadings,shapes.arrows,shadows,backgrounds,positioning}
+
+% \usepackage{subfigure} % subfiguras
+\usepackage{caption}
+\usepackage{subcaption}
+
+
+
+
+
+
+
+%Varios
+\usepackage{xspace}
+
+%\usepackage{synttree} %Árboles de decisión
+
+%%\usepackage[usenames,svgnames]{color}
+\usepackage{xcolor}
+
+\usepackage{appendix}
+\renewcommand{\appendixname}{Apéndices}
+\renewcommand{\appendixtocname}{Apéndices}
+\renewcommand{\appendixpagename}{Apéndices}
+
+
+
+
+%\usepackage{algorithm}
+%\usepackage{algorithmic}
+%Obtenido de https://code.google.com/p/tpso1c2010/source/browse/trunk/Informe/src/spanishAlgorithmic.tex?spec=svn2&r=2 y de http://www.rosapolis.net/2008/04/21/escribir-algoritmos-en-latex/
+%\input{./include/spanishAlgorithmic} % Archivo de traducción
+
+\usepackage{listings}
+\lstloadlanguages{[ANSI]C++}
+\renewcommand*{\lstlistingname}{Listado}
+\renewcommand*{\lstlistlistingname}{Índice de listados}
+
+\lstdefinelanguage{pseudocodigo}
+	{frame=trBL,
+	frameround=fttt,
+  % float=htbp,
+	mathescape=true,
+	%numbers=left,
+	keywords={for,do,begin,end,forall,foreach,break,continue,while,
+            if,then,else,and,or,
+            Answer,let,
+            insert,into,select,from,where,delete,add,to,sort,
+            repeat,until,on,generate,
+            procedure,call,output,with,add,clear},
+	keywordstyle=\textbf,
+	tabsize=2,
+	basicstyle=\small,
+	backgroundcolor=\color{green!2!white},
+	sensitive=false,
+	morecomment=[l]{//},
+	morecomment=[s]{/*}{*/}%,
+	%morestring=[b]"
+	}
+\lstdefinelanguage{listado}
+	{frame=trBL,
+	frameround=fttt,
+  % float=htbp,
+	mathescape=true,
+	%numbers=left,
+  keywords={1.,2.,3.,4.,5.,6.},
+	keywordstyle=\textbf,
+	tabsize=2,
+	basicstyle=\small,
+	backgroundcolor=\color{green!2!white},
+	sensitive=false,
+	morecomment=[l]{//},
+	morecomment=[s]{/*}{*/}%,
+	%morestring=[b]"
+	}
+\lstset{literate=   % Para usar UTF-8 en los ficheros
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\EUR}}1 {£}{{\pounds}}1
+}
+\lstset{language=pseudocodigo}
+
+
+
+
+%\def\bibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\usepackage{dtklogos} %\BibTeX
+
+
+
+\usepackage{longtable}
+
+%\usepackage[standard]{ntheorem}
+\usepackage{amsthm}
+\usepackage{thmtools}
+%\theoremstyle{break}
+%\theorembodyfont{\normalfont}
+
+%\theoremstyle{break}
+%\theoremheaderfont{\normalfont\bfseries}
+%\theorembodyfont{\slshape}
+%\theoremsymbol{\ensuremath{\heartsuit}}
+%\theoremsymbol{\ensuremath{\diamondsuit}}
+%\theoremseparator{:}
+%\theoremindent0.5cm
+%\theoremnumbering{arabic}
+\newtheorem{Definition}{Definición}
+\newtheorem{Lemma}{Lema}
+
+
+\usepackage{afterpage}
+
+\def\BibTeX{\textsc{Bib}\TeX}
+

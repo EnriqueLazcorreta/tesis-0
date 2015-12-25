@@ -1,1 +1,0 @@
-pygmentize -l cpp -f latex -P commandprefix=PYG -F tokenmerge -o "Lazcorreta.Tesis.out.pyg" "borrar/codigo/ficheroKEEL.h" 

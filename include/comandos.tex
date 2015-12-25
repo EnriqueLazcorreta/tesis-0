@@ -1,0 +1,55 @@
+% !TEX root = ../Lazcorreta.Tesis.tex
+
+% \newcommand{\dvdAdjunto}{\texttt{DVD}\xspace}
+\newcommand{\dvdAdjunto}{\texttt{CD}\xspace}
+
+
+\newcommand{\nombreCapituloUno}{\srws}
+\newcommand{\nombreCapituloDos}{\arm}
+\newcommand{\nombreCapituloTres}{\arm sobre \Catalogos}
+\newcommand{\nombreCapituloCuatro}{Conclusiones y Trabajo Futuro}
+
+
+
+%Iconos y logos
+\newcommand{\iconoPDF}[1][10pt]{\includegraphics[height=#1]{application-pdf}\xspace}
+\newcommand{\iconoDescargaPDF}[1][10pt]{\includegraphics[height=#1]{iconoDescargaPDF}\xspace}
+\newcommand{\iconoDescarga}[1][10pt]{\includegraphics[height=#1]{internet-download_manager-2}\xspace}
+\newcommand{\iconoWWW}[1][10pt]{\includegraphics[height=#1]{internet-web-browser-3}\xspace}
+\newcommand{\iconoSCOPUS}[1][9pt]{\includegraphics[trim=0 0 0 -7pt,height=#1]{Scopus_Logo_Main}\xspace}
+\newcommand{\logoCIO}[1][7pt]{\includegraphics[height=#1]{logoCIO}\xspace}
+%Iconos y logos
+
+
+
+%   Enlaces para la bibliografía
+\newcommand{\enlaceRevisado}{Revisado en diciembre de 2015.\xspace}
+
+\newcommand{\urlConNotaAlPie}[2]{\href{#1}{#2}\footnote{\tiny\url{#1}}}
+
+\newcommand{\leePDF}[2][10pt]{%
+  \href{file:#2}{\iconoPDF[#1]}%
+}
+\newcommand{\descargaCIO}[2][7pt]{%
+  \href{#2}{\logoCIO[#1]}\footnote{\tiny\url{#2}}%
+}
+\newcommand{\descarga}[2][10pt]{%
+  \href{#2}{\iconoDescarga[#1]}\footnote{\tiny\url{#2}}%
+}
+\newcommand{\descargaRevisado}[2][10pt]{%
+  \href{#2}{\iconoDescarga[#1]}\footnote{\tiny\url{#2} \enlaceRevisado}%
+}
+\newcommand{\visita}[2][10pt]{%
+  \href{#2}{\iconoWWW[#1]}\footnote{\tiny\url{#2}}%
+}
+\newcommand{\visitaRevisado}[2][10pt]{%
+  \href{#2}{\iconoWWW[#1]}\footnote{\tiny\url{#2} \enlaceRevisado}%
+}
+\newcommand{\scopus}[2][9pt]{%
+  \href{#2}{\iconoSCOPUS[#1]}%
+}
+\newcommand{\scopusConNotaAlPie}[2][9pt]{%
+   \footnotesize%
+   \href{#2}{\iconoSCOPUS}[#1]\footnote{\tiny\url{#2} Requiere acceso identificado.}%
+}
+% ! Enlaces para la bibliografía
