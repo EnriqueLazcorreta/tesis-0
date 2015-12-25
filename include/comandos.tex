@@ -18,6 +18,7 @@
 \newcommand{\iconoWWW}[1][10pt]{\includegraphics[height=#1]{internet-web-browser-3}\xspace}
 \newcommand{\iconoSCOPUS}[1][9pt]{\includegraphics[trim=0 0 0 -7pt,height=#1]{Scopus_Logo_Main}\xspace}
 \newcommand{\logoCIO}[1][7pt]{\includegraphics[height=#1]{logoCIO}\xspace}
+\newcommand{\logoGitHub}[1][7pt]{\includegraphics[height=#1]{GitHub-Mark-120px-plus}\xspace}
 %Iconos y logos
 
 
@@ -51,5 +52,8 @@
 \newcommand{\scopusConNotaAlPie}[2][9pt]{%
    \footnotesize%
    \href{#2}{\iconoSCOPUS}[#1]\footnote{\tiny\url{#2} Requiere acceso identificado.}%
+}
+\newcommand{\github}[2][10pt]{%
+  \href{#2}{\logoGitHub[#1]}\footnote{\tiny\url{#2} \enlaceRevisado}%
 }
 % ! Enlaces para la bibliografía
