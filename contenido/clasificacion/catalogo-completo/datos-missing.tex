@@ -1,6 +1,12 @@
 % !TEX root = ../../../Lazcorreta.Tesis.tex
 \ABIERTO
-\mushroom contiene 8\,124 registros en su dataset original (UCI) sin embargo en el fichero KEEL contiene sólo 5\,644 registros porque se han eliminado los datos missing que contenía el fichero original. Los datos missing son difíciles de interpretar correctamente ya que para convertir los ficheros en formato adecuado para ARM se utiliza un código binario para indicar esta situación, i.e., si un registro no contiene información sobre un atributo se crea la categoría ficticia "dato desconocido" en dicho atributo y se le asigna esa categoría, así podemos aplicar con cierta normalidad las técnicas de ARM, aunque la interpretación de las reglas que se pueden obtener es confusa:
+\mushroom contiene 8\,124 registros en su dataset original (UCI) sin embargo en el fichero KEEL contiene sólo 5\,644 registros porque se han eliminado los datos missing que contenía el fichero original.
+
+En un problema de \clasificacion los datos missing no deberían ser considerados. Hay autores que prefieren estimarlos [¿citas?] pero si no hay una justificación suficientemente poderosa no deberíamos ``inventar'' ningún valor cuando queremos clasificar correctamente a un individuo, la Minería de Datos nos puede dar información para reducir el espacio de búsqueda.
+
+En un registro, la ausencia de un dato provocará tener un valor menos, lo que traducido a transacciones se convierte en una transacción de distinto tamaño que el resto de registros. Esto sería un problema para tratarlo como se ha propuesto en la sección~\ref{sec:clasificacion:catalogo-comprimido} ya que el fichero \D no será considerado catálogo por no tener todos sus registros el mismo tamaño. Una solución consiste en considerar el valor missing de un atributo como un valor distinto al resto de los que realmente contiene, en el caso de \mushroom se denota con \texttt{?}, al convertirlo en fichero \D se codificará ese valor como un valor distinto del atributo al que pertenezca y la única consecuencia es, aparentemente, que tenemos un ítem diferente más.
+
+Los datos missing son difíciles de interpretar correctamente ya que para convertir los ficheros en formato adecuado para ARM se utiliza un código binario para indicar esta situación, i.e., si un registro no contiene información sobre un atributo se crea la categoría ficticia "dato desconocido" en dicho atributo y se le asigna esa categoría, así podemos aplicar con cierta normalidad las técnicas de ARM, aunque la interpretación de las reglas que se pueden obtener es confusa:
 
 \begin{quote}
 Si no conocemos el valor del atributo $\A_i$ podemos deducir que\ldots
