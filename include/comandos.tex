@@ -19,6 +19,7 @@
 \newcommand{\iconoSCOPUS}[1][9pt]{\includegraphics[trim=0 0 0 -7pt,height=#1]{Scopus_Logo_Main}\xspace}
 \newcommand{\logoCIO}[1][7pt]{\includegraphics[height=#1]{logoCIO}\xspace}
 \newcommand{\logoGitHub}[1][7pt]{\includegraphics[height=#1]{GitHub-Mark-120px-plus}\xspace}
+\newcommand{\logoGOOGLE}[1][7pt]{\includegraphics[height=#1]{logoGOOGLE}\xspace}
 %Iconos y logos
 
 
@@ -55,5 +56,8 @@
 }
 \newcommand{\github}[2][10pt]{%
   \href{#2}{\logoGitHub[#1]}\footnote{\tiny\url{#2} \enlaceRevisado}%
+}
+\newcommand{\google}[2][10pt]{%
+  \href{http://lmgtfy.com/?q="#2"}{\logoGOOGLE[#1]}\footnote{\tiny\url{http://lmgtfy.com/?q="#2"} \enlaceRevisado}%
 }
 % ! Enlaces para la bibliografía

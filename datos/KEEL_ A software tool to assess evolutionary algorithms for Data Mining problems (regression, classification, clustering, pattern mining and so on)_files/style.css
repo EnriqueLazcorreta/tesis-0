@@ -1,0 +1,1226 @@
+/* Compatibilidad i-explorer / firefox */
+/*
+*{-moz-box-sizing: border-box;box-sizing: border-box}
+p{margin-top:0px;margin-bottom:1em}
+form{margin:0px}
+input{padding:1px}
+*/
+
+/* Color of the links */
+
+a {font-weight: normal; font-family: Arial, verdana, sans-serif, Helvetica; text-decoration: none}
+a:link    {font-weight: normal; font-family: Arial, verdana, sans-serif, Helvetica; text-decoration: none; color:#696969}
+a:visited {font-weight: normal; font-family: Arial, verdana, sans-serif, Helvetica; text-decoration: none; color:#600}
+a:hover   {font-weight: normal; font-family: Arial, verdana, sans-serif, Helvetica; text-decoration: none; color:#0000D8}
+a:active  {font-weight: normal; font-family: Arial, verdana, sans-serif, Helvetica; text-decoration: none; color:#003}
+
+a.titulo {font-family: verdana,sans-serif; font-size:18px; font-weight:600; text-align:justify; color:#00086B}
+a.mail {
+	font-family: serif;
+	font-size:12px; 
+	color:#995544;
+}
+
+a.menu {
+	text-decoration:none;
+	color:white;
+}
+
+
+/* Style for paragraphs */
+
+p {font-family: verdana,helvetica,sans-serif; font-size:14px; color:#000000; text-align:justify}
+p.coment {font-family: helvetica,arial; font-size:12px; color:#808080; text-align:center}
+p.titulo {font-family: verdana,sans-serif; font-size:16px; font-weight:600; text-align:justify; color:#00086B}
+p.normal {font-family: arial,helvetica; color:#000000; font-size:14px}
+p.texto {font-family: verdana,helvetica,sans-serif; font-size:14px; color:#000000}
+
+p.keelGris{
+	font-family: helvetica,arial; 
+	font-size: 28px; 
+	color: rgb(128, 128, 128); 
+	text-align: center;
+}
+
+/* Lists */
+
+/*ul {font-family: verdana,helvetica,sans-serif; font-size:20px; color:#000000; text-align:justify}*/
+/*ol {font-family: verdana,helvetica,sans-serif; font-size:20px; color:#000000; text-align:justify}*/
+
+/* Body */
+
+body {
+	margin-left:0; 
+	margin-right:0; 
+	margin-top:0; 
+	font-family: verdana,helvetica,sans-serif; 
+	font-size:20px; 
+	color:#120415;
+	background:white; 
+	/*url(../images/fondo_nuevo.jpg)
+	no-repeat
+	fixed
+	175% -100%;*/	
+	/*
+	background-image: url(../images/fondo_nuevo.jpg); 
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: center center;
+	*/
+}
+
+/* Tables */
+
+
+td {font-family: arial,helvetica; font-size:15px; text-align:justify}
+td.color {font-family: arial,helvetica; font-size:15px; color:#ffffff}
+td.coment {font-family: helvetica,arial; font-size:15px; color:#808080; text-align:left}
+td.peque {font-family: helvetica,arial; font-size:9px; color:#ffffff}
+td.ref {font-family: verdana,helvetica,sans-serif; font-size:16px; text-align:justify}
+td.cuad {font-family: arial, verdana, sans-serif, helvetica; font-size: 12px; text-decoration: none; color:blue; text-align:justify}
+
+tr.fondo1 {
+	font-family: helvetica,arial; 
+	font-size:15px; 
+	text-align:center; 
+	background-color:#00086B;
+	color:#fff;
+}
+
+tr.fondo2 {font-family: helvetica,arial; font-size:15px; text-align:center; background-color:#aaa}
+
+tr.fondo3 {
+	background-color:#669900;
+}
+
+td.menu{
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	vertical-align: top;
+	background-image:url('http://sci2s.ugr.es/keel/images/menu_nuevo.jpg');
+	background-repeat:no-repeat;
+	width:201px;
+}
+
+td.centro{
+	text-align:center;
+	vertical-align:middle;
+}
+
+td.fondo1{
+	font-family: helvetica,arial; 
+	font-size:15px; 
+	text-align:center; 
+	background-color:#00086B;
+	color:#fff;
+	padding-left:1px;	
+}
+
+tbody {
+	font-family: verdana,arial,helvetica; 
+	font-size:20px; 
+	color:#000;
+	border:1px;
+	width:100%;
+}
+
+table.cien {
+	text-align:left;
+	border:0px;
+	border-collapse:collapse;
+	width:100%;
+}
+
+table.menu{
+	width:201px;
+	border:0;
+	/*position:fixed;*/
+}
+
+table.visits{
+	margin-left: 3%; 
+	border: #666699 solid 2px; 
+	text-align: center;
+}
+
+/* Resaltados */
+span.boton,a.boton {
+  color: #205567;
+  text-decoration: none;
+  background: white;
+  display: block;
+  width: 140px;
+  height: 172px;
+  padding: 3px 0px 3px 0px;
+  border: 1px solid #666699;
+  margin-left: 6px;
+  margin-top: 6px;
+  text-align: center;
+}
+span.boton:hover,a.boton:hover {
+  background: #d1d0cc;
+  border: 1px solid #9999cc;
+}
+
+span.botonp,a.botonp {
+  text-align: center;  
+  margin: 0 auto; 
+  vertical-align: middle;
+  color: #205567;
+  text-decoration: none;
+  background: white;
+  display: block;
+  width: 140px;
+  padding: 3px 0px 3px 0px;
+  border: 1px solid #666699;
+  margin-top: 6px;
+}
+
+span.botonpI,a.botonpI {
+  margin: auto; 
+  color: #205567;
+  text-decoration: none;
+  background: #0404b4;
+  display: block;
+  width: 140px;
+  height: 35px;
+  padding: 0px 0px 0px 0px;
+  border: 1px solid #666699;
+  margin-top: 6px;
+  background-image: none;
+  background-repeat: repeat;
+  background-attachment: scroll;
+  background-position: 0% 0%;
+}
+
+span.botonp:hover,a.botonp:hover {
+  background: #d1d0cc;
+  border: 1px solid #9999cc;
+  vertical-align: middle;
+}
+
+span.botonpIv2,a.botonpIv2 {
+  margin: auto; 
+  color: #205567;
+  text-decoration: none;
+  background: #0404b4;
+  display: block;
+  width: 140px;
+  height: 35px;
+  padding: 0px 0px 0px 0px;
+  border: 1px solid #666699;
+  margin-top: 6px;
+  background-image: none;
+  background-repeat: repeat;
+  background-attachment: scroll;
+  background-position: 0% 0%;
+}
+
+span.botonpIv2:hover,a.botonpIv2:hover {
+  background: #d1d0cc;
+  border: 1px solid #9999cc;
+  vertical-align: middle;
+}
+
+/* images */
+
+img { border: 0px;  }
+
+
+/* font properties */
+
+.sans{
+	font-family:sans-serif; 
+}
+
+.times{
+	font-family:times; 
+}
+
+.arial{
+	font-family:arial,helvetica; 
+}
+
+.verdana10{
+	font-family:verdana,helvetica,sans-serif; 
+	font-size:14px; 
+	color:#000000; 
+	text-align:justify;
+}
+
+.verdana15{
+	font-family:verdana,arial,helvetica; 
+	font-size:15px;
+	color:#00086b;
+}
+
+.bold{
+	font-weight:bold;
+}
+
+.italic{
+	font-style:italic;
+}
+
+.left{
+	text-align: left;	
+}
+
+.center{
+	text-align:center;
+	margin: auto;
+}
+
+.justificado{
+	text-align:justify;	
+}
+
+.cinco{
+	font-size: 5px;	
+}
+
+.ocho{
+	font-size:8px; 
+}
+
+.diez{
+	font-size: 10px;
+}
+
+.doce{
+	font-size: 12px;
+}
+
+.catorce{
+	font-size: 14px;
+}
+
+.veinte{
+	font-size: 20px;	
+}
+
+.negro{
+	color:black;	
+}
+
+.blanco{
+	color:white;
+}
+
+.visitas{
+	color: #00086b; 
+	font-size: 18px; 
+	border: 1px solid;
+}
+
+.azul{
+	color:#00086B;	
+}
+
+.bordefino {  border: #000000; border-style: solid; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px}
+.normtxt {  font-family: Arial, Helvetica, sans-serif; font-size: 9pt; color: #000000}
+.txttabla {  font-family: Arial, Helvetica, sans-serif; font-size: 8pt}
+.horas {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; color: #FFFFFF}
+
+.grisecillo{
+	color:#205567
+}
+
+#content {
+  float: none;
+  position: relative;
+  margin: 0px 7px 0px 156px;
+  padding: 0px 7px 0px 7px;
+}
+
+.tituloPaginaPrincipal {
+  padding: 0.3em;
+  border: 1px solid #666699;
+  border-right: 2px solid #666699;
+  border-bottom: 2px solid #666699;
+  background: none;
+  margin: 40px 40px;
+}
+
+.tituloPaginaPrincipal p {
+  text-align: center;
+}
+.tituloPaginaPrincipal table {
+
+}
+.tituloPaginaPrincipal table tr td {
+
+}
+.tituloPaginaPrincipal table tr td a {
+  font-size: 0.9em;
+}
+
+.middle{
+	vertical-align: middle;
+}
+
+.top{
+	vertical-align: top;
+}
+
+.bottom{
+	vertical-align: bottom;
+}
+
+/* Webmaster page*/
+
+table.myHeader {
+	border-spacing: 0em 0em;
+	margin: 0em;
+	padding: 0em;
+	margin-bottom: 1em;
+}
+
+td.myHeader {
+	background: url('http://sci2s.ugr.es/keel/images/repository/tinyheader.png') repeat-x;
+	font-weight: bold;
+	font-size: 1.1em;
+	font-family: Serif;
+	color: white;
+	text-align: left;
+	padding-left: 1em;
+	padding-top: 0.5em;
+	padding-bottom: 1em;
+	padding-right: 0em;
+	margin-left: 0em;
+	margin-right: 0em;
+	margin-top: 0em;
+	border:0px;
+	margin-bottom: 1em;
+}
+
+td.finalHeader {
+	background: url('http://sci2s.ugr.es/keel/images/repository/finalheader.png') no-repeat;
+	width: 6em;
+	border:0px;
+	margin-bottom: 1em;
+}
+
+p.pHeader{
+	font-weight: bold;
+	font-size: 1.5em;
+	font-family: Serif;
+	margin-left: 1em;
+	margin-top: 0em;
+	padding-top: 0.5em;
+	padding-bottom: 1em;
+	padding-right: 1.5em;
+	padding-left: 0em;
+	width: auto;
+	color: white;
+	text-align: left;
+}
+
+div.cont{
+	margin-left: 2em;
+}
+
+div.caption{
+	text-align:center;
+}
+
+li.master{
+	margin-bottom: 1em;
+}
+
+li.descr{
+	margin-right: 3em;
+}
+
+li.index{
+	margin-bottom: 1em;	
+}
+
+/* Repository main page */
+
+table.upBar{
+
+	width:20%;
+	height: 2.5em;
+	margin:2em;
+	margin-left: 3em;
+}
+
+table.upBar2{
+
+	width:25%;
+	height: 2.5em;
+	margin: 1em;
+	margin-top: 0em;
+	margin-bottom: 1em;
+	margin-left: 8em;
+}
+
+table.upBar3{
+
+	width:70%;
+	height: 2.5em;
+	margin: 1em;
+	margin-top: 0em;
+	margin-bottom: 1em;
+	margin-left: 7em;
+	border-spacing: 1em 0em;
+}
+
+td.rbutton{
+
+	border-width: 1px;
+	border-style: solid;
+	border-color: #666699;
+	
+	padding: 1em;
+	padding-top: 0.7em;
+	padding-bottom: 0.7em;
+	
+	text-align: center;
+	
+	font-weight: normal;
+
+	font-family: Arial,verdana,sans-serif,Helvetica;
+	text-decoration: none;
+	color: #205567;
+	background-color:white;
+}
+
+a.r:hover{
+	color:#CC0000;
+}
+
+a.r{
+	color:#205567;
+}
+
+a.alg:hover{
+	color:#00086B;
+}
+
+a.alg{
+	color:#FFFFFF;
+}
+
+a.alg2:hover{
+	color:#FFFFFF;
+}
+
+a.alg2{
+	color:#00086B;
+}
+
+p.cabecera{
+
+	font-weight:bold;
+	font-size: 1.5em;
+	text-align: center;
+}
+
+p.cabecera2{
+
+	font-weight:bold;
+	font-size: 1.5em;
+	text-align: center;
+}
+
+p.subtitulo{
+	font-family: verdana,sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	margin-left: 5em;
+	color: #00086b;
+}
+
+p.subtitulo_m{
+	font-family: verdana,sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	margin-left: 0em;
+	color: #00086b;
+}
+
+a.subtitulo{
+	font-family: verdana,sans-serif;
+	font-size: 15px;
+	font-weight: bold;
+	color: #00086b;
+}
+
+div.texto{
+	padding-left: 3em;
+	padding-right: 3em;
+	margin-bottom: 2em;
+}
+
+div.cabSec{
+	border: 0px;
+	margin-top: 2em;
+	margin-bottom: 1.5em;
+	padding-left: 2em;
+}
+
+ul.verdana10{
+	margin-left: 2em;
+	margin-bottom: 2em;
+}
+
+ul.liSt{
+	margin-left: 6em;
+}
+
+/* Category  */
+	
+a.noRed:visited{
+	color:#696969
+}
+
+a.noRed:hover{
+	color:#0000D8
+}
+
+th.headD{
+	text-align: center;
+	color: black;
+	border-width: 1px;
+	padding-top: 0.4em;
+	padding-bottom: 0.4em;
+	padding-left: 0.8em;
+	padding-right: 0.8em;
+	border-style: solid;
+	border-color: #666699;
+	border-radius: 6px;	
+
+}
+th.headD:hover{
+	background-color:#d1d0cc;
+}
+
+td.nameAll{
+	font-weight:bold;
+	text-align: center;
+	color: black;
+	border-width: 1px;
+	padding-top: 0.4em;
+	padding-bottom: 0.4em;
+	padding-left: 0.8em;
+	padding-right: 0.8em;
+	border-style: solid;
+	border-color: #666699;
+	border-radius: 6px;
+	background-color: #f3f781;
+}
+
+td.spaceAll{
+
+	border-width: 0px;
+
+}
+
+td.dataD{
+	text-align: center;
+	color: black;
+	border-width: 1px;
+	padding-top: 0.4em;
+	padding-bottom: 0.4em;
+	padding-left: 0.8em;
+	padding-right: 0.8em;
+	border-style: solid;
+	border-color: #666699;
+	border-radius: 6px;	
+}
+
+td.dataD:hover{
+	background-color:#d1d0cc;
+}
+
+td.dataDAT{
+	text-align: center;
+	color: black;
+	border-width: 1px;
+	padding-top: 0.4em;
+	padding-bottom: 0.4em;
+	padding-left: 0.8em;
+	padding-right: 0.2em;
+	border-style: solid;
+	border-color: #666699;
+	border-radius: 6px;	
+}
+
+td.dataDAT:hover{
+	background-color:#d1d0cc;
+}
+
+table.data{
+		border-width: thin;
+		border-spacing: 3px;
+		border-style: none;
+		border-color: gray;
+		border-collapse: separate;
+}
+
+img.zipIcon{
+	width: 1.7em;
+}
+
+img.noAvaIcon{
+	width: 1.7em;
+}
+
+img.icono{
+	width: 2em;
+	vertical-align: middle
+}
+
+td.tdIcon{
+	padding-left: 1em;
+	width: 10%;
+}
+
+div.contTex{
+	margin-left: 1em;
+	margin-right: 1em;
+	border: 0px;
+}
+
+p.pTitle{
+	font-weight: bold;
+
+}
+
+p.pAbs{
+	margin-left: 1em;
+}
+
+p.descTable{
+	margin: 3em;
+}
+
+p.descTable_vd{
+	margin-left: 3em;
+	margin-right: 3em;
+}
+
+p.descTable_vd2{
+	margin-left: 3em;
+	margin-right: 3em;
+}
+
+p.noMargen{
+	margin-left: -3em;
+}
+
+span.tipo{
+	font-weight: bold;
+}
+
+div.contFiles{
+	margin-left: 1em;
+	margin-right: 1em;
+	border: 0px;
+	margin-bottom: 2em;
+}
+
+div.listOrd{
+	margin-left: 3em;
+}
+
+div.introductionText{
+	padding-left: 3em;
+	padding-right: 3em;
+	margin-bottom: 2em;
+}
+div.cabSecCat{
+	border: 0px;
+	margin-top: 2em;
+	margin-bottom: 3em;
+	padding-left: 2em;
+}
+
+div.contTable{
+	margin: auto;
+	width:80%;
+}
+
+div.contTableCentrada{
+	margin: auto;
+	width:40%;
+}
+
+div.datasets{
+	margin: auto;
+	margin-bottom: 3em;
+}
+
+div.texto{
+	padding-left: 3em;
+	padding-right: 3em;
+	margin-bottom: 2em;
+}
+
+div.divList{
+	margin-top: 2em;
+}
+
+a.tdIcon{
+	margin-right: 1em;
+}
+
+a.tit{
+	font-family: verdana,sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	color: #00086b;
+}
+
+img.arrow{
+	vertical-align:middle;
+	margin-left: 5px;
+}
+
+li.smote{
+	margin-left:1em;
+	margin-bottom: 1.5em;
+}
+
+
+/* dataset */
+
+li.data{
+	margin-top: 0.5em;
+}
+p.textoD{
+	margin-top:2em;
+	margin-left:3em;
+	margin-right:3em;
+	margin-bottom: 2em;
+}
+
+p.textoDa{
+	margin-top:2em;
+	margin-left:3em;
+	margin-right:3em;
+	margin-bottom: 2em;
+}
+
+td.attD{
+	border-width: 1px;
+	border-style: solid;
+	border-color: black;
+	margin: 2px;
+	padding: 1em;
+	padding-top: 0.7em;
+	padding-bottom: 0.7em;
+	
+	text-align: left;
+	
+	font-weight: normal;
+
+	font-family: Arial,verdana,sans-serif,Helvetica;
+	text-decoration: none;
+	color: #205567;
+	background-color:white;
+	border-radius: 6px;
+}
+
+td.attV{
+	border-width: 1px;
+	border-style: solid;
+	border-color: #666699;
+	margin: 2px;
+	padding: 1em;
+	padding-top: 0.7em;
+	padding-bottom: 0.7em;
+	
+	text-align: center;
+	font-family: verdana;
+	font-size: 12px;	
+	border-radius: 6px;
+}
+
+td.outD{
+	border-width: 1px;
+	border-style: solid;
+	border-color: black;
+	margin: 2px;
+	padding: 1em;
+	padding-top: 0.7em;
+	padding-bottom: 0.7em;
+	
+	text-align: left;
+	
+	font-weight: normal;
+
+	font-family: Arial,verdana,sans-serif,Helvetica;
+	text-decoration: none;
+	color: #205567;
+	background-color:#E0F8F7;
+	border-radius: 6px;
+}
+
+td.outV{
+	border-width: 1px;
+	border-style: solid;
+	border-color: #666699;
+	margin: 2px;
+	padding: 1em;
+	padding-top: 0.7em;
+	padding-bottom: 0.7em;
+	
+	text-align: center;
+	font-family: verdana;
+	font-size: 12px;
+	border-radius: 6px;
+}
+
+th.atth{
+	border: 2px solid black;
+	font-family: verdana;
+	font-weight: bold;
+	font-size: 14px;
+	padding: 1em 1em;
+	text-align: center;
+	
+	background-color : #d1d0cc;
+
+}
+
+h3.inside{
+	margin-left: 3em;
+}
+
+div.centerAtt{
+	margin:auto;
+	margin-top: 3em;
+	margin-bottom: 3em;
+	width: 80%;
+}
+
+div.description{
+	margin:auto;
+	margin-left: 2em;
+	margin-top: 3em;
+	margin-bottom: 3em;
+	width: 90%;
+	border: solid 2px #AAAAAA;
+	padding-left: 1em;
+	padding-right: 1em;
+}
+
+div.imageTS{
+	margin-left: 5%;
+	display:inline;
+}
+
+img.imageTS{
+	width: 80%;
+	border: 1px solid #666699;
+	vertical-align: middle;
+}
+
+
+div.imageUp{
+	float: right;
+	margin-right: 45%;
+	display:inline;
+}
+
+div.cabData{
+	margin-left: 2em;
+	margin-bottom: 3em;
+}
+
+div.cabSecDat{
+	margin-left: 1.5em;
+	margin-bottom: 1em;
+}
+
+img.imageUp{
+	height: 8em;
+	border: 1px solid #666699;
+	vertical-align: middle;
+}
+
+
+
+img.zipIcon{
+	width: 2em;
+	vertical-align:middle;
+}
+
+li.disclaimer{
+	margin-top:2em;
+	margin-right:2em;
+}
+
+/* studies */
+
+table.upBar{
+
+	width:90%;
+	height: 2.5em;
+	margin-bottom: 2em;
+	margin-top:2em;
+	margin-left: 3em;
+	margin-right: 3em;
+}
+
+td.rbutton{
+
+	border-width: 1px;
+	border-style: solid;
+	border-color: #666699;
+	margin: 2px;
+	padding: 1em;
+	padding-top: 0.7em;
+	padding-bottom: 0.7em;
+	
+	text-align: center;
+	
+	font-weight: normal;
+
+	font-family: Arial,verdana,sans-serif,Helvetica;
+	text-decoration: none;
+	color: #205567;
+	background-color:white;
+}
+
+td.rbutton:hover{
+	background-color:#d1d0cc;
+}
+
+ul.verdana10{
+	margin-left: 2em;
+}
+
+ul.index{
+	margin-left: 2em;
+	list-style-image: url('http://sci2s.ugr.es/keel/images/doc_icon_tiny.jpg');
+}
+
+img.zipIcon{
+	width: 1.7em;
+}
+
+img.icono{
+	width: 2em;
+	vertical-align: middle
+}
+img.journal{
+	width: 4.5em;
+	height: 6em;
+	vertical-align: middle;
+	margin-right: 1em;
+}
+
+table.link{
+	width: 80%;
+	margin-left: 5em;
+}
+td.link1{
+width: 40%;
+}
+
+td.link2{
+width: 35%;
+}
+
+td.tdIcon{
+	padding-left: 1em;
+	width: 10%;
+}
+
+a.tdIcon{
+	margin-right: 1em;
+}
+
+p.pTitle{
+	font-weight: bold;
+}
+
+p.pAbs{
+	margin-left: 1em;
+}
+
+p.descTable{
+	margin: 3em;
+}
+
+p.inner{
+	font-weight: bold;
+	margin-right: 3em;
+	margin-top: 2em;
+	margin-bottom: -1em;
+}
+
+p.titYear{
+	font-weight: bold;
+	margin-left: 2.5em;
+	font-size: 1.2em;
+	color: #00086b;
+}
+p.listYear{
+	font-weight: bold;
+	margin-left: 3em;
+}
+
+p.link{
+	margin-left: 10%;
+}
+
+
+span.tipo{
+	font-weight: bold;
+}
+
+div.introductionText{
+	padding-left: 3em;
+	padding-right: 3em;
+	margin-bottom: 2em;
+}
+div.cabSecStu{
+	border: 0px;
+	margin-top: 2em;
+	margin-bottom: 2em;
+	padding-left: 2em;
+}
+
+div.contStudy{
+	margin: 3em;
+	border: solid 2px #AAAAAA;
+}
+
+div.contRef{
+	margin-left: 1em;
+	margin-right: 1em;
+	border: 0px;
+}
+
+div.contFiles{
+	margin-left: 1em;
+	margin-right: 1em;
+	border: 0px;
+	margin-bottom: 2em;
+}
+
+div.contTex{
+	margin-left: 1em;
+	margin-right: 1em;
+	border: 0px;
+}
+
+div.divList{
+	margin-top: 2em;
+}
+ 
+div.ref{
+	margin-top:1em;
+	margin-bottom:1em;
+} 
+div.listOrd{
+	margin-left: 3em;
+}
+
+div.indexSt{
+	margin-top: 2em;
+	margin-left: 3em;
+	padding-left: 1em;
+	padding-right: 1em;
+	margin-right: 3em;
+	border: solid 2px #AAAAAA;
+}
+
+div.datasets{
+	margin: auto;
+	margin-bottom: 3em;
+}
+
+li.sub{
+	margin-top: 0.4em;
+	margin-bottom: 0.4em;
+}
+
+a.resalta{
+	color:#228B22;
+}
+
+a.resalta:hover{
+	color:#0000D8;
+}
+
+a.resalta:visited{
+	color:#600;
+}
+
+td.ajuste{
+	margin:auto;
+	padding: 0px;
+	
+	width: 15em;
+}
+
+a.ajuste{
+	margin:auto;
+	padding: 0px;
+}
+
+dl.index { 
+
+} 
+
+dt.index { 
+	clear: left; 
+	text-align: left; 
+	font-weight: bold; 
+} 
+
+dd.index { 
+	margin-top: 0.4em;
+	margin-left: 3.4em;	
+}
+
+li.inicial{
+	font-size:14px;
+	display: block;
+}
+
+li.inicial:before{
+	content: counters(item, ".") " "; counter-increment: item
+}
+
+ol.inicial{
+	counter-reset: item
+}
+
+div.contenedor{
+	padding-left: 2em;
+	padding-right: 2em;
+}
+
+div.botones{
+	float: right;
+}
+
+div.espacio{
+	height: 1.5em;
+}
+
+a.guide:link{
+	color:#0000D8;
+}
+
+a.guide:hover{
+	color:#228B22;
+}
+
+a.guide:visited {
+	color:#B22222;
+}
+
+img.boton{
+	width:2em;
+	height:2em;
+}

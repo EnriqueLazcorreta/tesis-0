@@ -1,0 +1,18 @@
+% !TEX root = ../../../Lazcorreta.Tesis.tex
+\ABIERTO
+\mushroom contiene 8\,124 registros en su dataset original (UCI) sin embargo en el fichero KEEL contiene sólo 5\,644 registros porque se han eliminado los datos missing que contenía el fichero original. Los datos missing son difíciles de interpretar correctamente ya que para convertir los ficheros en formato adecuado para ARM se utiliza un código binario para indicar esta situación, i.e., si un registro no contiene información sobre un atributo se crea la categoría ficticia "dato desconocido" en dicho atributo y se le asigna esa categoría, así podemos aplicar con cierta normalidad las técnicas de ARM, aunque la interpretación de las reglas que se pueden obtener es confusa:
+
+\begin{quote}
+Si no conocemos el valor del atributo $\A_i$ podemos deducir que\ldots
+\end{quote}
+
+Eliminar los registros con datos missing parece una estrategia correcta para no tener que gestionar estas \ars. Sin embargo perdemos información sobre 2\,480 registros, sin saber si la información que perdemos es relevante o no lo es.
+
+Si analizamos el fichero observaremos que sólo un atributo contiene datos missing, \texttt{stalk-root}, y ya hemos visto en la sección~\ref{tal} que este atributo es prescindible, al menos en el dataset de KEEL. Con lo que ahora sabemos sobre \catalogos podemos diseñar otra estrategia, eliminar el atributo \texttt{stalk-root} del dataset original y comprobar si esos 2\,480 registros ignorados por la estrategia utilizada contienen información que habíamos perdido irremediablemente.
+
+En \href{KEEL - Mushroom}{http://sci2s.ugr.es/keel/dataset.php?cod=178} proporcionan dos ficheros \mushroom, por defecto el que han elaborado con su formato tras eliminar los registros con datos missing y si lo buscamos nos ofrecen el dataset original en formato KEEL, con 8\,124 registros. Al analizar ambos ficheros se obtienen los siguientes resultados:
+\begin{enumerate}
+  \item mushroom-original contiene un \CC de 8\,124 registros, con un atributo que contiene datos missing, \texttt{stalk-root}, que es prescindible y no aumenta el tamaño del catálogo.
+  \item mushroom contiene un \CC de 5\,644 registros, \texttt{stalk-root} es prescindible y no aumenta el tamaño del catálogo.
+\end{enumerate}
+Luego tenemos dos análisis sobre dos datasets\borrar{Añadir dataset a indice-alfabetico} que ofrecen datos similares pero deben contener diferente información, analizar sus similitudes y 
