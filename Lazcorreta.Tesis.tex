@@ -1,8 +1,7 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+% !BIB TS-program = biber
 \documentclass[utf8]{book}
-
-%\usepackage[utf8]{inputenc}
-%\usepackage[T1]{fontenc}
-%\usepackage[spanish]{babel}
 
 \include{include/generico}
 %<- BORRAR
@@ -84,7 +83,7 @@
   literate={á}{{\'a}}1 {´A}{{\'A}}1 {ã}{{\~a}}1 {é}{{\'e}}1 {´E}{{\'E}}1 {í}{{\'i}}1 {´I}{{\'I}}1 {ó}{{\'o}}1 {´O}{{\'O}}1 {ú}{{\'u}}1 {´U}{{\'U}}1
 }
 
-%Por lo visto hyperref tiene la opción de indicar impresión a doble cara... pero no la encuentro.
+%Por lo visto hyperref tiene la opción de indicar impresión a doble cara...
 \usepackage[pdfduplex=DuplexFlipLongEdge]{hyperref}
 
 
@@ -103,13 +102,13 @@ Hola, tesis doctoral en informática !!!
 %\newpage
 
 
-Este es el índice de mi último informe: 
-\input{borrar/tesis-Enrique-2015}
+%Este es el índice de mi último informe: 
+%\input{borrar/tesis-Enrique-2015}
 \tableofcontents
 
-\chapter*{Argumentación}
-\label{chap:argumentacion}
-\input{contenido/argumentacion}
+\chapter*{Motivación}
+\label{chap:motivacion}
+\input{contenido/motivacion}
 
 
 
