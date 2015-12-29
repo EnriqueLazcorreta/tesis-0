@@ -1,0 +1,37 @@
+% !TEX root = ../../Lazcorreta.Tesis.tex
+%TODO: Incluir \CAR en el índice como Regla de Clasificación Asociativa o Regla de Asociación de Clases (estudiarlo mejor en la literatura, esta última sólo me suena del proyecto de tesis de H.León).
+El problema de \Clasificacion tiene ya su propia notación, igual que el de \arm (definida en el capítulo~\ref{chap:arm}), en esta sección intentaremos unificarla y discutiremos algunos aspectos de ambas disciplinas que no han sido considerados en la bibliografía usada para este trabajo, lo que nos llevará también a definir nuevos conceptos e intentar caracterizarlos.
+
+
+\begin{Definition}[Individuo]
+   Sean $A_i, i = 1 \ldots n$ un conjunto de atributos, siendo $n_i$ el número de valores distintos que puede tomar el atributo $A_i$. Definimos un \emph{individuo} como una $n$-túpla, un conjunto de $n$ valores obtenidos ordenadamente de los atributos $A_i$.
+   $$individuo = \left(a_1, a_2\ldots a_n\right), a_i \in A_i$$
+\label{def:individuo}
+\end{Definition}
+
+
+
+
+
+
+\subsection{Tal}
+\label{sec:clasificacion:conceptos-basicos:tal}
+%\input{contenido/clasificacion/conceptos-basicos/tal}
+
+\begin{Definition}[Individuo]
+   Sean $A_i, i = 1 \ldots n$ un conjunto de atributos, siendo $n_i$ el número de valores distintos que puede tomar el atributo $A_i$. Definimos un \emph{individuo} como una $n$-túpla, un conjunto de $n$ valores obtenidos ordenadamente de los atributos $A_i$.
+   $$individuo = \left(a_1, a_2\ldots a_n\right), a_i \in A_i$$
+\label{def:individuo}
+\end{Definition}
+
+
+\begin{Definition}[Registro]
+   Sean $A_i, i = 1 \ldots n$ un conjunto de atributos, siendo $n_i$ el número de valores distintos que puede tomar el atributo $A_i$. Definimos un registro como una $n$-túpla, un conjunto de $n$ valores obtenidos ordenadamente de los atributos $A_i$.
+   $$registro = \left(item_1, item_2\ldots item_n\right), item_i \in A_i$$
+\label{def:registro}
+\end{Definition}
+
+\begin{Definition}[\Catalogo] Un \catalogo es un conjunto de $N$ registros diferentes.
+   $$\catalogo = \left\{registro_i, i = 1\ldots N\ | \ registro_i \neq registro_j \forall i \neq j\right\}$$
+\label{def:catalogo}
+\end{Definition}

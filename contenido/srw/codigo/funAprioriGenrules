@@ -1,0 +1,19 @@
+forall large itemsets $l_k, k \geq 2$ do
+   call genrules($l_k$, $l_k$);
+
+// The genrules generates all valid rules $\tilde{a}\Rightarrow(l_k - \tilde{a})$, 
+// for all $\tilde{a} \subset a_m$
+procedure genrules($l_k$: large $k$-itemset, 
+                   $a_m$: large $m$-itemset)
+1)  $A = \{(m-1){\rm -itemsets}\  a_{m-1} \ | \ a_{m-1} \subset a_m\}$;
+2)  forall $a_{m-1} \in A$ do begin
+3)    $conf = $ support($l_k$)/support($a_{m-1}$);
+4)    if ($conf \geq minconf$) then begin
+7)      output the rule $a_{m-1} \Rightarrow (l_k - a_{m-1})$, 
+          with confidence = $conf$ and support = support($l_k$);
+8)      if ($m - 1 > 1$) then
+9)        call genrules($l_k$, $a_{m-1}$); // to generate rules 
+                                  // with subsets of $a_{m-1}$ 
+                                  // as the antecedents
+10)    end
+11) end

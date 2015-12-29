@@ -1,0 +1,5 @@
+insert into $\aprioriC[k]$
+select $p.item_1,p.item_2,\ldots,p.item_{k-1},q.item_{k-1}$
+from $\aprioriL[k-1]p,\aprioriL[k-1]q$
+where  $p.item_1 = q.item_1,\ldots,p.item_{k-2} = q.item_{k-2},$
+       $p.item_{k-1} < q.item_{k-1}$;

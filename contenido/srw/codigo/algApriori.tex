@@ -1,0 +1,12 @@
+$\aprioriL[1] = \left\{large\ 1-itemsets\right\}$;
+for $(k=2; \aprioriL[k-1]\neq\emptyset;k++)$ do begin
+	$C_k = apriori-gen(\aprioriL[k-1])$;
+	forall transactions $t \in \D$ do begin
+		$C_t = subset(C_k, t)$;
+		forall candidates $c \in C_t$ do
+			$c.count++$;
+	end
+	$\aprioriL[k] = \left\{c \in C_k / c.count \geq minSup\right\}$;
+end
+
+Answer = $\aprioriL = \bigcup_k{\aprioriL[k]}$

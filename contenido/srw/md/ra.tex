@@ -1,0 +1,246 @@
+% !TEX root = ../../../Lazcorreta.Tesis.tex
+% \ABIERTO%
+
+% Nuestras \sns se han convertido en simples conjuntos de páginas. De cada sesión nos quedamos únicamente con las páginas que ha visitado el usuario, sin repetición de páginas si la hubiera en la sesión original y sin considerar el orden en que fueron visitadas.
+
+Las \ARs fueron introducidas por~\citet{AgrawalImielinskiSwami_MiningAssociationRulesBetweenSetsOfItemsInLargeDB_1993} y la \arm popularizada con su algoritmo \apriori (Agrawal y Srikant, \cite*{AgrawalSrikant_FastAlgorithmsForMiningAssociationRules_1994}, \cite*{AgrawalSrikant-FastAlgorithmsForMiningAssociationRules-LARGO-1994}), cuyo pseudocódigo se muestra en los listados~\ref{alg:apriori}, \ref{alg:apriori-union}, \ref{alg:apriori-poda} y~\ref{alg:apriori-genrules}. Las definen a través del ejemplo de la cesta de la compra en un supermercado.
+\begin{enumerate}
+  \item El supermercado tiene $M$ productos distintos.
+  \item Cada "`cesta de la compra"' se registra mediante un dispositivo informático en forma de \emph{ticket}, que puede contener información del cliente (tarjetas de fidelización) y del empleado, fecha y hora de la compra y un listado de los productos adquiridos por el cliente junto con detalles como cantidad, precio, descuentos\ldots
+  \item De cada ticket consideramos únicamente el conjunto de productos adquiridos, sin importarnos su orden en el \emph{ticket} ni si se ha adquirido una o más unidades. Convertimos el \emph{ticket} en una \transaccion.
+  \item Si comparamos cientos o miles de \transacciones podremos describir la relación de co-existencia de dos o más productos en una misma compra. Estas relaciones nos permitirán afirmar que, en la muestra observada, "`el 10\% de clientes compran pan y leche en la misma compra"'. O incluso que "`el 60\% de los clientes que compran pan también compran leche en la misma compra"'.
+  \item Este conocimiento debe convertirse en estrategias de marketing para facilitar a sus clientes la construcción de su próxima "`cesta de la compra"'. Debe extrapolarse a la población de clientes el conocimiento adquirido al analizar la muestra. Y debe analizarse la muestra con algoritmos rápidos pues cada día se pueden generar cientos o miles de \transacciones con información aún sin analizar.
+\end{enumerate}
+
+Según su propia experiencia, tras generar gran número de \ars a partir de gran cantidad de \transacciones de un supermercado descubrieron que "`los viernes, muchos de los clientes compran pañales y cervezas"', lo que les llevó a sugerir al propietario del comercio que los viernes promocionara ambos productos de manera conjunta. La base científica de las \ARs es la Estadística Descriptiva, sin embargo hacer un planteamiento similar con métodos estadísticos no nos llevaría a descubrir algo tan sorprendente ya que en Estadística hemos de formular la hipótesis antes de observar los datos, y llegar a formular esa hipótesis concretamente resulta difícil de imaginar.
+
+Formalicemos su propuesta para poder entenderla mejor. El punto de partida es un conjunto de $M$ \emph{ítems} al que llamaremos \I. Tenemos muchas \transacciones, subconjuntos de \I obtenidos en determinadas circunstancias, y nos preguntamos qué ítems están presentes de forma conjunta en las \transacciones. 
+
+\begin{Definition}[Población de ítems]
+   Sea \I un conjunto con $M$ \emph{ítems} distintos. Llamaremos \itemset a cualquier subconjunto de \I, o bien \kitemset si queremos indicar en su nombre su tamaño.
+   \begin{equation}\label{eq:1-3-2-poblacionDeItems}
+     \I = \left\{\I_1,\ldots, \I_M\right\}
+   \end{equation}
+\label{def:1-3-2-poblacionDeItems}
+\end{Definition}
+
+En la cesta de la compra, \I es el conjunto de todos los productos existentes en el comercio. En una tarea de \clasificacion se suelen codificar todos los pares \texttt{atributo=valor} mediante números enteros consecutivos, con lo que \I contiene únicamente un conjunto de números que representan todos los valores que pueden tomarse en los diferentes atributos en estudio. En \wum es el conjunto de páginas del sitio web (ver definición~\ref{def:1-2-4-cjto-paginasSW}, pág.~\pageref{def:1-2-4-cjto-paginasSW}).
+
+\begin{Definition}[\Transaccion]
+   Una \transaccion \T es un \itemset, un subconjunto de \I, obtenido en determinadas circunstancias.
+   \begin{equation}\label{eq:1-3-2-transaccion}
+     \T \subseteq \I = \left\{I_j\ | \ I_j \in \I,\ j = 1 \ldots k\right\}
+   \end{equation}
+\label{def:1:3:2:transaccion}
+\end{Definition}
+
+En la cesta de la compra una \transaccion es parte de la información recogida en un ticket, es el conjunto de productos que ha comprado el cliente en una compra. O podríamos crear las \transacciones con el conjunto de productos que han comprado los clientes identificados durante el último mes, con lo que tendríamos menos transacciones y podríamos buscar \patrones de compra entre nuestros clientes, no entre cada una de sus compras individuales. En un problema de \clasificacion cada registro en el que se han anotado los valores que toma un individuo para cada uno de los atributos en estudio es una \transaccion. En \WUM una \transaccion es el conjunto de páginas que ha visitado un usuario en una \sn.
+
+\begin{Definition}[Almacén \D]
+   Un almacén \D es un conjunto de \transacciones.
+\label{def:1:3:2:D}
+\end{Definition}
+
+He definido el almacén de \transacciones, \D, para diferenciarlo de la \DB que contiene todos los datos que podemos tener recogidos. La \arm, como técnica de \dm sólo es una fase de un proceso de \KDD por lo que se aplicará después de seleccionar, pre-procesar y transformar los datos originales. Cualquier cambio en los parámetros usados en estas fases provocará la obtención de un almacén \D diferente al que habría que analizar por completo.
+
+En la cesta de la compra podríamos crear \D con todos los tickets de un día, de una semana, de un día concreto de la semana durante los últimos 3 meses\ldots En \WUM podríamos crear \D a partir de las \sns usando criterios similares o de geolocalic¡zación de la IP\ldots No tiene sentido en muchos casos intentar aplicar técnicas de \dm a colecciones extremas de datos, a todo el historial de tickets o al conjunto de todas las \sns de nuestro sitio web. Si el almacén \D es tan grande tendremos que renunciar a mucha de la información que posee, recordemos que estamos investigando cómo extraer el máximo de información de un gran conjunto de datos utilizando equipos informáticos al alcance de todos los investigadores. Las aportaciones de esta tesis se pueden extrapolar al uso de supercomputadoras si se dispone de alguna de ellas para verificar resultados y se tiene un buen conocimiento de su uso, pero no es asunto a tratar en este informe.
+
+Al poder crear \D de un modo rápido y con diferentes criterios se abre el campo de posibilidades de uso de las \ars. Si podemos generar un almacén \D con información específica para un análisis y extraer de él todas las \ars representativas en un tiempo adecuado para el estudio que estamos haciendo podremos adaptar nuestros análisis utilizando la información proporcionada por los propios datos, que pueden volver a ser generados con nuevos criterios y analizados para obtener conocimiento de mayor calidad o para confirmar o descartar el conocimiento previo al análisis.
+
+El objetivo del análisis es encontrar las \ARs que contiene el almacén \D, reglas con la forma $X\rightarrow Y$ que nos informan sobre el número de veces que aparece el \itemset $Y$ en las transacciones que contienen el \itemset $X$.
+
+\begin{Definition}[\AR]
+   Una \AR es una expresión del tipo $a_i \rightarrow c_i$ , donde $a_i$ y $c_i$ son dos \itemsets mutuamente excluyentes ($a_i \cap c_i = \emptyset$).
+  \begin{equation}\label{eqARi}
+      R_i = \{a_i\rightarrow c_i\}
+  \end{equation}
+   \noindent $a_i$ recibe el nombre de \antecedente y $c_i$ el de \consecuente de la \ar.
+\label{def:1-3-2-AR}
+\end{Definition}
+
+Las \ars se obtienen al examinar a fondo un almacén de \transacciones y lo único que nos dirán es qué relaciones de co-ocurrencia existen entre los ítems en estudio. La aportación de la \arm es la posibilidad real de hacer el análisis de tremendas colecciones de conjuntos de datos. Algo tan aparentemente simple se ha de llevar a la práctica con cierta prudencia pues los recursos disponibles en la mayoría de dispositivos informáticos son limitados. A pesar de contar con muchas herramientas derivadas de la \emph{Teoría de Conjuntos}, al tratar de implementarlas en un dispositivo informático y manipular grandes cantidades de datos aparecerán enseguida problemas de desbordamiento de memoria, por lo que se entiende que la \arm sea una disciplina más investigada en el ámbito de la Informática que en el de la Estadística.
+
+\begin{Definition}[Minería de Reglas de Asociación]
+   La \arm es el proceso de búsqueda de \ARs en grandes almacenes de \transacciones utilizando los recursos informáticos disponibles y en un tiempo apropiado.
+\label{def:1-3-2-ARM}
+\end{Definition}
+
+El análisis propuesto es útil para muchas disciplinas en la época de la tecnología y el \emph{Big Data}. Las \transacciones sirven para modelar gran cantidad de estudios y las \ars puede convertirse en conocimiento muy útil en distintas áreas de investigación si se adquiere a tiempo de poder ser utilizado.
+
+\begin{itemize}
+  \item La cesta de la compra se puede generalizar a cualquier tipo de comercio, recibiendo mucha atención en el ámbito del \emph{e-comercio}, donde muchas recomendaciones se hacen en base al conocimiento adquirido por el uso de \ars.
+  \item En muchos estudios de \clasificacion se codifican los datos observados a cada individuo en un registro con pares \texttt{atributo=valor} y se realiza el proceso de \clasificacion observando la co-ocurrencia de los datos de los distintos registros. Las \ars proporcionan justo esta información por lo que han generado el estudio de las \emph{reglas de \clasificacion}~\citep{LiuHsuMa-IntegratingClassificationAndARM-1998,ThabtahCowlingHammoud-ImprovingRuleSorting-2006,KahramanliAllahverdi_NewMethodForComposingClassificationRulesARplusOPTBP_2009}.
+  \item Cuando un médico solicita diferentes análisis está adquiriendo datos del paciente, un conjunto de pares \texttt{atributo=valor} que puede ser observado como una \transaccion si los valores son categóricos o se pueden categorizar. Si pudiera comparar esta \transaccion con las \transacciones de otros pacientes a los que se está estudiando o ya han sido diagnosticados quizá tendría información de mayor calidad para poder emitir un diagnóstico o solicitar un nuevo análisis.
+  \item En un sondeo socio-político con respuestas categóricas se podría tratar cada encuesta individual como una \transaccion. La interpretación del sondeo se podría beneficiar del descubrimiento de alguna \ar difícil de encontrar usando métodos puramente estadísticos.
+  \item En \wum se pueden convertir las \sns en \transacciones y estudiar qué páginas relacionan entre sí los usuarios. Si se pueden obtener las "`mejores"' \ars en tiempo real se podrá usar esta información para mejorar un \srw.
+\end{itemize}
+
+
+
+
+
+
+Para medir la calidad de las \ARs se utilizan dos valores, el \soporte y la \confianza de la regla. Antes de definirlas hemos de exponer el significado de \soporte de un \itemset, que siempre tendrá relación con el tamaño del almacén de \transacciones, $|\D|$.
+
+\begin{Definition}[\Soporte de un \itemset]
+  El \soporte de un \itemset es su frecuencia en \D, el número de veces que aparece el \itemset en el almacén de \transacciones.
+  \begin{equation}\label{eq:1-3-2-soporte-absoluto-itemset}
+    soporte(X) = |\T_X| = n_X,\ \textrm{ siendo }\ \T_X =\left\{\T \in \D\ / \ X \in \T\right\}
+  \end{equation}   
+  Se utilizan las dos versiones de la frecuencia para hablar del \soporte. En la anterior ecuación aparece el \soporte absoluto y a continuación se muestra el \soporte relativo, puesto en relación al número de transacciones con que estamos trabajando.
+  \begin{equation}\label{eq:1-3-2-soporte-itemset}
+    soporte_{relativo}(X) = \frac{n_X}{|\D|}
+  \end{equation}
+\label{def:1-3-2-soporte-itemset}
+\end{Definition}
+
+En muchos estudios se supone que el \soporte de un \itemset es representativo de la frecuencia de ese \itemset en la población de la que procede la muestra analizada. Si esta suposición fuera correcta sería más probable encontrar este \itemset en esta población que cualquier otro con menor \soporte por lo que se utiliza para estimar probabilidades sobre la población de origen de la muestra \D.
+
+
+La limitación de recursos en los dispositivos en que se ejecutan los algoritmos de \arm obliga a hacer alguna definición más. El principal problema es el uso de memoria RAM cuando tenemos muchos ítems sobre los que guardar información. De \I se pueden obtener $2^M-M-1$ \itemsets distintos con más de un ítem, y de cada \kitemset se pueden obtener hasta $2^k-2$ \ars por lo que si $M$ es grande estamos hablando de registrar millones de datos y frecuencias, tantos que pueden llegar a desbordar la capacidad de almacenamiento del dispositivo en que se ejecute el algoritmo de \ARM.
+
+La primera solución propuesta consiste en ignorar los ítems que tengan menor \soporte para aprovechar la memoria sólo para guardar los ítems más frecuentes, lo que se supone que aportará información para un conjunto más amplio de individuos de la población. Es una suposición que no debe satisfacer las inquietudes del analista ya que cuando trabajamos con colecciones muy grandes de \transacciones puede darse el caso que decidamos ignorar los ítems cuyo \soporte sea inferior al 0.5\%, lo que muchos investigadores califican como "`poco representativo"' de la población en estudio. Si ese aparentemente pequeño 0.5\% supone que ignoremos la información que proporciona un ítem que aparece en miles de transacciones no deberíamos dar por terminado el estudio.
+
+
+\begin{Definition}[\Soporte mínimo]
+   El \soporte mínimo, $minSup$, es un valor fijado antes de llevar a cabo la \emph{búsqueda de} \itemsets \emph{frecuentes}. Si el almacén \D es muy grande y el equipo en que se ejecute el algoritmo de \arm tiene recursos insuficientes para el análisis completo de \D se debe fijar un \soporte mínimo para que no se produzcan desbordamientos de memoria RAM, lo que se logrará ignorando los \itemsets cuyo \soporte sea inferior a $minSup$.
+\label{def:1-3-2-soporte-minimo}
+\end{Definition}
+
+
+\begin{Definition}[\Itemset frecuente]
+   Un \itemset frecuente es un \itemset con \soporte en \D igual o superior a $minSup$.
+   % $$X \in \ap
+\label{def:1-3-2-itemset-frecuente}
+\end{Definition}
+
+\begin{Definition}[Conjunto de \itemsets frecuentes, {\aprioriL}]
+   Sea \aprioriL es el conjunto de todos los \itemsets frecuentes de \D. Sean \aprioriL[k] los conjuntos de \kitemsets frecuentes de \D.
+  \begin{equation}\label{eq:1-3-2-cjto-kitemsets}
+    \aprioriL = \cup_k{\aprioriL[k]}
+  \end{equation}
+\label{def:1-3-2-cjto-itemsets-frecuente}
+\end{Definition}
+
+Técnicamente el valor más grande que puede tomar $k$ coincide con la longitud de la \transaccion más larga de \D. Sin embargo al trabajar con \soporte mínimo es muy probable que $k$ no alcance dicho valor.
+
+
+\begin{Definition}[\Soporte de una \AR]
+  El \soporte de la \AR $X \rightarrow Y$ es la frecuencia del \itemset que la forma, $X \cup Y$, en \D.
+  \begin{equation}\label{eq:1-3-2-soporte-AR-absoluto}
+    soporte(X \rightarrow Y) = soporte(X \cup Y) = n_{XY}
+  \end{equation}
+  \begin{equation}\label{eq:1-3-2-soporte-AR}
+    soporte_{relativo}(X \rightarrow Y) = \frac{soporte(X \cup Y)}{|\D|} = \frac{n_{XY}}{|\D|}
+  \end{equation}
+\label{def:1-3-2-soporte-AR}
+\end{Definition}
+
+El \soporte de una \ar nos indica con qué frecuencia se encuentra esta regla entre las transacciones de la muestra \D.
+
+\begin{Definition}[\Confianza de una \AR]
+   La \confianza de una regla es la frecuencia con que aparece el \consecuente, $Y$, en las transacciones en que está el \antecedente, $X$.
+  \begin{equation}\label{eq:1-3-2-confianza-AR}
+    confianza(X \rightarrow Y) = \frac{soporte(X \cup Y)}{soporte(X)} = \frac{n_{XY}}{n_X}
+  \end{equation}
+\label{def:1-3-2-confianza}
+\end{Definition}
+
+Si la \ar $X \rightarrow Y$ tiene \soporte $s$ y confianza $c$ su lectura es sencilla de comprender: 
+\begin{quote}
+  "`En el $s$\% de las \transacciones de \D está el \itemset $(X \cup Y)$. En el $c$\% de las \transacciones en que está está presente el \itemset $X$ también está presente el \itemset $Y$"'
+\end{quote}
+
+Se utilizan mucho en tareas de \prediccion interpretando la \confianza como una probabilidad aunque para hacerlo correctamente debería estudiarse más a fondo la población de origen de los datos.
+
+\begin{Definition}[\Confianza mínima]
+   La \confianza mínima, $minConf$, es un valor fijado antes de llevar a cabo la \emph{generación de} \ars para evitar problemas de desbordamiento de memoria {RAM}, lo que se logrará ignorando las \ars cuya confianza sea inferior a $minConf$.
+\label{def:1-3-2-confianza-minima}
+\end{Definition}
+
+En todo proceso de \arm hay dos fases bien diferenciadas, la \fim (\FIM) y la obtención de las \ars a partir de los \itemsets frecuentes encontrados. La parte más costosa del proceso es la primera pues se ha de recorrer por completo el almacén \D para comprobar qué ítems se relacionan entre sí y cuáles lo hacen de manera frecuente (superando el \soporte mínimo fijado en el estudio). En esta fase se guarda la información obtenida conforme se va leyendo \D, con el riesgo de tener desbordamiento de memoria RAM si no se hacen costosas operaciones de comprobación cada vez que se va a necesitar algo más de RAM. En la segunda fase se utiliza el conjunto de \itemsets frecuentes encontrado en la primera y se comprueban todas las reglas que se pueden derivar de ellos, ofreciendo como resultado las reglas que superen la \confianza mínima fijada para el estudio.
+
+Existen muchos algoritmos de \arm entre los que destacan 
+\algoritmo{AIS}~\citep{AgrawalImielinskiSwami_MiningAssociationRulesBetweenSetsOfItemsInLargeDB_1993}, 
+\algoritmo{SETM}~\citep{HoutsmaSwami_SETMofAR_1993}, 
+\algoritmo{Apriori}, \algoritmo{Apriori-TID} y \algoritmo{AprioriHybrid} (Agrawal y Srikant, \cite*{AgrawalSrikant_FastAlgorithmsForMiningAssociationRules_1994}, \cite*{AgrawalSrikant-FastAlgorithmsForMiningAssociationRules-LARGO-1994}), 
+\algoritmo{Partition}~\citep{SavasereOmiecinskiNavathe_AnEfficientAlgorithmForARM_1995}, 
+\algoritmo{DHP} (Park, M. Chen y P. Yu, \cite*{ParkChenYu_AnEffectiveHashBasedAlgorithmForARM_1995}, \cite*{ParkChenYu_UsingAHashBasedMethod_1997}), 
+\algoritmo{Count Distribution}, \algoritmo{Data Distribution} y \algoritmo{Candidate Distribution}~\citep{AgrawalShafer_ParallelMAR_1996}, 
+\algoritmo{Eclat}, \algoritmo{MaxEclat}, \algoritmo{Clique} y \algoritmo{MaxClique}~\citep{ZakiParthasarathyOgiharaL_NewAlgorithms_1997}, 
+\algoritmo{DIC}~\citep{BrinMotwaniUllmanTsur_DynamicItemsetCounting_1997}, 
+\algoritmo{Basic}, \algoritmo{Cumulate} y \algoritmo{EstMerge}~\citep{SrikantAgrawal_MiningGeneralizedAR_1997}, 
+\algoritmo{MaxMiner}~\citep{Bayardo-EfficientlyMiningLongPatternsFromDB-1998}, 
+\algoritmo{RangeApriori}~\citep{GrothRoberston_DiscoveringFrequentItemsets_2001}, 
+\algoritmo{PincerSearch}~\citep{LinKedem_PincerSearchFIM_2002} o 
+\algoritmo{FP-Growth}~\citep{HanPeiYin_MiningFrequentPatternsWithoutCandidateGeneration_2000,HanPeiYinMao_MiningFrequentPatternsWithoutCandidateGenerationAFPTreeApproach_2004}.
+
+
+Entre todos ellos hemos seleccionado \apriori por tratarse de un algoritmo sencillo, fácil de implementar y de modificar o ajustar a nuevas aportaciones a la \arm. De hecho este algoritmo es la base de muchos de los algoritmos propuestos hasta la fecha. Como todo algoritmo de \ARM, \apriori consta de dos fases:
+\begin{enumerate}
+   \item \fim. Se fija $minSup$, el \soporte mínimo, y se recorre \D las veces que sea necesario hasta obtener todos los \itemsets frecuentes que contiene, aquellos cuyo \soporte sea igual o superior a $minSup$. Los listados~\ref{alg:apriori}, ~\ref{alg:apriori-union} y~\ref{alg:apriori-poda} muestran esta fase en el algoritmo \apriori.
+   \item Obtención de \ARs. Se fija $minConf$, la \confianza mínima, y se recorre el conjunto de \itemsets frecuentes \aprioriL obteniendo las reglas del tipo $\itemset_1 \Rightarrow \itemset_2$ con \confianza igual o superior a $minConf$. El listado~\ref{alg:apriori-genrules} muestran esta fase en el algoritmo \apriori.
+\end{enumerate}
+
+
+\begin{Definition}[Conjunto de candidatos a \kitemsets frecuentes, \aprioriC]
+   \aprioriC es el conjunto de todos los \kitemsets que podrían ser frecuentes en \D. Se genera a partir de \aprioriL[k-1].
+\label{def:1-3-2-cjto-candidatos}
+\end{Definition}
+
+
+\lstinputlisting[label=alg:apriori,
+                 caption={Algoritmo \apriori},
+                 float=htb,
+                 basicstyle=\footnotesize]
+                 {./contenido/srw/codigo/algApriori}
+                 
+La primera fase se inicia fijando el valor del \soporte mínimo, $minSup$, leyendo \D y anotando la frecuencia de todos los ítems que contiene, obteniendo \aprioriC[1], el conjunto de todos los \emph{candidatos} a 1-\itemset. A continuación descartamos los ítems de \aprioriC[1] cuya frecuencia (\soporte) no satisfaga el \soporte mínimo establecido ($soporte < minSup$) y obtenemos los 1-\itemsets frecuentes, los ítems que están en \D con \soporte mínimo, \aprioriL[1]. A partir de \aprioriL[1] se generan los candidatos a 2-\itemsets frecuentes, \aprioriC[2], y se comprueba en \D cuáles tienen \soporte mínimo, obteniendo \aprioriC[2]. El proceso se repetirá con \aprioriC y \aprioriL[k] mientras se sigan encontrando conjuntos de \kitemsets frecuentes en \D. En el listado~\ref{alg:apriori} se entiende que ya se ha hecho la primera lectura de \D por lo que conocemos la frecuencia de todos los ítems de \D y hemos obtenido ya \aprioriL[1] descartando los ítems poco frecuentes.
+
+La generación de candidatos, \aprioriC, se realiza mediante la función $apriori-gen$, que recibe como argumento \aprioriL[k-1], el conjunto de \kitemsets[(k-1)] frecuentes. Se realiza en dos fases, la unión y la poda.
+
+\lstinputlisting[label=alg:apriori-union,
+                 caption={Función $apriori-gen$: unión},
+                 float=htb,
+                 basicstyle=\footnotesize]
+                 {./contenido/srw/codigo/funAprioriUnion}
+
+En la unión (ver listado~\ref{alg:apriori-union}) se obtienen todos los \kitemsets fruto de la unión de dos \itemsets de \aprioriL[k-1] con raíz común (cuyos primeros $k-2$ ítems coinciden). A nivel de implementación hay que situarse en cada hoja de \aprioriL[k-1] y añadirle \aprioriC, el vector de todos sus "`hermanos menores"'. Es en esta función donde más recursos de memoria RAM son necesarios debido a que cada hoja del árbol \aprioriL generará un vector de pre-candidatos (excepto la última hoja de cada rama, por no tener "`hermanos menores"'). Es por tanto en esta función donde se puede presentar el problema de desbordamiento de memoria cuando se ejecuta el algoritmo con ciertas colecciones de datos.
+
+\lstinputlisting[label=alg:apriori-poda,
+                 caption={Función $apriori-gen$: poda},
+                 float=htb,
+                 basicstyle=\footnotesize]
+                 {./contenido/srw/codigo/funAprioriPoda}
+
+
+En la poda (ver listado~\ref{alg:apriori-poda}) se eliminan de \aprioriL[k-1]-\aprioriC los \kitemsets que contengan algún \kitemsets[(k-1)] no frecuente (no presente en \aprioriL[k-1]) pues, a priori, no será un \kitemset frecuente. Esta función es la que da nombre al algoritmo. La poda supone recorrer por completo \aprioriL[k-1]-\aprioriC y para cada uno de sus elementos realizar la búsqueda de todos sus \kitemsets[(k-1)] en \aprioriL[k-1]. Consume mucho tiempo porque las búsquedas en \aprioriL[k-1] son muy laboriosas, hay que buscar el primer elemento en \aprioriL[1], localizar su rama \aprioriL[2] y buscar en ella el segundo elemento y seguir hasta que no se encuentre uno de los elementos o lleguemos al nivel \aprioriL[k-1] y lo encontremos en cuyo caso no habría que hacer nada. Si no se ha encontrado se libera la memoria reservada para el pre-candidato por lo que no puede producir desbordamiento de memoria.
+
+
+Una vez generados todos los candidatos a \kitemset frecuente se procede a contarlos en \D (listado~\ref{alg:apriori}). Inicialmente se ha asignado \soporte nulo a todos los candidatos en \aprioriC. Se lee cada \transaccion de \D y se busca en \aprioriL[k-1]-\aprioriC cada \kitemset de la \transaccion, incrementando su \soporte si se encuentra entre los candidatos. La lectura completa de \D consume mucho tiempo si está guardado en disco duro, sin embargo no siempre es posible guardarlo en memoria RAM para agilizar esta fase del algoritmo. Cuando se termina de leer \D se comprueban qué candidatos tienen \soporte mínimo y se eliminan los que no lo tienen, liberando memoria en esta fase.
+
+
+
+
+
+
+
+Una vez conocemos todos los \itemsets con \soporte mínimo que contiene \D, \aprioriL, procederemos a obtener las \ARs calculando la confianza de todas las reglas que contienen y guardando las que superen la \confianza mínima, $minConf$.
+
+El listado~\ref{alg:apriori-genrules} muestra el código que proponen~\citeauthor{AgrawalSrikant-FastAlgorithmsForMiningAssociationRules-LARGO-1994} para generar las \ars. Aunque es un código muy sencillo supone un uso intensivo de procesador y de memoria para guardar los resultados que se van obteniendo. Si no se tienen que utilizar simultáneamente todas las \ars obtenidas es preferible guardarlas en disco conforme se van obteniendo para asegurarnos de no provocar un desbordamiento de memoria. Realmente no es un problema costoso computacionalmente hablando pero una mala implementación de la función o el uso de una estructura inadecuada para almacenar \aprioriL podría provocar tiempos de ejecución muy elevados.
+
+La obtención de millones de \ARs no supone el final del proceso. Hay que extraer conocimiento de ellas y para ello hay que usar técnicas de visualización de grandes colecciones de datos, técnicas de comparación que permitan observar los cambios producidos sobre el conocimiento que ya teníamos\ldots
+
+\lstinputlisting[label=alg:apriori-genrules,
+                 caption={Función $genrules()$},
+                 float=htb,
+                 basicstyle=\footnotesize]
+                 {./contenido/srw/codigo/funAprioriGenrules}
+
+
+
+
+
+\subsubsection{Técnicas de \ARM aplicadas a un \srw}
+\label{sec:1-3-2-1-tecnicasARMsobreSRW}
+%\input{./1-SRW/1-3-MD/1-3-2-1-tecnicasARMsobreSRW}
