@@ -26,7 +26,7 @@ Antes de obtener información sobre \mushroom comenzamos a analizar los resultad
 Tras llevar a cabo la investigación que se expone en este capítulo podemos afirmar que, aunque todas las citas usadas en los párrafos anteriores han experimentado con \mushroom para aliviar su \dilemaIR, \mushroom y muchas colecciones de datos de similares características realmente no contienen \IRs.
 
 
-
+\cite{Lichman-UCI-2013} ponen a disposición de investigadores una buena colección de datos. Con ellos podemos probar nuestras propuestas y, lo que es más importante, hacer comparaciones con otros trabajos ya publicados, en situaciones similares y con los mismos datos. Aunque esto no siempre es así, muchos de los experimentos relatados en la amplia bibliografía de esta tesis han usado aparentemente los mismos datos pero al profundizar en ellos observamos pequeñas diferencias que pueden alterar los resultados de las comparaciones llevadas a cabo. En la sección~\ref{sec:clasificacion:datos-missing} mostraremos un caso en el que los autores modifican los datos originales, lo que nos llevó a experimentar con dos datasets distintos diseñados para el mismo problema de \clasificacion y nos permitió llegar a conclusiones interesantes que de otro modo quizá no habríamos descubierto.
 
 
  % \citet{Freitas:UnderstandingDiffBetweenClassifAndDiscoveryOfAR:00} muestran las diferencias existentes entre \ac{ARM} y la tarea de \clasificacion. El debate se debe a que muchas de las investigaciones sobre \ac{ARM} presentan sus resultados como si se tratara de tareas de \clasificacion cuando en realidad no son tales. Estas diferencias nos permiten ver analogías existentes entre ambas tareas que permiten una adaptación de la información extraída de los algoritmos de búsqueda de reglas de asociación para la tarea de \clasificacion, como muestran \citet{Liu:Hsu:Ma:IntegratingClassAndARM:98} en su artículo. La primera diferencia que destacan es a nivel sintáctico: las reglas de asociación muestran en su \consecuente un conjunto de ítems mientras que la tarea de \clasificacion sólo debe mostrar como \consecuente la clase a la que pertenece el individuo (transacción) en estudio. Otra diferencia es la simetría respecto a los elementos incluidos en \antecedente y \consecuente, las reglas de asociación son simétricas si sólo nos fijamos en que tanto \antecedente como \consecuente están formados por ítems (atributos), mientras que en \clasificacion el \antecedente lo forman ítems y el \consecuente es siempre una clase de pertenencia. En consecuencia, las reglas de asociación deben ser del tipo $X\rightarrow y$, donde $X$ es un conjunto de ítems (atributos y no clases) e $y$ es la clase a la que pertenece la transacción que contiene $X$, para poder ser utilizadas en tareas de \clasificacion. Esto no parece suficiente para los autores debido al modo de operar de los algoritmos de \clasificacion: en una primera fase de entrenamiento se encuentran las reglas de \clasificacion entre individuos previamente clasificados, lo que constituye información del ``pasado'' de la población en estudio, mientras que la segunda fase se utiliza para clasificar los individuos del ``presente'' o ``futuro'' según las reglas encontradas en la primera fase. En \ac{ARM} no existe \clasificacion previa ni entrenamiento, y todos los individuos en estudio pertenecen a una misma cohorte, el ``presente'', que en muchas situaciones pretende ser utilizado para inferir las reglas que se cumplirán en el ``futuro''. Esto nos lleva a pensar que el uso de reglas de asociación en tareas de \clasificacion puede realizarse si existe una transformación adecuada de la información obtenida en el proceso de \ac{ARM} -- relaciones existentes entre los ítems de un conjunto de transacciones -- en la información necesaria para clasificar los individuos en estudio -- clases de pertenencia y reglas de \clasificacion.
@@ -35,7 +35,7 @@ Tras llevar a cabo la investigación que se expone en este capítulo podemos afi
 
 
 
-\section{Catálogo}
+\section{\Catalogo}
 \label{sec:clasificacion:catalogo}
 \input{contenido/clasificacion/catalogo}
 
@@ -47,7 +47,7 @@ Tras llevar a cabo la investigación que se expone en este capítulo podemos afi
 
 
 
-\section{Catálogo comprimido}
+\section{\Catalogo Comprimido}
 \label{sec:clasificacion:catalogo-comprimido}
 \input{contenido/clasificacion/catalogo-comprimido}
 
@@ -68,6 +68,7 @@ Tras llevar a cabo la investigación que se expone en este capítulo podemos afi
 
 
 
+%TODO: Añadir \missing al índice alfabético
 \section{Datos missing}
 \label{sec:clasificacion:datos-missing}
 \input{contenido/clasificacion/datos-missing}
