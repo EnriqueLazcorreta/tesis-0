@@ -35,7 +35,7 @@ Cualquier \ar que incluya el ítem \texttt{stalk-root=?} en su antecedente debe 
 
 Si eliminamos \texttt{stalk-root} de ambos ficheros obtendremos dos \CCs distintos, el primero con todos los registros-tipo del segundo y además 2\,480 registros-tipo que no están en el segundo. Es evidente que el primero tiene información más precisa sobre el problema de \clasificacion que estamos analizando. Pero la información extra que contiene no es sobre el atributo \texttt{stalk-root}, ni tan siquiera se utiliza este atributo para obtener esa información, sólo depende de las co-ocurrencias entre valores del resto de atributos. Si eliminamos el atributo \texttt{stalk-root} de ambos ficheros obtendremos dos nuevos \CCs, esta vez sin datos missing, ambos orientados al mismo problema de \clasificacion y sin ninguna discrepancia entre ellos (de hecho el reducido es una partición del original). Si pudiéramos utilizar cualquiera de ellos en nuestro próximo clasificador está claro que deberíamos usar el \CC que ese obtiene eliminando el atributo \texttt{stalk-root} al dataset original.
 
-
+El \CC mayor contiene al menor pero el menor se ha obtenido a partir de la información proporcionada por otro atributo (que ahora ya no está). Ambos contienen algo de información distinta para el mismo problema de \clasificacion. En el menor hay más $ARN_2$, que desaparecen al añadir nuevos registros-tipo para formar el mayor, es lo que podría ocurrir si seguimos tomando muestras y aparecen nuevos registros-tipo que no presenten incertidumbre, el \CC va mejorando y nos informa que los datos que conocemos garantizan una buena clasificación (no es necesario medir otro atributo porque no tenemos incertidumbre y cada vez sabemos más sobre los registros-tipo de este problema de clasificación).
 
 
 
@@ -45,7 +45,3 @@ Si eliminamos \texttt{stalk-root} de ambos ficheros obtendremos dos \CCs distint
 
 No todos los \catalogos con datos missing tendrán las mismas características que \mushroom, pero sí se puede dar en muchos estudios que sigamos añadiendo registros a un dataset pero sin incluir uno de sus atributos, si el resto de atributos es suficiente para clasificar correctamente al individuo tendremos una situación similar a la analizada en esta sección. Si estamos trabajando con un \CC completo y válido es muy posible que no necesitemos nunca más medir el valor de ese atributo, pero no deberíamos borrarlo del dataset original porque alguna vez podría aparecer algo de incertidumbre en el catálogo y sería útil poder añadir toda la información que ya se recogió en su día sobre cualquier otro atributo medible en los individuos en estudio.
 
-
-
-
-\mushroom
