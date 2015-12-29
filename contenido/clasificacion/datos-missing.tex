@@ -1,0 +1,51 @@
+% !TEX root = ../../Lazcorreta.Tesis.tex
+\ABIERTO
+\mushroom contiene 8\,124 registros en su dataset original (UCI) sin embargo en el fichero KEEL contiene sólo 5\,644 registros porque se han eliminado los registros con datos missing que contenía el fichero original.
+
+En un problema de \clasificacion los datos missing no deberían ser considerados. Hay autores que prefieren estimarlos [¿citas?] pero si no hay una justificación suficientemente poderosa no deberíamos ``inventar'' ningún valor cuando queremos clasificar correctamente a un individuo, la Minería de Datos nos puede dar información para reducir el espacio de búsqueda.
+
+En un registro, la ausencia de un dato provocará tener un valor menos, lo que traducido a transacciones se convierte en una transacción de distinto tamaño que el resto de registros. Esto sería un problema para tratarlo como se ha propuesto en la sección~\ref{sec:clasificacion:catalogo-comprimido} ya que el fichero \D no será considerado catálogo por no tener todos sus registros el mismo tamaño. Una solución consiste en considerar el valor missing de un atributo como un valor distinto al resto de los que realmente contiene, en el caso de \mushroom se denota con \texttt{?}, al convertirlo en fichero \D se codificará ese valor como un valor distinto del atributo al que pertenezca y la única consecuencia es, aparentemente, que tenemos un ítem diferente más.
+
+Los datos missing son difíciles de interpretar correctamente ya que para convertir los ficheros en formato adecuado para ARM se utiliza un código binario para indicar esta situación, i.e., si un registro no contiene información sobre un atributo se crea la categoría ficticia "dato desconocido" en dicho atributo y se le asigna esa categoría, así podemos aplicar con cierta normalidad las técnicas de ARM, aunque la interpretación de las reglas que se pueden obtener es confusa:
+
+\begin{quote}
+Si no conocemos el valor del atributo $\A_i$ podemos deducir que\ldots
+\end{quote}
+
+Eliminar los registros con datos missing parece una estrategia correcta para no tener que gestionar estas \ars. Sin embargo perdemos información sobre 2\,480 registros, sin saber si la información que perdemos es relevante o no lo es.
+
+Si analizamos el fichero \mushroom observaremos que sólo un atributo contiene datos missing, \texttt{stalk-root}, y ya hemos visto en la sección~\ref{sec:clasificacion:catalogo-completo} que este atributo es prescindible, al menos en el dataset reducido de KEEL. Con lo que ahora sabemos sobre \catalogos podemos diseñar otra estrategia, eliminar el atributo \texttt{stalk-root} del dataset original y comprobar si esos 2\,480 registros ignorados por la estrategia utilizada contienen información que habíamos perdido irremediablemente.
+
+En \href{http://sci2s.ugr.es/keel/dataset.php?cod=178}{KEEL - Mushroom} proporcionan dos ficheros \mushroom:
+\begin{itemize}
+  \item por defecto el que han elaborado con su formato tras eliminar los registros con datos missing
+  \item si lo buscamos nos ofrecen el dataset original en formato KEEL, con 8\,124 registros.
+\end{itemize}
+
+Al analizar ambos ficheros se obtienen los siguientes resultados:
+\begin{enumerate}
+  \item mushroom-original contiene un \CC de 8\,124 registros, con un atributo que contiene datos missing, \texttt{stalk-root}, que es prescindible y no aumenta el tamaño del catálogo.
+  \item mushroom contiene un \CC de 5\,644 registros, \texttt{stalk-root} es prescindible y no aumenta el tamaño del catálogo.
+\end{enumerate}
+Luego tenemos dos análisis sobre dos datasets\borrar{Añadir dataset a indice-alfabetico} que ofrecen datos similares pero deben contener diferente información. Analizar sus similitudes y diferencias nos dará más información que la que obteníamos con el primer fichero KEEL.
+
+El primer dato relevante es que ambos ficheros son \CCs, si eliminamos en cualquiera de ellos el atributo \texttt{stalk-root} no se reduce el catálogo ni se pierde información. Si no sobran los 2\,480 registros de más que tiene el catálogo original deberían de aportar algo de información que no está presente en el catálogo reducido.
+
+Cualquier \ar que incluya el ítem \texttt{stalk-root=?} en su antecedente debe ser ignorada ya que su interpretación sería ``\emph{Si no sé qué valor tiene stalk-root entonces\ldots}''.
+
+Si eliminamos \texttt{stalk-root} de ambos ficheros obtendremos dos \CCs distintos, el primero con todos los registros-tipo del segundo y además 2\,480 registros-tipo que no están en el segundo. Es evidente que el primero tiene información más precisa sobre el problema de \clasificacion que estamos analizando. Pero la información extra que contiene no es sobre el atributo \texttt{stalk-root}, ni tan siquiera se utiliza este atributo para obtener esa información, sólo depende de las co-ocurrencias entre valores del resto de atributos. Si eliminamos el atributo \texttt{stalk-root} de ambos ficheros obtendremos dos nuevos \CCs, esta vez sin datos missing, ambos orientados al mismo problema de \clasificacion y sin ninguna discrepancia entre ellos (de hecho el reducido es una partición del original). Si pudiéramos utilizar cualquiera de ellos en nuestro próximo clasificador está claro que deberíamos usar el \CC que ese obtiene eliminando el atributo \texttt{stalk-root} al dataset original.
+
+
+
+
+
+
+
+
+
+No todos los \catalogos con datos missing tendrán las mismas características que \mushroom, pero sí se puede dar en muchos estudios que sigamos añadiendo registros a un dataset pero sin incluir uno de sus atributos, si el resto de atributos es suficiente para clasificar correctamente al individuo tendremos una situación similar a la analizada en esta sección. Si estamos trabajando con un \CC completo y válido es muy posible que no necesitemos nunca más medir el valor de ese atributo, pero no deberíamos borrarlo del dataset original porque alguna vez podría aparecer algo de incertidumbre en el catálogo y sería útil poder añadir toda la información que ya se recogió en su día sobre cualquier otro atributo medible en los individuos en estudio.
+
+
+
+
+\mushroom
