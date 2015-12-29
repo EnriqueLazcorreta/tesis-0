@@ -1,8 +1,7 @@
 forall large itemsets $l_k, k \geq 2$ do
    call genrules($l_k$, $l_k$);
 
-// The genrules generates all valid rules $\tilde{a}\Rightarrow(l_k - \tilde{a})$, 
-// for all $\tilde{a} \subset a_m$
+// The genrules generates all valid rules $\tilde{a}\Rightarrow(l_k - \tilde{a})$, $\forall\tilde{a} \subset a_m$
 procedure genrules($l_k$: large $k$-itemset, 
                    $a_m$: large $m$-itemset)
 1)  $A = \{(m-1){\rm -itemsets}\  a_{m-1} \ | \ a_{m-1} \subset a_m\}$;

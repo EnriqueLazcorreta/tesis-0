@@ -189,29 +189,29 @@ Entre todos ellos hemos seleccionado \apriori por tratarse de un algoritmo senci
 \end{Definition}
 
 
-\lstinputlisting[label=alg:apriori,
-                 caption={Algoritmo \apriori},
-                 float=htb,
-                 basicstyle=\footnotesize]
-                 {./contenido/srw/codigo/algApriori}
+\lstinputlisting[language=Pascal,
+                       basicstyle=\ttfamily\footnotesize,
+                       label=alg:apriori,
+                       caption={Algoritmo \apriori}]
+                       {./contenido/srw/codigo/algApriori}
                  
 La primera fase se inicia fijando el valor del \soporte mínimo, $minSup$, leyendo \D y anotando la frecuencia de todos los ítems que contiene, obteniendo \aprioriC[1], el conjunto de todos los \emph{candidatos} a 1-\itemset. A continuación descartamos los ítems de \aprioriC[1] cuya frecuencia (\soporte) no satisfaga el \soporte mínimo establecido ($soporte < minSup$) y obtenemos los 1-\itemsets frecuentes, los ítems que están en \D con \soporte mínimo, \aprioriL[1]. A partir de \aprioriL[1] se generan los candidatos a 2-\itemsets frecuentes, \aprioriC[2], y se comprueba en \D cuáles tienen \soporte mínimo, obteniendo \aprioriC[2]. El proceso se repetirá con \aprioriC y \aprioriL[k] mientras se sigan encontrando conjuntos de \kitemsets frecuentes en \D. En el listado~\ref{alg:apriori} se entiende que ya se ha hecho la primera lectura de \D por lo que conocemos la frecuencia de todos los ítems de \D y hemos obtenido ya \aprioriL[1] descartando los ítems poco frecuentes.
 
 La generación de candidatos, \aprioriC, se realiza mediante la función $apriori-gen$, que recibe como argumento \aprioriL[k-1], el conjunto de \kitemsets[(k-1)] frecuentes. Se realiza en dos fases, la unión y la poda.
 
-\lstinputlisting[label=alg:apriori-union,
-                 caption={Función $apriori-gen$: unión},
-                 float=htb,
-                 basicstyle=\footnotesize]
-                 {./contenido/srw/codigo/funAprioriUnion}
+\lstinputlisting[language=SQL,
+                       basicstyle=\ttfamily\footnotesize,
+                       label=alg:apriori-union,
+                       caption={Función $apriori-gen$: unión}]
+                       {./contenido/srw/codigo/funAprioriUnion}
 
 En la unión (ver listado~\ref{alg:apriori-union}) se obtienen todos los \kitemsets fruto de la unión de dos \itemsets de \aprioriL[k-1] con raíz común (cuyos primeros $k-2$ ítems coinciden). A nivel de implementación hay que situarse en cada hoja de \aprioriL[k-1] y añadirle \aprioriC, el vector de todos sus "`hermanos menores"'. Es en esta función donde más recursos de memoria RAM son necesarios debido a que cada hoja del árbol \aprioriL generará un vector de pre-candidatos (excepto la última hoja de cada rama, por no tener "`hermanos menores"'). Es por tanto en esta función donde se puede presentar el problema de desbordamiento de memoria cuando se ejecuta el algoritmo con ciertas colecciones de datos.
 
-\lstinputlisting[label=alg:apriori-poda,
-                 caption={Función $apriori-gen$: poda},
-                 float=htb,
-                 basicstyle=\footnotesize]
-                 {./contenido/srw/codigo/funAprioriPoda}
+\lstinputlisting[language=SQL,
+                       basicstyle=\ttfamily\footnotesize,
+                       label=alg:apriori-poda,
+                       caption={Función $apriori-gen$: poda}]
+                       {./contenido/srw/codigo/funAprioriPoda}
 
 
 En la poda (ver listado~\ref{alg:apriori-poda}) se eliminan de \aprioriL[k-1]-\aprioriC los \kitemsets que contengan algún \kitemsets[(k-1)] no frecuente (no presente en \aprioriL[k-1]) pues, a priori, no será un \kitemset frecuente. Esta función es la que da nombre al algoritmo. La poda supone recorrer por completo \aprioriL[k-1]-\aprioriC y para cada uno de sus elementos realizar la búsqueda de todos sus \kitemsets[(k-1)] en \aprioriL[k-1]. Consume mucho tiempo porque las búsquedas en \aprioriL[k-1] son muy laboriosas, hay que buscar el primer elemento en \aprioriL[1], localizar su rama \aprioriL[2] y buscar en ella el segundo elemento y seguir hasta que no se encuentre uno de los elementos o lleguemos al nivel \aprioriL[k-1] y lo encontremos en cuyo caso no habría que hacer nada. Si no se ha encontrado se libera la memoria reservada para el pre-candidato por lo que no puede producir desbordamiento de memoria.
@@ -231,11 +231,11 @@ El listado~\ref{alg:apriori-genrules} muestra el código que proponen~\citeautho
 
 La obtención de millones de \ARs no supone el final del proceso. Hay que extraer conocimiento de ellas y para ello hay que usar técnicas de visualización de grandes colecciones de datos, técnicas de comparación que permitan observar los cambios producidos sobre el conocimiento que ya teníamos\ldots
 
-\lstinputlisting[label=alg:apriori-genrules,
-                 caption={Función $genrules()$},
-                 float=htb,
-                 basicstyle=\footnotesize]
-                 {./contenido/srw/codigo/funAprioriGenrules}
+\lstinputlisting[language=Pascal,
+                       basicstyle=\ttfamily\footnotesize,
+                       label=alg:apriori-genrules,
+                       caption={Función $genrules()$}]
+                       {./contenido/srw/codigo/funAprioriGenrules}
 
 
 
