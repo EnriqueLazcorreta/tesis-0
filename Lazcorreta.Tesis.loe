@@ -1,40 +1,54 @@
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {Definition}{\numberline {1}Definici\IeC {\'o}n\thmtformatoptarg {Poblaci\IeC {\'o}n de \IeC {\'\i }tems}}{11}{Definition.1}
+\contentsline {Definition}{\numberline {1}Definici\IeC {\'o}n\thmtformatoptarg {\emph {P\IeC {\'a}ginas} del sitio web}}{11}{Definition.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {Definition}{\numberline {2}Definici\IeC {\'o}n\thmtformatoptarg {\emph {Transacci\IeC {\'o}n}\xspace }}{12}{Definition.2}
+\contentsline {Definition}{\numberline {2}Definici\IeC {\'o}n\thmtformatoptarg {\emph {Enlaces internos} del sitio web}}{11}{Definition.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {Definition}{\numberline {3}Definici\IeC {\'o}n\thmtformatoptarg {Almac\IeC {\'e}n \ensuremath {\mathcal {D}}\xspace }}{12}{Definition.3}
+\contentsline {Definition}{\numberline {3}Definici\IeC {\'o}n\thmtformatoptarg {\emph {Sesi\IeC {\'o}n de navegaci\IeC {\'o}n}\xspace }}{14}{Definition.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {Definition}{\numberline {4}Definici\IeC {\'o}n\thmtformatoptarg {\emph {Regla de Asociaci\IeC {\'o}n}\xspace }}{13}{Definition.4}
+\contentsline {Definition}{\numberline {4}Definici\IeC {\'o}n\thmtformatoptarg {Conjunto de \emph {sesiones de navegaci\IeC {\'o}n}\xspace }}{15}{Definition.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {Definition}{\numberline {5}Definici\IeC {\'o}n\thmtformatoptarg {Miner\IeC {\'\i }a de Reglas de Asociaci\IeC {\'o}n}}{13}{Definition.5}
+\contentsline {Definition}{\numberline {5}Definici\IeC {\'o}n\thmtformatoptarg {\emph {P\IeC {\'a}ginas visitadas} del sitio web}}{17}{Definition.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {Definition}{\numberline {6}Definici\IeC {\'o}n\thmtformatoptarg {\emph {Soporte}\xspace de un \emph {itemset}\xspace }}{15}{Definition.6}
+\contentsline {Definition}{\numberline {6}Definici\IeC {\'o}n\thmtformatoptarg {Tiempo de permanencia en las \emph {p\IeC {\'a}ginas visitadas}}}{17}{Definition.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {Definition}{\numberline {7}Definici\IeC {\'o}n\thmtformatoptarg {\emph {Soporte}\xspace m\IeC {\'\i }nimo}}{16}{Definition.7}
+\contentsline {Definition}{\numberline {7}Definici\IeC {\'o}n\thmtformatoptarg {\emph {Enlaces internos utilizados} en el sitio web}}{18}{Definition.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {Definition}{\numberline {8}Definici\IeC {\'o}n\thmtformatoptarg {\emph {Itemset}\xspace frecuente}}{16}{Definition.8}
+\contentsline {Definition}{\numberline {8}Definici\IeC {\'o}n\thmtformatoptarg {Poblaci\IeC {\'o}n de \IeC {\'\i }tems}}{20}{Definition.8}
 \defcounter {refsection}{0}\relax 
-\contentsline {Definition}{\numberline {9}Definici\IeC {\'o}n\thmtformatoptarg {Conjunto de \emph {itemsets}\xspace frecuentes, {\aprioriL }}}{16}{Definition.9}
+\contentsline {Definition}{\numberline {9}Definici\IeC {\'o}n\thmtformatoptarg {\emph {Transacci\IeC {\'o}n}\xspace }}{20}{Definition.9}
 \defcounter {refsection}{0}\relax 
-\contentsline {Definition}{\numberline {10}Definici\IeC {\'o}n\thmtformatoptarg {\emph {Soporte}\xspace de una \emph {Regla de Asociaci\IeC {\'o}n}\xspace }}{16}{Definition.10}
+\contentsline {Definition}{\numberline {10}Definici\IeC {\'o}n\thmtformatoptarg {Almac\IeC {\'e}n \ensuremath {\mathcal {D}}\xspace }}{21}{Definition.10}
 \defcounter {refsection}{0}\relax 
-\contentsline {Definition}{\numberline {11}Definici\IeC {\'o}n\thmtformatoptarg {\emph {Confianza}\xspace de una \emph {Regla de Asociaci\IeC {\'o}n}\xspace }}{16}{Definition.11}
+\contentsline {Definition}{\numberline {11}Definici\IeC {\'o}n\thmtformatoptarg {\emph {Regla de Asociaci\IeC {\'o}n}\xspace }}{22}{Definition.11}
 \defcounter {refsection}{0}\relax 
-\contentsline {Definition}{\numberline {12}Definici\IeC {\'o}n\thmtformatoptarg {\emph {Confianza}\xspace m\IeC {\'\i }nima}}{17}{Definition.12}
+\contentsline {Definition}{\numberline {12}Definici\IeC {\'o}n\thmtformatoptarg {Miner\IeC {\'\i }a de Reglas de Asociaci\IeC {\'o}n}}{22}{Definition.12}
 \defcounter {refsection}{0}\relax 
-\contentsline {Definition}{\numberline {13}Definici\IeC {\'o}n\thmtformatoptarg {Conjunto de candidatos a \kitemsets frecuentes, \aprioriC }}{18}{Definition.13}
+\contentsline {Definition}{\numberline {13}Definici\IeC {\'o}n\thmtformatoptarg {\emph {Soporte}\xspace de un \emph {itemset}\xspace }}{23}{Definition.13}
+\defcounter {refsection}{0}\relax 
+\contentsline {Definition}{\numberline {14}Definici\IeC {\'o}n\thmtformatoptarg {\emph {Soporte}\xspace m\IeC {\'\i }nimo}}{24}{Definition.14}
+\defcounter {refsection}{0}\relax 
+\contentsline {Definition}{\numberline {15}Definici\IeC {\'o}n\thmtformatoptarg {\emph {Itemset}\xspace frecuente}}{25}{Definition.15}
+\defcounter {refsection}{0}\relax 
+\contentsline {Definition}{\numberline {16}Definici\IeC {\'o}n\thmtformatoptarg {Conjunto de \emph {itemsets}\xspace frecuentes, {\aprioriL }}}{25}{Definition.16}
+\defcounter {refsection}{0}\relax 
+\contentsline {Definition}{\numberline {17}Definici\IeC {\'o}n\thmtformatoptarg {\emph {Soporte}\xspace de una \emph {Regla de Asociaci\IeC {\'o}n}\xspace }}{25}{Definition.17}
+\defcounter {refsection}{0}\relax 
+\contentsline {Definition}{\numberline {18}Definici\IeC {\'o}n\thmtformatoptarg {\emph {Confianza}\xspace de una \emph {Regla de Asociaci\IeC {\'o}n}\xspace }}{25}{Definition.18}
+\defcounter {refsection}{0}\relax 
+\contentsline {Definition}{\numberline {19}Definici\IeC {\'o}n\thmtformatoptarg {\emph {Confianza}\xspace m\IeC {\'\i }nima}}{26}{Definition.19}
+\defcounter {refsection}{0}\relax 
+\contentsline {Definition}{\numberline {20}Definici\IeC {\'o}n\thmtformatoptarg {Conjunto de candidatos a \kitemsets frecuentes, \aprioriC }}{27}{Definition.20}
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {Definition}{\numberline {14}Definici\IeC {\'o}n\thmtformatoptarg {Individuo}}{29}{Definition.14}
+\contentsline {Definition}{\numberline {21}Definici\IeC {\'o}n\thmtformatoptarg {Individuo}}{37}{Definition.21}
 \defcounter {refsection}{0}\relax 
-\contentsline {Definition}{\numberline {15}Definici\IeC {\'o}n\thmtformatoptarg {Individuo}}{30}{Definition.15}
+\contentsline {Definition}{\numberline {22}Definici\IeC {\'o}n\thmtformatoptarg {Individuo}}{38}{Definition.22}
 \defcounter {refsection}{0}\relax 
-\contentsline {Definition}{\numberline {16}Definici\IeC {\'o}n\thmtformatoptarg {Registro}}{30}{Definition.16}
+\contentsline {Definition}{\numberline {23}Definici\IeC {\'o}n\thmtformatoptarg {Registro}}{38}{Definition.23}
 \defcounter {refsection}{0}\relax 
-\contentsline {Definition}{\numberline {17}Definici\IeC {\'o}n\thmtformatoptarg {\emph {Cat\IeC {\'a}logo}\xspace }}{30}{Definition.17}
+\contentsline {Definition}{\numberline {24}Definici\IeC {\'o}n\thmtformatoptarg {\emph {Cat\IeC {\'a}logo}\xspace }}{38}{Definition.24}
 \defcounter {refsection}{0}\relax 
-\contentsline {Definition}{\numberline {18}Definici\IeC {\'o}n\thmtformatoptarg {\emph {Cat\IeC {\'a}logo Completo}\xspace }}{32}{Definition.18}
+\contentsline {Definition}{\numberline {25}Definici\IeC {\'o}n\thmtformatoptarg {\emph {Cat\IeC {\'a}logo Completo}\xspace }}{40}{Definition.25}

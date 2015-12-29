@@ -1,0 +1,23 @@
+$sesiones = \emptyset$;
+$sesiones_{abiertas} = \emptyset$;
+
+forall $registro_i, i\ldots N$ do
+	select $IP_i$, $p_i$ y $t_i$ from $registro_i$;
+	select $sesion$ from $sesiones_{abiertas}$ where $(IP_i \in sesion)$;
+	if ($\exists\ sesion$) then
+		if ($t_i - sesion.t_{fin} < maxClick$) and 
+       ($t_i - sesion.t_0 < maxSession$) then
+			add $(t_i - sesion.t_{fin}, p_i)$ to $sesion$;
+			$sesion.t_{fin} = t_i$;
+		else
+			$CierraSesion(sesion)$
+			$CreaSesion(IP_i$, $p_i$, $t_i)$;
+		end
+	else
+		$CreaSesion(IP_i$, $p_i$, $t_i)$;
+	end
+end
+
+forall $sesion\ \in\ sesiones_{abiertas}$ do
+	$CierraSesion(sesion)$
+end

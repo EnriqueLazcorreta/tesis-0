@@ -100,11 +100,56 @@
           stringstyle=\color{redstrings},
           basicstyle=\ttfamily\tiny,
           extendedchars=true,
-          otherkeywords={forall,output,call,Answer},           % if you want to add more keywords to the set
+%          otherkeywords={forall,output,call,Answer,if,to,do,of},           % if you want to add more keywords to the set
   %  inputencoding=utf8,
 %          literate={á}{{\'a}}1 {´A}{{\'A}}1 {ã}{{\~a}}1 {é}{{\'e}}1 {´E}{{\'E}}1 {í}{{\'i}}1 {´I}{{\'I}}1 {ó}{{\'o}}1 {´O}{{\'O}}1 {ú}{{\'u}}1 {´U}{{\'U}}1,
           float=htb
 }
+%\lstset{language=pseudocodigo,
+%          backgroundcolor=\color{light-gray},
+%          mathescape=true,
+%          showspaces=false,
+%          showtabs=false,
+%          breaklines=true,
+%          showstringspaces=false,
+%          breakatwhitespace=true,
+%          escapeinside={\%*}{*)},
+%          commentstyle=\color{greencomments},
+%          keywordstyle=\color{bluekeywords},
+%          stringstyle=\color{redstrings},
+%          basicstyle=\ttfamily\tiny,
+%          extendedchars=true,
+%          otherkeywords={forall,output,call,Answer},           % if you want to add more keywords to the set
+%  %  inputencoding=utf8,
+%%          literate={á}{{\'a}}1 {´A}{{\'A}}1 {ã}{{\~a}}1 {é}{{\'e}}1 {´E}{{\'E}}1 {í}{{\'i}}1 {´I}{{\'I}}1 {ó}{{\'o}}1 {´O}{{\'O}}1 {ú}{{\'u}}1 {´U}{{\'U}}1,
+%          float=htb
+%}
+
+
+\lstdefinestyle{miSQL}{%belowcaptionskip=1\baselineskip,
+%                                    breaklines=true,
+%                                    frame=L,
+%                                    xleftmargin=\parindent,
+                                    language=SQL,
+%                                    showstringspaces=false,
+                                    basicstyle=\footnotesize\ttfamily,
+%                                    keywordstyle=\bfseries\color{green!40!black},
+%                                    commentstyle=\itshape\color{purple!40!black}
+%                                    identifierstyle=\color{blue},
+%                                    stringstyle=\color{orange},
+                                    otherkeywords={for,forall,output,call,Answer,if,to,do,of,begin}
+}
+
+\lstdefinestyle{customasm}{
+  belowcaptionskip=1\baselineskip,
+  frame=L,
+  xleftmargin=\parindent,
+  language=[x86masm]Assembler,
+  basicstyle=\footnotesize\ttfamily,
+  commentstyle=\itshape\color{purple!40!black},
+}
+
+%\lstset{escapechar=@,style=customc}
 
 
 
