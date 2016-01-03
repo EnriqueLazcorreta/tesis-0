@@ -45,10 +45,22 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {Definition}{\numberline {21}Definici\IeC {\'o}n\thmtformatoptarg {Individuo}}{37}{Definition.21}
 \defcounter {refsection}{0}\relax 
-\contentsline {Definition}{\numberline {22}Definici\IeC {\'o}n\thmtformatoptarg {Individuo}}{38}{Definition.22}
+\contentsline {Definition}{\numberline {22}Definici\IeC {\'o}n\thmtformatoptarg {\emph {Itemset}\xspace }}{38}{Definition.22}
 \defcounter {refsection}{0}\relax 
-\contentsline {Definition}{\numberline {23}Definici\IeC {\'o}n\thmtformatoptarg {Registro}}{38}{Definition.23}
+\contentsline {Definition}{\numberline {23}Definici\IeC {\'o}n\thmtformatoptarg {Soporte}}{38}{Definition.23}
 \defcounter {refsection}{0}\relax 
-\contentsline {Definition}{\numberline {24}Definici\IeC {\'o}n\thmtformatoptarg {\emph {Cat\IeC {\'a}logo}\xspace }}{38}{Definition.24}
+\contentsline {Definition}{\numberline {24}Definici\IeC {\'o}n\thmtformatoptarg {$minSup$}}{38}{Definition.24}
 \defcounter {refsection}{0}\relax 
-\contentsline {Definition}{\numberline {25}Definici\IeC {\'o}n\thmtformatoptarg {\emph {Cat\IeC {\'a}logo Completo}\xspace }}{40}{Definition.25}
+\contentsline {Definition}{\numberline {25}Definici\IeC {\'o}n\thmtformatoptarg {\emph {Regla de Asociaci\IeC {\'o}n}\xspace }}{38}{Definition.25}
+\defcounter {refsection}{0}\relax 
+\contentsline {Definition}{\numberline {26}Definici\IeC {\'o}n\thmtformatoptarg {Especificidad}}{38}{Definition.26}
+\defcounter {refsection}{0}\relax 
+\contentsline {Definition}{\numberline {27}Definici\IeC {\'o}n\thmtformatoptarg {Soporte de una regla}}{38}{Definition.27}
+\defcounter {refsection}{0}\relax 
+\contentsline {Definition}{\numberline {28}Definici\IeC {\'o}n\thmtformatoptarg {Individuo}}{39}{Definition.28}
+\defcounter {refsection}{0}\relax 
+\contentsline {Definition}{\numberline {29}Definici\IeC {\'o}n\thmtformatoptarg {Registro}}{39}{Definition.29}
+\defcounter {refsection}{0}\relax 
+\contentsline {Definition}{\numberline {30}Definici\IeC {\'o}n\thmtformatoptarg {\emph {Cat\IeC {\'a}logo}\xspace }}{39}{Definition.30}
+\defcounter {refsection}{0}\relax 
+\contentsline {Definition}{\numberline {31}Definici\IeC {\'o}n\thmtformatoptarg {\emph {Cat\IeC {\'a}logo Completo}\xspace }}{41}{Definition.31}

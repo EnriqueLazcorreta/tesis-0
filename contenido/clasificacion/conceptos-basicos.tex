@@ -10,6 +10,42 @@ El problema de \Clasificacion tiene ya su propia notación, igual que el de \arm
 \end{Definition}
 
 
+\cite{HLeonCarrascoHPalancarMTrinidad-DesarrolloDeClasificadoresBasadosEnRA-2010}, utilizan las siguientes definiciones para modelizar las Reglas de Asociación de Clase (que otros autores denominan Reglas de Clasificación Asociativa), las \ars adaptadas al problema de \Clasificacion.
+
+\borrar{[HLeon-2010\ldots]}
+Sean $\I = \{i_1,i_2,\ldots,l_n\}$ un conjunto de $n$ ítems y \T un conjunto de transacciones. Cada \transaccion en \T está formada por un conjunto de ítems $X$ tal que $X\in\I$.
+\begin{Definition}[\Itemset]
+  El tamaño de un conjunto de ítems está dado por su cardinalidad; un conjunto de ítems de cardinalidad $k$ se denomina $k$-itemset.
+\label{def:itemset}
+\end{Definition}
+
+\begin{Definition}[Soporte]
+  El \soporte de un conjunto de ítems $X$, en adelante $Sop(X)$, se define como la fracción de \transacciones en \T que contienen a $X$. El \soporte toma valores en el intervalo $[0,1]$.
+\label{def:soporte}
+\end{Definition}
+
+\begin{Definition}[$minSup$]
+  Sea $minSup$ un umbral previamente establecido, un conjunto de ítems $X$ se denomina \emph{frecuente} (FI por sus siglas en inglés) si $Sop(X) \geq minSup$.
+\label{def:flujo-de-datos}
+\end{Definition}
+
+\begin{Definition}[\AR]
+  Una \AR (AR por sus siglas en inglés) sobre el conjunto de transacciones \T es una implicación $X\Rightarrow Y$ tal que $X\subset\I, Y\subset\I$ y $X\cap Y=\emptyset$.
+\label{def:reglas-de-asociacion}
+\end{Definition}
+
+\begin{Definition}[Especificidad]
+  Dadas dos reglas $R_1: X_1\Rightarrow Y$ y $R_2: X_2\Rightarrow Y$, se dice que $R_1$ es más específica que $R_2$ si $X_2\subset X_1$.
+\label{def:reglas-de-asociacion}
+\end{Definition}
+
+Las medidas más usadas en la literatura para evaluar la calidad de una \AR son el \soporte y la \confianza.
+
+\begin{Definition}[Soporte de una regla]
+  El \soporte de una \ar $X\Rightarrow Y$ es igual a $Sop(X\cup Y)$.
+\label{def:soporte-de-una-AR}
+\end{Definition}
+\borrar{[\ldots HLeon-2010]}
 
 
 
