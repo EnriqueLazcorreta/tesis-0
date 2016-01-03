@@ -3,7 +3,7 @@
 
 % Nuestras \sns se han convertido en simples conjuntos de páginas. De cada sesión nos quedamos únicamente con las páginas que ha visitado el usuario, sin repetición de páginas si la hubiera en la sesión original y sin considerar el orden en que fueron visitadas.
 
-Las \ARs fueron introducidas por~\citet{AgrawalImielinskiSwami_MiningAssociationRulesBetweenSetsOfItemsInLargeDB_1993} y la \arm popularizada con su algoritmo \apriori (Agrawal y Srikant, \cite*{AgrawalSrikant_FastAlgorithmsForMiningAssociationRules_1994}, \cite*{AgrawalSrikant-FastAlgorithmsForMiningAssociationRules-LARGO-1994}), cuyo pseudocódigo se muestra en los listados~\ref{alg:apriori}, \ref{alg:apriori-union}, \ref{alg:apriori-poda} y~\ref{alg:apriori-genrules}. Las definen a través del ejemplo de la cesta de la compra en un supermercado.
+Las \ARs fueron introducidas por~\citet{AgrawalImielinskiSwami_MiningAssociationRulesBetweenSetsOfItemsInLargeDB_1993} y la \arm popularizada con su algoritmo \apriori (Agrawal y Srikant, \cite*{AgrawalSrikant-FastAlgorithmsForMiningAssociationRules-1994}, \cite*{AgrawalSrikant-FastAlgorithmsForMiningAssociationRules-LARGO-1994}), cuyo pseudocódigo se muestra en los listados~\ref{alg:apriori}, \ref{alg:apriori-union}, \ref{alg:apriori-poda} y~\ref{alg:apriori-genrules}. Las definen a través del ejemplo de la cesta de la compra en un supermercado.
 \begin{enumerate}
   \item El supermercado tiene $M$ productos distintos.
   \item Cada "`cesta de la compra"' se registra mediante un dispositivo informático en forma de \emph{ticket}, que puede contener información del cliente (tarjetas de fidelización) y del empleado, fecha y hora de la compra y un listado de los productos adquiridos por el cliente junto con detalles como cantidad, precio, descuentos\ldots
@@ -166,7 +166,7 @@ En todo proceso de \arm hay dos fases bien diferenciadas, la \fim (\FIM) y la ob
 Existen muchos algoritmos de \arm entre los que destacan 
 \algoritmo{AIS}~\citep{AgrawalImielinskiSwami_MiningAssociationRulesBetweenSetsOfItemsInLargeDB_1993}, 
 \algoritmo{SETM}~\citep{HoutsmaSwami_SETMofAR_1993}, 
-\algoritmo{Apriori}, \algoritmo{Apriori-TID} y \algoritmo{AprioriHybrid} (Agrawal y Srikant, \cite*{AgrawalSrikant_FastAlgorithmsForMiningAssociationRules_1994}, \cite*{AgrawalSrikant-FastAlgorithmsForMiningAssociationRules-LARGO-1994}), 
+\algoritmo{Apriori}, \algoritmo{Apriori-TID} y \algoritmo{AprioriHybrid} (Agrawal y Srikant, \cite*{AgrawalSrikant-FastAlgorithmsForMiningAssociationRules-1994}, \cite*{AgrawalSrikant-FastAlgorithmsForMiningAssociationRules-LARGO-1994}), 
 \algoritmo{Partition}~\citep{SavasereOmiecinskiNavathe_AnEfficientAlgorithmForARM_1995}, 
 \algoritmo{DHP} (Park, M. Chen y P. Yu, \cite*{ParkChenYu_AnEffectiveHashBasedAlgorithmForARM_1995}, \cite*{ParkChenYu_UsingAHashBasedMethod_1997}), 
 \algoritmo{Count Distribution}, \algoritmo{Data Distribution} y \algoritmo{Candidate Distribution}~\citep{AgrawalShafer_ParallelMAR_1996}, 

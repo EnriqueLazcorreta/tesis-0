@@ -3,11 +3,11 @@
 El problema de \Clasificacion tiene ya su propia notación, igual que el de \arm (definida en el capítulo~\ref{chap:arm}), en esta sección intentaremos unificarla y discutiremos algunos aspectos de ambas disciplinas que no han sido considerados en la bibliografía usada para este trabajo, lo que nos llevará también a definir nuevos conceptos e intentar caracterizarlos.
 
 
-\begin{Definition}[Individuo]
-   Sean $A_i, i = 1 \ldots n$ un conjunto de atributos, siendo $n_i$ el número de valores distintos que puede tomar el atributo $A_i$. Definimos un \emph{individuo} como una $n$-túpla, un conjunto de $n$ valores obtenidos ordenadamente de los atributos $A_i$.
-   $$individuo = \left(a_1, a_2\ldots a_n\right), a_i \in A_i$$
-\label{def:individuo}
-\end{Definition}
+%\begin{Definition}[Individuo]
+%   Sean $A_i, i = 1 \ldots n$ un conjunto de atributos, siendo $n_i$ el número de valores distintos que puede tomar el atributo $A_i$. Definimos un \emph{individuo} como una $n$-túpla, un conjunto de $n$ valores obtenidos ordenadamente de los atributos $A_i$.
+%   $$individuo = \left(a_1, a_2\ldots a_n\right), a_i \in A_i$$
+%\label{def:individuo}
+%\end{Definition}
 
 
 \cite{HLeonCarrascoHPalancarMTrinidad-DesarrolloDeClasificadoresBasadosEnRA-2010}, utilizan las siguientes definiciones para modelizar las Reglas de Asociación de Clase (que otros autores denominan Reglas de Clasificación Asociativa), las \ars adaptadas al problema de \Clasificacion.
@@ -36,7 +36,7 @@ Sean $\I = \{i_1,i_2,\ldots,l_n\}$ un conjunto de $n$ ítems y \T un conjunto de
 
 \begin{Definition}[Especificidad]
   Dadas dos reglas $R_1: X_1\Rightarrow Y$ y $R_2: X_2\Rightarrow Y$, se dice que $R_1$ es más específica que $R_2$ si $X_2\subset X_1$.
-\label{def:reglas-de-asociacion}
+\label{def:especificidad}
 \end{Definition}
 
 Las medidas más usadas en la literatura para evaluar la calidad de una \AR son el \soporte y la \confianza.
@@ -45,14 +45,64 @@ Las medidas más usadas en la literatura para evaluar la calidad de una \AR son 
   El \soporte de una \ar $X\Rightarrow Y$ es igual a $Sop(X\cup Y)$.
 \label{def:soporte-de-una-AR}
 \end{Definition}
+
+\begin{Definition}[Confianza de una regla]
+  La \confianza de una \ar $X\Rightarrow Y$, en adelante $Conf(X\Rightarrow Y)$ se define en función del \soporte como $\frac{Sop(X\cup Y)}{Sop(X)}$. La \confianza toma valores en el intervalo $[0,1]$.
+\label{def:confianza-de-una-AR}
+\end{Definition}
+
+Es importante aclarar que cuando se haga referencia a un conjunto de ítems $X$ se estará hablando de un subconjunto de \I y se supondrá, sin pérdida de generalidad, que existe un orden lexicográfico entre los ítems del conjunto \I.
+
+Para extender las definiciones anteriores al problema de \clasificacion basada en CARs, además del conjunto \I, se tiene un conjunto de clases \C y un conjunto de transacciones etiquetadas $\T_\C$ (conjunto de entrenamiento). Las \transacciones del conjunto $\T_\C$ están formadas por un conjunto de ítems $X$ y una clase $c\in \C$. Esta extensión no afecta las definiciones de \soporte y \confianza enunciadas previamente.
+
+\begin{Definition}[\CAR]
+  Una \CAR (CAR) es una implicación $X\Rightarrow c$ tal que $X\subseteq\I$ y $c\in\D$. El \soporte de una \CAR $X\Rightarrow c$ es igual a $Sop(X\cup\{c\})$ y la confianza es igual a $\frac{Sop(X\cup\{c\})}{Sop(X)}$.
+\label{def:CAR}
+\end{Definition}
+
+\begin{Definition}
+  Una \CAR $X\Rightarrow c$ ($X\subseteq\I$ y $c\in\D$) satisface o cubre a una \transaccion $t\subseteq\I$ si $X\subseteq t$.
+\label{def:cubrimiento-CAR}
+\end{Definition}
+
+Los clasificadores desarrollados basados en \CARs seleccionan, para cada \transaccion $t$ que se desee clasificar, el subconjunto de CARs que la cubren y con este subconjunto determinan la clase que se asignará a $t$.
+
+\subsubsection{Planteamiento del problema}
+\label{sec:CAR-planteamiento-del-problema}
+Sea \I un conjunto de ítems, \C un conjunto de clases, $\T_\C$ un conjunto de transacciones de la forma $\{i_1,i_2,\ldots,i_n,c\}$ tal que $\forall_{1\leq k\leq n}\left[i_k\in\I\ \wedge\ c\in\C\right]$ (ver tabla~\ref{tabla:HLeon}), \R un conjunto ordenado de reglas $X\Rightarrow c$ tal que $X\subseteq\I$ y $c\in\C$, $\mathcal{W}$ una función que asigna un peso a cada regla $r\in\R$ y $D$ un criterio de decisión que utiliza a \R para asignar una clase a cada \transaccion $t$ que se desee clasificar.
+
+\begin{table}[htp]
+\caption{Representación general de un conjunto de transacciones}
+\begin{center}
+\begin{tabular}{c|ccccc}
+$\T_\C$  &  \multicolumn{4}{c}{Ítems}                               &   Clase \\\hline
+$t_1$      & $i_{11}$   & $i_{12}$   & \ldots  & $i_{1k_1}$  & $c_1$ \\
+$t_2$      & $i_{21}$   & $i_{22}$  & \ldots  & $i_{2k_2}$  & $c_2$ \\
+               &                 &                 & \ldots  &                    &  \\
+$t_n$     & $i_{n1}$   & $i_{n2}$   & \ldots  & $i_{nk_n}$  & $c_n$ 
+\end{tabular}
+\end{center}
+\label{tabla:HLeon}
+\end{table}%
+
+Dados \I, \C y $\T_\C$, construir un clasificador basado en CARs consiste en calcular \R, ordenar \R según la función de asignación de peso $\mathcal{W}$ y definir el criterio de decisión $D$. El problema que se plantea en esta propuesta de tesis doctoral es la construcción de clasificadores basados en CARs.
+
+A continuación presentan varios clasificadores basados en CARs (CBA (Classification Based on Associations), CMAR (Classification based on Multiple Association Rules), MMAC (Multi-class, Multi-label Associative Classification), MCAR (Multi-class Classificationbased on Association Rules), PRM (Predictive Rule Mining), CPAR (Classification based on Predictive Association Rules), TFPC (Total From Partial Classification)) y los suyos propios (CAR-NF) y una sección en la que discuten las limitaciones de la medida de calidad \Confianza y discuten las propiedades que debe tener una medida de calidad para ser utilizada en la evaluación y ordenamiento de las CARs.
+
 \borrar{[\ldots HLeon-2010]}
 
 
 
 
-\subsection{Tal}
+
+
+
+
+
+\subsection{Adaptación de la notación}
 \label{sec:clasificacion:conceptos-basicos:tal}
 %\input{contenido/clasificacion/conceptos-basicos/tal}
+Para poder adaptar la notación de Hernández León necesitamos definir antes algunos conceptos.
 
 \begin{Definition}[Individuo]
    Sean $A_i, i = 1 \ldots n$ un conjunto de atributos, siendo $n_i$ el número de valores distintos que puede tomar el atributo $A_i$. Definimos un \emph{individuo} como una $n$-túpla, un conjunto de $n$ valores obtenidos ordenadamente de los atributos $A_i$.

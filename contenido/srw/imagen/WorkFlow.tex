@@ -1,0 +1,94 @@
+%CursoUMH: que busquen imágenes de "`tikzpicture example workflow"' "`... graph"' ...
+%http://tex.stackexchange.com/questions/70320/workflow-diagram
+%\documentclass{article}
+\documentclass[tikz,border=0pt,svgnames]{standalone}
+\usepackage[utf8]{inputenc} %NO PORTABLE. Para escribir acentos...
+\usepackage[T1]{fontenc}    % Usar la codificación T1 para que aparezcan en el pdf los acentos...
+\usepackage{times}          % Usar tipo Times-Roman
+
+\usepackage{tikz}
+\usetikzlibrary{calc,fadings,shapes.arrows,shadows,backgrounds,positioning}
+
+\tikzset{bubble/.style={rectangle, draw=gray,rounded corners,fill=#1,align = flush center,minimum height=1cm,minimum width=1.75cm}}
+
+\tikzfading [name=arrowfading, top color=transparent!0, bottom color=transparent!95]
+\tikzset{arrowfill/.style={top color=OrangeRed!20, bottom color=Red, general shadow={fill=black, shadow yshift=-0.8ex, path fading=arrowfading}}}
+\tikzset{arrowstyle/.style={draw=FireBrick,arrowfill, single arrow,minimum height=#1, single arrow,
+single arrow head extend=.2cm}}
+
+\tikzset{retornofill/.style={top color=LightGray!20, bottom color=DarkGray, general shadow={fill=black, shadow yshift=-0.6ex, path fading=arrowfading, dashed}}}
+\tikzset{retorno/.style={draw=LightGray,retornofill, single arrow,minimum height=#1, single arrow,
+single arrow head extend=.1cm}}
+
+\begin{document}
+
+\begin{tikzpicture}
+  % Bubbles
+  \node[bubble=Red!80] (datos) at (0,0) {DATOS};
+  \node[bubble=Coral!60] (seleccionados) at (2.1,0) {Datos a\\analizar};
+  \node[bubble=Orange!40] (preprocesados) at (4.4,0) {Datos\\preprocesados};
+  \node[bubble=GreenYellow!60] (transformados) at (7,0) {Datos\\transformados};
+  \node[bubble=Green!80] (conocimiento) at (10,0) {CONOCIMIENTO};
+
+  %\node[above= 1 cm of conocimiento,font={\bf}]{Remote};
+  %\node[above= 1 cm of seleccionados,font={\bf}]{Local};
+
+
+  % Lines
+  \foreach \bubble in {datos,seleccionados,preprocesados,transformados,conocimiento}
+    {
+    %\draw[ultra thick, gray] ($(\bubble.south)-(0,0.25)$)--($(\bubble.south)-(0,3.5)$);
+    %\draw[ultra thick, gray, dashed] ($(\bubble.south)$)--($(\bubble.south)-(0,.25)$);
+    \draw[ultra thick, gray] ($(\bubble.south)$)--($(\bubble.south)-(0,3.2)$);
+    }
+
+
+
+  % Arrows
+  \node (seleccion) [arrowstyle=2cm,xshift=-0.1cm,yshift=-.5cm] at ($(datos.south)!0.5!(seleccionados.south)$) {\small Selección}
+  ;
+\node [retorno=1cm,xshift=0.1cm,yshift=-1.1cm,shape border rotate=180] at ($(datos.south)!0.5!(seleccionados.south)$) {};%{\scriptsize Realimentación};
+
+  \node (preproceso) [arrowstyle=2.2cm,xshift=-0.1cm,yshift=-1.1cm] at ($(seleccionados.south)!0.5!(preprocesados.south)$) {\small Preproceso}
+    %edge [-latex, ultra thick, Black, dashed, bend left=45] (a.south)
+  ;
+\node [retorno=1cm,xshift=0.1cm,yshift=-1.7cm,shape border rotate=180] at ($(seleccionados.south)!0.5!(preprocesados.south)$) {};
+\node [retorno=1cm,xshift=0.1cm,yshift=-1.7cm,shape border rotate=180] at ($(datos.south)!0.5!(seleccionados.south)$) {};
+
+  \node (c) [arrowstyle=2.2cm,xshift=-0.1cm,yshift=-1.7cm] at ($(preprocesados.south)!0.5!(transformados.south)$) {\small Transformación}
+    %edge [-latex, ultra thick, Black, dashed, bend left=35] (a.south)
+    %edge [-latex, ultra thick, Black, dashed, bend left=35] (b.south)
+  ;
+\node [retorno=1cm,xshift=0.1cm,yshift=-2.3cm,shape border rotate=180] at ($(preprocesados.south)!0.5!(transformados.south)$) {};
+\node [retorno=1cm,xshift=0.1cm,yshift=-2.3cm,shape border rotate=180] at ($(seleccionados.south)!0.5!(preprocesados.south)$) {};
+\node [retorno=1cm,xshift=0.1cm,yshift=-2.3cm,shape border rotate=180] at ($(datos.south)!0.5!(seleccionados.south)$) {};
+
+  \node [arrowstyle=2.9cm,xshift=-0.1cm,yshift=-2.3cm] at ($(transformados.south)!0.5!(conocimiento.south)$) {\small Minería de Datos}
+    %edge [-latex, ultra thick, Black, dashed, bend left=25] (a.south)
+    %edge [-latex, ultra thick, Black, dashed, bend left=25] (b.south)
+    %edge [-latex, ultra thick, Black, dashed, bend left=25] (c.south)
+  ;
+\node [retorno=1cm,xshift=0.1cm,yshift=-2.9cm,shape border rotate=180] at ($(transformados.south)!0.5!(conocimiento.south)$) {};
+\node [retorno=1cm,xshift=0.1cm,yshift=-2.9cm,shape border rotate=180] at ($(preprocesados.south)!0.5!(transformados.south)$) {};
+\node [retorno=1cm,xshift=0.1cm,yshift=-2.9cm,shape border rotate=180] at ($(seleccionados.south)!0.5!(preprocesados.south)$) {};
+\node [retorno=1cm,xshift=0.1cm,yshift=-2.9cm,shape border rotate=180] at ($(datos.south)!0.5!(seleccionados.south)$) {};
+
+
+%\node [retorno=3.5cm,xshift=0.1cm,yshift=-2.75cm,shape border rotate=180] at ($(conocimiento.south)!0.5!(preprocesados.south)$) {\scriptsize Realimentación};
+%\node [arrowstyle=5cm,xshift=0.1cm,yshift=-6.5cm,shape border rotate=180] at ($(preprocesados.south)!0.5!(datos.south)$) {git checkout};
+%\node [arrowstyle=5cm,xshift=0.1cm,yshift=-8cm,shape border rotate=180] at ($(preprocesados.south)!0.5!(datos.south)$) {git merge};
+
+%% Background
+  %\begin{pgfonlayer}{background}
+    %\fill[gray!10]($(datos.north)-(.,1)$)rectangle($(datos.south)!0.5!(seleccionados.south)+(0,-3.7)$) ;
+    %\draw[dashed, shorten <=-1.5cm] ($(datos.south)!0.5!(seleccionados.south)+(0,-1.5)$)--($(datos.south)!0.5!(seleccionados.south)-(0,3.7)$);
+  %%\end{pgfonlayer}
+%
+  %%\begin{pgfonlayer}{background}
+    %\fill[gray!10]($(transformados.north)!0.5!(conocimiento.north)-(0.2,1)$)rectangle($(transformados.south)!0.5!(conocimiento.south)+(3,-3.7)$);
+    %\draw[dashed, shorten <=-1.5cm] ($(transformados.south)!0.5!(conocimiento.south)-(0.2,1.5)$)--($(transformados.south)!0.5!(conocimiento.south)-(0.2,3.7)$);
+  %\end{pgfonlayer}
+\end{tikzpicture}
+
+
+\end{document}
