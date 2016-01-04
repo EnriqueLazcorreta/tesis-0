@@ -1,0 +1,25 @@
+\documentclass[border=5pt]{standalone}
+\usepackage[pdftex]{graphicx}
+
+\usepackage[utf8]{inputenc} 
+\usepackage[T1]{fontenc}    
+\usepackage{times}          
+
+\begin{document}
+
+\begin{tabular}{|c|c}\cline{1-1}
+   \includegraphics[width=70pt]{MNW.pdf} & \\
+   \ldots & {\tiny $MPNW$} \\
+   \ldots & \includegraphics[width=50pt]{Flecha.pdf} \\
+   \ldots & \\
+   \includegraphics[width=70pt]{MNW2.pdf} & \\\cline{1-1}
+\end{tabular}
+\begin{minipage}{100pt}
+   \mbox{ \includegraphics[width=100pt]{MNW3.pdf} }
+   % \begin{tabular}{c}
+   %    \fbox{\tiny $MPNW$} \\
+   %    \includegraphics[width=100pt]{MNW3.pdf}
+   % \end{tabular}
+\end{minipage}
+
+\end{document}

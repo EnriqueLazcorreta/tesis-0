@@ -3,7 +3,7 @@
 
 % Nuestras \sns se han convertido en simples conjuntos de páginas. De cada sesión nos quedamos únicamente con las páginas que ha visitado el usuario, sin repetición de páginas si la hubiera en la sesión original y sin considerar el orden en que fueron visitadas.
 
-Las \ARs fueron introducidas por~\citet{AgrawalImielinskiSwami_MiningAssociationRulesBetweenSetsOfItemsInLargeDB_1993} y la \arm popularizada con su algoritmo \apriori (Agrawal y Srikant, \cite*{AgrawalSrikant-FastAlgorithmsForMiningAssociationRules-1994}, \cite*{AgrawalSrikant-FastAlgorithmsForMiningAssociationRules-LARGO-1994}), cuyo pseudocódigo se muestra en los listados~\ref{alg:apriori}, \ref{alg:apriori-union}, \ref{alg:apriori-poda} y~\ref{alg:apriori-genrules}. Las definen a través del ejemplo de la cesta de la compra en un supermercado.
+Las \ARs fueron introducidas por~\citet{AgrawalImielinskiSwami-MiningAssociationRulesBetweenSetsOfItemsInLargeDB-1993} y la \arm popularizada con su algoritmo \apriori (Agrawal y Srikant, \cite*{AgrawalSrikant-FastAlgorithmsForMiningAssociationRules-1994}, \cite*{AgrawalSrikant-FastAlgorithmsForMiningAssociationRules-LARGO-1994}), cuyo pseudocódigo se muestra en los listados~\ref{alg:apriori}, \ref{alg:apriori-union}, \ref{alg:apriori-poda} y~\ref{alg:apriori-genrules}. Las definen a través del ejemplo de la cesta de la compra en un supermercado.
 \begin{enumerate}
   \item El supermercado tiene $M$ productos distintos.
   \item Cada "`cesta de la compra"' se registra mediante un dispositivo informático en forma de \emph{ticket}, que puede contener información del cliente (tarjetas de fidelización) y del empleado, fecha y hora de la compra y un listado de los productos adquiridos por el cliente junto con detalles como cantidad, precio, descuentos\ldots
@@ -72,7 +72,7 @@ El análisis propuesto es útil para muchas disciplinas en la época de la tecno
 
 \begin{itemize}
   \item La cesta de la compra se puede generalizar a cualquier tipo de comercio, recibiendo mucha atención en el ámbito del \emph{e-comercio}, donde muchas recomendaciones se hacen en base al conocimiento adquirido por el uso de \ars.
-  \item En muchos estudios de \clasificacion se codifican los datos observados a cada individuo en un registro con pares \texttt{atributo=valor} y se realiza el proceso de \clasificacion observando la co-ocurrencia de los datos de los distintos registros. Las \ars proporcionan justo esta información por lo que han generado el estudio de las \emph{reglas de \clasificacion}~\citep{LiuHsuMa-IntegratingClassificationAndARM-1998,ThabtahCowlingHammoud-ImprovingRuleSorting-2006,KahramanliAllahverdi_NewMethodForComposingClassificationRulesARplusOPTBP_2009}.
+  \item En muchos estudios de \clasificacion se codifican los datos observados a cada individuo en un registro con pares \texttt{atributo=valor} y se realiza el proceso de \clasificacion observando la co-ocurrencia de los datos de los distintos registros. Las \ars proporcionan justo esta información por lo que han generado el estudio de las \emph{reglas de \clasificacion}~\citep{LiuHsuMa-IntegratingClassificationAndARM-1998,ThabtahCowlingHammoud-ImprovingRuleSorting-2006,KahramanliAllahverdi-NewMethodForComposingClassificationRulesARplusOPTBP-2009}.
   \item Cuando un médico solicita diferentes análisis está adquiriendo datos del paciente, un conjunto de pares \texttt{atributo=valor} que puede ser observado como una \transaccion si los valores son categóricos o se pueden categorizar. Si pudiera comparar esta \transaccion con las \transacciones de otros pacientes a los que se está estudiando o ya han sido diagnosticados quizá tendría información de mayor calidad para poder emitir un diagnóstico o solicitar un nuevo análisis.
   \item En un sondeo socio-político con respuestas categóricas se podría tratar cada encuesta individual como una \transaccion. La interpretación del sondeo se podría beneficiar del descubrimiento de alguna \ar difícil de encontrar usando métodos puramente estadísticos.
   \item En \wum se pueden convertir las \sns en \transacciones y estudiar qué páginas relacionan entre sí los usuarios. Si se pueden obtener las "`mejores"' \ars en tiempo real se podrá usar esta información para mejorar un \srw.
@@ -164,19 +164,19 @@ Se utilizan mucho en tareas de \prediccion interpretando la \confianza como una 
 En todo proceso de \arm hay dos fases bien diferenciadas, la \fim (\FIM) y la obtención de las \ars a partir de los \itemsets frecuentes encontrados. La parte más costosa del proceso es la primera pues se ha de recorrer por completo el almacén \D para comprobar qué ítems se relacionan entre sí y cuáles lo hacen de manera frecuente (superando el \soporte mínimo fijado en el estudio). En esta fase se guarda la información obtenida conforme se va leyendo \D, con el riesgo de tener desbordamiento de memoria RAM si no se hacen costosas operaciones de comprobación cada vez que se va a necesitar algo más de RAM. En la segunda fase se utiliza el conjunto de \itemsets frecuentes encontrado en la primera y se comprueban todas las reglas que se pueden derivar de ellos, ofreciendo como resultado las reglas que superen la \confianza mínima fijada para el estudio.
 
 Existen muchos algoritmos de \arm entre los que destacan 
-\algoritmo{AIS}~\citep{AgrawalImielinskiSwami_MiningAssociationRulesBetweenSetsOfItemsInLargeDB_1993}, 
-\algoritmo{SETM}~\citep{HoutsmaSwami_SETMofAR_1993}, 
+\algoritmo{AIS}~\citep{AgrawalImielinskiSwami-MiningAssociationRulesBetweenSetsOfItemsInLargeDB-1993}, 
+\algoritmo{SETM}~\citep{HoutsmaSwami-SETMofAR-1993}, 
 \algoritmo{Apriori}, \algoritmo{Apriori-TID} y \algoritmo{AprioriHybrid} (Agrawal y Srikant, \cite*{AgrawalSrikant-FastAlgorithmsForMiningAssociationRules-1994}, \cite*{AgrawalSrikant-FastAlgorithmsForMiningAssociationRules-LARGO-1994}), 
-\algoritmo{Partition}~\citep{SavasereOmiecinskiNavathe_AnEfficientAlgorithmForARM_1995}, 
-\algoritmo{DHP} (Park, M. Chen y P. Yu, \cite*{ParkChenYu_AnEffectiveHashBasedAlgorithmForARM_1995}, \cite*{ParkChenYu_UsingAHashBasedMethod_1997}), 
-\algoritmo{Count Distribution}, \algoritmo{Data Distribution} y \algoritmo{Candidate Distribution}~\citep{AgrawalShafer_ParallelMAR_1996}, 
-\algoritmo{Eclat}, \algoritmo{MaxEclat}, \algoritmo{Clique} y \algoritmo{MaxClique}~\citep{ZakiParthasarathyOgiharaL_NewAlgorithms_1997}, 
-\algoritmo{DIC}~\citep{BrinMotwaniUllmanTsur_DynamicItemsetCounting_1997}, 
-\algoritmo{Basic}, \algoritmo{Cumulate} y \algoritmo{EstMerge}~\citep{SrikantAgrawal_MiningGeneralizedAR_1997}, 
+\algoritmo{Partition}~\citep{SavasereOmiecinskiNavathe-AnEfficientAlgorithmForARM-1995}, 
+\algoritmo{DHP} (Park, M. Chen y P. Yu, \cite*{ParkChenYu-AnEffectiveHashBasedAlgorithmForARM-1995}, \cite*{ParkChenYu-UsingAHashBasedMethod-1997}), 
+\algoritmo{Count Distribution}, \algoritmo{Data Distribution} y \algoritmo{Candidate Distribution}~\citep{AgrawalShafer-ParallelMAR-1996}, 
+\algoritmo{Eclat}, \algoritmo{MaxEclat}, \algoritmo{Clique} y \algoritmo{MaxClique}~\citep{ZakiParthasarathyOgiharaL-NewAlgorithms-1997}, 
+\algoritmo{DIC}~\citep{BrinMotwaniUllmanTsur-DynamicItemsetCounting-1997}, 
+\algoritmo{Basic}, \algoritmo{Cumulate} y \algoritmo{EstMerge}~\citep{SrikantAgrawal-MiningGeneralizedAR-1997}, 
 \algoritmo{MaxMiner}~\citep{Bayardo-EfficientlyMiningLongPatternsFromDB-1998}, 
-\algoritmo{RangeApriori}~\citep{GrothRoberston_DiscoveringFrequentItemsets_2001}, 
-\algoritmo{PincerSearch}~\citep{LinKedem_PincerSearchFIM_2002} o 
-\algoritmo{FP-Growth}~\citep{HanPeiYin_MiningFrequentPatternsWithoutCandidateGeneration_2000,HanPeiYinMao_MiningFrequentPatternsWithoutCandidateGenerationAFPTreeApproach_2004}.
+\algoritmo{RangeApriori}~\citep{GrothRoberston-DiscoveringFrequentItemsets-2001}, 
+\algoritmo{PincerSearch}~\citep{LinKedem-PincerSearchFIM-2002} o 
+\algoritmo{FP-Growth}~\citep{HanPeiYin-MiningFrequentPatternsWithoutCandidateGeneration-2000,HanPeiYinMao-MiningFrequentPatternsWithoutCandidateGenerationAFPTreeApproach-2004}.
 
 
 Entre todos ellos hemos seleccionado \apriori por tratarse de un algoritmo sencillo, fácil de implementar y de modificar o ajustar a nuevas aportaciones a la \arm. De hecho este algoritmo es la base de muchos de los algoritmos propuestos hasta la fecha. Como todo algoritmo de \ARM, \apriori consta de dos fases:
