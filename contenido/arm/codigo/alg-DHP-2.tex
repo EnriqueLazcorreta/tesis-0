@@ -1,0 +1,17 @@
+$k=2$;
+$\D_k = \D$ /* database for large \kitemsets */
+while ($|\ \{x | H_k[x]\geq s\}\ | \geq LARGE$) {
+  /* make a hash table */
+	gen_candidate$(\aprioriL[k-1], H_k, \aprioriC)$;
+	set all the buckets of $H_{k+1}$ to zero;
+	$\D_{k+1} = \emptyset$;
+	forall transactions $t\in \D_k$ do begin
+		count_support$(t, \aprioriC, k, \hat{t})$; /* $\hat{t}\subseteq t$ */
+		if $|\hat{t}| > k$ do begin
+			make_hasht$(\hat{t}, H_k, k, H_{k+1}, \ddot{t})$;
+			if $|\ddot{t}| > k$ then $\D_{k+1} = \D_{k+1}\cup\{\ddot{t}\}$;
+		end
+	end
+	$L_k=\{c\in C_k | c.count\geq s\}$;
+	$k++$;
+}

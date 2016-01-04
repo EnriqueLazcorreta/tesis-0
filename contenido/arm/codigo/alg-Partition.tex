@@ -1,0 +1,15 @@
+$P = $partition_database$(\D)$
+$n = $ number of transactions
+for $i = 1$ to $n$ do begin // Phase I
+	read_in_partition$(p_i\in P)$
+	$\aprioriL^i=$gen_large_itemsets$(p_i)$
+end
+for $(i = 2; \aprioriL[i]^j \neq \emptyset, j = 1,2,\ldots,n; i++)$ do
+	$\aprioriC[i]^G = \bigcup_{i=1,2,\ldots,n}{\aprioriL[i]^j}$ // Merge Phase
+for $i=1$ to $n$ begin // Phase II
+	read_in_partition$(p_i\in P)$
+	forall candidates $c\in C^G$ gen_count$(c, p_i)$
+end
+$\aprioriL^G = \{c\in C^G | c.count\geq minSup\}$
+
+Answer = $\aprioriL^G$;

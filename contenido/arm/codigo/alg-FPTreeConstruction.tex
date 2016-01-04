@@ -1,0 +1,18 @@
+Input: $\D$ and a minimum support $\xi$.
+Output: Its frequent pattern tree, FP-tree.
+Method: The FP-tree is constructed in the following steps:
+  1. Scan $\D$ once. Collect the set of frequent items $F$ and their supports.
+     Sort $F$ in support descending order as $\aprioriL[1]$, the list of frequent items.
+	2. Create the root of an FP-tree, $T$, and label it NULL. For each transaction 
+     $Trans$ in $\D$ do the following:
+		
+     Select and sort the frequent items in $Trans$ according to the order of $\aprioriL$.
+     Let the sorted frequent item list in $Trans$ be $[p\mid P]$, where $p$ is the first
+     element and $P$ is the remaining list. Call $insert\_tree\left([p|P],T\right)$.
+		
+		 The function $insert\_tree\left([p|P],T\right)$ is performed as follows. If $T$ has a child
+     $N$ such that $N.item-name = p.item-name$, then increment $N$'s count by 1;
+     else create a new node $N$ and let its count be 1, its parent link be
+     linked to $T$, and its node-link be linked to the nodes with the same
+     $item-name$ via the node-link structure. If $P$ is nonempty, call
+     $insert\_tree\left([p|P],N\right)$

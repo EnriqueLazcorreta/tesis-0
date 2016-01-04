@@ -1,0 +1,313 @@
+% !TEX root = ../../../Lazcorreta.Tesis.tex
+% \ABIERTO%
+
+La atención mostrada por la comunidad científica a la búsqueda de algoritmos y estructuras de datos específicos para la \fim se revela en la gran cantidad de trabajos presentados. Debido al gran volumen de información que se ha de manipular se han propuesto todo tipo de representaciones de los almacenes \D destinados a reducir su volumen sin perder la información que contienen mediante el uso de estructuras especializadas o de taxonomías, técnicas basadas en el muestreo de los almacenes \D para la extracción de la máxima cantidad de conocimiento oculto, técnicas basadas en paralelismo para lograr mayor velocidad en la ejecución\ldots
+
+\citet{AgrawalSrikant-FastAlgorithmsForMiningAssociationRules-1994} proponen el algoritmo más estudiado en \ARM, \apriori (ver algoritmo~\ref{alg:apriori}), y un par de alternativas que se adaptan mejor a algunas colecciones de transacciones, \algoritmo{AprioriTID} y \algoritmo{AprioriHybrid}.
+
+La clave de \apriori está en la generación de candidatos, que es la fase del algoritmo que más recursos consume y que más incide en la eficiencia del resto de operaciones del algoritmo. Su propuesta se basa en la siguiente propiedad, que es la que da nombre al algoritmo: \emph{si un candidato a \kitemset contiene un \kitemset[k-1] que no es frecuente, \textsl{a priori} sabemos que no puede ser frecuente}. Gracias a esta observación en su algoritmo sólo se generan los candidatos a \kitemset frecuente cuyos subconjuntos de $k-1$ ítems sean todos frecuentes. Esto supone un uso mayor de procesador en esta fase (tiempo de ejecución) en beneficio de un menor uso de memoria principal ya que se reduce notablemente el número de \itemsets que teóricamente se pueden obtener del conjunto \I de ítems en estudio.
+
+La principal diferencia entre \apriori y los dos primeros algoritmos expuestos radica en la generación de candidatos. En \apriori no se requiere una lectura de \D para obtener los candidatos pues se obtienen a partir de los \itemsets frecuentes encontrados en una lectura previa.
+
+La separación de las funciones de generación y poda hacen más legible el algoritmo (ver funciones~\ref{alg:apriori-union} y~\ref{alg:apriori-poda}), pero su implementación es poco eficiente pues requiere una reserva de memoria excesiva en la primera fase. En Interacción'05 (pg.~\pageref{sec:nuestro-Mejora-2005}) propusimos una solución eficiente a este problema uniendo ambas funciones en una sola (véanse los listados~\ref{alg:apriori-unionYpoda}, \ref{alg:apriori-poda-relajada} y~\ref{alg:apriori-unionYpodaRelajada}).
+
+\lstinputlisting[label=alg:aprioriTID,
+                 caption={Algoritmo {AprioriTID}, 1994},
+                 float=htb,
+                 basicstyle=\scriptsize]
+                 {./contenido/arm/codigo/alg-AprioriTID}
+
+En el mismo artículo proponen el algoritmo \algoritmo{AprioriTID} (ver algoritmo \ref{alg:aprioriTID}), que se basa en una representación vertical de \D. Este cambio de representación de \D surge por la poca eficiencia de la representación horizontal usada en \apriori para algunos bancos de transacciones específicos. Esta observación sigue presente en muchas investigaciones y pone de manifiesto que no existe un algoritmo "`mejor"' que todos para cualquier banco de transacciones. En un intento de lograr este objetivo proponen en el mismo artículo el algoritmo {Apriori-Hybrid}, que combina características de Apriori y {AprioriTID} aprovechando que el primero es más eficiente para valores pequeños de $k$ y conforme va aumentando mejora la eficiencia del segundo.
+
+También plantean algunas mejoras en la búsqueda de \ars, aunque se trata de la fase menos problemática de la \ARM y serán expuestas en la sección \ref{sec:2-3-GeneracionDeAR}.
+
+
+De forma independiente a la presentación de Apriori \citet{MannilaToivonenVerkamo-EfficientAlgorithmsForDiscoveringAR-1994} observan que la generación de candidatos puede ralentizar o incluso abortar la ejecución del algoritmo de \ARM y proponen un análisis que permite eliminar los candidatos innecesarios para el estudio. Comparan su algoritmo, \algoritmo{OCD}, con \algoritmo{AIS} (ver listado~\ref{alg:AIS}), indicando a partir de sus experimentos que mejora notablemente su rendimiento. Basan su reducción de candidatos a procesar en un análisis combinatorio de los \kitemsets frecuentes obtenido en la $k$-ésima lectura de \D, una forma compleja de obtener los mismos candidatos que proporciona \apriori. También proponen el uso de muestreo para obtener las \ars mediante el análisis de parte de \D, sin embargo lo justifican pobremente y sólo dicen que se obtienen buenos resultados en algunas pruebas que han hecho. Mencionan continuamente el trabajo de \citet{AgrawalSrikant-FastAlgorithmsForMiningAssociationRules-1994} insistiendo en que obtienen resultados similares de forma totalmente independiente, partiendo del conjunto ${C'}_k$, un superconjunto del generado por \apriori y coincidente con el obtenido en la fase de unión. Dos años más tarde presentan conjuntamente \citet{AgrawalMannilaSrikantToivonenVerkamo-FastDiscoveryOfAR-1996}, una revisión conjunta de sus trabajos.
+
+
+%1995
+
+\lstinputlisting[label=alg:DHPuno,
+                 caption={Algoritmo {DHP} (fase 1), 1995},
+                 float=htb,
+                 basicstyle=\scriptsize]
+                 {./contenido/arm/codigo/alg-DHP}                 
+
+\citet{ParkChenYu-AnEffectiveHashBasedAlgorithmForARM-1995} hacen una propuesta muy interesante para reducir el número de candidatos: leer los \kitemsets[(k+1)] de cada \transaccion mientras se hace el recuento de \aprioriC y convertirlos en un entero mediante una función hash, si al finalizar la lectura actual de \D algún código hash no tiene \soporte mínimo no es necesario crear candidatos para los \kitemsets[(k+1)] que producen ese código hash.
+
+\lstinputlisting[label=alg:DHPdos,
+                 caption={Algoritmo {DHP} (fase 2), 1995},
+                 float=htb,
+                 basicstyle=\scriptsize]
+                 {./contenido/arm/codigo/alg-DHP-2}
+
+Proponen el algoritmo \algoritmo{DHP} (ver listados~\ref{alg:DHPuno},~\ref{alg:DHPdos} y \ref{alg:DHPtres}) que reduce notablemente el número de candidatos generados por \apriori. La propuesta es muy acertada pero en ciertas circunstancias puede provocar una ralentización del algoritmo ya que obliga en cada lectura de \D a la codificación de un gran número de \kitemsets[(k+1)] sin retener más información que su número hash (para evitar un uso excesivo de memoria utilizan una función hash no unívoca, i.e., dos \kitemsets[(k+1)] distintos pueden generar el mismo número hash, por lo que si encuentran que un número hash determinado tiene \soporte mínimo no pueden garantizar que los \itemsets que generan dicho número tenga también \soporte mínimo).
+%TODO: La retomamos en la sección \ref{chap:ReglasDeOportunidad} para comparar su eficiencia con otros métodos.
+
+\lstinputlisting[label=alg:DHPtres,
+                 caption={Algoritmo {DHP} (fase 3), 1995},
+                 float=htb,
+                 basicstyle=\scriptsize]
+                 {./contenido/arm/codigo/alg-DHP-3}
+
+Si el número de ítems distintos de \D, $|\I|$, es muy grande y las transacciones no tienen una longitud excesiva, este algoritmo permite reducir drásticamente el \soporte mínimo fijado por el analista, umbral que ha de ser grande en este tipo de repositorios debido a la magnitud que puede alcanzar el número de candidatos a \kitemsets[2]. Los autores indican que en posteriores niveles este número se reduce por las propias características del repositorio por lo que podría prescindirse de la costosa generación de códigos hash.
+
+\citet{HanFu-DiscoveryMultipleLevelARFromLargeDB-1995} extienden el estudio de \ars añadiendo información a la \db de transacciones. Proponen añadir al estudio una taxonomía de los ítems del servicio de modo que puedan obtener información a múltiples niveles, reduciendo mediante agrupación el número de ítems a procesar y pudiendo obtener mejor información en el análisis. La primera lectura de \D trata a todos los ítems según su pertenencia al máximo nivel de la taxonomía usada, de modo que la mayoría de ítems (que son pocos en comparación con el total al estar agrupados) tengan \soporte mínimo y puedan seguir siendo analizados. En la siguiente lectura de \D sólo se consideran las transacciones que contienen ítems frecuentes al primer nivel de la taxonomía, tratándolos ahora como ítems de un nivel inferior. Se prosigue con sucesivas lecturas de \D y niveles inferiores en la taxonomía hasta detenerse cuando no se encuentran nuevos \kitemsets. Proponen los algoritmos {ML\_T2L1}, {ML\_T1LA}, {ML\_TML1} y {ML\_T2LA}.
+
+Conforme van aumentando las propuestas sobre \ARM se incrementan notablemente los repositorios de transacciones existentes, con lo que los algoritmos van perdiendo su eficiencia y los analistas se ven obligados a incrementar el \soporte mínimo para poder llevar a cabo el estudio. Para resolver el problema de la magnitud, \citet{SavasereOmiecinskiNavathe-AnEfficientAlgorithmForARM-1995} proponen el algoritmo \algoritmo{Partition} (ver algoritmo~\ref{alg:Partition}), que comienza dividiendo \D en $n$ particiones y realiza el análisis en varias fases, utilizando un \soporte mínimo inferior al fijado por el analista pues es de esperar que el \soporte de cada \itemset en una partición será menor a su \soporte en \D.
+
+\lstinputlisting[label=alg:Partition,
+                 caption={Algoritmo Partition, 1995},
+                 float=htb,
+                 basicstyle=\scriptsize]
+                 {./contenido/arm/codigo/alg-Partition}
+
+La fase I del algoritmo realiza $n$ iteraciones sobre \D, una por cada partición creada. Durante la iteración $i$ sólo se considera la partición $p_i$. La función gen\_large\_itemsets toma una partición $p_i$ como input y genera los \kitemsets locales de todos los tamaños, $\aprioriL[1]^i,\aprioriL[2]^i,\ldots,\aprioriL[k]^i$ como output. En la fase de mezcla son combinados todos los \itemsets frecuentes de la misma longitud de las $n$ particiones. El conjunto de candidatos globales de longitud $j$ se obtiene con $C_j^G=\bigcup_{i=1}^n \aprioriL[j]^i$. En la fase II el algoritmo cuenta el \soporte de todos los candidatos globales en las $n$ particiones y obtiene todos los \itemsets con \soporte mínimo. El algoritmo lee \D una vez en la fase I y otra vez en la fase II, lo que supone un gran ahorro en el proceso de lectura de datos del disco.
+
+\citet{Mueller-FastSequentialAndParallelAlgorithmsForARM-1995} hace un buen análisis de los algoritmos existentes sobre \ARM y propone los algoritmos \algoritmo{SEAR} (basado en una nueva estructura de datos, \algoritmo{SPTID}), \algoritmo{SPEAR}, \algoritmo{SPINC} y una versión paralela de los dos primeros.
+
+
+%1996
+
+\citet{Toivonen-SamplingLargeDatabasesForAssociationRules-1996} propone un método de muestreo con el que encontrar todas las \ars de una \db con una única lectura de la misma, si no se busca excesiva precisión, y con una segunda lectura si buscamos mayor precisión. La idea consiste en guardar en memoria una muestra representativa de \D y obtener los \itemsets frecuentes según un \soporte mínimo inferior al planteado en el estudio. Al trabajar sólo con parte de \D y poder alojarlo en memoria se gana mucho en eficiencia, pudiendo obtenerse de forma muy rápida los principales \patrones presentes en \D y, si se considera necesario, se puede hacer una segunda lectura de \D para analizar las transacciones no presentes en la muestra inicial. El uso de muestras de \D para obtener información preliminar de las \ars que contiene se ha mostrado eficiente en muchos artículos pero en ninguno de ellos se analiza la representatividad de la muestra ya que proceder a su análisis conllevaría un gasto de tiempo que iría en contra de uno de los principales propósitos de los algoritmos de \ARM, su inmediata respuesta.
+
+
+\citet{AgrawalShafer-ParallelMAR-1996} hacen su incursión en la ejecución de algoritmos de \ARM en paralelo, con el fin de repartir entre varios procesadores la enorme carga de cómputo y memoria requeridos para su proceso cuando trabajamos con grandes \dbs de \transacciones. Proponen tres algoritmos - \algoritmo{Count Distribution}, \algoritmo{Data Distribution} y \algoritmo{Candidate Distribution} - con los que ponen a prueba las dificultades de comunicación entre procesadores, uso de memoria compartida y sincronización de memorias locales. Se trata de un interesante artículo de referencia si se quiere paralelizar la obtención de \ars. En los tres algoritmos parten de una misma base: dividen \D en particiones disjuntas que son repartidas entre los $N$ equipos que realizarán el proceso, usando procesadores, memoria principal y en disco totalmente independientes y compartiendo únicamente los resultados necesarios. 
+
+El algoritmo~\algoritmo{Count Distribution}% (ver algoritmo~\ref{alg:CountDistribution})
+ se limita a realizar en cada paso la generación y recuento de candidatos de la partición que le corresponde, combinando los resultados al final del mismo. En esta aproximación no se aprovecha la posibilidad de utilizar memoria compartida, ya que cada equipo utiliza su propia memoria para evaluar el árbol completo de \itemsets frecuentes. Para aprovechar el incremento de memoria principal al añadir nuevos equipos proponen el algoritmo \algoritmo{Data Distribution} cuya primera fase es idéntica a la del algoritmo \algoritmo{Count Distribution} pero a continuación cada procesador hace el recuento de candidatos mutuamente excluyentes con el resto de procesadores. Al compartir todos el mismo repositorio \D se debe utilizar un equipo que permita una rápida comunicación entre procesadores. Ambos algoritmos requieren de una sincronización de todos los procesadores al finalizar cada paso para intercambiar recuentos o \itemsets frecuentes, lo que causa paradas de procesadores si el flujo de trabajo no está correctamente balanceado.
+
+El algoritmo \algoritmo{Candidate Distribution} pretende resolver este problema al no requerir sincronización hasta el final del proceso. En el paso $l$, determinado heurísticamente, el algoritmo divide $\aprioriL[l-1]$ entre los procesadores de modo que el procesador $P^i$ pueda generar un único $\mathcal{C}_m^i (m\geq l)$ independiente del resto de procesadores ($\mathcal{C}_m^i \cap \mathcal{C}_m^j = \emptyset, i\neq j$). Simultáneamente, las transacciones se replican selectivamente de modo que cada procesador pueda hacer el recuento de $\mathcal{C}_m^i$ de forma independiente al resto de procesadores. Hasta el paso $l$ se utilizará el algoritmo \algoritmo{Count Distribution} o \algoritmo{Data Distribution}, a partir de $k=l$ se procede con el algoritmo \algoritmo{Candidate Distribution}.
+
+
+%1997
+
+
+
+\citet{BrinMotwaniUllmanTsur-DynamicItemsetCounting-1997} proponen un nuevo algoritmo para el minado de reglas de asociación, \algoritmo{DIC}, que reduce el número de lecturas de la \db y genera un número menor de candidatos a \itemset que los algoritmos basados en muestras. Se basan en ir creando un árbol similar a \aprioriL leyendo \D en bloques de $M$ transacciones, de los que va deduciendo qué \itemsets pueden ser frecuentes y cuáles no. También hablan de \textsl{reglas de implicación}, que no sólo miden la co-ocurrencia de ítems en transacciones, considerando lo que ellos llaman "`verdadera implicación"' entre \antecedentes y \consecuentes normalizados. Proponen ideas sobre el reordenamiento de los ítems presentes en \D para lograr mayor eficiencia. Introducen el concepto de \textsl{conviccción} como alternativa a la \confianza, obteniéndola a partir de $P(A)P(\neg B) / P(A,\neg B)$.
+
+
+%TODO: Esto es eliminación de \ars con poco interés (definir), sección 2.2
+\citet{SrikantAgrawal-MiningGeneralizedAR-1997} presentan el algoritmo \algoritmo{Basic} (ver algoritmo~\ref{alg:Basic}) de extracción de \ars de una colección de transacciones cuyos ítems están jerarquizados en una taxonomía. Este enfoque, a diferencia de futuros trabajos que también usan taxonomías, no reduce el número de ítems a procesar en la fase de \FIM pues considera como ítems tanto a los ítems de \D como a sus ancestros en la jerarquización, completando todas las transacciones de \D con los ancestros de cada uno de sus ítems (sin duplicados). Realmente se aumenta el conjunto de ítems a considerar, \I, los ítems poco frecuentes desaparecerán del estudio pero quedarán en las transacciones sus ancestros de modo que siempre podremos extraer información sobre ellos aunque sea a otro nivel de la taxonomía utilizada.
+
+\lstinputlisting[label=alg:Basic,
+                 caption={Algoritmo Basic, 1997},
+                 float=htb,
+                 basicstyle=\scriptsize]
+                 {./contenido/arm/codigo/alg-Basic}
+
+Una vez utilizado el algoritmo \algoritmo{Basic} piensan en algunas optimizaciones del mismo, que darán lugar al algoritmo \algoritmo{Cumulate} (ver algoritmo~\ref{alg:Cumulate}).
+
+\begin{enumerate}
+  \item \textbf{Filtrado de ancestros añadidos a las transacciones.} No añaden a las transacciones todos los ancestros de sus ítems ya que alguno de ellos, o incluso el propio ítem, no forman parte de los candidatos a estudiar.
+  \item \textbf{Pre-cómputo de ancestros.} En lugar de recorrer la taxonomía para conocer los ancestros de un ítem se crea una tabla de ancestros para cada ítem.
+  \item \textbf{Eliminación de \itemsets que contienen un ítem y su ancestro.} Justificado en los siguientes lemas:
+    \begin{Lemma}
+      El \soporte de un \itemset $X$ que contiene tanto el ítem $x$ como su ancestro $\hat{x}$ coincide con el \soporte del \itemset $X-\hat{x}$.
+    \end{Lemma}
+    \begin{Lemma}
+      Si \aprioriL[k], el conjunto de \kitemsets frecuentes, no incluye ningún \itemset que contenga tanto un ítem como su ancestro, el conjunto de candidatos \aprioriC[k+1] generado no contendrá ningún \itemset que contenga tanto un ítem como su ancestro.
+    \end{Lemma}
+\end{enumerate}
+
+\lstinputlisting[label=alg:Cumulate,
+                 caption={Algoritmo Cumulate, 1997},
+                 float=htb,
+                 basicstyle=\scriptsize]
+                 {./contenido/arm/codigo/alg-Cumulate}
+
+También presentan el algoritmo \algoritmo{EstMerge} (ver algoritmo~\ref{alg:EstMerge}), que en cada lectura de \D hace un muestreo previo basado en el subconjunto $\D_S$ para obtener una mejor estimación de los candidatos a \kitemset, \aprioriC. Esta lectura extra de ciertas transacciones de \D inicialmente consumen algo más de recursos y de tiempo, sin embargo cuando se lee \D para obtener \aprioriL[k] no se buscará ninguno de los candidatos que no han superado el \soporte mínimo corregido para la muestra (con la muestra se utiliza un \soporte mínimo reducido por el factor 0.9), con lo que el tiempo empleado con la muestra se recupera ampliamente al ahorrar muchísimas operaciones de búsqueda y conteo de candidatos.
+
+\lstinputlisting[label=alg:EstMerge,
+                 caption={Algoritmo {EstMerge}, 1997},
+                 float=htb,
+                 basicstyle=\scriptsize]
+                 {./contenido/arm/codigo/alg-EstMerge}
+
+
+\citet{SrikantVuAgrawal-MininARWithItemConstraints-1997} proponen tres nuevos algoritmos, \algoritmo{Reorder}, \algoritmo{MultipleJoins} y \algoritmo{Direct}, para introducir restricciones sobre los ítems a procesar dentro de los algoritmos existentes de \ARM. Justifican su trabajo en que a menudo el analista necesita hacer un filtrado de \ars en función de la presencia o ausencia de cierto ítem (o de su ancestro o descendiente en una taxonomía) y que es mucho más eficiente aplicar ese filtro antes de proceder con el algoritmo de \ARM que después de haberlo hecho.
+
+
+\citet{ZakiParthasarathyOgiharaL-NewAlgorithms-1997} proponen cuatro nuevos algoritmos, \algoritmo{Eclat}, \algoritmo{MaxEclat}, \algoritmo{Clique} y \algoritmo{MaxClique}. Todos ellos se basan en el clustering de \itemsets y en el esquema \textsl{divide y vencerás} y en todos se propone leer \D sólo una vez, con el ahorro de tiempo que ello supone. \algoritmo{Eclat} utiliza la representación vertical de \D y genera un número de candidatos mayor que \apriori debido a que no guarda el \soporte de todos los \itemsets leídos. Su principal ventaja sobre \apriori está en que sólo realiza una lectura de \D, lo que supone una ejecución más rápida en general en una época en que el acceso a disco era aún demasiado costosa.
+
+
+%1998
+
+\citet{Bayardo-EfficientlyMiningLongPatternsFromDB-1998} afronta el problema de la presencia de \kitemsets largos en \D que dificultan su análisis con los métodos tradicionales, citando básicamente \apriori. Propone el algoritmo \algoritmo{Max-Miner} para extraer únicamente los \itemsets frecuentes \emph{maximales}, aquellos que no tienen un superconjunto que sea también frecuente. Dado que todo \itemset frecuente es un subconjunto de un \itemset frecuente maximal, la salida de su algoritmo representa implícitamente y de modo conciso a todos los \itemsets frecuentes presentes en \D. %La función \textsc{Get-Initial-Groups} devuelve el conjunto $F_1$ de \kitemsets[1] frecuentes ordenados por su frecuencia, de modo que se maximice la eficiencia del algoritmo al ser de esperar que los ítems más frecuentes aparezcan más en los \itemsets frecuentes maximales. \textsc{Gen-Sub-Nodes} devuelve los \itemsets formados por los \itemsets frecuentes encontrados y su unión con el ítem más frecuente no perteneciente a los primeros, utilizando de nuevo la heurística de que los ítems más frecuentes son más proclives a formar \itemsets frecuentes maximales.
+ El ahorro que supone el almacenamiento de sólo los \itemsets frecuentes maximales frente a \apriori proporciona a su algoritmo mayor rapidez de ejecución en algunas \dbs, sin embargo este ahorro puede perderse cuando queremos obtener información más detallada sobre algunos \itemsets frecuentes que no sean maximales.
+
+
+%1999
+
+\citet{HoltChung-EfficientMiningOfARInTextDB-1999} aplican los algoritmos \apriori y \algoritmo{DHP} al minado de \dbs de texto y proponen los algoritmos \algoritmo{Multipass-Apriori}, \algoritmo{M-Apriori} y \algoritmo{Multipass DHP (M-DHP}) específicos para tratar \dbs de texto usando técnicas de \ARM.
+
+
+ % %2000
+
+
+\citet{HanPeiYin-MiningFrequentPatternsWithoutCandidateGeneration-2000} introducen una nueva estructura, {FP-Tree}, para guardar los \itemsets presentes en \D, y con ella el algoritmo \algoritmo{FP-Growth}% (ver algoritmo~\ref{alg:FPGrowth})
+, con el que evitan la generación de candidatos, uno de los cuellos de botella del algoritmo \apriori. En su artículo proponen otro algoritmo para construir la estructura {FP-Tree} en la que recoger toda la información relevante de \D. {FP-Tree} realmente es una representación compacta de \D para poder manipularlo en la memoria principal del ordenador. Es por ello que si el número de ítems distintos que contiene es muy grande las prestaciones de \algoritmo{FP-Growth} se reducen notablemente teniendo que trabajar con un \soporte alto para poder llevar a cabo su ejecución.% (ver algoritmo~\ref{alg:FPTreeConstruction}).
+% 
+% % \afterpage{\clearpage
+           % \lstinputlisting[label=alg:FPGrowth,
+           %                  caption={Algoritmo {FP-Growth}, 2000},
+           %                  float=htb,
+           %                  basicstyle=\scriptsize]
+           %                  {./contenido/arm/codigo/alg-FPGrowth}
+% % }
+ % \input{algoritmo/alg_FPGrowth}
+% 
+% % \afterpage{\clearpage
+           % \lstinputlisting[label=alg:FPTreeConstruction,
+           %                  caption={Algoritmo {FP-Tree Construction}, 2000},
+           %                  float=htb,
+           %                  basicstyle=\scriptsize]
+           %                  {./contenido/arm/codigo/alg-FPTreeConstruction}
+% % }
+ % \input{algoritmo/alg_FPTreeConstruction}
+% 
+
+
+\citet{HippGuntzerNakhaeizadeh-AlgorithmsForAssociationRuleMining-2000} presentan una comparativa entre los cuatro algoritmos más representativos de \ARM: \algoritmo{Apriori}, \algoritmo{FP-Growth}, \algoritmo{Partition} y \algoritmo{Eclat}, concluyendo que no existen grandes diferencias en cuestión de tiempo de ejecución y que la propia distribución de \D puede influir en el hecho de que un algoritmo funcione mejor en una colección de datos concreta respecto a los demás algoritmos.
+
+%2001
+
+\citet{OzelGuvenir-AnAlgorithmForMining-2001} proponen el algoritmo \algoritmo{PHP}, basado en \algoritmo{DHP} pero utilizando hashing perfecto con lo que no es necesario hacer doble recuento de los candidatos a \kitemsets[(k+1)] frecuentes. No especifican la función hash que usan ni aseguran que su método pueda ser utilizado con cualquier colección \D, lo que no es descartable pues el número de candidatos a \kitemsets[(k+1)] puede ser tan grande que no sea viable su almacenamiento en un vector de códigos hash.
+
+%TODO: Este no encaja... Sobre todo inciden en la estimación de valores missing para obtener Aproximate AR
+ % \citet{Nayak:Cook:ApproxARM:01} ponen su atención en las pequeñas variaciones que puede presentar \DD y que pasan desapercibidas para la mayoría de algoritmos de \ac{ARM}, proponiendo el algoritmo $\sim$AR para encontrar las reglas de interés presentes en esas variaciones. También introducen el estudio de valores missing utilizando estimaciomes obtenidas del propio \DD, lo que consideramos un exceso de información para retroalimentar el estudio de reglas de asociación. Utilizan \dbs relacionales en lugar de las transaccionales para las que está diseñado Apriori, algoritmo con el que comparan sus resultados.
+
+ % %2002
+
+\citet{LinKedem-PincerSearchFIM-2002} hacen una propuesta interesante desde el punto de vista de la \fim, completar la búsqueda bottom-up de \itemsets frecuentes mediante una búsqueda top-down simultánea que puede reducir drásticamente el número de candidatos generado por el algoritmo y el número de lecturas de \D. El único inconveniente de este algoritmo es que no se guarda el \soporte real de todos los \itemsets frecuentes cuyos candidatos no han sido generados, con lo que sería necesaria una nueva lectura de \D para obtenerlo. En su artículo indican que los algoritmos de \ARM utilizados son eficientes cuando los \itemsets frecuentes de \D son cortos, decreciendo su eficiencia conforme aumenta su longitud.
+ % \input{algoritmo/alg_PincerSearch}
+Presentan un nuevo algoritmo que combina las búsquedas bottom-up  y top-down, \algoritmo{Pincer-Search}% (ver algoritmo~\ref{alg:PincerSearch})
+, para mantener y actualizar una nueva estructura de datos, $MFCS$ (\textsl{Maximum Frequent Candidate Set}) con la que obtener el conjunto de \itemsets frecuentes maximales, $MFS$, sin necesidad de usar un conjunto grande de candidatos, lo que indican que ahorrará mucho tiempo de CPU al proceso por ahorrar búsquedas y conteo de candidatos que no llegarán a ser \itemsets frecuentes.
+
+En su artículo presentan un esquema general muy claro sobre el proceso de \fim:
+
+\selectlanguage{english}
+\begin{quote}
+  Throughout the execution, the set of all \itemsets is partitioned, perhaps implicitly, into three sets:
+  \begin{enumerate}
+    \item \emph{frequent}: This is the set of those \itemsets that have so far been discovered as frequent.
+    \item \emph{unfrequent}: This is the set of those \itemsets that so far have been discovered as infrequent.
+    \item \emph{unclassified}: This is the set of all the other \itemsets.
+  \end{enumerate}
+  Initially, the frequent and the infrequent sets are empty. Throughout the execution, they grow at the expense of the unclassified set. The execution terminates when the unclassified set becomes empty, and then, of course, all the maximal frequent \itemsets are discovered.
+\end{quote}
+\selectlanguage{spanish}
+
+%TODO: No sé dónde colocarlo
+ % \citet{Calders:Goethals:MiningAllNonDerivablesFI:02} proponen una representación comprimida de los \itemsets frecuentes, los \textsl{itemsets frecuentes no-derivables}, que pueden resolver ciertos problemas de uso de memoria en la aplicación de los algoritmos de \ac{FIM}. Plantean el problema que surge con los algoritmos de \ac{ARM} al imponer \soportes mínimos demasiado bajos o trabajar con datos muy correlacionados debido al enorme número de \itemsets frecuentes que puede producir el análisis. Presentan las \textsl{reglas deductivas} con las que poder eliminar las redundancias presentes en \FF y posibilitar el análisis sin tener que recurrir a grandes equipos.
+ %
+ % %\citet{Goethals_SurveyOnFPM_2003} presenta un completísimo informe sobre la teoría y algoritmos de \ARM más valorados hasta la fecha.
+
+\citet{HoltChung-MiningARusingInvertedHashingAndPruning-2002} presentan el algoritmo \algoritmo{IHP} mostrando con sus experimentos que se comportan mejor que \apriori y \algoritmo{DHP} en colecciones con transacciones largas. En la primera lectura de \D, \algoritmo{IHP} realiza el recuento de cada ítem de \I además de una \TID \texttt{Hash Table} (THT) para cada ítem utilizando una función hash, lo que supone un aumento de requerimiento de memoria principal pero limitado por el valor máximo obtenido en la función hash y no por el número total de transacciones como ocurría en Partition. Su principal aportación consiste en la eliminación de candidatos mediante una comprobación previa de las THT de cada ítem presente en el $k$-candidato a comprobar, esta reducción supone un recuento más rápido de los candidatos dado su menor número. También incorporan técnicas de reducción de ítems en transacciones y de \transacciones que no pueden generar más \kitemsets frecuentes, técnicas ya revisadas en la literatura expuesta en esta sección.
+
+%TODO: Sección 2.2 o nada
+ % %\citet{Mansuri:Berengoltz:GeneralizingAssociationRules:02} definen las \textsl{reglas de dependencia} basadas en el test $\chi^2$ y proponen un algoritmo para descubrirlas.
+ %
+ % \citet{Meretakis:AUnifiedViewOnAssociationAndClassificationMining:02} presenta una visión unificada de los problemas de asociación y \clasificacion. Una de sus principales aportaciones es la observación del hecho de que las técnicas de asociación permiten obtener conocimiento sobre grandes \dbs que puede ser utilizada en otra disciplina como es la \clasificacion.
+
+ % %2003
+
+\citet{CheungZaiane-IncrementalMiningOfPWithoutCandidateGenerationOrSupport-2003} proponen una nueva estructura, {CATS-Tree}, que extiende la idea de la estructura {FP-Tree} para mejorar la compresión de \D y permitir el minado de \itemsets frecuentes sin generación de candidatos. A destacar la escalabilidad de esta estructura que permite modificar el \soporte mínimo sin tener que reconstruirla, lo que hace posible también la inserción o eliminación de transacciones sin repetir todo el proceso de \ARM.
+
+ % \citet{ZhaoBhowmick_ARMSurvey_2003} presentan otro informe sobre \ac{ARM}.
+ %
+ %
+ %
+ % %2004
+ %
+ % \citet{Coenen:Leng:Ahmed:DataStructuresForARMTandPTrees:04} presentan nuevos algoritmos basados en el uso de \ac{T-Tree} y \ac{P-Tree}.
+ %
+ % \citet{Hong:Kuo:Wang:FuzzyAprioriTID:04} tratan la extracción de reglas de asociación difusas a partir de variables cuantitativas
+ %
+ % \citet{Pei:Han:Lakshmanan:PushingConvertibleConstraintsInFIM:04} analizan las restricciones aplicables a los algoritmos de \ac{ARM}. Debido a la gran cantidad de \itemsets frecuentes y reglas de asociación que pueden estar presentes en \DD se plantean la necesidad de permitir al analista fijar su foco en parte del conocimiento a extraer de \DD, mediante restricciones que permitan añadir al estudio conocimientos previos sobre el contexto en estudio. Crean una clase de restricciones aplicables al algoritmo FP-Growth, argumentando que Apriori no permite aplicarlas.
+ %
+ % \citet{Tsay:ChangChien:EfficientCluster:04} proponen el algoritmo \ac{CDAR}, que comienza dividiendo \DD en clusters de modo que los $k$-itemsets frecuentes se busquen en el $k$-ésimo cluster obtenido en el primer paso. Aunque indican que sólo se necesita una lectura de \DD para ejecutar su algoritmo, al revisar su algoritmo comprobamos que para llevarlo a término son necesarias varias lecturas del repositorio además de suficiente espacio en memoria para almacenarlo en forma de clusters. El conjunto \FF de \itemsets frecuentes que proporciona no es el mismo que obtenemos con Apriori. A pesar de estas carencias nos parece una propuesta interesante pues introduce algunos conceptos que utilizaremos en las aportaciones de este trabajo.
+ % %\input{algoritmo/alg_CDAR}
+ %
+ %
+ %
+ %
+ %
+ % %2005
+ %
+ % \citet{Jamali:Taghi:Rahgozar:FastAlgorithmGeneratingARWithEncodingDBLayout:05} proponen un método de codificado para reducir notablemente el tamaño de las \dbs de transacciones, presentando un algoritmo que utiliza la \db codificada.
+ %
+ % \citet{Burdick:Calimlim:Flannick:Gehrke:Yiu:MAFIA:05} presentan \ac{MAFIA}, incidiendo en la búsqueda de \itemsets frecuentes maximales.
+ % %\input{algoritmo/alg_MAFIA}
+ %
+ % \citet{Gouda:Zaki:GenMax:05} presentan el algoritmo GenMax, un método de búsqueda que permite encontrar los \itemsets frecuentes maximales.
+ %
+ %
+ % \citet{Liu:SupportingEfficientAndScalableFrequentPatternMining:05} presenta en su tesis el algoritmo \ac{AFOPT} que utiliza una nueva estructura con el mismo nombre y otras dos estructuras para almacenar \dbs condicionales. Utiliza una estrategia de adaptación que permite elegir la mejor estructura en función de la densidad de las \dbs condicionales, lo que hace que su algoritmo sea eficiente tanto en \dbs densas como dispersas.
+ % %\input{algoritmo/alg_AFOPT}
+ %
+ % \citet{Tsay:Chiang:CBAR:05} presentan el algoritmo \ac{CBAR}. Dividen \DD en clusters en función de la longitud de las transacciones y buscan los $k$-itemsets frecuentes en el cluster $\DD_k$ (que sólo contiene transacciones de longitud $k$) de modo que si un candidato se comprueba que es frecuente no se sigue contando su presencia en las transacciones de mayor tamaño, y si su presencia no alcanza el \soporte mínimo fijado por el analista se conserva como candidato hasta que se haya comprobado en el resto de clusters si tiene \soporte. Esto supone una ganancia de tiempo de ejecución pero impide conocer el \soporte real de muchos \itemsets, lo que conducirá a una nueva lectura de \DD para concluir con la generación de reglas de asociación. Cabe destacar que en \dbs como \texttt{chess.dat} cuyas  transacciones tienen todas la misma longitud no se obtiene ningún beneficio.
+ % %\input{algoritmo/alg_CBAR}
+ %
+ %
+ %
+ %
+ % %2006
+ %
+ % \citet{Ahmed:Coenen:Leng:TreeBasedPartitioningOfDateForARM:06} presentan un método de particionado de \DD que resuelve parte del problema de trabajar con la memoria principal cuando el repositorio de transacciones es muy grande y denso. En su propuesta se organizan los datos de \DD en unas estructuras que pueden ser tratadas independientemente y, por tanto, pueden ser alojadas en memoria evitando múltiples lecturas de disco.
+ %
+ % \citet{Calders:Goethals:NonDerivableItemestMining:06} presentan en un artículo su representación comprimida de los \itemsets frecuentes, los \textsl{itemsets frecuentes no-derivables} que pueden resolver ciertos problemas de uso de memoria en la aplicación de los algoritmos de \ac{FIM}.
+ %
+ %
+ % \citet{Rozenberg:Gudes:ARMInVertically:06} proponen un algoritmo que permite obtener reglas de asociación presentes en \dbs distribuidas protegiendo la privacidad de cada una de las \dbs.
+ %
+ % \citet{Schmitz:Hotho:Jaschke:Stumme:MARInFolksonomies:06} proponen el uso de reglas de asociación en folksonomías.
+ %
+ %
+ %
+ %
+ %
+ %
+ %
+ % %2007
+ %
+ % \citet{Dong:Han:BitTableFI:07} presentan el algoritmo BitTableFI, que utiliza una nueva estructura, BitTable, que comprime \DD horizontal y verticalmente para la generación y recuento eficientes de los candidatos a \itemset frecuente.
+ %
+ % \citet{Liu:Lu:Yu:CFPtreeCompactDiskBasedStructureForStoringAndQueryingFI:07} presentan la estructura CFP-tree para guardar y buscar con eficiencia \itemsets frecuentes.
+ %
+ % \citet{Luo:Zhang:AnEffFIMAlg:07} proponen dos nuevos algoritmos, Diffset y DiffsetHybrid, que utilizan la representación vertical de \DD. Concluyen que son eficientes para \dbs densas y dispersas.
+ % %\input{algoritmo/alg_Diffset}
+ % %\input{algoritmo/alg_DiffsetHybrid}
+ %
+ % \citet{Palshikar:Kale:Apte:ARMUsingHeavy:07} proponen el uso de \textsl{heavy \itemsets}, definidos como aquellos que contienen ítems cuyas co-ocurrencias presentan confianza y \soporte mínimo. Un único heavy \itemset representa a un gran número de reglas de asociación, lo que permite ahorrar memoria principal y permite desarrollar un algoritmo más eficiente.
+ % %\input{algoritmo/alg_AprioriHeavy}
+ %
+ %
+ %
+ %
+ % %2008
+ %
+ %
+ %
+ %
+ %
+ % %2009
+ %
+ % En \citet{Li:Chen:MiningNonDerivableFIOverDataStream:09} comprobamos que el estudio de \itemsets frecuentes no-derivables sigue vigente.
+ 
+ 
+ 
+ 
+ %TODO: Comparar con los otros bloques de citas
+ Hay diversas aportaciones para optimizar el uso de memoria RAM y el acceso a los datos almacenados.
+  \citet{LinKedem-PincerSearchFIM-2002} proponen almacenar los \itemsets en una estructura capaz de gestionarlos de un modo más eficiente, permitiendo hacer su recuento en dos sentidos, comenzando con 1-\itemsets e incrementando su tamaño (del mismo modo que hace \apriori) y almacenando simultáneamente los \kitemsets frecuentes que va encontrando en \D para detectar los frecuentes en sentido inverso, reduciendo su tamaño.
+  \citet{HongKuoWang-FuzzyAprioriTID-2004} proponen un algoritmo que busca \ars difusas en transacciones con datos cuantitativos, reduciendo tiempos de ejecución en esta fase.
+  En su tesis, \citet{Tesis-Liu-SupportingEfficientAndScalableFrequentPatternMining-2005} presenta una detallada descripción de su investigación sobre \fim.
+   \citet{LiuLuYu-CFPtreeCompactDiskBasedStructureForStoringAndQueryingFI-2007} proponen el uso de \texttt{{CFP}-tree}, una estructura compacta para el almacenamiento de \itemsets y optimizada para realizar búsquedas.
+  \citet{LiuLiZhangTang-OptimizationOfFIMOnMultipleCoreProcessor-2007} utilizan paralelismo para optimizar el proceso.
+  \citet{TsayHsuYu-FIUTaNewMethodForFIM-2009} presentan otra estructura, \texttt{FIU-tree}, con la que sólo se ha de acceder dos veces a \D para encontrar todos los \itemsets frecuentes que contiene.
+  Muchas de estas publicaciones son posteriores a este periodo de nuestra investigación por lo que no pudieron ser incorporadas en su momento. 
+
+
+
+ 

@@ -1,0 +1,12 @@
+gen_candidate$(\aprioriL[k-1], H_k, \aprioriC)$;
+while $(|\aprioriC| > 0)$ {
+	$\D_{k+1} = \emptyset$;
+	forall transactions $t \in \D_k$
+		count_support$(t, \aprioriC, k, \hat{t})$; /* $\hat{t}\subseteq t$ */
+		if ($|\hat{t}|>k$) then $D_{k+1}=D_{k+1}\cup\{\hat{t}\}$;		
+	end
+	$\aprioriL[k] = \{c \in \aprioriC\ |\ c.count\geq s\}$;
+	if ($|\D_{k+1}| = 0$) then break;
+	$\aprioriC[k+1] = $apriori_gen$(\aprioriL[k])$ /* refer to Agrawal and Srikant (1994) */
+	$k++$;
+}

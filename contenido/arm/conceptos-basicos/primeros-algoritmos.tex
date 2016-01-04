@@ -1,0 +1,61 @@
+% !TEX root = ../../../Lazcorreta.Tesis.tex
+% \ABIERTO%
+En este primer artículo proponen el algoritmo \algoritmo{AIS} (ver algoritmo~\ref{alg:AIS}) que se basa en múltiples lecturas de la \db de transacciones \D. Comienzan con un conjunto vacío de \itemsets frecuentes, \aprioriL, y un conjunto de \itemsets al que llaman frontera, $\mathcal{F}$, y que contiene inicialmente el conjunto vacío. En cada lectura de \D, $k=1\ldots$, se realizan los siguientes pasos:
+
+\begin{enumerate}
+  \item Se vacía el conjunto de candidatos, \aprioriC.
+  \item Se busca cada \kitemset[k-1] de la frontera en cada \transaccion.
+  \item Si se encuentra se extiende con todos los ítems de la \transaccion y se añade la extensión al conjunto \aprioriC[k+1], creándolo con \soporte 1 si no existe o incrementando su \soporte si ya existe.
+  \item Al terminar la $k$-ésima lectura de \D se vacía la frontera, se guardan en \aprioriL[k] los candidatos que tienen \soporte mínimo y se añaden a la frontera los que se estima que se podrán extender en la siguiente iteración.
+  \item Si la frontera no está vacía se vuelve al paso 1.
+\end{enumerate}
+
+Empiezan a encontrarse los problemas de recursos intrínsecos a esta disciplina, llegando a proponer un algoritmo que guarda en disco la información que está en memoria y no es necesaria. Este algoritmo se llamará cada vez que se necesite memoria para almacenar nuevos datos, lo que restará algo de eficiencia al proceso completo.
+
+Proponen también una serie de heurísticas para estimar el \soporte de un \kitemset antes de generar su candidato, de modo que si se estima que tendrá un \soporte bajo no se genere el candidato y el sistema no caiga por falta de memoria para almacenar los candidatos. La generación de candidatos se hace bajo la suposición de independencia de los ítems presentes en cada transacción. Si los \itemsets $X$ e $Y$ son disjuntos y tienen \soporte $x$ e $y$ respectivamente, estiman que el \itemset $X \cup Y$ tendrá \soporte $z = x\cdot y$, por lo que esperan que será frecuente en \D si $z \geq minSup$.
+
+% \afterpage{\clearpage}
+\lstinputlisting[label=alg:AIS,
+                 caption={Algoritmo {AIS}, 1993},
+                 float=htbp,
+                 basicstyle=\scriptsize]
+                {./contenido/arm/codigo/alg-AIS}%
+
+\citet{HoutsmaSwami-SETMofAR-1993} sugieren trabajar directamente sobre las \dbs de \transacciones aprovechando las funciones propias de los \dbms en lugar de desarrollar aplicaciones específicas para trabajar con almacenes \D guardados como texto plano. Proponen el algoritmo \algoritmo{SETM} (ver algoritmo~\ref{alg:SETM}), que genera los candidatos al leerlos en las transacciones, igual que \algoritmo{AIS}, y guarda una copia de cada \itemset junto al \TID de la transacción que lo contiene. Al trabajar con \DB en disco no necesita muchos recursos de memoria para guardar tanta información pero no puede competir en eficiencia con programas preparados específicamente para extraer la misma información de un fichero de texto plano. Sin embargo la asociación de cada \itemset con el \TID de la transacción en que está contenido puede agilizar un estudio más profundo de ciertos \itemsets por lo que no descartamos el uso de esta idea cuando podamos realizar en paralelo estas sentencias que no benefician la eficiencia del propósito actual, encontrar los \itemsets frecuentes presentes en \D, pero cuyos resultados pueden ser guardados en ficheros cuyo análisis posterior puede proporcionar gran cantidad de conocimiento sobre la población en estudio. 
+
+% \afterpage{\clearpage}
+\lstinputlisting[label=alg:SETM,
+                 caption={Algoritmo {SETM}, 1993},
+                 float=htbp,
+                 basicstyle=\scriptsize]
+                {./contenido/arm/codigo/alg-SETM}
+
+Como se está buscando la co-existencia de ítems en \transacciones se puede aprovechar el orden lexicográfico del código utilizado para representar a cada ítem. El \soporte del \itemset $XY$ coincide con el de $YX$ por lo que si al guardar los \itemsets lo hacemos con sus ítems ordenados lexicográficamente sólo guardaremos el \itemset $XY$. Este orden se va a aprovechar para hacer más eficientes las operaciones a realizar por el algoritmo.
+
+\lstinputlisting[label=alg:SETM-mergeScan,
+                 caption={Algoritmo {SETM}, función merge-scan},
+                 float=htbp,
+                 basicstyle=\scriptsize]
+                {./contenido/arm/codigo/alg-SETM-mergeScan}
+                
+Las funciones del algoritmo son consultas a la \db. Para obtener $R'_k$ se ejecuta la consulta del listado~\ref{alg:SETM-mergeScan}, que extiende cada \kitemset frecuente encontrado en el paso anterior con los ítems frecuentes de \D que sean lexicográficamente mayores que el mayor de los ítems del \kitemset. Concretamente en la extensión de un \kitemset basta con añadir uno a uno los ítems de la \transaccion que contienen al \kitemset y son lexicográficamente mayores al mayor de los ítems del \kitemset.
+
+
+\aprioriC se obtiene contando los \itemsets del conjunto $R'_k$ y guardando sólo los que tienen \soporte mínimo, como muestra el listado~\ref{alg:SETM-Ck}.
+
+\lstinputlisting[label=alg:SETM-Ck,
+                 caption={Algoritmo {SETM}, selección de candidatos},
+                 float=htbp,
+                 basicstyle=\scriptsize]
+                {./contenido/arm/codigo/alg-SETM-Ck}
+
+El conjunto auxiliar $R_k$ lo obtienen seleccionando las tuplas de $R'_k$ que pueden ser extendidas, como muestra el listado~\ref{alg:SETM-Rk}.
+\lstinputlisting[label=alg:SETM-Rk,
+                 caption={Algoritmo {SETM}, \itemsets extendibles},
+                 float=htbp,
+                 basicstyle=\scriptsize]
+                {./contenido/arm/codigo/alg-SETM-Rk}
+
+Estos primeros algoritmos de \arm utilizan la misma estrategia para evitar desbordamiento de memoria al generar los candidatos a \itemset frecuente. Como el número de candidatos es teóricamente muy grande cuando trabajamos con grandes almacenes \D y muchos ítems en \I, y como es de esperar que el número de \itemsets en \D sea sensiblemente menor que el teórico, en estos algoritmos se propone reservar memoria únicamente para contar los \itemsets que realmente están en \D, es decir, se reserva memoria cada vez que se encuentra un \itemset en \D para el que aún no hemos hecho dicha reserva. Este planteamiento consigue su objetivo a costa de eficiencia, ya cada una de las millones de operaciones de reserva de memoria que se llevan a cabo consume un tiempo y su acumulación resulta en un tiempo de ejecución muy superior al que conseguiríamos si hiciéramos una buena estimación de los \itemsets contenidos en \D y realizáramos la reserva de memoria en una única instrucción. En los algoritmos que se muestran en la sección~\ref{sec:2-2-FIM} se adoptará esta última estrategia.
+
+En ambos artículos se trata por encima la generación de \ars. En su definición se especifica que el consecuente es un único ítem por lo que una vez conocemos todos los \kitemsets frecuentes basta con recorrerlos uno a uno y separarlos en dos \itemsets, el antecedente con $k-1$ ítems y el consecuente con el ítem restante, con lo que se obtendrán todas las \ARs de \D que tienen \soporte mínimo.

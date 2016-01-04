@@ -1,0 +1,12 @@
+$k := 1$;
+sort $R_1$ on item;
+$\aprioriC[1] :=$ generate counts on $R_1$;
+repeat
+  $k := k + 1$;
+  sort $R_{k-1}$ on $trans\_id, item_1,\ldots, item_{k-1}$;
+  $R'_k :=$ merge-scan $R_{k-1}, R_1$;
+  sort $R'_k$ on $item_1,\ldots, item_{k-1}$;
+  $\aprioriC :=$ generate counts on $R'_k$;
+  $R_k := $ filter $R'_k$ to retain supported patterns;
+until $R_k = \{\}$
+  

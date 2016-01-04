@@ -1,0 +1,19 @@
+$\aprioriL[1]$ = {large 1-itemsets};
+$\overline{\aprioriC[1]} = $ database \D;
+for ($k = 2; L_{k-1}\neq\emptyset; k++$) do begin
+	$\aprioriC = apriori-gen(\aprioriL[k-1])$;  //New candidates
+	$\overline{\aprioriC} = \emptyset$;
+	forall entries $t\in \overline{\aprioriC[k-1]}$ do begin
+		// determines candidate itemsets in $C_k$ contained
+    // in the transaction with identifier $t.TID$
+		$\aprioriC[t] =\{c\in C_k|(c-c[k])\in t.$set-of-itemsets $\wedge (c-c[k-1])\in t.$set-of-itemsets$\}$;
+		forall candidates $c\in C_t$ do begin
+			$c:count++$;
+		end
+		if $C_t\neq\emptyset$ then
+			$\overline{C}_k += <t.TID,C_t>$;		
+	end
+	$\aprioriL[k] = \{c\in \aprioriC | c:count \geq minsup\}$;
+end
+
+Answer = $\bigcup_k{\aprioriL[k]}$;

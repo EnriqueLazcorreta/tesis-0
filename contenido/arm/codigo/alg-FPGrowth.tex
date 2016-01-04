@@ -1,0 +1,16 @@
+Input: FP-tree constructed based on algorithm FP-TreeConstruction using $\D$
+       and a minimum support $\xi$.
+Output: The complete set of frequent patterns.
+Method: Call FP-Growth$(FP-tree, null)$.
+
+Procedure FP-Growth$(Tree, \alpha)$
+{
+if ($Tree$ contains a single path $P$)
+then foreach combination (denoted by $\beta$) of the nodes in the path $P$ do
+  generate pattern $\beta\cup\alpha$ with $support = minnimum\ support\ of\ nodes\ in \beta;$
+else foreach $a_i$ in the header of $Tree$ do {
+  Generate pattern $\beta=a_i\cup\alpha$ with $support = a_i.support;$
+  Construct $\beta$'s conditional pattern base and then $\beta$'s conditional FP-tree $Tree_\beta$;
+  if $Tree_\beta \neq\emptyset$
+	then call FP-Growth$(Tree_\beta, \beta)$ }
+}

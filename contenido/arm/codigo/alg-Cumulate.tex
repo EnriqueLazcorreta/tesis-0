@@ -1,0 +1,19 @@
+Compute $\mathcal{T}^*$, the set of ancestors of each item, from $\mathcal{T}$ // Optimization 2
+$L_1 := \{$frequent 1-itemsets$\}$;
+$k:=2$ // $k$ represents the pass number
+while ($\aprioriL[k-1] \neq \emptyset$) do begin
+	$\aprioriC := $ New candidates of size $k$ generated from $\aprioriL[k-1]$;
+	if ($k = 2$) then // Optimization 3
+		Delete any candidate in $\aprioriC[2]$ that consists of an item and its ancestor;
+	Delete any ancestors in $\mathcal{T}^*$ that are not present in any of the candidates
+    in $\aprioriC$ // Optimization 1
+	forall transactions $t\in \D$ do begin
+    forall item $x \in t$ do
+      Add all ancestors of $x$ in $\mathcal{T}^*$ to $t$;
+    Remove any duplicates from $t$;
+		Increment the count of all candidates in $\aprioriC$ that are contained in $t$;
+	end
+	$\aprioriL[k] := $ All candidates in $\aprioriC$ with minimum support;
+	$k := k+1$;
+end
+Answer $:=\bigcup_k{\aprioriL[k]}$;

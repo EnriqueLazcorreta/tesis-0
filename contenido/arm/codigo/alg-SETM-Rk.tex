@@ -1,0 +1,7 @@
+INSERT INTO $R_k$
+SELECT $p.trans\_id, p.item_1, \ldots, p.item_k$
+FROM $R'_k\ p$, $C_k\ q$
+WHERE $p-item_1 = q.item_1$ AND
+      $\ldots$
+      $p-item_k = q.item_k$
+ORDER BY $p.trans\_id, p.item_1, \ldots, p.item_k$

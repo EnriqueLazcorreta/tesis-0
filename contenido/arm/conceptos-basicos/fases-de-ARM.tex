@@ -1,0 +1,12 @@
+% !TEX root = ../../../Lazcorreta.Tesis.tex
+% \ABIERTO%
+
+Como se ha visto en la sección anterior y exponen \citeauthor{AgrawalImielinskiSwami-MiningAssociationRulesBetweenSetsOfItemsInLargeDB-1993} en su primer artículo, la \ARM se compone de dos fases bien diferenciadas:
+\begin{enumerate}
+  \item En primer lugar hay que encontrar los conjuntos de ítems que están presentes en un porcentaje mínimo de \transacciones de \D.
+  \item A continuación se descubren las \ARs que se deducen de esos conjuntos.
+\end{enumerate}
+
+La primera fase es la que mayores aportaciones científicas ha recibido en la \ARM pues al trabajar con grandes colecciones de \transacciones puede consumir más recursos de los disponibles o tardar más tiempo del adecuado para dar por finalizado el análisis. Cabe destacar que la tecnología utilizada para el desarrollo de los algoritmos expuestos en esta sección ha evolucionado notablemente desde los inicios de esta metodología, las comparaciones realizadas a través de los artículos presentados pueden haber variado debido a que actualmente tenemos a nuestra disposición recursos de memoria y de cómputo muy superiores a los utilizados en las dos décadas precedentes. En la sección~\ref{sec:arm:fim} se estudian las propuestas más interesantes sobre esta fase, \fim, y se muestra una comparativa sobre la implementación del algoritmo más utilizado en la \arm.
+
+La segunda fase es elemental y no consume tiempo ni recursos excesivos en comparación con la primera por lo que no ha habido grandes avances desde sus inicios excepto en el estudio de las métricas que mejores reglas de asociación proporcionan, dado que el número de reglas generadas puede ser demasiado grande para ser analizado correctamente. En la sección~\ref{sec:arm:generacion-ar} se aborda esta fase, la generación de \ars a partir del conjunto de \itemsets frecuentes, y se presenta una propuesta para ejecutarla de un modo más eficiente, propuesta que forma parte de nuestro artículo más citado.

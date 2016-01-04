@@ -1,0 +1,8 @@
+$s=$ a minimum support;
+set all the buckets of $H_2$ to zero; /* hash table */
+forall transaction $t\in \D$ do begin
+	insert and count 1-items occurrence in a hash tree;
+	forall 2-subsets $x$ of $t$
+		$H_2[h_2(x)]++$;
+end
+$\aprioriL[1] = \{c\ |\  c.count>s, c is in a leaf node of the hash tree\}$;

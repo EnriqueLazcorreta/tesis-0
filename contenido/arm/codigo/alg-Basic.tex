@@ -1,0 +1,12 @@
+$\aprioriL[1] := \{$frequent 1-itemsets$\}$;
+$k:=2;$  // $k$ represents the pass number
+while ($\aprioriL[k-1] \neq \emptyset$) do begin
+	$\aprioriC := $ New candidates of size $k$ generated from $\aprioriL[k-1]$;
+	forall transactions $t \in \D$ do begin
+		Add all ancestors of each item in $t$ to $t$, removing any duplicate;
+		Increment the count of all candidates in $\aprioriC$ that are contained in $t$;
+  end
+	$\aprioriL[k] := $ All candidates in $\aprioriC$ with minimum support;
+	$k := k+1$;
+end
+Answer $:=\bigcup_k{\aprioriL[k]}$;

@@ -1,0 +1,5 @@
+INSERT INTO $R'_k$
+SELECT $p.trans\_id, p.item_1, \ldots, p.item_{k-1}, q.item$
+FROM $R_{k-1}\ p$, SALES $q$
+WHERE $q.trans\_id = p.trans\_id$ AND
+      $q.item > p.item_{k-1}$

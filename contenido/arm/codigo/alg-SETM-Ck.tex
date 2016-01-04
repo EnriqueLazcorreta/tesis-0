@@ -1,0 +1,5 @@
+INSERT INTO $C_K$
+SELECT $p.item_1, \ldots, p.item_k, COUNT (*)$
+FROM $R'_k\ p$
+GROUP BY $p.item_1, \ldots, p.item_k$
+HAVING COUNT (*) >= $min\_support$
