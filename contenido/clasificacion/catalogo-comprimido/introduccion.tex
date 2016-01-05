@@ -1,0 +1,69 @@
+% !TEX root = ../../../Lazcorreta.Tesis.tex
+\ABIERTO
+
+Un \catalogo comprimido contiene en muy poco espacio la misma información que un \catalogo.
+\begin{itemize}
+   \item $N$, el número de registros del \catalogo.
+   \item Los valores correspondientes a cada atributo junto a su frecuencia en el \catalogo (\aprioriC[1] ampliado con información de $A_i$).
+   \item Los valores menos frecuentes de cada atributo.
+\end{itemize}
+
+Con esta información es inmediato reconstruir el \catalogo original, pero no necesitaremos hacerlo ya que vamos a trabajar con el \catalogo comprimido y la información extra disponible. De hecho esta información nos permitirá crear el árbol \aprioriL completo antes de comenzar a hacer la segunda lectura de \D, esta vez a través del \catalogo comprimido.
+
+En primer lugar no estamos interesados en crear un árbol \aprioriL completo, este era uno de los problemas que provocó la búsqueda de algoritmos eficientes para \ARM. Sólo necesitamos expandir las primeras ramas del árbol, las correspondientes a los valores de la clase. Si necesitáramos cualquier otro valor del árbol completo podríamos reproducirlo con unos pocos cálculos aplicados sobre los datos que contiene nuestro \aprioriL reducido.
+
+Es de destacar que al codificar los datos originales para construir un \catalogo se comenzó con los valores de la clase y a continuación se añadieron los atributos, sin aparente orden. El orden en que estén estos atributos podría ser relevante en un análisis clásico de \arm, podría provocar muchas más búsquedas de las necesarias si la codificación fuera otra. En el caso de los \catalogos comprimidos este hecho no afecta a la eficiencia del algoritmo ni a los recursos empleados. Desde el primer momento se reservará memoria para las primeras ramas del árbol \aprioriL completo y desde entonces no habrá reserva ni destrucción de memoria. El efecto inicial es un alto consumo de memoria que realmente no será utilizada (la que es evitaba reservar a la hora de generar candidatos por la propiedad \apriori). Sin embargo este consumo de memoria será compensado por dos factores: si una hoja de nuestro árbol \aprioriL reducido queda con \soporte nulo hemos descubierto una \emph{Regla de Asociación Negativa}, y ahorramos millones de operaciones de búsqueda a cambio de operaciones de cálculo mucho más adaptadas al trabajo de un procesador.
+
+
+
+
+
+
+
+
+%TODO: Esto no va aquí, primero hablar de \catalogos -> comprimidos -> apriori_estático -> L
+En el listado~\ref{alg:apriori-L-completo} se muestra el árbol \aprioriL completo para cualquier almacén \D basado en la clase \{1,2\} y los atributos \{3,4,5\}, \{6,7\}. Son necesarios 127 nodos para representar todas las posibles combinaciones entre los valores 1 y 7.
+
+\afterpage{\clearpage}
+\lstinputlisting[label=alg:apriori-L-completo,
+                 caption={\aprioriL completo},
+                 float=htb,
+                 basicstyle=\scriptsize]
+                 {./contenido/clasificacion/codigo/aprioriLcompleto}
+
+
+Simplemente aplicando la característica\borrar{¿nombre?}\ldots reducimos notablemente el tamaño de \aprioriL, como muestra el listado~\ref{alg:apriori-L-reducido}. Como en un registro no pueden aparecer dos valores de una misma clase o atributo no encontraremos nunca los \itemsets (1,2), (3,4), (3,5), (4,5) y (6,7) por lo que sólo necesitamos 35 nodos para tener la misma información sobre reglas de asociación que contiene la colección de datos que estamos tratando. 
+
+Los
+
+\afterpage{\clearpage}
+\lstinputlisting[label=alg:apriori-L-reducido,
+                 caption={\aprioriL reducido},
+                 float=htb,
+                 basicstyle=\scriptsize]
+                 {./contenido/clasificacion/codigo/aprioriLreducido}
+
+Por último, si observamos\borrar{¿qué?} \ldots vemos que toda la información que se puede guardar en el árbol \aprioriL reducido mostrado en el listado~\ref{alg:apriori-L-reducido} se puede comprimir de modo que sólo sean necesarios 11 nodos, los mostrados en el listado~\ref{alg:apriori-L-compacto}. El árbol \aprioriL compacto se puede expandir con simples cálculos numéricos hasta obtener el árbol \aprioriL completo si fuera necesario obtener todos sus nodos, lo habitual es que sólo queramos obtener el valor almacenado en un nodo del árbol \aprioriL completo y no sea necesario recrear todo el árbol, aunque tenemos la capacidad de obtener toda la información que contiene. Este formato se ha de tener en cuenta a la hora de leer \D.
+
+Al ser de reducido tamaño es fácil transmitir \catalogos comprimidos entre distintos dispositivos, lo que facilitaría su procesamiento por el dispositivo que ha recibido los datos sin necesidad de mayor interacción. Lo que hay que conseguir son estructuras y métodos adecuados para el procesamiento de estos ficheros usando pocos recursos.
+
+En muchos casos el número de nodos del árbol reducido puede ser mayor que el obtenido con el algoritmo original. Sin embargo sólo estamos guardando el \soporte en cada nodo por lo que no guardamos ni el ítem que tiene ese \soporte (8, 16 o 32 \texttt{bits}) ni el puntero a su hermano menor (32 o 64 \texttt{bits}) por lo que el hecho de contener más nodos no garantiza que se necesite más memoria RAM para guardar su contenido. Sustituir búsquedas por cálculos sobre índices reducirá mucho el tiempo de ejecución del algoritmo.
+
+\afterpage{\clearpage}
+\lstinputlisting[label=alg:apriori-L-compacto,
+                 caption={\aprioriL compacto},
+                 float=htb,
+                 basicstyle=\scriptsize]
+                 {./contenido/clasificacion/codigo/aprioriLcompacto}
+
+
+
+
+
+
+
+
+
+
+
+En un fichero con $n$ valores distintos distribuidos en $A$ atributos se parte de un vector inicial de $n - A$ elementos, de los cuales sólo surgirán ramas de los $n_{A_1} - 1$ primeros si estamos ante un problema de \clasificacion.
