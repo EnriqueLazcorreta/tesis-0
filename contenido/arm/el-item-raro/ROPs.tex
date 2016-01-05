@@ -1,0 +1,60 @@
+% !TEX root = ../../../Lazcorreta.Tesis.tex
+\ABIERTO
+
+Las \ROPs son \ARs interpretadas en sentido inverso. Pueden ser útiles cuando aparece el \dilemaIR en nuestra colección de datos. El principal motivo de la aparición de este problema son los recursos de memoria utilizados, si tenemos que guardar mucha información sobre muchos datos podemos llegar a desbordar la memoria del sistema y perder todo el trabajo hecho hasta el momento. Hay muchas propuestas para aliviar este problema, todas ellas buscando perder cierta información que por algún motivo se va a considerar irrelevante a cambio de ganar espacio en memoria para poder analizar otros datos de la colección con información más relevante.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+En un Sistema de Recomendación Web se utiliza
+información sobre taxonomías, contenido
+semántico y uso del portal para hacer sugerencias
+a sus usuarios. Sin embargo cuando un ítem es
+nuevo no puede obtenerse información de su uso
+hasta que no logra un cierto \soporte. Las reglas de
+oportunidad permiten incorporar en el sistema la
+información de uso de los ítems nuevos de modo
+automático.
+
+Las RO contienen los ítems frecuentes que son
+visitados conjuntamente con los ítems sin \soporte
+mínimo. Esto nos permite sugerir un \ir a
+los usuarios que visitan alguna de las páginas que
+más favorecen la presencia de dicho ítem, p.ej. la
+página A.
+
+Si la sugerencia es acertada es de esperar que el
+\ir vaya aumentando su \soporte y se incorpore
+de modo natural al proceso de estudio de
+reglas de asociación, mostrando una asociación
+cada vez más fuerte a la página A.
+
+Si la sugerencia no es acertada el ítem seguirá
+siendo raro y su asociación con la página A se irá
+diluyendo a favor de una asociación con otras
+páginas con las que realmente sea más afín. Esto
+se debe a que el número de veces que aparece el
+\ir en \D es pequeño y cualquier aparición
+nueva del ítem modificará sustancialmente los
+porcentajes en que se basan los algoritmos de
+búsqueda de \ARs y \ROPs.

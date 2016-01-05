@@ -2,7 +2,7 @@
 %% http://bibdesk.sourceforge.net/
 
 
-%% Created for Enrique Lazcorreta Puigmartí at 2016-01-04 22:04:13 +0100 
+%% Created for Enrique Lazcorreta Puigmartí at 2016-01-05 10:32:21 +0100 
 
 
 %% Saved with string encoding Unicode (UTF-8) 
@@ -864,15 +864,15 @@ ISSN 1568-4946},
 	Title = {Integrating Classification and Association Rule Mining},
 	Year = {1998}}
 
-@inproceedings{Liu:Hsu:Ma:ARMWithMultipleMS:1999,
+@inproceedings{LiuHsuMa-ARMWithMultipleMS-1999,
 	Abstract = {Association rule mining is an important model in data mining. Its mining algorithms discover all item associations (or rules) in the data that satisfy the user-specified minimum support (minsup) and minimum confidence (minconf) constraints. Minsup controls the minimum number of data cases that a rule must cover. Minconf controls the predictive strength of the rule. Since only one minsup is used for the whole database, the model implicitly assumes that all items in the data are of the same nature and/or have similar frequencies in the data. This is, however, seldom the case in reallife applications. In many applications, some items appear very frequently in the data, while others rarely appear. If minsup is set too high, those rules that involve rare items will not be found. To find rules that involve both frequent and rare items, minsup has to be set very low. This may cause combinatorial explosion because those frequent items will be associated with one another in all possible ways. This dilemma is called the rare item problem. This paper proposes a novel technique to solve this problem. The technique allows the user to specify multiple minimum supports to reflect the natures of the items and their varied frequencies in the database. In rule mining, different rules may need to satisfy different minimum supports depending on what items are in the rules. Experiment results show that the technique is very effective.},
 	Address = {New York, NY, USA},
 	Author = {Bing Liu and Wynne Hsu and Yiming Ma},
 	Booktitle = {KDD '99: Proceedings of the fifth ACM SIGKDD international conference on Knowledge discovery and data mining},
 	Date-Added = {2014-12-20 09:24:46 +0000},
-	Date-Modified = {2015-05-22 08:40:32 +0000},
+	Date-Modified = {2016-01-05 09:06:39 +0000},
 	Location = {San Diego, California, United States},
-	Note = {\leePDF{bib/citas/LiuHsuMa_ARMWithMultipleMS_1999.pdf} \descarga{http://www.philippe-fournier-viger.com/spmf/MISApriori.pdf}},
+	Note = {\leePDF{bib/citas/LiuHsuMa-ARMWithMultipleMS-1999.pdf} \descarga{http://www.philippe-fournier-viger.com/spmf/MISApriori.pdf}},
 	Pages = {337--341},
 	Publisher = {ACM Press},
 	Title = {Mining association rules with multiple minimum supports},
@@ -899,14 +899,14 @@ ISSN 0020-0255},
 	Bdsk-Url-1 = {http://www.sciencedirect.com/science/article/B6V0C-4VDS8JY-1/2/4832c16c758c95802af049f13cb21478},
 	Bdsk-Url-2 = {http://dx.doi.org/10.1016/j.ins.2009.01.010}}
 
-@article{Palshikar:Kale:Apte:ARMUsingHeavyItemsets:2007,
+@article{PalshikarKaleApte-ARMUsingHeavyItemsets-2007,
 	Abstract = {A well-known problem that limits the practical usage of association rule mining algorithms is the extremely large number of rules generated. Such a large number of rules makes the algorithms inefficient and makes it difficult for the end users to comprehend the discovered rules. We present the concept of a heavy itemset. An itemset $A$ is heavy (for given support and confidence values) if all possible association rules made up of items only in $A$ are present. We prove a simple necessary and sufficient condition for an itemset to be heavy. We present a formula for the number of possible rules for a given heavy itemset, and show that a heavy itemset compactly represents an exponential number of association rules. Along with two simple search algorithms, we present an efficient greedy algorithm to generate a collection of disjoint heavy itemsets in a given transaction database. We then present a modified apriori algorithm that starts with a given collection of disjoint heavy itemsets and discovers more heavy itemsets, not necessarily disjoint with the given ones.},
 	Address = {Amsterdam, The Netherlands, The Netherlands},
 	Author = {Girish K. Palshikar and Mandar S. Kale and Manoj M. Apte},
 	Date-Added = {2014-12-19 18:19:37 +0000},
-	Date-Modified = {2015-05-22 08:39:43 +0000},
+	Date-Modified = {2016-01-05 09:32:20 +0000},
 	Journal = {Data \& Knowledge Engineering},
-	Note = {\leePDF{bib/citas/PalshikarKaleApte_ARMUsingHeavyItemsets_2007.pdf} \descarga{http://dl.acm.org/citation.cfm?id=1228174}},
+	Note = {\leePDF{bib/citas/PalshikarKaleApte-ARMUsingHeavyItemsets-2007.pdf} \descarga{http://dl.acm.org/citation.cfm?id=1228174}},
 	Number = {1},
 	Pages = {93--113},
 	Publisher = {Elsevier Science Publishers B. V.},
@@ -2132,10 +2132,10 @@ El término (del inglés information overload) fue acuñado en 1970 por Alvin To
 	Url = {Wikipedia_SobrecargaInformativa},
 	Bdsk-Url-1 = {Wikipedia_SobrecargaInformativa}}
 
-@techreport{Kiran:Reddy:ImprovedMultipleMSBasedAppMineRareAR:09,
+@techreport{KiranReddy-ImprovedMultipleMSBasedAppMineRareAR-2009,
 	Abstract = {In this paper we have proposed an improved approach to extract rare association rules. Rare association rules are the association rules containing rare items. Rare items are less frequent items. For extracting rare itemsets, the single minimum support (minsup) based approaches like Apriori approach suffer from rare item problem dilemma. At high minsup value, rare itemsets are missed, and at low minsup value, the number of frequent itemsets explodes. To extract rare itemsets, an effort has been made in the literature in which minsup of each item is fixed equal to the percentage of its support. Even though this approach improves the performance over single minsup based approaches, it still suffers from rare item problem dilemma. If minsup for the item is fixed by setting the percentage value high, the rare itemsets are missed as the minsup for the rare items becomes close to their support, and if minsup for the item is fixed by setting the percentage value low, the number of frequent itemsets explodes. In this paper, we propose an improved approach in which minsup is fixed for each item based on the notion of support difference. The proposed approach assigns appropriate minsup values for frequent as well as rare items based on their item supports and reduces both rule missing and rule explosion problems. Experimental results on both synthetic and real world datasets show that the proposed approach improves performance over existing approaches by minimizing the explosion of number of frequent itemsets involving frequent items and without missing the frequent itemsets involving rare items.},
 	Author = {R. Uday Kiran and P. Krishna Reddy},
-	Date-Modified = {2015-05-15 07:58:25 +0000},
+	Date-Modified = {2016-01-05 09:26:46 +0000},
 	File = {:KiranReddy_ImprovedMultipleMSBasedAppMineRareAR_09.236.pdf:PDF},
 	Iddea = {236},
 	Institution = {2009 IEEE Symposium on Computational Intelligence and Data Mining (IEEE CIDM 2009)},

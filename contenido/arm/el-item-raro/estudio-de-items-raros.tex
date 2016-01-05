@@ -1,0 +1,159 @@
+% !TEX root = ../../../Lazcorreta.Tesis.tex
+\ABIERTO
+%El \dilemaIR ha provocado muchas investigaciones~\citep{LiuHsuMa_ARMWithMultipleMS_1999,PalshikarKaleApte_ARMUsingHeavyItemsets_2007}
+
+Los \irs son ítems que por alguna razón no aparecen con frecuencia en las \transacciones. En una cesta de la compra los \irs suelen ser muy caros o duraderos, y también pueden ser novedades que tardarán en ser comprados de forma frecuente. En un \portalWeb los \irs son páginas muy especializadas, de baja calidad o páginas de novedades.
+
+Los ítems exclusivos (por su alto precio, larga durabilidad o especialización) serán siempre \irs aunque se incorporen en un \sr ya que son infrecuentes por naturaleza. Sin embargo, los ítems nuevos deberían ser incorporados a los \srs hasta que alcancen la categoría de ítems frecuentes, momento en el cual ya pueden ser tratados mediante la búsqueda clásica de \ar.
+
+\citet{HanFu-DiscoveryMultipleLevelARFromLargeDB-1995} proponen dividir \D mediante una jerarquía y buscar las \ars tanto entre ítems como entre las categorías en las que sitúan a cada uno de ellos. Con esta estrategia se puede reducir el número de ítems a vincular, cuando se trabaja con \irs se puede ver su relación con otros ítems mediante la categoría a la que pertenecen por lo que todos los ítems pueden estar representados en alguna \ar y se puede redirigir el análisis para estudiar mejor la relación de dichos \irs con el resto de ítems de la población. El procedimiento es correcto pero conlleva análisis específicos y la creación y mantenimiento de la jerarquía propuesta, lo que puede provocar una ralentización del análisis y falta de actualidad si aparecen nuevos ítems en la población y no se realiza en paralelo una correcta jerarquización de los mismos.
+
+
+
+
+
+
+
+\citet{LiuHsuMa-ARMWithMultipleMS-1999} y \citet{PalshikarKaleApte-ARMUsingHeavyItemsets-2007} ponen el énfasis en la distribución de los ítems presentes en \D. La investigación precedente sobre \arm considera una distribución uniforme de los ítems de \D, lo que no es correcto en la mayoría de las ocasiones y produce una gran cantidad de reglas de asociación que no aportan información de calidad sobre las relaciones reales existentes entre los ítems de \D. Esa información de baja calidad presenta otro problema: no deja suficientes recursos para analizar otra información de mayor calidad pero menor presencia en la \db. Para resolver esto proponen el uso de \soportes mínimos múltiples en lugar del clásico \soporte mínimo único, de modo que los ítems con mayor \soporte en \D necesiten más evidencias para mostrar relaciones entre sí que los ítems con poca presencia, a los que los algoritmos clásicos simplemente ignoran considerándolos \irs.
+
+ % \input{algoritmo/alg_MSApriori}
+ %
+ % Proponen el algoritmo \ac{MSApriori} (ver algoritmo~\ref{alg:MSApriori}) que es una modificación de Apriori en que se considera el \soporte particular de cada ítem ($MIS$). Para determinar el $MIS$ de cada ítem proponen su asignación por parte del analista o bien el uso de la distribución de frecuencias de los ítems presentes en \DD.
+
+
+
+
+
+
+%TODO: Sección 2.3 (Abarcar más ítems raros prescindiendo de los frecuentes)
+% \citet{GrothRoberston-DiscoveringFrequentItemsets-2001} inciden en la gran cantidad de reglas de asociación descubiertas por los algoritmos expuestos y la necesidad de aplicarles técnicas de \ARM para extraer conocimiento comprensible por los analistas. En vez de centrarse en la identificación de \itemsets no frecuentes para evitar su estudio proponen técnicas que, partiendo del algoritmo \apriori, excluyen del estudio los \itemsets que sabemos que serán frecuentes. Proponen el algoritmo \algoritmo{RangeApriori} que se diferencia de \apriori en la generación de 2-candidatos (ver algoritmo~\ref{alg:RangeApriori}) donde se obtienen todos los \itemsets con \soporte superior a $s_1$ pero inferior a $s_2$ al que denominan \textsl{nivel máximo de \soporte}. A partir de este nivel no modifican \apriori pues sólo proporciona \itemsets derivados de los \kitemsets[2] frecuentes encontrados.
+%
+% % % \afterpage{\clearpage
+%            \lstinputlisting[label=alg:RangeApriori,
+%                             caption={Algoritmo {RangeApriori} (generación de 2-candidatos), 2001},
+%                             float=htb,
+%                             basicstyle=\scriptsize]
+%                             {./2_ARM/codigo/alg_RangeApriori}
+% % % }
+%  % \input{algoritmo/alg_RangeApriori}
+
+
+
+
+
+%TODO: Sección 2.3
+ % \citet{KourisMakrisTsakalidis-AnImprovedAlgorithmForMARUsingMSValues-2003} proponen el uso de múltiples \soportes mínimos mediante un algoritmo obtenido a partir de las ideas presentadas con los algoritmos \ac{DIC} y \ac{MSApriori}.
+
+
+
+
+
+
+%TODO: Sección 2.3
+ % \citet{Hu-AnEffAlgForDiscAndMaintFPWithMMS-2003} presenta una nueva estructura, MIS-Tree, para guardar la información más relevante sobre los \itemsets frecuentes que contenga \DD. Utilizando múltiples \soportes mínimos propone el algoritmo CFP-Growth que, según sus experimentos, es más eficiente que \ac{MSApriori}. Con otro algoritmo que propone para mantener el MIS-Tree se puede ajustar el \soporte mínimo de los ítems sin volver a generarlo.
+ %
+
+
+
+
+
+
+ % \citet{ZhangLuZhang-FuzzyLogicBased-2004} abordan el problema de determinar un \soporte mínimo para una \db de la que no tenemos información y proponen un algoritmo que resuelve esta común situación utilizando lógica difusa, de modo que el \soporte mínimo no lo decide el analista si no la propia distribución de \DD.
+
+
+
+
+ % \citet{LeeHongLin-MiningAR-2005} presentan un algoritmo basado en Apriori que permite que cada ítem tenga su propio \soporte mínimo, en lugar de trabajar con un sopote mínimo común a todos los ítems.
+
+
+
+
+ %TODO: Sección 2.3
+ % \citet{HuChen-MiningAR-2006} presentan en un artículo el trabajo de \citet{Hu-AnEffAlgForDiscAndMaintFPWithMMS-2003}.
+
+
+
+
+
+
+
+
+%Para abordar el problema del \ir~
+\cite{LiuHsuMa-ARMWithMultipleMS-1999} proponen usar múltiples \soportes, de modo que la relación
+entre dos ítems frecuentes sea considerada sólo si es una relación muy frecuente en \D. De este modo se alivia considerablemente la carga de memoria requerida por el algoritmo y permite abordar el estudio sobre un número mayor de ítems. La asignación de \soporte a cada ítem puede hacerse por parte del analista o bien teniendo en cuenta el propio \soporte de cada ítem en \D. En~\cite{KiranReddy-ImprovedMultipleMSBasedAppMineRareAR-2009} se propone una modificación interesante del algoritmo propuesto por~\cite{LiuHsuMa-ARMWithMultipleMS-1999}, incorporando al estudio medidas de tendencia de los ítems de \D.
+
+Con la primera propuesta de~\cite{LiuHsuMa-ARMWithMultipleMS-1999} se pueden incorporar los ítems nuevos asignándoles un \soporte
+mínimo muy bajo mientras sean nuevos, sin embargo el analista debe decidir en algún momento cuándo debe modificar su \soporte mínimo y qué nuevo \soporte asignarle.
+
+En las restantes propuestas el \soporte mínimo se obtiene en función del \soporte real del ítem, con lo que muchos \irs se incorporan al sistema con facilidad, sin embargo siguen quedando muchos ítems sobre los que no obtenemos información pues si intentamos incorporarlos al estudio se detiene la ejecución del algoritmo por falta de recursos. Además las reglas que proporcionan siempre sugieren una relación entre un \ir como \antecedente y uno que no lo es como \consecuente, lo que en un \sr no es práctico porque se usaría únicamente cuando el usuario solicite un \ir, lo que ocurre en muy pocas ocasiones dada la naturaleza del ítem solicitado.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\borrar{Lo que queda de sección no está formateado}
+
+candidatos
+a considerar que haría abortar la ejecución
+del algoritmo por falta de recursos.
+
+Input: D, sm (\soporte mínimo) y om (oportunidad mínima)
+
+Output: RO (\ROPs) y RA (\ARs) presentes en D
+
+/* Obtener frecuencia de todos los ítems y 2-itemsets de \D */
+
+foreach \transaccion Ti en D
+
+foreach i1 en Ti {
+
+Incrementa(FP1[i1]);
+
+foreach (i1; i2) en Ti
+
+Incrementa(FP1[i1]->FP2[i2]);
+
+}
+
+/* Extraemos las RO */
+
+foreach i1 en FP1
+
+if (FP1[i1] >= sm) then
+
+foreach i2 en FP1[i1]->FP2
+
+if (FP1[i2] < sm y FP2[i2]/FP1[i2]
+>= om) then
+
+Añadir RO(it1  it2);
+
+Algoritmo 1: ORFind - Algoritmo de búsqueda de
+Reglas de Oportunidad
+
+Al aplicar el algoritmo clásico tras la ejecución del
+algoritmo 1 a los repositorios T10I4D100K,
+T40I10D100K y kosarak hemos obtenido información
+de interés sobre todos los ítems de cada repositorio
+en un tiempo inferior al empleado con la
+implementación de las propuestas de [10] y [11].
+
+Las reglas de asociación obtenidas entre ítems
+frecuentes tienen el suficiente \soporte como para
+ser utilizados como patrones de comportamiento
+del colectivo estudiado. Las reglas de oportunidad
+obtenidas vinculan los ítems infrecuentes a los
+frecuentes, permitiendo a un sistema de recomendación
+saber cuál es el momento más oportuno
+para recomendar un ítem infrecuente de cuyo uso
+no tenemos aún información suficiente.

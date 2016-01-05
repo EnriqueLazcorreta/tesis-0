@@ -1,0 +1,29 @@
+forall large itemsets $l_k, k \geq 2$ do
+  $supp\_l\_k =$ support($l_k$);
+  call genrules($l_k$, $l_k$, $supp\_l\_k$);
+
+// The genrules generates all valid rules $\tilde{a}\Rightarrow(l_k - \tilde{a})$,
+// for all $\tilde{a} \subset a_m$
+procedure genrules($l_k$: large $k$-itemset,
+                   $a_m$: large $m$-itemset,
+                   $supp\_l\_k$: double)
+x)  static a_m_processed; // set containing the sets of $l_k$ processed
+                          // in previous  calls to genrules
+x)  if ($m == k$)
+x)    a_m_processed.clear(); // Initialize a_m_processed for each new $l_k$
+1)    $A = \{(m-1){\rm -itemsets}\  a_{m-1} \ | \ a_{m-1} \subset a_m\}$;
+2)    forall $a_{m-1} \in A$ do begin
+x)      if $a_{m-1} \in$ a_m_processed then
+x)        continue;
+x)      a_m_processed.add($a_{m-1}$);
+3)      $conf = support\_l\_k$/support($a_{m-1}$);
+4)      if ($conf \geq minconf$) then begin
+7)        output the rule $a_{m-1} \Rightarrow (l_k - a_{m-1})$,
+              with confidence = $conf$ 
+                  and support = support($l_k$);
+8)      if ($m - 1 > 1$) then
+9)        call genrules($l_k$, $a_{m-1}$, $supp\_l\_k$); // to generate rules with
+                                            // subsets of $a_{m-1}$ as the
+                                            // antecedents
+10)   end
+11) end

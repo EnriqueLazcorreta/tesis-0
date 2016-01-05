@@ -1,17 +1,6 @@
 % !TEX root = ../../Lazcorreta.Tesis.tex
 % \ABIERTO%
-Una vez resuelta la fase de \fim se utiliza el conjunto \aprioriL de \itemsets frecuentes para obtener las \ARs que contiene el almacén de transacciones \D. Ya tenemos todos los \itemsets cuyo \soporte sea superior al mínimo prefijado, $minSup$, pero aún no tenemos las \ARs, para ello hemos de recorrer todo \aprioriL, de cada uno de los \itemsets frecuentes que contiene obtener todas sus particiones en dos subconjuntos no vacíos y comparar la \confianza de las dos reglas que genera con el umbral mínimo establecido para el estudio, $minConf$.
-
-\apriori es un algoritmo hermoso, sencillo y moldeable, de ahí la atención que ha recibido por parte de la comunidad científica. Está descrito de un modo muy general por lo que se puede modificar con facilidad cualquiera de sus partes sin perder su esencia. La mayoría de los trabajos expuestos en la sección~\ref{sec:2-2-FIM} y de los que mostraremos en la sección~\ref{sec:2-4-ElItemRaro} se centran en mejorar la primera fase de este algoritmo, la \fim, debido a su gran necesidad de recursos y de procesos de lectura/escritura en disco. Si leemos con atención el párrafo anterior podremos ver que la fase de generación de \ars también tiene mucha carga de procesos:
-
-\begin{enumerate}
-  \item Hemos de leer cada \itemset frecuente de \aprioriL, lo que se conseguirá mediante un simple bucle que recorra todos sus nodos.
-  \item Cada \itemset se divide en un par de subconjuntos no vacíos, $X_1$ y $X_2$, que serán el antecedente y consecuente de dos \ARs diferentes, $X_1 \rightarrow X_2$ y $X_2 \rightarrow X_1$.
-  \item Para obtener la \confianza de cada regla hemos de buscar en \aprioriL el \soporte de $X_1$ y de $X_2$, calcular su cociente y determinar si tienen o no confianza mínima.
-\end{enumerate}
-
-Los dos primeros pasos son elementales, sin embargo el paso 3 es más complejo de lo que parece a simple vista. Para encontrar el \soporte de cada \kitemset hemos de hacer $k$ búsquedas en \aprioriL. Primero hemos de localizar en \aprioriL[1] el nodo que representa a su primer ítem, una vez encontrado entramos en la rama que se deriva de él y localizar en \aprioriL[2] el nodo que representa a su segundo ítem, siguiendo el proceso hasta localizar su $k$-ésimo ítem en \aprioriL[k]. Aunque usemos algoritmos de búsqueda eficiente en cada rama tenemos que hacer cientos de comparaciones para encontrar en \aprioriL cada uno de los \itemsets obtenidos en el paso 2, lo que nos hizo pensar que es una fase en la que podría aplicar alguna optimización.
-
+\input{./contenido/arm/generacion-ar/introduccion}
 
 
 
@@ -61,14 +50,14 @@ Los dos primeros pasos son elementales, sin embargo el paso 3 es más complejo d
 
 
 \subsection{\texttt{genrules()}}
-\label{sec:2-2-1-genrules}
-%\input{./2-ARM/2-3-GeneracionDeAR/2-3-1-genrules}
+\label{sec:arm:ar:genrules}
+\input{./contenido/arm/generacion-ar/genrules}
 
 
 
 \subsection{Apriori2}
-\label{sec:2-2-2-Apriori2}
-%\input{./2-ARM/2-3-GeneracionDeAR/2-3-2-Apriori2}
+\label{sec:arm:ar:apriori2}
+\input{./contenido/arm/generacion-ar/apriori2}
 
 
 

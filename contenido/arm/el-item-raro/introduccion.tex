@@ -1,0 +1,9 @@
+% !TEX root = ../../../Lazcorreta.Tesis.tex
+% \ABIERTO%
+Desde la irrupción de la informática en pequeñas y grandes empresas se guarda en \dbs todo tipo de información, entre otra las \transacciones que modelan la cesta de la compra o las \sns de un usuario a través de un \portalWeb. El volumen de datos almacenados crece a diario por lo que su análisis inicial se realiza con técnicas como la \arm, capaces de extraer información sobre la coexistencia de ítems en grandes colecciones de datos.
+
+El uso de \soporte mínimo mediante \arm permite abordar el problema sobre grandes \dbs con la tecnología actual pero impide obtener información sobre una gran cantidad de los ítems en estudio, ítems que tiene menor \soporte del fijado como mínimo para ser estudiados por lo que se denominan \irs.
+
+El \dilemaIR ha sido estudiado por muchos investigadores para obtener reglas de asociación que involucren a ítems poco frecuentes, sin embargo todas las propuestas realizadas sobrecargan las tareas del algoritmo usado y de sus analistas y no aportan reglas de uso frecuente. En la sección~\ref{sec:arm:items-raros} expondremos estas propuestas.
+
+En la sección~\ref{sec:arm:ROP} se introducen las \ROPs, que permiten a los algoritmos de búsqueda de reglas de asociación encontrar simultáneamente información de interés sobre los ítems que no superen el \soporte mínimo con un consumo mínimo de recursos, sin intervención de los analistas y aportando conocimiento útil. Con esta propuesta conseguimos aliviar parte del problema generado por el \dilemaIR.

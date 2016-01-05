@@ -1,0 +1,57 @@
+\documentclass{standalone}
+\usepackage[svgnames]{xcolor}
+\usepackage{tikz}
+\usepackage{times}
+
+\begin{document}
+% T10I4D100K  0.5\%
+\begin{tikzpicture}[scale=.35]
+   %ejes
+   \draw (-0.1,0) -- (10,0);
+   \draw (0,-0.1) -- (0,10);
+   \draw[help lines,step=1cm] (0.1,0.1) grid (9.9,9.9);
+   %marcas eje X
+   \draw (5cm,-35pt) node {\tiny $minConf$};
+   \draw (0cm,1pt) -- (0cm,-1pt) node[anchor=north] {\tiny 0};
+   \draw (.5cm,1pt) -- (.5cm,-1pt) node[anchor=north] {\tiny 5};
+   \draw (2.5cm,1pt) -- (2.5cm,-1pt) node[anchor=north] {\tiny 25};
+   \draw (5cm,1pt) -- (5cm,-1pt) node[anchor=north] {\tiny 50};
+   \draw (7.5cm,1pt) -- (7.5cm,-1pt) node[anchor=north] {\tiny 75};
+   \draw (9cm,1pt) -- (9cm,-1pt) node[anchor=north] {\tiny 90};
+   %marcas eje Y
+   \draw (-90pt,5 cm) node[rotate=90] {\tiny \# transacciones};
+   \draw (1pt,0 cm) -- (-1pt,0 cm) node[anchor=east] {\tiny 0};
+   \draw (1pt,1.4498 cm) -- (-1pt,1.4498 cm) node[anchor=east,yshift=-1pt] {\tiny 14\,498};
+   \draw (1pt,1.9805 cm) -- (-1pt,1.9805 cm) node[anchor=east,yshift=-1pt] {\tiny 19\,805};
+   \draw (1pt,2.5 cm) -- (-1pt,2.5 cm) node[anchor=east,yshift=-1pt] {\tiny 23\,493};
+   \draw (1pt,4.9301 cm) -- (-1pt,4.9301 cm) node[anchor=east,yshift=-1pt] {\tiny 49\,301};
+   \draw (1pt,6.0618 cm) -- (-1pt,6.0618 cm) node[anchor=east,yshift=1.5pt] {\tiny 60\,618};
+   \draw (1pt,10.0000 cm) -- (-1pt,10.0000 cm) node[anchor=east] {\tiny 100\,000};
+   %líneas
+   \draw[color=red,style=dotted,double] plot[mark=ball] coordinates {
+      (  0,10.0000)
+      % ( .1,10.0000)
+      ( .5,10.0000)
+      (2.5,10.0000)
+      (5.0,10.0000)
+      (7.5,10.0000)
+      (9.0,10.0000)
+   };
+   \draw[color=Aqua,style=solid] plot[mark=ball] coordinates {
+      (  0,6.0618)
+      ( .5,6.0618)
+      (2.5,4.9301)
+      (5.0,2.3493)
+      (7.5,1.9805)
+      (9.0,1.4498)
+   };
+   %leyenda
+   \draw[rounded corners=1ex] (7.5,7.5) rectangle (10,9.5);
+   \draw (9.5,9) node(a) {\tiny$\mathcal{D}$};
+   \draw (9.5,8) node(a) {\tiny$\mathcal{R}$};
+   \draw[color=red,style=dotted,double] (7.9,9) -- (8.9,9) plot[mark=ball] coordinates {(8.4,9)};
+   \draw[color=red,style=dotted] plot coordinates {(7.9,9) (8.9,9)};
+   \draw[color=Aqua,style=solid] (7.9,8) -- (8.9,8) plot[mark=ball] coordinates {(8.4,8)};
+\end{tikzpicture}
+
+\end{document}

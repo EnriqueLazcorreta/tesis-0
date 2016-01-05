@@ -1,0 +1,50 @@
+\documentclass[tikz]{standalone}
+\usepackage{times}
+
+\begin{document}
+
+\begin{tikzpicture}[xscale=.35, yscale=.47]
+   \pgftransformxshift{-5cm}
+   \tiny
+   
+   %ejes
+   \draw (-0.1,0) -- (10,0);
+   \draw (0,-0.1) -- (0,11);
+   \draw[help lines,step=1cm] (0.1,0.1) grid (9.9,10.9);
+   
+   %marcas eje X
+   \draw (5cm,-35pt) node {$minConf$};
+   \draw (0cm,1pt) -- (0cm,-1pt) node[anchor=north] { 0};
+   \draw (.5cm,1pt) -- (.5cm,-1pt) node[anchor=north] {5};
+   \draw (2.5cm,1pt) -- (2.5cm,-1pt) node[anchor=north] {25};
+   \draw (5cm,1pt) -- (5cm,-1pt) node[anchor=north] {50};
+   \draw (7.5cm,1pt) -- (7.5cm,-1pt) node[anchor=north] {75};
+   \draw (9cm,1pt) -- (9cm,-1pt) node[anchor=north] {90};
+   
+   %marcas eje Y
+   \draw (-80pt,5 cm) node[rotate=90] {milisegundos};
+   \draw (1pt,0 cm) -- (-1pt,0 cm) node[anchor=east] {0};
+   
+   %Original
+   \draw (1pt,3.547 cm) -- (-1pt,3.547 cm) node[anchor=east,color=red,yshift=1pt] {3\,547};
+   \draw (1pt,6.250 cm) -- (-1pt,6.250 cm) node[anchor=east,color=red] {6\,250};
+   \draw (1pt,10.562 cm) -- (-1pt,10.562 cm) node[anchor=east,color=red] {10\,562};
+   
+   %Modificado
+   \draw (1pt,3.047 cm) -- (-1pt,3.047 cm) node[anchor=east,color=blue] {3\,047};
+   \draw (1pt,4.766 cm) -- (-1pt,4.766 cm) node[anchor=east,color=blue] {4\,766};
+   \draw (1pt,6.938 cm) -- (-1pt,6.938 cm) node[anchor=east,color=blue] {6\,938};
+   
+   %líneas
+   \draw[color=red,style=solid] plot[mark=ball] coordinates {(0,10.562) (.5,6.234) (2.5,6.250) (5.0,5.594) (7.5,3.687) (9.0,3.547)};
+   \draw[color=blue,style=solid] plot[mark=x] coordinates {(0,6.938) (.5,4.734) (2.5,4.766) (5.0,4.407) (7.5,3.156) (9.0,3.047)};
+   
+   %leyenda
+   \draw[rounded corners=1ex] (4,7.7) rectangle (9.5,9.7);
+   \draw (5.4,9.2) node[anchor=west](a) {original};
+   \draw (5.4,8.2) node[anchor=west](b) {modificado};
+   \draw[color=red,style=solid] (4.4,9.2) -- (5.4,9.2) plot[mark=ball] coordinates {(4.9,9.2)};
+   \draw[color=blue,style=solid] (4.4,8.2) -- (5.4,8.2) plot[mark=x] coordinates {(4.9,8.2)};
+\end{tikzpicture}
+
+\end{document}
