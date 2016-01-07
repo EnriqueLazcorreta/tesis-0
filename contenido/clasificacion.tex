@@ -1,35 +1,13 @@
 % !TEX root = ../Lazcorreta.Tesis.tex
-\ABIERTO
-
-%Los trabajos expuestos en los capítulos anteriores muestran una dificultad presente en muchas investigaciones en el ámbito de la informática, la imposibilidad de comprobar si los resultados obtenidos son correctos y aplicables con la tecnología actual. Todas las Ciencias recogen una Teoría que la sustenta, la Informática también, pero las demostraciones teóricas basadas en otras Ciencias no siempre son válidas para la Informática. Hay muchos artículos teóricos sobre Minería de Datos, pero algunos de ellos no evolucionan en un artículo posterior que muestre cómo se ha realizado el experimento con la tecnología actual usando datos reales.
-%
-%Es fácil calcular teóricamente el número de reglas de asociación presente en una colección concreta de datos, pero si el algoritmo propuesto no es capaz de almacenar en RAM todas las reglas de asociación del problema no servirá de nada ese algoritmo en esa situación. \texttt{mushroom} fue el primer caso que encontré curioso en el ambicioso campo de la Minería de Datos, una colección de tan solo 5\,644 registros de 23 valores que sólo contenía 100 valores diferentes no podía ser analizada a fondo por el mejor algoritmo de ARM que conozco, Apriori, cuando el número de transacciones distintas que se puede obtener bajo estas circunstancias es X\,XXX\,XXX y con ellas tenemos un máximo de X\,XXX\,XXX\,XXX\,XXX reglas de asociación. La tecnología actual de un equipo de escritorio no puede gestionar en RAM tanta información, pero me negaba a creer que no se pudiera extraer \emph{toda la información} que contuviera un problema tan pequeño. Al profundizar en \texttt{mushroom} y los artículos que lo mencionaban y otras colecciones de datos que encontré publicadas en los mismos portales encontré un modo de indicar al algoritmo de ARM que estoy tratando con un tipo de colecciones de datos especial. No es simplemente una colección de transacciones como las analizadas en~\ref{sec:arm:conceptos-basicos} si no que éstas tienen unas restricciones muy fuertes en su definición.
-%
-%Este informe refleja el trabajo que he realizado para descubrir lo suficiente como para ser merecedor del título de doctor en Informática. Los anteriores capítulos reflejan una gran labor de documentación y exposición científica de los resultados que podía obtener con colecciones de datos fijas, no disponía de un servidor capaz de poner a prueba nuestras aportaciones y realizar sugerencias en tiempo real a un gran número de usuarios. Podía comprobar que mis cálculos se podían realizar con la tecnología actual y las colecciones de datos que yo manejaba pero no sabía qué ocurriría si aumentaran mis colecciones de datos o si pudiera realizar sugerencias en tiempo real. Es un buen trabajo teórico apoyado en algunas realizaciones prácticas pero del que no puedo extraer aún la conclusión que es un buen trabajo de investigación en Informática.
-
-Uno de los problemas de la búsqueda de \ars mediante equipos informáticos es su necesidad de memoria RAM para guardar todos los \itemsets frecuentes (\aprioriL) en un lugar de rápido acceso para ser más eficientes en la búsqueda de \ars. El \dilemaIR puede aparecer en cualquier momento, dependiendo de los datos que contenga el almacén \D que estemos analizando, y se siguen proponiendo ideas para aliviarlo como el uso de umbrales automáticos para el \soporte propuesto por~\citet{SadhasivamAngamuthu-MiningRareItemsetWithAutomatedSupportThresholds-2011}. Sería interesante poder averiguar, en base a información básica del fichero \D, qué requisitos de memoria RAM necesitamos, de cuáles disponemos y, con ello, deducir hasta qué \soporte mínimo podemos trabajar con esa colección específica de datos en este equipo en particular. Hay estudios sobre ello [cita sobre \mushroom de gAcademy]. Aunque este proceso puede llevar algo de tiempo (y restar eficiencia global al algoritmo de \FIM) permite ahorrar el tiempo perdido cuando el programa deja de funcionar por falta de RAM y no es capaz de ofrecernos ningún resultado.
-
-%TODO: Reorganizar, algo de esto se menta en el primer párrafo
-%TODO: Ojo, el enlace queda en un salto de página y afecta a la cabecera de la siguiente página. COMPROBARLO EN LA VERSIÓN FINAL
-Esta reflexión nos llamó la atención en ficheros tan "`pequeños"' como \mushroom o \texttt{chess.dat}. \mushroom es una colección de datos ampliamente utilizada debido a su publicación en \urlConNotaAlPie{https://archive.ics.uci.edu/ml/datasets/Mushroom}{UCI - Machine Learning Repository}, donde podemos encontrar una completa descripción de los datos en sí y de su aparición en el mundo de la investigación. Encontramos información sobre el uso de este almacén \D en artículos de \clasificacion.
-
-%TODO: Revisar esta información
-La Minería de Reglas de \Clasificacion (CRM) toma pronto las bondades de la Minería de Reglas de Asociación (ARM) derivando en una nueva línea de investigación en auge denominada Minería de Reglas de Clasificación Asociativa (CARM) ~\citep{LiuHsuMa-IntegratingClassificationAndARM-1998, Bayardo-EfficientlyMiningLongPatternsFromDB-1998, WangXinCoenen-MiningEfficientlySignificantCAR-2008} donde se aprovecha el potencial que tienen las \ars para descubrir clasificadores precisos.\borrar{Añadir más citas}
-
-%TODO: Añadir ZakiPetersAssentSeidl_Clicks_06 y Ziani:Ouinten:MiningMaximalFIJavaImplOfFPMAXalgorithm:09 (dea.bib) 
-Estos ficheros han sido analizados en muchos artículos desde el punto de vista de la \arm clásica~\citep{Suzuki-DiscoveringInterestingExceptionRulesWithRulePair-2004, Borgelt-EfficientImplementationsOfAprioriAndEclat-2004, ThabtahCowlingHammoud-ImprovingRuleSorting-2006, WangXinCoenen-MiningEfficientlySignificantCAR-2008, LiZhang-MiningMaximalFIOnGraphicsProcessors-2010, MalikRaheja-ImprovingPerformanceOfFrequentItemsetAlgorithm-2013, RituArora-IntensificationOfExecutionOfFrequentItemSetAlgorithms-2014, SahooKumarGoswami-AnAlgorithmForMiningHighUtilityClosedItemsetsAndGenerators-2014}. Se proponen nuevas medidas, como la \emph{utilidad} de los \itemsets~\citep{WuShie-MiningTopKHighUtilityItemsets-2012} para aliviar el \dilemaIR. En todos los casos se ha de recurrir al \soporte mínimo para poder llevar a cabo el análisis en un tiempo prudencial (algo más de 2 segundos en el caso de~\citeauthor{RituArora-IntensificationOfExecutionOfFrequentItemSetAlgorithms-2014}, un estudio muy reciente cuyos gráficos coinciden con los de~\citeauthor{MalikRaheja-ImprovingPerformanceOfFrequentItemsetAlgorithm-2013}). Intentamos aplicar técnicas de \dm a colecciones relativamente pequeñas (\mushroom sólo contiene $8\,124 \times 23$ datos) y no podemos profundizar o trabajar en tiempo real si no aplicamos recortes drásticos de información. Hoy en día, almacenes \D de este tamaño deberían poder analizarse en tiempos razonables sin prescindir de ninguno de sus datos.
-
-La Minería de Reglas de Clasificación Asociativa (CARM) transforma los datasets que han de ser analizados desde la perspectiva de CRM para que puedan ser vistos como conjuntos de transacciones y hacer un análisis basado en ARM. Para ello convierten los valores utilizados en CRM, formado por pares atributo=valor, en atributos binarios que tendrán el significado ``Si aparece el atributo binario X entonces el registro toma el valor Y en el atributo original $\A_i$''. Ha habido grandes avances en \Clasificacion gracias a esta pequeña transformación, sin embargo también se ha perdido información muy importante sobre el dataset en estudio, que no será aprovechada si no la incorporamos a la colección de transacciones que queremos analizar con ARM.\borrar{Mejorar}
-
-Antes de obtener información sobre \mushroom comenzamos a analizar los resultados obtenidos en nuestros propios experimentos sobre este almacén \D. Al observarlos encontramos una estructura concreta: todas las filas ("`\transacciones"') tienen el mismo número de datos y en la primera columna sólo aparece un 1 o un 2, en la segunda sólo un 3, 4 o 5\ldots Se trata de una estructura muy rígida y con exceso de información. Al descubrir que el 1 aparecía en X\,XXX \transacciones dedujimos que el 2 aparecería en las restantes 8\,124 - X\,XXX. En el proceso de \fim estábamos desperdiciando esta información y nos entreteníamos en contar el número de veces que aparecía el ítem 2. También descubrimos que el ítem 3 aparecía en un total de Y\,YYY \transacciones, en Z\,ZZZ ocasiones junto al ítem 1, luego en las restantes Y\,YYY - Z\,ZZZ veces que aparece ha de estar junto al ítem 2. No necesitamos averiguar nada sobre el ítem 2, lo que averigüemos sobre el ítem 1 nos dará toda la información que tiene \D sobre el ítem 2. No necesitamos utilizar memoria RAM para guardar información sobre el ítem 2, tendremos memoria RAM libre para analizar los \irs más frecuentes de \D.
-
-Tras llevar a cabo la investigación que se expone en este capítulo podemos afirmar que, aunque todas las citas usadas en los párrafos anteriores han experimentado con \mushroom para aliviar su \dilemaIR, \mushroom y muchas colecciones de datos de similares características realmente no contienen \IRs.
+\label{sec:clasificacion:conceptos-basicos}
+\input{contenido/clasificacion/introduccion}
 
 
-\cite{Lichman-UCI-2013} ponen a disposición de investigadores una buena colección de datos. Con ellos podemos probar nuestras propuestas y, lo que es más importante, hacer comparaciones con otros trabajos ya publicados, en situaciones similares y con los mismos datos. Aunque esto no siempre es así, muchos de los experimentos relatados en la amplia bibliografía de esta tesis han usado aparentemente los mismos datos pero al profundizar en ellos observamos pequeñas diferencias que pueden alterar los resultados de las comparaciones llevadas a cabo. En la sección~\ref{sec:clasificacion:datos-missing} mostraremos un caso en el que los autores modifican los datos originales, lo que nos llevó a experimentar con dos datasets distintos diseñados para el mismo problema de \clasificacion y nos permitió llegar a conclusiones interesantes que de otro modo quizá no habríamos descubierto.
 
 
- % \citet{Freitas:UnderstandingDiffBetweenClassifAndDiscoveryOfAR:00} muestran las diferencias existentes entre \ac{ARM} y la tarea de \clasificacion. El debate se debe a que muchas de las investigaciones sobre \ac{ARM} presentan sus resultados como si se tratara de tareas de \clasificacion cuando en realidad no son tales. Estas diferencias nos permiten ver analogías existentes entre ambas tareas que permiten una adaptación de la información extraída de los algoritmos de búsqueda de reglas de asociación para la tarea de \clasificacion, como muestran \citet{Liu:Hsu:Ma:IntegratingClassAndARM:98} en su artículo. La primera diferencia que destacan es a nivel sintáctico: las reglas de asociación muestran en su \consecuente un conjunto de ítems mientras que la tarea de \clasificacion sólo debe mostrar como \consecuente la clase a la que pertenece el individuo (transacción) en estudio. Otra diferencia es la simetría respecto a los elementos incluidos en \antecedente y \consecuente, las reglas de asociación son simétricas si sólo nos fijamos en que tanto \antecedente como \consecuente están formados por ítems (atributos), mientras que en \clasificacion el \antecedente lo forman ítems y el \consecuente es siempre una clase de pertenencia. En consecuencia, las reglas de asociación deben ser del tipo $X\rightarrow y$, donde $X$ es un conjunto de ítems (atributos y no clases) e $y$ es la clase a la que pertenece la transacción que contiene $X$, para poder ser utilizadas en tareas de \clasificacion. Esto no parece suficiente para los autores debido al modo de operar de los algoritmos de \clasificacion: en una primera fase de entrenamiento se encuentran las reglas de \clasificacion entre individuos previamente clasificados, lo que constituye información del ``pasado'' de la población en estudio, mientras que la segunda fase se utiliza para clasificar los individuos del ``presente'' o ``futuro'' según las reglas encontradas en la primera fase. En \ac{ARM} no existe \clasificacion previa ni entrenamiento, y todos los individuos en estudio pertenecen a una misma cohorte, el ``presente'', que en muchas situaciones pretende ser utilizado para inferir las reglas que se cumplirán en el ``futuro''. Esto nos lleva a pensar que el uso de reglas de asociación en tareas de \clasificacion puede realizarse si existe una transformación adecuada de la información obtenida en el proceso de \ac{ARM} -- relaciones existentes entre los ítems de un conjunto de transacciones -- en la información necesaria para clasificar los individuos en estudio -- clases de pertenencia y reglas de \clasificacion.
+\section{Transacciones Tipo II}
+\label{sec:catalogos:transacciones-tipo-ii}
+\input{contenido/clasificacion/transacciones-tipo-ii}
 
 
 
@@ -41,8 +19,6 @@ Tras llevar a cabo la investigación que se expone en este capítulo podemos afi
 
 
 
-
-
 \section{\Catalogo}
 \label{sec:clasificacion:catalogo}
 \input{contenido/clasificacion/catalogo}
@@ -50,28 +26,9 @@ Tras llevar a cabo la investigación que se expone en este capítulo podemos afi
 
 
 
-
-
-
-
-
-\section{\Catalogo Comprimido}
-\label{sec:catalogos:catalogo-comprimido}
-\input{contenido/clasificacion/catalogo-comprimido}
-
-
-
-
-
-
-
-
-
 \section{\CC}
 \label{sec:clasificacion:catalogo-completo}
 \input{contenido/clasificacion/catalogo-completo}
-
-
 
 
 
@@ -84,23 +41,6 @@ Tras llevar a cabo la investigación que se expone en este capítulo podemos afi
 
 
 
-
-\section{Flujos de Datos}
-\label{sec:clasificacion:flujos-de-datos}
-\input{contenido/clasificacion/flujos-de-datos}
-
-
-
-
-
-
-
 \section{Publicaciones}
 \label{sec:clasificacion:publicaciones}
 \input{contenido/clasificacion/publicaciones}
-
-
-
-
-
-

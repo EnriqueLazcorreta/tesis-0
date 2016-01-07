@@ -1,13 +1,14 @@
 % !TEX root = ../../Lazcorreta.Tesis.tex
-\ABIERTO
-Al seguir trabajando con \mushroom encontramos otra versión del mismo dataset en KEEL
+%\ABIERTO
+Al seguir trabajando con \mushroom encontramos otra versión del mismo dataset en KEEL\footnote{\url{http://sci2s.ugr.es/keel/dataset.php?cod=178}}, ésta con 5\,644 registros debido a que se eliminaron los registros con datos missing. Este detalle nos hizo pensar en la información que puede aportar un dato desconocido: ninguna. El criterio de eliminación de registros con datos missing parece correcto pero ¿debemos prescindir de la información que puede aportar al estudio los valores recogidos en todos los registros eliminados? ¿Es posible que eliminando esos registros cambie la información que proporcionan los datos al estudio? En la sección~\ref{sec:clasificacion:datos-missing} estudiaremos más a fondo esta circunstancia y ofreceremos resultados interesantes proporcionados por los datos que estamos manejando.
 
-http://sci2s.ugr.es/keel/dataset.php?cod=178
 
+
+Para la siguiente definición necesito aclarar antes (con la notación de H. León si es posible) qué es un registro-tipo, luego indicar que el \catalogo es \CC si un registro-tipo apunta sólo a una clase.
 
 \borrar{Necesito definir antes conjuntoDeValoresDeAtributos, quizá en otra sección.}
 \begin{Definition}[\CC] Un \CC es un \catalogo sin incertidumbre.
-   $$\CC = \left\{registro_i, i = 1\ldots N\ | \ registro_i \neq registro_j \forall i \neq j\right\},  conjuntoValoresAtributos son todos diferentes$$
+   $$\mathcal{CC} = \left\{r_i, i = 1\ldots N\ | \ r_i \neq r_j \forall i \neq j\right\}$$
 \label{def:catalogo-completo}
 \end{Definition}
 
@@ -16,8 +17,10 @@ http://sci2s.ugr.es/keel/dataset.php?cod=178
 
 
 
-\subsection{Colecciones de \CCs}
-\label{sec:clasificacion:catalogo-comprimido:colecciones}
-%\input{contenido/clasificacion/catalogo-comprimido/colecciones}
 
-Todos los \CCs pueden tener un \CC maximal y diversos \CCs de menores dimensiones. Volviendo al origen de esta investigación, disponemos de un dataset\ldots
+
+\subsection{Colecciones de \CCs}
+\label{sec:clasificacion:catalogo-completo:colecciones}
+%\input{contenido/clasificacion/catalogo-completo/colecciones}
+
+Todos los \CCs pueden tener un \CC maximal y diversos \CCs de menores dimensiones. Volviendo al origen de esta investigación, disponemos de un dataset con registros clasificados en el que pueden haber datos missing\ldots 

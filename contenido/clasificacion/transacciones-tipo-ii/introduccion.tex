@@ -1,5 +1,7 @@
 % !TEX root = ../../../Lazcorreta.Tesis.tex
 \ABIERTO
+Cuando trabajamos con un número grande de ítems diferentes yuna gran cantidad de transacciones el dilema del ítem raro sólo esresoluble utilizando mucho tiempo y/o potentes computadores. Loque sorprende es que este dilema aparezca en colecciones de datoscon dimensiones reducidas, como ocurre con los repositoriosutilizados en los trabajos analizados sobre esta temáticadestacando chess y mushroom. [9,10,11].
+
 
 Un \catalogo comprimido contiene en muy poco espacio la misma información que un \catalogo.
 \begin{itemize}
@@ -45,16 +47,16 @@ Los
 
 Por último, si observamos\borrar{¿qué?} \ldots vemos que toda la información que se puede guardar en el árbol \aprioriL reducido mostrado en el listado~\ref{alg:apriori-L-reducido} se puede comprimir de modo que sólo sean necesarios 11 nodos, los mostrados en el listado~\ref{alg:apriori-L-compacto}. El árbol \aprioriL compacto se puede expandir con simples cálculos numéricos hasta obtener el árbol \aprioriL completo si fuera necesario obtener todos sus nodos, lo habitual es que sólo queramos obtener el valor almacenado en un nodo del árbol \aprioriL completo y no sea necesario recrear todo el árbol, aunque tenemos la capacidad de obtener toda la información que contiene. Este formato se ha de tener en cuenta a la hora de leer \D.
 
-Al ser de reducido tamaño es fácil transmitir \catalogos comprimidos entre distintos dispositivos, lo que facilitaría su procesamiento por el dispositivo que ha recibido los datos sin necesidad de mayor interacción. Lo que hay que conseguir son estructuras y métodos adecuados para el procesamiento de estos ficheros usando pocos recursos.
-
-En muchos casos el número de nodos del árbol reducido puede ser mayor que el obtenido con el algoritmo original. Sin embargo sólo estamos guardando el \soporte en cada nodo por lo que no guardamos ni el ítem que tiene ese \soporte (8, 16 o 32 \texttt{bits}) ni el puntero a su hermano menor (32 o 64 \texttt{bits}) por lo que el hecho de contener más nodos no garantiza que se necesite más memoria RAM para guardar su contenido. Sustituir búsquedas por cálculos sobre índices reducirá mucho el tiempo de ejecución del algoritmo.
-
 \afterpage{\clearpage}
 \lstinputlisting[label=alg:apriori-L-compacto,
                  caption={\aprioriL compacto},
                  float=htb,
                  basicstyle=\scriptsize]
                  {./contenido/clasificacion/codigo/aprioriLcompacto}
+
+Al ser de reducido tamaño es fácil transmitir \catalogos comprimidos entre distintos dispositivos, lo que facilitaría su procesamiento por el dispositivo que ha recibido los datos sin necesidad de mayor interacción. Lo que hay que conseguir son estructuras y métodos adecuados para el procesamiento de estos ficheros usando pocos recursos.
+
+En muchos casos el número de nodos del árbol reducido puede ser mayor que el obtenido con el algoritmo original. Sin embargo sólo estamos guardando el \soporte en cada nodo por lo que no guardamos ni el ítem que tiene ese \soporte (8, 16 o 32 \texttt{bits}) ni el puntero a su hermano menor (32 o 64 \texttt{bits}) por lo que el hecho de contener más nodos no garantiza que se necesite más memoria RAM para guardar su contenido. Sustituir búsquedas por cálculos sobre índices reducirá mucho el tiempo de ejecución del algoritmo.
 
 
 

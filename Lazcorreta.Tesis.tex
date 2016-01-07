@@ -12,9 +12,9 @@
 %\usepackage{blindtext}
 \newcommand{\borrar}[2][red]{
    \marginpar{
-      \begin{minipage}{50pt}
+%      \begin{minipage}{50pt}
          \footnotesize\color{#1}\noindent #2
-      \end{minipage}
+%      \end{minipage}
    }
 }
 \newcommand{\sinRevisar}{
@@ -39,7 +39,9 @@
       \end{tabular}
    }
 }
-\newcommand{\ABIERTO}{\borrar[white]{\colorbox{red}{ABIERTO}}}
+\newcommand{\ABIERTO}{
+   \marginpar{\small\color{red}ABIERTO}
+}
 
 % \usepackage{fixme}
 \newcommand{\tab}[1][15]{\rule{#1pt}{0pt}}

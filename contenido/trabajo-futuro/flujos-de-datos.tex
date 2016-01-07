@@ -1,0 +1,22 @@
+% !TEX root = ../../Lazcorreta.Tesis.tex
+%\ABIERTO
+%TODO: Con author={Yaniela {Fernández Mena} and Raudel {Hdez. León} and José {Hdez. Palancar}} tengo varios errores de \endcsname que no controlo, con author={Yaniela {Fernández Mena} and Raudel {Hernández León} and José Hernández Palancar} no aparecen esos errores pero en la cita aparece Fernández Mena, Hernández León y Palancar, 2013.
+\cite{FMenaHLeonHPalancar-ClasificacionBasadaEnCARFlujosDeDatos-2013}, presentan un estado del arte actualizado sobre el uso de Reglas de Asociación de Clase (CAR) sobre Flujos de Datos, que está estrechamente relacionado con las propuestas hechas en esta sección ya que centran el foco en el \clasificador obtenido tras las primeras lecturas de los datasets disponibles para el estudio de \clasificacion en curso.
+
+
+
+\begin{quote}
+Los \clasificadores para flujos de datos, a diferencia de los \clasificadores para datos estáticos, no disponen de todo el conjunto de transacciones etiquetadas (conjunto de entrenamiento) a priori, sino que estas arriban de forma incremental a lo largo del tiempo. Por otro lado, dado que los flujos de datos son, en teoría, infinitos, resulta imposible cargar todas las transacciones en memoria y se requiere de un algoritmo incremental que actualice el clasificador con la información de las nuevas transacciones, reutilizando la información extraída de las transacciones previas. En general, los clasificadores para flujos de datos [1,8,23] deben garantizar que:
+
+\begin{enumerate}
+  \item Cada \transaccion del flujo de datos sea procesada a lo sumo una vez.
+  \item Los resultados de \clasificacion estén disponibles en todo momento.
+  \item El modelo resultante sea consistente con las nuevas \transacciones que llegan, pues los datos pueden variar a lo largo del tiempo debido a cambios en su distribución de probabilidad.
+\end{enumerate}
+
+La \clasificacion en flujos de datos tiene diversas aplicaciones como: detección de software malicioso [46], \clasificacion de paquetes en el área de las telecomunicaciones [53], monitoreo de procesos industriales [4,37], monitoreo de datos de navegación en vehículos automotrices [38], detección de fraudes en transacciones bancarias [65], entre otros.
+
+Varios han sido los \clasificadores adaptados al entorno de flujos de datos. Entre los más reportados se encuentran los árboles de decisión [19,25,26,34,36,59,61] y los métodos de ensamble de \clasificadores [9,39,47,51,57]. Otros \clasificadores que han recibido menor atención son los basados en el vecino más cercano [5,54], las máquinas de vectores de soporte [43,66] y los basados en reglas. Particularmente, los \clasificadores basados en Reglas de Asociación de Clase (CARs), son preferidos por muchos especialistas debido a su interpretabilidad, aspecto que los hace más expresivos y fáciles de comprender. Su interpretabilidad permite a los especialistas modificar las reglas con base en su experiencia y así mejorar la eficacia del clasificador. Además de los clasificadores basados en CARs, los árboles de decisión también generan reglas comprensibles. Para construir un clasificador utilizando árboles de decisión se sigue una estrategia voraz seleccionando en cada momento la característica que mejor separa las clases. Sin embargo, esta estrategia voraz puede podar reglas interesantes. En [55], los autores probaron que las reglas obtenidas de los árboles de decisión son un subconjunto de las reglas generadas por los clasificadores basados en CARs, asumiendo un umbral relativamente bajo de concurrencia (Soporte) de los elementos que componen la regla.
+\end{quote}
+
+Los \catalogos consiguen reducir el número de objetos a utilizar en memoria RAM, de modo que el \clasificador puede encontrar una \emph{regla determinista basada en los datos conocidos}.\borrar{Añadir \emph{regla determinista basada en los datos conocidos} a definiciones e índice.}
