@@ -1,0 +1,167 @@
+% !TEX root = ../../../../Lazcorreta.Tesis.tex
+% \ABIERTO%
+En la sección~\ref{sec:srw:muw:transformacion} describimos cómo obtener \sns de \flogs. Si convertimos cada sesión en una \transaccion podemos obtener fácilmente un almacén \D en que cada \transaccion representa un conjunto de páginas visitado por un usuario en un espacio de tiempo determinado. Si las páginas que visitó el usuario tienen relación entre sí es fácil que encontremos otras \transacciones que contengan subconjuntos de páginas similares a las de esta sesión. Volvemos a la misma idea que en la sección~\ref{sec:srw:md:mnw} pero ahora manejaremos menos datos, nos preocuparemos sólo por estudiar a fondo las relaciones entre las páginas representadas por los nodos de los \grafos.
+
+La \arm tiene un planteamiento muy sencillo que concuerda en cierto modo con nuestras necesidades. Queremos saber cómo se usa un sitio web, tenemos \sns que podemos observar como un simple \emph{conjunto de páginas visitado por un usuario en una sesión}, \transacciones. Si transformamos todas las \sns en \transacciones (ver listado{\ref{listado:algSesiones2Transacciones}}) obtendremos un almacén de \transacciones, al que llamaremos \D. Los subconjuntos de datos (\itemsets) más frecuentes de las \transacciones de \D nos informarán de que "`es frecuente encontrar en una misma sesión \emph{este subconjunto de páginas}"'. Las \ars que obtengamos de \D nos harán deducir que "`si un usuario visita \emph{este conjunto de páginas} entonces es probable que también visite \emph{este otro conjunto de páginas}"', lo que es un conocimiento muy útil para un \srw, sobre todo si podemos obtenerlo de un modo rápido en situaciones en que \D sea muy dinámico.
+
+\lstinputlisting[label=listado:algSesiones2Transacciones,
+                 caption={Algoritmo de obtención de \D},
+                 float=htb,
+                 basicstyle=\footnotesize]
+                 {./contenido/srw/codigo/algSesiones2Transacciones}
+
+Si queremos ir más allá podemos pensar que cada vez que un usuario entra en nuestro sitio web está interesado en un objetivo concreto y visita un "`conjunto concreto de páginas web"', $P$. Con esta hipótesis, si encontramos que muchos usuarios también visitan $P$ en sus \sns podemos pensar que son páginas que cubren un mismo objetivo. En un \srw sería útil esta información cuando un usuario entrara en una de las páginas de $P$, podríamos recomendarle que visite el resto de páginas de $P$.
+
+El uso más inmediato de una \ar en un \srw es la predicción. Cuando un usuario solicita la página $P_i$, si tenemos información fácil de procesar podremos recomendarle que visite otras páginas, aquellas en que aparezca $P_i$ como \antecedente y tengan mejor \soporte o \confianza. Si aplicamos el algoritmo de \ARM a todo el almacén \D tardaremos demasiado tiempo en obtener todas las \ars que contiene con $P_i$ como \antecedente por lo que debemos seleccionar un grupo de transacciones representativo para hacer el proceso de \dm en tiempo real. 
+
+Al analizar las sesiones obtenidas en el \flog de un servidor propio comprobamos que habían usuarios de los que teníamos diversas sesiones por lo que comenzamos a pensar en ese caso, por ir de menor a mayor complejidad. Decidimos probar tiempos de ejecución del algoritmo en el conjunto de transacciones de cada usuario que había realizado al menos una visita al sitio web obteniendo tiempos de ejecución muy por debajo del segundo, lo que permitiría su uso en tiempo real en un \srw.
+
+Si un usuario está visitando el grupo de páginas $X$ y disponemos de reglas cuyo \antecedente sea $X$ podemos utilizar los \consecuentes de dichas reglas como páginas recomendadas. Si son muchas las reglas cuyo \antecedente sea $X$ habrá que decidir qué criterio se utiliza para determinar qué \consecuentes se recomiendan. Todas las reglas se obtienen de las transacciones de \D que contienen a $X$ por lo que el \soporte y la \confianza de la regla nos proporcionan la misma información y podemos utilizar indistintamente cualquiera de las dos medidas para decidir qué reglas se utilizan en el \SRW.
+
+Existen otras medidas como el \lift, que hace intervenir el \soporte del \consecuente.
+
+\begin{Definition}[\lift]
+   El \lift de una \AR compara la frecuencia de la regla con la frecuencia del \consecuente. Si llamamos $n_{XY}$ al número de veces que aparece el \itemset $(X \cup Y)$ en \D, su \lift sería
+  \begin{equation}\label{eq:1-3-2-lift-AR}
+    lift(X \rightarrow Y) = \frac{soporte(X \rightarrow Y)}{n_Y} = \frac{n_{XY}}{n_X\cdot n_Y}
+  \end{equation}
+\label{def:1:3:2:lift:ar}
+\end{Definition}
+
+Su interpretación se hace en términos de probabilidad. Si hubiera independencia estadística entre los sucesos $A$ ("`la transacción contiene el \itemset $X$"') y $B$ ("`la transacción contiene el \itemset $Y$"') podríamos comprobarlo a partir de las probabilidades $P(A)$, $P(B)$ y $P(A \cap B)$ debido a que dos sucesos independientes cumplen que $P(A \cap B) = P(A)\cdot P(B)$. Utilizando las frecuencias observadas en \D podríamos pensar que dos sucesos son independientes si el producto de sus frecuencias coincide con la frecuencia conjunta de ambos. Utilizando $n_X$, $n_Y$ y $n_{XY}$ para expresar estas frecuencias si detectamos que $n_X\cdot n_Y = n_{XY}$ podemos pensar que la presencia de $Y$ en las \transacciones de \D es independiente de que también esté presente $X$. Si ocurriera esto tendríamos que $lift(X \rightarrow Y) = \frac{n_{XY}}{n_X\cdot n_Y} = 1$ por lo que el $lift$ debe compararse con la unidad para que nos proporcione alguna información.
+
+\begin{itemize}
+  \item  si $lift(X \rightarrow Y) > 1$ se deduce que el conjunto de páginas $Y$ es más popular entre los que han visitado ya $X$ que por sí misma por lo que es más probable que un usuario que ya ha visitado $X$ quiera visitar $Y$. El hecho de que el usuario haya visitado $X$ "`favorece"' la probabilidad de que quiera visitar $Y$ en la misma \sn.
+  \item Si $lift(X \rightarrow Y) < 1$, la presencia de $X$ disminuye la probabilidad de que aparezca $Y$ en la misma \sn. Quizá no sea buena idea recomendar $Y$ a un usuario que ya ha visitado $X$.
+  \item Si $lift(X \rightarrow Y) = 1$, la presencia de $X$ no influye en la probabilidad de que aparezca $Y$ en la misma \sn, son dos sucesos independientes. Quizá no sea buena idea recomendar $Y$ a un usuario que ya ha visitado $X$ a no ser que no tengamos otra recomendación mejor.
+\end{itemize}
+
+\cite{AnCercone-RuleQualityMeasures-2001} proponen el uso de otras medidas de calidad para determinar qué \ARs se deben descartar. Recordemos que se generan gran cantidad de reglas y no se pueden utilizar todas ellas de un modo sensato, en un \srw deberíamos recomendar un conjunto pequeño de páginas, no todas las que pueden tener relación con las visitadas por el usuario. Hay muchos trabajos en esta línea, intentando aportar rigurosidad estadística a cálculos tan simples como el \lift (no es muy riguroso hacer una estimación de independencia estadística basándonos únicamente en un cociente de frecuencias muestrales).
+
+Sea cual sea el índice que utilicemos para decidir qué \ars se utilizarán en la recomendación primero hemos de obtenerlas. Ya sabemos todo lo que necesitamos para ello, y hemos decidido qué algoritmo utilizaremos por lo que hay que decidir qué lenguaje de programación usaremos y qué estructuras se adaptarán mejor al tipo de datos que queremos almacenar y a su eficiencia en las labores de búsqueda, inserción y eliminación de elementos.
+% TODO: Tengo algunos ejecutables míos en Toshiba/ARM/codigo/Lazcorreta/ARM  ARM_CLASICO ARM_MIS ARM_RO pero están compilados para MS-Windows y de momento en Mac OS X no puedo probarlos, debería ejecutarlos en W y colocarlos junto a los bin en el \dvdAdjunto
+La lectura de los trabajos de investigación sobre las dificultades de la implementación de algoritmos de \arm (\cite{Goethals-SurveyOnFPM-2003,Borgelt-EfficientImplementationsOfAprioriAndEclat-2004}; \citeauthor{Bodon-SurprisingResultsOfTrieBasedFIMAlgorithms-2004},  \cite*{Bodon-SurprisingResultsOfTrieBasedFIMAlgorithms-2004}, \cite*{Bodon-ATrieBasedAPRIORImplementationForMFISequences-2005}) nos hizo pensar en detalles muy interesantes sobre la implementación de \apriori y nos hizo tener una buena base antes de afrontar nuestra propia implementación del algoritmo. Al probar nuestra primera versión de \apriori nos tropezamos pronto con el \dilemaIR, obteniendo continuos desbordamientos de memoria RAM. Se resolvía puntualmente incrementando el \soporte mínimo pero nos parecía que tenía que haber mejores soluciones.
+
+En la fase de \fim se hace la mayor reserva de memoria RAM, concretamente en la fase de unión de la función $apriori-gen()$. La mayoría de memoria reservada se libera tras la fase de poda de esta función, pero si ya hay desbordamiento no se llegará a producir la poda. Decidimos unir ambas fases en una sola, como muestra el listado~\ref{alg:apriori-unionYpoda}, para no reservar más memoria RAM de la que necesitamos para guardar \aprioriC y ahorrar tiempo de computación pues las operaciones de reserva y liberación dinámica de memoria pueden ser muy costosas (sobre todo cuando se utiliza mucha memoria RAM y se ha de recurrir a la memoria virtual gestionada en el disco duro).
+
+\lstinputlisting[label=alg:apriori-unionYpoda,
+                 caption={Función $apriori-gen$: unión y poda},
+                 float=htb,
+                 basicstyle=\footnotesize]
+                 {./contenido/srw/codigo/funAprioriUnionYPoda}
+
+En la implementación de \aprioriL se ha de utilizar una estructura que utilice pocos recursos de memoria para guardar sus datos y en la que sea fácil realizar búsquedas, recordemos que se trabajará con muchos datos dentro de esta estructura y cualquier proceso de búsqueda, inserción o eliminación puede ser realmente muy costoso en tiempo si no acertamos con la estructura utilizada. Al ir adaptando el algoritmo a nuestras necesidades y trabajar con conjuntos no excesivamente grandes de datos en esta fase de la investigación pudimos proponer una poda relajada que reducía el número de accesos a \aprioriL y el número de elementos a eliminar de \aprioriC en esta fase, lo que supondrá un aumento de rendimiento a cambio de no liberar temporalmente algo de memoria RAM.
+
+\lstinputlisting[label=alg:apriori-poda-relajada,
+                 caption={Función $apriori-gen$: poda relajada},
+                 float=htb,
+                 basicstyle=\footnotesize]
+                 {./contenido/srw/codigo/funAprioriPodaRelajada}
+
+Al aplicar la poda relajada la función con la unión y la poda queda como muestra el listado~\ref{alg:apriori-unionYpodaRelajada}. Por un lado no esperamos desbordamiento de memoria porque no se reservará espacio para todos los posibles candidatos ya que muchos de ellos serán descartados antes de realizar la reserva, por otro lado se ahorran miles de búsquedas en \aprioriL[k-1] por lo que se gana en eficiencia al realizar esta modificación al algoritmo original.
+
+\lstinputlisting[label=alg:apriori-unionYpodaRelajada,
+                 caption={Función $apriori-gen$: unión y poda relajada},
+                 float=htb,
+                 basicstyle=\footnotesize]
+                 {./contenido/srw/codigo/funAprioriUnionYPodaRelajada}
+
+En un primer estudio teórico se previó que el número de candidatos obtenidos con el algoritmo modificado sería muy superior al obtenido utilizando el algoritmo original. Sin embargo, al experimentar con datos de \flogs reales se observó que las sesiones producidas por un mismo usuario de nuestro sitio web presentaban \patrones muy marcados y eran muy homogéneas en cuanto a las páginas que contenían. Esto permitió realizar un estudio completo de todas las páginas, es decir, sin tener que considerar \soporte mínimo, y permitió generar predicciones para cualquier página visitada anteriormente por el usuario. La \confianza o el \lift servirían para dar prioridad a las sugerencias.
+
+Para probar la eficiencia del algoritmo modificado se preprocesaron las solicitudes hechas a un servidor web durante los 22 últimos días del mes de julio del 2004. En la lectura del \flog se observaron 2\,977\,380 solicitudes a recursos, 94\,442 de las cuales no pudieron ser servidas (errores en la petición y/o peticiones a páginas no existentes), 2\,437\,378 peticiones fueron realizadas a recursos auxiliares a las páginas solicitadas por los usuarios (imágenes, ficheros de estilo, archivos multimedia, etc.) En el análisis se emplearon 445\,560 solicitudes, conteniendo 2\,158 recursos diferentes.
+
+Para este estudio se definió una \sn como la \secuencia de solicitudes realizada desde la misma dirección IP, de modo que entre una petición y la siguiente no transcurrieran más de 15 minutos, y entre la primera petición y la última de una sesión no transcurrieran más de 8 horas. Así se obtuvieron un total de 30\,559 sesiones realizadas desde 11\,391 direcciones IP, obteniendo así información sobre los accesos de 11\,391 usuarios distintos.
+
+\begin{table}[htp]
+\caption{Resumen de tiempos de ejecución del algoritmo modificado}
+\begin{center}
+\begin{tabular}{|r@{ $t$ }l|r|r|}
+  \multicolumn{2}{c}{Tiempo (milisegundos)} & \multicolumn{1}{c}{Frecuencia} & \multicolumn{1}{c}{(\%)}\\\hline
+            & $<15$ & 9\,079 & 79.7\\\hline
+  $15\leq$  & $<30$ & 2\,305 & 20.2\\\hline
+  $30\leq$  & $<45$ &      4 &  0.0\\\hline
+  $145\leq$ & $<60$ &      2 &  0.0\\\hline
+  $60\leq$  &       &      1 &  0.0\\\hline%
+\end{tabular}
+\end{center}
+\label{tab:1-3-resumenTiemposEjecucionAlgoritmoModificado}
+\end{table}%
+%{\footnotesize
+%\begin{longtable}{|r@{ $t$ }l|r|r|}
+%\caption{Resumen de tiempos de ejecución del algoritmo modificado}
+%\label{tab:1-3-resumenTiemposEjecucionAlgoritmoModificado}
+%\\
+%\endhead
+%\hline
+%\multicolumn{4}{r}{\textit{Continúa en la página siguiente\ldots}} \\
+%\endfoot
+%\hline
+%\endlastfoot
+%  \multicolumn{2}{c}{Tiempo (milisegundos)} & \multicolumn{1}{c}{Frecuencia} & \multicolumn{1}{c}{(\%)}\\\hline
+%            & $<15$ & 9\,079 & 79.7\\\hline
+%  $15\leq$  & $<30$ & 2\,305 & 20.2\\\hline
+%  $30\leq$  & $<45$ &      4 &  0.0\\\hline
+%  $145\leq$ & $<60$ &      2 &  0.0\\\hline
+%  $60\leq$  &       &      1 &  0.0%
+%\end{longtable}
+%}
+
+En la tabla~\ref{tab:1-3-resumenTiemposEjecucionAlgoritmoModificado} se muestran los tiempos de ejecución del algoritmo modificado sobre las 30\,559 \transacciones producidas desde las 11\,391 direcciones IP, identificando cada dirección IP con un usuario distinto y haciendo un análisis exclusivo para las \transacciones de cada usuario.
+
+
+\begin{table}[htp]
+\caption{Resumen de tiempos de ejecución del algoritmo modificado}
+\begin{center}
+\begin{tabular}{|r|r|r|r|r|}
+  \multicolumn{1}{c}{$|\D|$} &
+  \multicolumn{1}{c}{$|\I|$} &
+  \multicolumn{1}{c}{\scriptsize Transacción más larga} &
+  \multicolumn{1}{c}{\scriptsize \Soporte mínimo (absoluto)} &
+  \multicolumn{1}{c}{\scriptsize Tiempo (milisegundos)} \\\hline
+    3 &   11 &  11 &  1 &       1 \\\hline
+   11 &   13 &  10 &  1 &       1 \\\hline
+   20 &   51 &  26 &  1 &       1 \\\hline
+   30 &  139 &  57 &  1 &      49 \\\hline
+   51 &  127 &  21 &  1 &      16 \\\hline
+   86 &  602 & 222 &  1 &  1\,540 \\
+      &      &     &  5 &     467 \\
+      &      &     &  5 &     187 \\\hline
+  275 &   73 &  52 &  1 &      30 \\\hline
+  364 &  114 &  22 &  1 &      16\\\hline%
+\end{tabular}
+\end{center}
+\label{tab:1-3-muestraTiemposEjecucionAlgoritmoModificado}
+\end{table}%
+%\newpage
+%{\footnotesize
+%\begin{longtable}{|r|r|r|r|r|}
+%\caption{Muestra de tiempos de ejecución del algoritmo modificado}
+%\label{tab:1-3-muestraTiemposEjecucionAlgoritmoModificado}
+%\\
+%\endhead
+%\hline
+%\multicolumn{5}{r}{\textit{Continúa en la página siguiente\ldots}} \\
+%\endfoot
+%\hline
+%\endlastfoot
+%  \multicolumn{1}{c}{$|\D|$} &
+%  \multicolumn{1}{c}{$|\I|$} &
+%  \multicolumn{1}{c}{\scriptsize Transacción más larga} &
+%  \multicolumn{1}{c}{\scriptsize \Soporte mínimo (absoluto)} &
+%  \multicolumn{1}{c}{\scriptsize Tiempo (milisegundos)} \\\hline
+%    3 &   11 &  11 &  1 &       1 \\\hline
+%   11 &   13 &  10 &  1 &       1 \\\hline
+%   20 &   51 &  26 &  1 &       1 \\\hline
+%   30 &  139 &  57 &  1 &      49 \\\hline
+%   51 &  127 &  21 &  1 &      16 \\\hline
+%   86 &  602 & 222 &  1 &  1\,540 \\
+%      &      &     &  5 &     467 \\
+%      &      &     &  5 &     187 \\\hline
+%  275 &   73 &  52 &  1 &      30 \\\hline
+%  364 &  114 &  22 &  1 &      16%
+%\end{longtable}
+%}
+
+Se obtuvieron tiempos inferiores a los 30 milisegundos en el 99.9\% de las ejecuciones del algoritmo modificado (menos de 15 milisegundos en el 79.7\% de los casos analizados). El análisis de las sesiones realizadas por un robot que realizó una visita al sitio web duró algo más de 1.5 segundos, en este caso aplicamos un \soporte mínimo (absoluto) de 5 y 10 (sólo consideraríamos los \itemsets que estuvieran al menos en 5 o 10 transacciones) para comprobar la drástica reducción de tiempo empleado a cambio de no obtener toda la información de \D (como muestra la tabla~\ref{tab:1-3-muestraTiemposEjecucionAlgoritmoModificado}). Por último hubieron seis casos en que las direcciones IP se correspondían con ordenadores públicos por lo que las \sns que proporcionaron seguramente fueron realizadas por diferentes usuarios, mostrando comportamientos muy heterogéneas y cuyos análisis se realizaron en tiempos de entre 30 y 60 milisegundos.
+
+Los resultados obtenidos nos dan pié a pensar que este tipo de análisis es válido para determinar qué sugerencias se pueden hacer a cualquier usuario que ya haya visitado nuestro sitio web ya que se están utilizando los datos generados por el propio usuario en anteriores visitas al sitio y se obtienen las recomendaciones mientras se están enviando los recursos solicitados por la actual visita con lo que se podrán enviar también las sugerencias que determine nuestro algoritmo como mejores para el usuario actual en la visita actual.

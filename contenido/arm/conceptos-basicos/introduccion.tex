@@ -1,0 +1,19 @@
+% !TEX root = ../../../Lazcorreta.Tesis.tex
+% \ABIERTO%
+\citet{AgrawalImielinskiSwami-MiningAssociationRulesBetweenSetsOfItemsInLargeDB-1993} son pioneros en la \arm. La definición formal que dan a a esta disciplina es muy elemental\footnote{He adaptado la nomenclatura a la utilizada en este informe.}:
+
+\selectlanguage{english}
+\begin{quote}
+  Let $\I = \{I_1, I_2, \ldots I_N\}$ be a set of binary attributes, called items. Let \D be a database of transactions. Each transaction $t$ is represented as a binary vector, with $t[k] = 1$ if $t$ bought the item $I_k$, and $t[k] = 0$ otherwise. There is one tuple in the database for each transaction. Let $X$ be a set of some items in \I. We say that a transaction $t$ satisfies $X$ if for all items $I_k$ in $X$, $t[k] = 1$.
+  
+  By an association rule, we mean an implication of the form 
+  $$X \rightarrow I_j$$
+  where $X$ is a set of some items in \I, and $I_j$ is a single item in \I that is not present in $X$. The rule $X \rightarrow I_j$ is satisfied in the set of transactions \D with the confidence factor $0 \leq c \leq 1$ iff at least $c\%$ of transactions in \D that satisfy $X$ also satisfy $I_j$.
+  
+  Given the set of transactions \D, we are interested in generating all rules that satisfy certain additional constraints of two different forms: Syntantic Constrains and Support Constrains.
+\end{quote}
+\selectlanguage{spanish}
+
+Definen \I como un conjunto de $N$ atributos binarios y \D como una \db de \transacciones, vectores binarios de $N$ elementos cuyo valor $k$-ésimo indica si el ítem $I_k$ está o no presente en la \transaccion. El \consecuente de una \AR es un ítem de \I no presente en el \antecedente de la regla. Las investigaciones posteriores sobre este tema amplían esta definición para estudiar reglas en que el \consecuente sea un \kitemset, como se indica en la definición~\ref{def:1-3-2-AR}. Por último definen la \arm como la disciplina que busca en un gran almacén \D las \ARs que cumplen ciertas restricciones, bien de tipo sintáctico (como la presencia de cierto ítem en el antecedente o el consecuente) o de \soporte (obteniendo únicamente las reglas más frecuentes).
+
+Las restricciones no son imposiciones si no necesidades. Si \I está formado por $N$ ítems, para tratar una transacción tendremos que utilizar $N$ valores (ceros o unos), y se podrán obtener hasta $2^N$ \itemsets distintos\footnote{Si $N=100$ tendremos $2^{100}\approx1.3\cdot10^{30}$ posibles \itemsets en las \transacciones si no contamos repeticiones, lo que da una idea del número de relaciones que se pueden encontrar entre los \itemsets de \D cuando éste es muy grande y el número de ítems distintos también lo es.}, pudiendo actuar como \antecedente de una \ar $2^N-2$ al descontar $\emptyset$ e \I. Considerando que cada \kitemset[1] puede ser el \antecedente de hasta $2^{N-1}-1$ \ars distintas, cada \kitemset[2] puede ser el \antecedente de $2^{N-2}-1$ reglas distintas\ldots es fácil descubrir que el número de \ARs que se podría obtener es enorme: $\sum_{i=1}^{N-1}{{N \choose i}(2^{N-i}-1)}$. Como la mayoría de datos se ha de manipular en memoria RAM para poder acceder a ellos rápidamente, sólo si trabajamos con pocos ítems y pocas \transacciones podremos evitar las restricciones.

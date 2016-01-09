@@ -157,6 +157,12 @@
 
 \makeindex
 
+
+%\AtBeginDocument{%
+%  \renewcommand\tablename{Tabla}
+%}
+
+
 \begin{document}
 %\selectlanguage{spanish}
 
@@ -228,13 +234,15 @@ Hola, tesis doctoral en informática !!!
 
 \listoffigures
 
+\renewcommand{\listtablename}{Índice de tablas}%
 \listoftables
 
 %\listofalgorithms
 %\addcontentsline{toc}{chapter}{Índice de algoritmos}
 
+\renewcommand{\listtheoremname}{Índice de definiciones}%
 \listoftheorems
-\addcontentsline{toc}{chapter}{Índice de definiciones}
+%\addcontentsline{toc}{chapter}{Índice de definiciones}
 
 
 \lstlistoflistings

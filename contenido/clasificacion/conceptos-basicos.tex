@@ -10,7 +10,7 @@ El problema de \Clasificacion tiene ya su propia notación, igual que el de \arm
 %\end{Definition}
 
 
-\cite{HLeonCarrascoHPalancarMTrinidad-DesarrolloDeClasificadoresBasadosEnRA-2010}, utilizan las siguientes definiciones para modelizar las Reglas de Asociación de Clase (que otros autores denominan Reglas de Clasificación Asociativa), las \ars adaptadas al problema de \Clasificacion.
+\cite{HLeonCarrascoHPalancarMTrinidad-DesarrolloDeClasificadoresBasadosEnRA-2010}, utilizan las siguientes definiciones para modelizar las \CAR (que otros autores denominan \emph{Reglas de Clasificación Asociativa}), las \ars adaptadas al problema de \Clasificacion.
 
 \borrar{[HLeon-2010\ldots]}
 Sean $\I = \{i_1,i_2,\ldots,l_n\}$ un conjunto de $n$ ítems y \T un conjunto de transacciones. Cada \transaccion en \T está formada por un conjunto de ítems $X$ tal que $X\in\I$.
@@ -53,7 +53,7 @@ Las medidas más usadas en la literatura para evaluar la calidad de una \AR son 
 
 Es importante aclarar que cuando se haga referencia a un conjunto de ítems $X$ se estará hablando de un subconjunto de \I y se supondrá, sin pérdida de generalidad, que existe un orden lexicográfico entre los ítems del conjunto \I.
 
-Para extender las definiciones anteriores al problema de \clasificacion basada en CARs, además del conjunto \I, se tiene un conjunto de clases \C y un conjunto de transacciones etiquetadas $\T_\C$ (conjunto de entrenamiento). Las \transacciones del conjunto $\T_\C$ están formadas por un conjunto de ítems $X$ y una clase $c\in \C$. Esta extensión no afecta las definiciones de \soporte y \confianza enunciadas previamente.
+Para extender las definiciones anteriores al problema de \clasificacion basada en CARs, además del conjunto \I, se tiene un conjunto de \clases \C y un conjunto de transacciones etiquetadas $\T_\C$ (conjunto de entrenamiento). Las \transacciones del conjunto $\T_\C$ están formadas por un conjunto de ítems $X$ y una \clase $c\in \C$. Esta extensión no afecta las definiciones de \soporte y \confianza enunciadas previamente.
 
 \begin{Definition}[\CAR]
   Una \CAR (CAR) es una implicación $X\Rightarrow c$ tal que $X\subseteq\I$ y $c\in\D$. El \soporte de una \CAR $X\Rightarrow c$ es igual a $Sop(X\cup\{c\})$ y la confianza es igual a $\frac{Sop(X\cup\{c\})}{Sop(X)}$.
@@ -65,17 +65,17 @@ Para extender las definiciones anteriores al problema de \clasificacion basada e
 \label{def:cubrimiento-CAR}
 \end{Definition}
 
-Los clasificadores desarrollados basados en \CARs seleccionan, para cada \transaccion $t$ que se desee clasificar, el subconjunto de CARs que la cubren y con este subconjunto determinan la clase que se asignará a $t$.
+Los clasificadores desarrollados basados en \CARs seleccionan, para cada \transaccion $t$ que se desee clasificar, el subconjunto de CARs que la cubren y con este subconjunto determinan la \clase que se asignará a $t$.
 
 \subsubsection{Planteamiento del problema}
 \label{sec:CAR-planteamiento-del-problema}
-Sea \I un conjunto de ítems, \C un conjunto de clases, $\T_\C$ un conjunto de transacciones de la forma $\{i_1,i_2,\ldots,i_n,c\}$ tal que $\forall_{1\leq k\leq n}\left[i_k\in\I\ \wedge\ c\in\C\right]$ (ver tabla~\ref{tabla:HLeon}), \R un conjunto ordenado de reglas $X\Rightarrow c$ tal que $X\subseteq\I$ y $c\in\C$, $\mathcal{W}$ una función que asigna un peso a cada regla $r\in\R$ y $D$ un criterio de decisión que utiliza a \R para asignar una clase a cada \transaccion $t$ que se desee clasificar.
+Sea \I un conjunto de ítems, \C un conjunto de \clases, $\T_\C$ un conjunto de transacciones de la forma $\{i_1,i_2,\ldots,i_n,c\}$ tal que $\forall_{1\leq k\leq n}\left[i_k\in\I\ \wedge\ c\in\C\right]$ (ver tabla~\ref{tabla:HLeon}), \R un conjunto ordenado de reglas $X\Rightarrow c$ tal que $X\subseteq\I$ y $c\in\C$, $\mathcal{W}$ una función que asigna un peso a cada regla $r\in\R$ y $D$ un criterio de decisión que utiliza a \R para asignar una \clase a cada \transaccion $t$ que se desee clasificar.
 
 \begin{table}[htp]
 \caption{Representación general de un conjunto de transacciones}
 \begin{center}
 \begin{tabular}{c|ccccc}
-$\T_\C$  &  \multicolumn{4}{c}{Ítems}                               &   Clase \\\hline
+$\T_\C$  &  \multicolumn{4}{c}{Ítems}                               &   \Clase \\\hline
 $t_1$      & $i_{11}$   & $i_{12}$   & \ldots  & $i_{1k_1}$  & $c_1$ \\
 $t_2$      & $i_{21}$   & $i_{22}$  & \ldots  & $i_{2k_2}$  & $c_2$ \\
                &                 &                 & \ldots  &                    &  \\
@@ -87,7 +87,8 @@ $t_n$     & $i_{n1}$   & $i_{n2}$   & \ldots  & $i_{nk_n}$  & $c_n$
 
 Dados \I, \C y $\T_\C$, construir un clasificador basado en CARs consiste en calcular \R, ordenar \R según la función de asignación de peso $\mathcal{W}$ y definir el criterio de decisión $D$. El problema que se plantea en esta propuesta de tesis doctoral es la construcción de clasificadores basados en CARs.
 
-A continuación presentan varios clasificadores basados en CARs (CBA (Classification Based on Associations), CMAR (Classification based on Multiple Association Rules), MMAC (Multi-class, Multi-label Associative Classification), MCAR (Multi-class Classificationbased on Association Rules), PRM (Predictive Rule Mining), CPAR (Classification based on Predictive Association Rules), TFPC (Total From Partial Classification)) y los suyos propios (CAR-NF) y una sección en la que discuten las limitaciones de la medida de calidad \Confianza y discuten las propiedades que debe tener una medida de calidad para ser utilizada en la evaluación y ordenamiento de las CARs.
+A continuación presentan varios clasificadores basados en CARs (CBA (Classification Based on Associations), CMAR (Classification based on Multiple Association Rules), MMAC (Multi-class, Multi-label Associative Classification), MCAR (Multi-class Classification
+based on Association Rules), PRM (Predictive Rule Mining), CPAR (Classification based on Predictive Association Rules), TFPC (Total From Partial Classification)) y los suyos propios (CAR-NF) y una sección en la que discuten las limitaciones de la medida de calidad \Confianza y discuten las propiedades que debe tener una medida de calidad para ser utilizada en la evaluación y ordenamiento de las CARs.
 
 \borrar{[\ldots HLeon-2010]}
 

@@ -2,12 +2,72 @@
 %% http://bibdesk.sourceforge.net/
 
 
-%% Created for Enrique Lazcorreta Puigmartí at 2016-01-07 18:32:33 +0100 
+%% Created for Enrique Lazcorreta Puigmartí at 2016-01-08 18:12:52 +0100 
 
 
 %% Saved with string encoding Unicode (UTF-8) 
 
 
+
+@article{TsengLin-EfficientMiningOfAR-2007,
+	Abstract = {Mining generalized association rules between items in the presence of taxonomies has been recognized as an important model in data mining. Earlier work on generalized association rules confined the minimum supports to be uniformly specified for all items or for items within the same taxonomy level. This constraint on minimum support would restrain an expert from discovering some deviations or exceptions that are more interesting but much less supported than general trends. In this paper, we extended the scope of mining generalized association rules in the presence of taxonomies to allow any form of user-specified multiple minimum supports. We discuss the problems of using classic Apriori itemset generation and presented two algorithms, MMS\_Cumulate and MMS\_Stratify, for discovering the generalized frequent itemsets. Empirical evaluation showed that these two algorithms are very effective and have good linear scale-up characteristics.},
+	Author = {Ming-Cheng Tseng and Wen-Yang Lin},
+	Date-Added = {2016-01-07 20:15:20 +0000},
+	Date-Modified = {2016-01-07 20:17:12 +0000},
+	Doi = {10.1016/j.datak.2006.07.002},
+	File = {:TsengLin_EfficientMining_06.182.pdf:PDF},
+	Iddea = {182},
+	Journal = {Data \& Knowledge Engineering},
+	Number = {1},
+	Pages = {41--64},
+	Review = {Citado en ESWA-Apriori2.},
+	Title = {Efficient mining of generalized association rules with non-uniform minimum support},
+	Volume = {62},
+	Year = {2007},
+	Bdsk-Url-1 = {http://dx.doi.org/10.1016/j.datak.2006.07.002}}
+
+@article{HuChen-MiningARwithMMS-2006,
+	Abstract = {Mining association rules with multiple minimum supports is an important generalization of the association-rule-mining problem, which was recently proposed by Liu et al. Instead of setting a single minimum support threshold for all items, they allow users to specify multiple minimum supports to reflect the natures of the items, and an Apriori-based algorithm, named MSapriori, is developed to mine all frequent itemsets. In this paper, we study the same problem but with two additional improvements. First, we propose a FP-tree-like structure, MIS-tree, to store the crucial information about frequent patterns. Accordingly, an efficient MIS-tree-based algorithm, called the CFP-growth algorithm, is developed for mining all frequent itemsets. Second, since each item can have its own minimum support, it is very difficult for users to set the appropriate thresholds for all items at a time. In practice, users need to tune items' supports and run the mining algorithm repeatedly until a satisfactory end is reached. To speed up this time-consuming tuning process, an efficient algorithm which can maintain the MIS-tree structure without rescanning database is proposed. Experiments on both synthetic and real-life datasets show that our algorithms are much more efficient and scalable than the previous algorithm.},
+	Address = {Amsterdam, The Netherlands, The Netherlands},
+	Author = {Ya-Han Hu and Yen-Liang Chen},
+	Date-Added = {2016-01-07 20:13:12 +0000},
+	Date-Modified = {2016-01-07 20:13:50 +0000},
+	Doi = {http://dx.doi.org/10.1016/j.dss.2004.09.007},
+	File = {:HuChen_MiningAssociationRules_06.205.pdf:PDF},
+	Iddea = {205},
+	Idtesis = {121},
+	Issn = {0167-9236},
+	Journal = {Decision Support Systems},
+	Note = {Referenciado en ESWA-Apriori2},
+	Number = {1},
+	Pages = {1--24},
+	Publisher = {Elsevier Science Publishers B. V.},
+	Title = {Mining association rules with multiple minimum supports: a new mining algorithm and a support tuning mechanism},
+	Volume = {42},
+	Year = {2006},
+	Bdsk-Url-1 = {http://dx.doi.org/10.1016/j.dss.2004.09.007}}
+
+@article{YunHaHwangRyu-MiningAROnSignificantRareDataUsingRelativeSupport-2003,
+	Abstract = {Recently, data mining, a technique to analyze the stored data in large databases to discover potential information and knowledge, has been a popular topic in database research. In this paper, we study the techniques discovering the association rules which are one of these data mining techniques. And we propose a technique discovering the association rules for significant rare data that appear infrequently in the database but are highly associated with specific data. Furthermore, considering these significant rare data, we evaluate the performance of the proposed algorithm by comparing it with other existing algorithms for discovering the association rules.},
+	Address = {New York, NY, USA},
+	Author = {Yun, Hyunyoon and Ha, Danshim and Hwang, Buhyun and Ryu, Keun Ho},
+	Date-Added = {2016-01-07 20:01:44 +0000},
+	Date-Modified = {2016-01-07 20:02:57 +0000},
+	Doi = {http://dx.doi.org/10.1016/S0164-1212(02)00128-0},
+	Iddea = {238},
+	Idtesis = {081},
+	Issn = {0164-1212},
+	Journal = {J. Syst. Softw.},
+	Note = {\visita{http://www.sciencedirect.com/science/article/pii/S0164121202001280}},
+	Number = {3},
+	Owner = {Enrique},
+	Pages = {181--191},
+	Publisher = {Elsevier Science Inc.},
+	Timestamp = {2009.07.23},
+	Title = {Mining association rules on significant rare data using relative support},
+	Volume = {67},
+	Year = {2003},
+	Bdsk-Url-1 = {http://dx.doi.org/10.1016/S0164-1212(02)00128-0}}
 
 @techreport{HLeonCarrascoHPalancarMTrinidad-DesarrolloDeClasificadoresBasadosEnRA-2010,
 	Author = {Raudel {Hernández León} and Jesús A. Carrasco and José {Hernández Palancar} and J. Fco. {Martínez Trinidad}},
@@ -21,7 +81,7 @@
 @techreport{FMenaHLeonHPalancar-ClasificacionBasadaEnCARFlujosDeDatos-2013,
 	Author = {Yaniela {Fernández Mena} and Raudel {Hernández León} and José Hernández Palancar},
 	Date-Added = {2016-01-02 12:43:19 +0000},
-	Date-Modified = {2016-01-07 17:32:33 +0000},
+	Date-Modified = {2016-01-07 19:43:29 +0000},
 	Institution = {Centro de Aplicaciones de Tecnologías de Avanzada (CENATAV)},
 	Title = {Clasificación basada en reglas de asociación de clase para flujos de datos, un estado del arte},
 	Year = {2013}}
@@ -448,16 +508,16 @@ Our work shows that database techniques are promising for data mining: general a
 	Bdsk-Url-1 = {http://www.almaden.ibm.com/cs/projects/iis/hdb/Publications/papers/rj10004.pdf},
 	Bdsk-Url-2 = {http://dx.doi.org/10.1109/69.553164}}
 
-@article{AnCercone_RuleQualityMeasures_2001,
+@article{AnCercone-RuleQualityMeasures-2001,
 	Abstract = {A rule quality measure is important to a rule induction system for determining when to stop generalization or specialization. Such measures are also important to a rule-based classification procedure for resolving conflicts among rules. We describe a number of statistical and empirical rule quality formulas and present an experimental comparison of these formulas on a number of standard machine learning datasets. We also present a meta-learning method for generating a set of formula-behavior rules from the experimental results which show the relationships between a formula's performance and the characteristics of a dataset. These formulas-behavior rules are combined into formula-selection rules that can be used in a rule induction system to select a rule quality formula before rule induction. We will report the experimental results showing the effects of formula-selection on the predictive performance of a rule induction system.},
 	Author = {Aijun An and Nick Cercone},
 	Date-Added = {2014-12-28 17:06:53 +0000},
-	Date-Modified = {2014-12-28 17:08:44 +0000},
+	Date-Modified = {2016-01-08 17:12:49 +0000},
 	File = {AnCercone_RuleQualityMeasures_01:AnCercone_RuleQualityMeasures_01:PDF},
 	Iddea = {022},
 	Journal = {Computational Intelligence},
 	Nota = {Disponible en \url{http://www.cs.yorku.ca/~aan/research/paper/ci01.pdf}.},
-	Note = {\leePDF{bib/citas/AnCercone_RuleQualityMeasures_2001.pdf} \descarga{http://www.cse.yorku.ca/~aan/research/paper/ci01.pdf}},
+	Note = {\leePDF{bib/citas/AnCercone-RuleQualityMeasures-2001.pdf} \descarga{http://www.cse.yorku.ca/~aan/research/paper/ci01.pdf}},
 	Num = {3},
 	Pages = {409--424},
 	Title = {Rule Quality Measures for Rule Induction Systems: Description and Evaluation},

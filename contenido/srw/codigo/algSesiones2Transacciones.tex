@@ -1,0 +1,10 @@
+$\D = \emptyset$;
+
+forall $sesion_i,\ i = 1\ldots N$ do
+  $transaccion = \emptyset$;
+  forall $p_j \in sesion_i,\ j = 1\ldots n_i$ do
+    if $p_j \notin transaccion$
+      insert $p_j$ into $transaccion$;
+  end
+  insert $transaccion$ into $\D$
+end

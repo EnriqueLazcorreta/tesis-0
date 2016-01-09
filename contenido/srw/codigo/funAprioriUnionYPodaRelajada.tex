@@ -1,0 +1,7 @@
+insert into $C_k$
+select $c = \{p.item_1,p.item_2,\ldots,p.item_{k-1},q.item_{k-1}\}$
+from $L_{k-1}p,L_{k-1}q$
+where  $(p.item_1 = q.item_1,\ldots,p.item_{k-2} = q.item_{k-2},$
+          $p.item_{k-1} < q.item_{k-1})$
+		   and
+          $\left(p.item_{k-1}, q.item_{k-1}\right) \in L_2$;
