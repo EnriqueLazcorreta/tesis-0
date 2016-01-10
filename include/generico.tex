@@ -153,6 +153,12 @@
 
 %Hyperenlaces en .pdf
 
+%Para dividir urls largas en \url
+%\PassOptionsToPackage{hyphens}{url}
+\makeatletter
+\g@addto@macro{\UrlBreaks}{\UrlOrds}
+\makeatother
+
 \usepackage[
             pdftex,
             plainpages = false, 

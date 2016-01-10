@@ -1,5 +1,64 @@
 % !TEX root = ../../../Lazcorreta.Tesis.tex
 \ABIERTO
+Antes de leer un \dataset de \registros ya conocemos su estructura y sabemos que cada \registro contiene exactamente $k$ ítems. El tamaño de las \transacciones en un problema de \ARM no suele ser constante por lo que los algoritmos utilizados no pueden usar esta información cuando las \transacciones son realmente \registros. Se podrían modificar dichos algoritmos para aprovechar este hecho pero nosotros hemos preferido reducir la información a procesar y utilizar los algoritmos ya conocidos en esta materia.
+
+\begin{Lemma}
+   Un \registro no puede contener dos valores representantes del mismo \atributo.
+\label{lema:un-valor-por-atributo}
+\end{Lemma}
+
+El hecho de que cada ítem de un \registro represente a uno de los \atributos en estudio implica que si en un \registro aparece el ítem que representa a un valor concreto de un \atributo no podrán aparecer el resto de ítems asociados a ese \atributo. Es por ello que si eliminamos del \dataset un valor concreto de uno de los \atributos no perderemos información: si un \registro no contiene información sobre un \atributo es porque el valor que toma en ese \atributo es precisamente aquel que hemos eliminado del \dataset.
+
+\begin{Lemma}
+   Si eliminamos de un \dataset de \registros un valor de cada uno de los \atributos y una de las \clases seguiremos teniendo la misma información en el \dataset si recordamos su estructura inicial.
+\label{lema:eliminar-valores}
+\end{Lemma}
+
+En el listado~\ref{alg:apriori-L-completo} se muestra el árbol \aprioriL completo para cualquier almacén \D basado en las \clases \{1,2\} y los \atributos $\A_1=\{3,4,5\}$ y $\A_2=\{6,7\}$. Son necesarios 127 nodos para representar todas las posibles combinaciones entre los valores 1 a 7.
+
+%\afterpage{\clearpage}
+%\begin{center}
+%{\centering
+\lstinputlisting[label=alg:apriori-L-completo,
+                 caption={\aprioriL completo},
+                 float=htb,
+                 basicstyle=\tiny,
+                 linewidth=.8\textwidth,
+                 xleftmargin=.2\textwidth]
+                 {./contenido/clasificacion/codigo/aprioriLcompleto}
+%}
+%\end{center}
+
+Estas son las dimensiones teóricas de la estructura que debemos guardar en memoria para poder hacer un análisis completo de \ARM sobre estos datos. Además en cada uno de los nodos de \aprioriL deberá guardarse el \soporte del \itemset al que representa. Como no sabemos si en el \dataset están presentes todos los \itemsets que se podrían generar a partir de este conjunto \I también hemos de guardar en memoria el código que representa a cada ítem y un puntero que una los nodos del árbol.
+
+Aplicando el lema~\ref{lema:un-valor-por-atributo} podemos reducir notablemente el tamaño de \aprioriL, como muestra el listado~\ref{alg:apriori-L-reducido}. Como en un \registro sólo puede aparecer una \clase y un valor de cada \atributo no encontraremos nunca los \itemsets (1,2), (3,4), (3,5), (4,5) y (6,7) por lo que sólo necesitamos 35 nodos para tener la misma información sobre reglas de asociación que contiene la colección de datos que estamos tratando. 
+
+%\afterpage{\clearpage}
+\lstinputlisting[label=alg:apriori-L-reducido,
+                 caption={\aprioriL reducido},
+                 float=htb,
+                 basicstyle=\tiny,
+                 linewidth=.78\textwidth,
+                 xleftmargin=.22\textwidth]
+                 {./contenido/clasificacion/codigo/aprioriLreducido}
+
+Por último, si eliminamos un valor de cada \atributo, aplicando el lema~\ref{lema:eliminar-valores} vemos que toda la información que se puede guardar en el árbol \aprioriL reducido mostrado en el listado~\ref{alg:apriori-L-reducido} se puede comprimir de modo que sólo sean necesarios 9 nodos, los mostrados en el listado~\ref{alg:apriori-L-compacto}, en que se han eliminado los ítems 2, 5 y 7. El árbol \aprioriL compacto se puede expandir con simples cálculos numéricos hasta obtener el árbol \aprioriL completo si fuera necesario obtener todos sus nodos, lo habitual es que sólo queramos obtener el valor almacenado en un nodo del árbol \aprioriL completo y no sea necesario recrear todo el árbol, aunque tenemos la capacidad de obtener toda la información que contiene.
+
+%\afterpage{\clearpage}
+\lstinputlisting[label=alg:apriori-L-compacto,
+                 caption={\aprioriL compacto},
+                 float=htb,
+                 basicstyle=\tiny,
+                 linewidth=.65\textwidth,
+                 xleftmargin=.35\textwidth]
+                 {./contenido/clasificacion/codigo/aprioriLcompacto}
+
+Al ser de reducido tamaño es fácil transmitir \catalogos comprimidos entre distintos dispositivos, lo que facilitaría su procesamiento por el dispositivo que ha recibido los datos sin necesidad de mayor interacción. Lo que hay que conseguir son estructuras y métodos adecuados para el procesamiento de estos ficheros usando pocos recursos.
+
+En muchos casos el número de nodos del árbol reducido puede ser mayor que el obtenido con el algoritmo original. Sin embargo sólo estamos guardando el \soporte en cada nodo por lo que no guardamos ni el ítem que tiene ese \soporte (8, 16 o 32 \texttt{bits}) ni el puntero a su hermano menor (32 o 64 \texttt{bits}) por lo que el hecho de contener más nodos no garantiza que se necesite más memoria RAM para guardar su contenido. Sustituir búsquedas por cálculos sobre índices reducirá mucho el tiempo de ejecución del algoritmo.
+
+
+
 
 
 
@@ -28,39 +87,7 @@ Es de destacar que al codificar los datos originales para construir un \catalogo
 
 
 %TODO: Esto no va aquí, primero hablar de \catalogos -> comprimidos -> apriori_estático -> L
-En el listado~\ref{alg:apriori-L-completo} se muestra el árbol \aprioriL completo para cualquier almacén \D basado en la \clase \{1,2\} y los atributos \{3,4,5\}, \{6,7\}. Son necesarios 127 nodos para representar todas las posibles combinaciones entre los valores 1 y 7.
 
-\afterpage{\clearpage}
-\lstinputlisting[label=alg:apriori-L-completo,
-                 caption={\aprioriL completo},
-                 float=htb,
-                 basicstyle=\scriptsize]
-                 {./contenido/clasificacion/codigo/aprioriLcompleto}
-
-
-Simplemente aplicando la característica\borrar{¿nombre?}\ldots reducimos notablemente el tamaño de \aprioriL, como muestra el listado~\ref{alg:apriori-L-reducido}. Como en un \registro no pueden aparecer dos valores de una misma \clase o \atributo no encontraremos nunca los \itemsets (1,2), (3,4), (3,5), (4,5) y (6,7) por lo que sólo necesitamos 35 nodos para tener la misma información sobre reglas de asociación que contiene la colección de datos que estamos tratando. 
-
-Los
-
-\afterpage{\clearpage}
-\lstinputlisting[label=alg:apriori-L-reducido,
-                 caption={\aprioriL reducido},
-                 float=htb,
-                 basicstyle=\scriptsize]
-                 {./contenido/clasificacion/codigo/aprioriLreducido}
-
-Por último, si observamos\borrar{¿qué?} \ldots vemos que toda la información que se puede guardar en el árbol \aprioriL reducido mostrado en el listado~\ref{alg:apriori-L-reducido} se puede comprimir de modo que sólo sean necesarios 11 nodos, los mostrados en el listado~\ref{alg:apriori-L-compacto}. El árbol \aprioriL compacto se puede expandir con simples cálculos numéricos hasta obtener el árbol \aprioriL completo si fuera necesario obtener todos sus nodos, lo habitual es que sólo queramos obtener el valor almacenado en un nodo del árbol \aprioriL completo y no sea necesario recrear todo el árbol, aunque tenemos la capacidad de obtener toda la información que contiene. Este formato se ha de tener en cuenta a la hora de leer \D.
-
-\afterpage{\clearpage}
-\lstinputlisting[label=alg:apriori-L-compacto,
-                 caption={\aprioriL compacto},
-                 float=htb,
-                 basicstyle=\scriptsize]
-                 {./contenido/clasificacion/codigo/aprioriLcompacto}
-
-Al ser de reducido tamaño es fácil transmitir \catalogos comprimidos entre distintos dispositivos, lo que facilitaría su procesamiento por el dispositivo que ha recibido los datos sin necesidad de mayor interacción. Lo que hay que conseguir son estructuras y métodos adecuados para el procesamiento de estos ficheros usando pocos recursos.
-
-En muchos casos el número de nodos del árbol reducido puede ser mayor que el obtenido con el algoritmo original. Sin embargo sólo estamos guardando el \soporte en cada nodo por lo que no guardamos ni el ítem que tiene ese \soporte (8, 16 o 32 \texttt{bits}) ni el puntero a su hermano menor (32 o 64 \texttt{bits}) por lo que el hecho de contener más nodos no garantiza que se necesite más memoria RAM para guardar su contenido. Sustituir búsquedas por cálculos sobre índices reducirá mucho el tiempo de ejecución del algoritmo.
 
 
 

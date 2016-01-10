@@ -23,11 +23,12 @@
 %Iconos y logos
 
 
+\newcommand{\urlConNotaAlPie}[2]{\href{#1}{#2}\footnote{\tiny\url{#1}}}
+
+
 
 %   Enlaces para la bibliografía
-\newcommand{\enlaceRevisado}{Revisado en diciembre de 2015.\xspace}
-
-\newcommand{\urlConNotaAlPie}[2]{\href{#1}{#2}\footnote{\tiny\url{#1}}}
+%\newcommand{\enlaceRevisado}{Revisado en diciembre de 2015.\xspace}
 
 \newcommand{\leePDF}[2][10pt]{%
   \href{file:#2}{\iconoPDF[#1]}%
@@ -38,15 +39,15 @@
 \newcommand{\descarga}[2][10pt]{%
   \href{#2}{\iconoDescarga[#1]}\footnote{\tiny\url{#2}}%
 }
-\newcommand{\descargaRevisado}[2][10pt]{%
-  \href{#2}{\iconoDescarga[#1]}\footnote{\tiny\url{#2} \enlaceRevisado}%
-}
+%\newcommand{\descargaRevisado}[2][10pt]{%
+%  \href{#2}{\iconoDescarga[#1]}\footnote{\tiny\url{#2} \enlaceRevisado}%
+%}
 \newcommand{\visita}[2][10pt]{%
   \href{#2}{\iconoWWW[#1]}\footnote{\tiny\url{#2}}%
 }
-\newcommand{\visitaRevisado}[2][10pt]{%
-  \href{#2}{\iconoWWW[#1]}\footnote{\tiny\url{#2} \enlaceRevisado}%
-}
+%\newcommand{\visitaRevisado}[2][10pt]{%
+%  \href{#2}{\iconoWWW[#1]}\footnote{\tiny\url{#2} \enlaceRevisado}%
+%}
 \newcommand{\scopus}[2][9pt]{%
   \href{#2}{\iconoSCOPUS[#1]}%
 }
@@ -55,9 +56,9 @@
    \href{#2}{\iconoSCOPUS}[#1]\footnote{\tiny\url{#2} Requiere acceso identificado.}%
 }
 \newcommand{\github}[2][10pt]{%
-  \href{#2}{\logoGitHub[#1]}\footnote{\tiny\url{#2} \enlaceRevisado}%
+  \href{#2}{\logoGitHub[#1]}\footnote{\tiny\url{#2}}%
 }
 \newcommand{\google}[2][10pt]{%
-  \href{http://lmgtfy.com/?q="#2"}{\logoGOOGLE[#1]}\footnote{\tiny\url{http://lmgtfy.com/?q="#2"} \enlaceRevisado}%
+  \href{http://lmgtfy.com/?q="#2"}{\logoGOOGLE[#1]}\footnote{\tiny\url{http://lmgtfy.com/?q="#2"}}%
 }
 % ! Enlaces para la bibliografía

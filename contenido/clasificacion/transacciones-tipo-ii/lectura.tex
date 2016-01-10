@@ -1,9 +1,12 @@
 % !TEX root = ../../../Lazcorreta.Tesis.tex
 \ABIERTO
+Para almacenar el contenido de un \dataset de estas características se puede utilizar el árbol \aprioriL. Esto podría suponer mayor facilidad de transmisión de datos entre distintos dispositivos siempre que el nuevo formato ocupe menos espacio que el ocupado por el \dataset original. También se puede utilizar $\aprioriL_{reducido}$ o $\aprioriL_{compacto}$, en función de sus tamaños y del uso que se quiera dar. Cuando se obtienen nuevos \registros sin clasificar se puede utilizar cualquiera de estos formatos para contrastar la información que tenemos sobre el nuevo individuo en estudio, mientras utilicemos soporte unitario todos ellos son fácilmente escalables.\borrar{Ahora debería explicar qué formato es ideal para qué tarea o situación ¿No?}
 
-La lectura de un \catalogo comprimido es elemental si se ha optado por guardar $\aprioriL_{reducido}$ para la \clase. Se dará prioridad al valor de la \clase por lo que cada vez que se lea un registro se comprobará si el primer ítem se corresponde con un valor de la \clase o si el valor de la \clase se ha omitido, con lo que sabemos que la lectura se corresponde con el valor de la \clase no utilizado en el \catalogo comprimido.
+%TODO: Definir \dataset comprimido en indice-alfabetico
+La lectura de un \dataset comprimido es elemental si se ha optado por guardar $\aprioriL_{reducido}$ para la \clase. Se dará prioridad al valor de la \clase por lo que cada vez que se lea un \registro comprimido se comprobará si el primer ítem se corresponde con un valor de la \clase o si el valor de la \clase se ha omitido, con lo que sabemos que la lectura se corresponde con el valor de la \clase no utilizado en el \catalogo comprimido. Los \regsClas en la \clase eliminada\ldots
 
-Cada registro aumentará el \soporte de un máximo de $M$ \itemsets, buscados secuencialmente a partir del valor de la \clase. Cada vez que se lee un valor del registro (tras comprobar si el primero es o no información sobre la \clase y actuar en consecuencia) se incrementa el \soporte del hijo con índice $itemLeido - itemAnterior - 1 numHermanosItemAnterior$. De este modo con una única lectura de \D se completa $\aprioriL_{reducido}$ del que se puede obtener fácilmente cualquier \soporte de \aprioriL.
+%TODO: Reescribir cuando estén definidos registro, registro-clasificado, 
+Cada \registro aumentará el \soporte de un máximo de $M$ \itemsets, buscados secuencialmente a partir del valor de la \clase. Cada vez que se lee un valor del registro (tras comprobar si el primero es o no información sobre la \clase y actuar en consecuencia) se incrementa el \soporte del hijo con índice $itemLeido - itemAnterior - 1 - numHermanosItemAnterior$. De este modo con una única lectura de \D se completa $\aprioriL_{reducido}$ del que se puede obtener fácilmente cualquier \soporte de \aprioriL.
 
 Si se ha optado por el formato $\aprioriL_{compacto}$ se leen uno a uno los ítems del registro aumentando sólo un elemento de $\aprioriL_{compacto}$ tras cada lectura (al contrario que en \apriori que se busca en el resto de ramas en que esté guardado). Se lee el primer ítem y se incremente su \soporte en $\aprioriL[1][item1]$, se lee el segundo ítem y se incremente su \soporte en $\aprioriL[1][item1]-\aprioriL[2][item2]$\ldots Con lo que no sólo se lee una vez \D si no que se hace sólo una búsqueda por \transaccion utilizando índices directos en lugar de comparaciones recursivas\ldots
 
@@ -16,11 +19,20 @@ Sea $item_i \in \{1\ldots N\}$ un conjunto ordenado de los valores de $M$ atribu
 ítems que sí aportan información sobre \D. Los codificaremos usando los valores $0\ldots N'-1$ con lo que \aprioriL[1]$_{compacto}$ tendrá $N'$ elementos, cada uno de ellos guardará un \soporte y un vector con los ítems "`menores"' con que pueda estar relacionado, i.e., con los ítems representados por un número mayor pero que no sean valores del mismo atributo.
 
 
-\afterpage{\clearpage}
+%\afterpage{\clearpage}
 \lstset{language=C++}
 \lstinputlisting[label=clase:apriori:L:nodo,
                  caption={Librería \aprioriL\_compacto},
-                 float=htb,
-                 basicstyle=\scriptsize]
+%                 float=htb,
+                 basicstyle=\tiny,
+                 linewidth=.78\textwidth,
+                 xleftmargin=.22\textwidth
+                 ]
                  {./contenido/clasificacion/codigo/L_compacto.h}
 \lstset{language=pseudocodigo}
+
+
+
+
+El árbol $\aprioriL_compacto$ se crea completo antes de leer un \dataset comprimido, con lo que si hubieran problemas de memoria se detectarían antes de comenzar cualquier proceso. El acceso a esta estructura se realiza mediante su índice por lo que se ahorrarán millones de búsquedas en $\aprioriL_compacto$.
+
