@@ -31,7 +31,7 @@ Sea el $k$-itemset $l_k = \{1, 2, 3, 4, 5, 6\}$.
 En consecuencia, se llama a $genrules(l_k, \{1, 2, 3, 4\})$ dos veces, lo que generará duplicados de todas las llamadas hechas con los subconjuntos de $\{1, 2, 3, 4\}$ como segundo parámetro. Esto genera un gran número de búsquedas y cálculos repetidos, exponencial en función de $k$, que no aportan nada al estudio pues se trata de cálculos ya realizados y convenientemente almacenados.
 \end{quote}
 
-Esta característica hace aún más ineficiente el algoritmo original si recordamos el modo en que se almacena el repositorio de \itemsets frecuentes, \aprioriL, ya que para buscar el \soporte de un \kitemset hemos de recorrer \aprioriL desde su raíz buscando cada uno de los ítems que forman $l_k$. Si hacer una búsqueda ya es costoso por tener que hacer $k$ búsquedas individuales, repetirla cuando ya se ha hecho es un desperdicio de recursos.
+Esta característica hace aún más ineficiente el algoritmo original si recordamos el modo en que se almacena el \dataset de \itemsets frecuentes, \aprioriL, ya que para buscar el \soporte de un \kitemset hemos de recorrer \aprioriL desde su raíz buscando cada uno de los ítems que forman $l_k$. Si hacer una búsqueda ya es costoso por tener que hacer $k$ búsquedas individuales, repetirla cuando ya se ha hecho es un desperdicio de recursos.
 
 % \afterpage{\clearpage}
 \lstinputlisting[label=alg:apriori-genrules-modificado,

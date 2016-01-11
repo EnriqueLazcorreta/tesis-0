@@ -6,9 +6,9 @@ Otra de nuestras propuestas consistió en crear un fichero similar a \D en el qu
 \subsubsection{Reescribiendo \D para obtener \R}
 Para estudiar el comportamiento de un usuario es preferible analizar qué reglas "`verifica"' en vez de centrar el análisis en los ítems que forman dichas regla. Supongamos que un usuario visita los lunes un \portalWeb solicitando las páginas $A$, $B$ y $C$ y un conjunto de páginas $P_1$. Los viernes este usuario visita las páginas $A$, $G$ y $H$ y un conjunto de páginas $P_2$. Supongamos también que las páginas de $P_1$ y $P_2$ no están relacionadas frecuentemente con la página $A$ y que nuestro sistema de recomendación no considera variables temporales por lo que no puede determinar si es lunes o viernes. Cuando el usuario entra en el \portalWeb y solicita la página $A$ es muy probable que le recomendemos visitar la página $B$ o $G$ si estamos usando los métodos tradicionales de recomendación. Si el usuario visita a continuación $G$ el sistema recomendará la página $H$, a continuación alguna de las páginas de $P_2$ y por último la página $B$ con menor probabilidad. De cualquier modo el hecho de que visite la página $A$ no es tan significativo como la posibilidad de usar las reglas de comportamiento ya guardadas en nuestro sistema (las reglas que contienen la relación entre los \kitemsets $AGH$ y $P_2$). Nuestro objetivo es aprovechar la capacidad que tenemos de analizar las reglas que se verifican en nuestro \portalWeb de forma independiente al número de páginas que contienen, proporcionar un método para medir la relación existente entre las reglas de comportamiento de nuestro \portalWeb y usando únicamente las transacciones proporcionadas por los usuarios.
 
-Si estudiamos las reglas verificadas por cada transacción del repositorio original \D, podemos definir el conjunto de reglas \R que contiene una línea por cada transacción de \D conteniendo las reglas que verifica la transacción original. El objetivo de esta conversión, $\D\hookrightarrow\R$, es analizar en un segundo estudio las reglas que contiene \R utilizando el algoritmo \apriori.
+Si estudiamos las reglas verificadas por cada transacción del \dataset original \D, podemos definir el conjunto de reglas \R que contiene una línea por cada transacción de \D conteniendo las reglas que verifica la transacción original. El objetivo de esta conversión, $\D\hookrightarrow\R$, es analizar en un segundo estudio las reglas que contiene \R utilizando el algoritmo \apriori.
 
-Inicialmente esta tarea es simplemente exploratoria y se necesitan muchas horas para convertir el repositorio original \D en grandes repositorios \R con diferentes umbrales de \soporte y confianza. Los repositorios de reglas tienden a ser mucho más grandes que los de transacciones. Si una transacción verifica una regla que contiene un determinado \kitemset $l_k$ también verificará todas las reglas de los \itemsets contenidos en $l_k$. Por ejemplo, si la transacción $ABCD$ genera una regla también generará las cincuenta reglas que se deducen de sus subconjuntos:
+Inicialmente esta tarea es simplemente exploratoria y se necesitan muchas horas para convertir el \dataset original \D en grandes \datasets \R con diferentes umbrales de \soporte y confianza. Los \datasets de reglas tienden a ser mucho más grandes que los de transacciones. Si una transacción verifica una regla que contiene un determinado \kitemset $l_k$ también verificará todas las reglas de los \itemsets contenidos en $l_k$. Por ejemplo, si la transacción $ABCD$ genera una regla también generará las cincuenta reglas que se deducen de sus subconjuntos:
 \begin{itemize}
   \item 14 reglas de 4 ítems: $ABC\rightarrow D$, $ABD\rightarrow C$, \ldots $D\rightarrow ABC$
   \item 24 reglas de 3 ítems: $AB\rightarrow C$, $AB\rightarrow D$, \ldots $D\rightarrow BC$
@@ -17,13 +17,13 @@ Inicialmente esta tarea es simplemente exploratoria y se necesitan muchas horas 
 
 Si usamos un umbral de confianza bajo, una transacción de \D con dos ítems generará una línea con 2 reglas en \R, una transacción con 3 ítems generará 12 reglas, una transacción con 4 ítems generará 50 reglas. \R crecerá exponencialmente en función de la longitud de las transacciones de \D.
 
-El desmesurado tamaño de los repositorios \R obtenidos nos condujo a hacer un análisis exploratorio de las diferencias existentes entre \R y \D con el fin de reducir los datos que forman \R sin perder la información que contiene.
+El desmesurado tamaño de los \datasets \R obtenidos nos condujo a hacer un análisis exploratorio de las diferencias existentes entre \R y \D con el fin de reducir los datos que forman \R sin perder la información que contiene.
 
 
 
 
 \subsubsection{Análisis descriptivo de las diferencias existentes entre \D y \R}
-En la sección TAL se expuso una modificación del algoritmo de generación de reglas con la que se puede trabajar con umbrales de confianza muy pequeños. La razón por la que buscamos esta reducción, que en algunos casos consistía en la eliminación del umbral, se entiende mejor al revisar los resultados obtenidos, que se muestran en la figura~\ref{fig:2-1-DvsR} y el cuadro~\ref{tab:2-2-2-DvsR}. Conforme se reduce el valor de \confianza mínima se pierde información de las transacciones en estudio. Por ejemplo, al usar un \soporte mínimo del 5\% en el repositorio \texttt{T40I10D100K} las reglas obtenidas se derivan únicamente de un 32.6\% de las transacciones del repositorio, de lo que se deduce que más del 67\% de las transacciones originales son completamente ignoradas por el análisis.
+En la sección TAL se expuso una modificación del algoritmo de generación de reglas con la que se puede trabajar con umbrales de confianza muy pequeños. La razón por la que buscamos esta reducción, que en algunos casos consistía en la eliminación del umbral, se entiende mejor al revisar los resultados obtenidos, que se muestran en la figura~\ref{fig:2-1-DvsR} y el cuadro~\ref{tab:2-2-2-DvsR}. Conforme se reduce el valor de \confianza mínima se pierde información de las transacciones en estudio. Por ejemplo, al usar un \soporte mínimo del 5\% en el \dataset \texttt{T40I10D100K} las reglas obtenidas se derivan únicamente de un 32.6\% de las transacciones del \dataset, de lo que se deduce que más del 67\% de las transacciones originales son completamente ignoradas por el análisis.
 
 %\afterpage{\clearpage}
 \begin{figure}[htb]
@@ -131,25 +131,25 @@ En la sección TAL se expuso una modificación del algoritmo de generación de r
 
 Existen muchas aproximaciones en el estado del arte que buscan la reducción de las dimensiones del problema a tratar utilizando técnicas estadísticas basadas en la frecuencia de los ítems, sin embargo no se tienen en cuenta ciertos detalles, como el hecho de que los resultados son sólo significativos para un reducido grupo de individuos de la población en estudio.
 
-En este trabajo usamos valores para el \soporte y \confianza mínimos que puedan ser utilizados en ordenadores personales convencionales sin generar problemas de falta de recursos, de modo que podamos atender al mayor número de individuos de la población en estudio. El tamaño de los repositorios \R obtenidos con estos parámetros es tan grande que no podemos analizarlos directamente por lo que proponemos un nuevo algoritmo para dividir \R en diferentes repositorios que puedan ser analizados convenientemente.
+En este trabajo usamos valores para el \soporte y \confianza mínimos que puedan ser utilizados en ordenadores personales convencionales sin generar problemas de falta de recursos, de modo que podamos atender al mayor número de individuos de la población en estudio. El tamaño de los \datasets \R obtenidos con estos parámetros es tan grande que no podemos analizarlos directamente por lo que proponemos un nuevo algoritmo para dividir \R en diferentes \datasets que puedan ser analizados convenientemente.
 
 
 
-\subsubsection{División automática del repositorio de reglas}
-Existen muchas investigaciones proponiendo métodos para dividir los repositorios originales de transacciones, pero todos ellos se basan en un alto control y \clasificacion del conjunto de ítems disponibles en el sistema. Nuestra propuesta no usa esta información adicional porque se obtiene de una gestión del sistema y no de del propio uso del mismo. Definimos un conjunto de familias de reglas para dividir el repositorio \R y agrupar aquellas reglas que los usuarios relacionan entre sí cuando interactúan con el sistema. A continuación se describe el algoritmo que proponemos.
+\subsubsection{División automática del \dataset de reglas}
+Existen muchas investigaciones proponiendo métodos para dividir los \datasets originales de transacciones, pero todos ellos se basan en un alto control y \clasificacion del conjunto de ítems disponibles en el sistema. Nuestra propuesta no usa esta información adicional porque se obtiene de una gestión del sistema y no de del propio uso del mismo. Definimos un conjunto de familias de reglas para dividir el \dataset \R y agrupar aquellas reglas que los usuarios relacionan entre sí cuando interactúan con el sistema. A continuación se describe el algoritmo que proponemos.
 
 \begin{enumerate}
   \item Seleccionar la regla con mayor \soporte, en caso de empate seleccionar la regla con mayor confianza y en caso de empate seleccionar la regla que contenga más ítems.
   $$R_1 = max_i\{soporte(R_i)\} \wedge$$
   $$\left(confianza(R_1) = max_j\{confianza(R_j) | soporte(R_j) = soporte(R_1)\} \right)$$
   Esta regla será el elemento principal de la primera familia de reglas, $\mathcal{F}_1$.
-  \item Dividir \R en subconjuntos de reglas. El primer repositorio, $\R_1$, contendrá todas las líneas de \R que tengan la regla $R_1$ y el segundo repositorio, $\R_\infty$, contendrá el resto de líneas de \R.
+  \item Dividir \R en subconjuntos de reglas. El primer \dataset, $\R_1$, contendrá todas las líneas de \R que tengan la regla $R_1$ y el segundo \dataset, $\R_\infty$, contendrá el resto de líneas de \R.
   \item Ejecutar el algoritmo \apriori sobre $\R_1$ y aplicar de nuevo el paso 1 para seleccionar $R_2$, la regla de $\R_1$ que aparece con mayor frecuencia junto a $R_1$.
   \item Comprobar el \soporte de $R_2$ en $\R_\infty$: si el \soporte de $R_2$ en $\R_1$ es mayor que su \soporte en $\R_\infty$ se añade $R_2$ a la familia $\mathcal{F}_1$; en otro caso se elimina $R_2$ de $\R_1$.
   \item Volver al paso (3) mientras queden reglas no clasificadas en $\R_1$.
 \end{enumerate}
 
-Cuando se ha completado la definición de la primera familia de reglas se eliminan todas las reglas pertenecientes a $\mathcal{F}_1$ del repositorio original de reglas, \R, y las transacciones que queden vacías. A continuación se utiliza el mismo procedimiento para generar $\mathcal{F}_2$, la segunda familia de reglas. El algoritmo finaliza cuando $\R_\infty$ no contiene reglas asociadas, es decir, cuando todas las transacciones de $\R_\infty$ contienen únicamente una regla.
+Cuando se ha completado la definición de la primera familia de reglas se eliminan todas las reglas pertenecientes a $\mathcal{F}_1$ del \dataset original de reglas, \R, y las transacciones que queden vacías. A continuación se utiliza el mismo procedimiento para generar $\mathcal{F}_2$, la segunda familia de reglas. El algoritmo finaliza cuando $\R_\infty$ no contiene reglas asociadas, es decir, cuando todas las transacciones de $\R_\infty$ contienen únicamente una regla.
 
 
 
