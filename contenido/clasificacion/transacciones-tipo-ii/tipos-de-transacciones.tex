@@ -8,7 +8,7 @@ Es importante destacar que \ARM suele trabajar sin conocimiento previo de la pob
 
 A lo largo de su evolución, \ARM se ha ido desarrollando en base a conceptos teóricos y a su aplicación en ciertos \datasets, Muchos desarrollos han resultado poco competitivos al ser aplicados en \datasets concretos, lo que genera una constante duda sobre si existe un algoritmo mejor que otro o si todo depende de los datos sobre los que son aplicados. Es el caso de \texttt{chess.dat} y \mushroom: pese a tener dimensiones reducidas no se suelen utilizar con \soporte mínimo bajo, pues su análisis mediante \ARM produce una explosión de reglas que o bien no pueden ser guardadas en memoria o bien tardan tanto tiempo en obtenerse que se pierde su utilidad en servicios que deben ser ágiles, como los \sr.
 
-Estos ficheros han sido utilizados por
+Estos ficheros han sido utilizados por \cite{JinMcCallenBreitbartFuhryWang-EstimatingTheNumberOfFIInLargeDB-2009}, proponiendo un estudio sobre el umbral de \soporte mínimo adecuado para este fichero y en el que trabajan con \soporte mínimo del 25\% y 40\%.
 
 En ninguno de estos trabajos se ha tenido en cuenta que realmente estamos analizando dos tipos bien diferenciados de \transacciones:
 \begin{itemize}

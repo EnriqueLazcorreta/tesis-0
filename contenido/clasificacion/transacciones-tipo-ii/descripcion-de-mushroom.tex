@@ -1,2 +1,28 @@
 % !TEX root = ../../../Lazcorreta.Tesis.tex
 \ABIERTO
+Esta colección de datos ha sido utilizada para experimentar en muchas investigaciones y con propósitos y propuestas bien diferentes, pero en todas ellas se analiza utilizando el umbral de \soporte mínimo pese a sus reducidas dimensiones.
+
+\cite{Borgelt-EfficientImplementationsOfAprioriAndEclat-2004}, usa \mushroom con \soporte absoluto de entre 200 y 1\,000 \transacciones, prescindiendo de gran parte de la información contenida en el \dataset.
+
+\cite{Suzuki-DiscoveringInterestingExceptionRulesWithRulePair-2004}, 
+
+\cite{ThabtahCowlingHammoud-ImprovingRuleSorting-2006}, hacen énfasis en la utilidad del \soporte mínimo:
+\begin{quote}
+Given a history or a training data set, the task of an AC algorithm is to discover the complete class association rules with significant supports and high confidences (attributes values that have frequencies above user specified constraints, denoted by minimum support (minsup) and minimum confidence (minconf) thresholds).
+\end{quote}
+
+\cite{WangXinCoenen-MiningEfficientlySignificantCAR-2008}, analizan \mushroom con un 1\% de \soporte mínimo a pesar de reducir el número de ítems a considerar de los 119 del \dataset original a 90, con lo que ya reducen las dimensiones del problema original, perdiendo incluso algo más de información que no está demostrado que sea más o menos valiosa que la información recogida en el \dataset original.
+
+
+\cite{LiChen-MiningNonDerivableFIOverDataStream-2009}, califican a \mushroom como una colección densa y con alta correlación, lo que según los autores dificulta su estudio con niveles bajos de \soporte mínimo.
+
+\cite{LiZhang-MiningMaximalFIOnGraphicsProcessors-2010}, proponen el uso de "`Maximal Frequent Itemsets"' como una representación compacta de los \itemsets frecuentes contenidos en un \dataset, con lo que se necesita menos memoria para su almacenamiento y se puede aliviar el \dilemaIR. A pesar de ello también recurren al uso de \soporte mínimo en el análisis de esta colección de datos.
+
+%TODO: Añadir cita
+Hernández León utiliza esta colección de datos en su tesis, con 90 ítems distintos en lugar de los 119 originales. Propone la medida de calidad \emph{Netconf} como sustituto del \soporte mínimo, que fijan en el 1\% para hacer comparables sus aportaciones con las de otros investigadores.
+%\cite{HLeonCarrascoHPalancarMTrinidad-DesarrolloDeClasificadoresBasadosEnRA-2010}, utilizan también un \soporte mínimo del 1\% para hacer comparables sus aportaciones con las de otros científicos.
+
+\cite{MalikRaheja-ImprovingPerformanceOfFrequentItemsetAlgorithm-2013}, y \cite{RituArora-IntensificationOfExecutionOfFrequentItemSetAlgorithms-2014}, presentan el mismo trabajo bajo diferentes títulos. Utilizan esta colección de datos para comparar la eficiencia de tres algoritmos de \ARM aplicando \soporte mínimo del 10\%, 20\%\ldots 100\%.
+
+\cite{SahooKumarGoswami-AnAlgorithmForMiningHighUtilityClosedItemsetsAndGenerators-2014}, argumentan que el uso de \soporte-\confianza está sobrevalorado ya que estas medidas son puramente estadísticas y no aportan información de utilidad real de los \itemsets encontrados en el \dataset. Incorporan una medida de utilidad, asignada por el investigador, que se completa con el \soporte de los ítems en el \dataset. No indican qué valor asignan al \soporte mínimo pero siguen utilizándolo y, con ello, renunciando a parte de la información presente en la colección de datos a pesar de sus reducidas dimensiones.
+
