@@ -1,26 +1,28 @@
 % !TEX root = ../../../Lazcorreta.Tesis.tex
 \ABIERTO
-Esta colección de datos ha sido utilizada para experimentar en muchas investigaciones y con propósitos y propuestas bien diferentes, pero en todas ellas se analiza utilizando el umbral de \soporte mínimo pese a sus reducidas dimensiones.
+Esta colección de datos ha sido utilizada para experimentar en muchas investigaciones y con propósitos y propuestas bien diferentes. En todas ellas se analiza utilizando el umbral de \soporte mínimo pese a sus reducidas dimensiones. El problema que presenta el uso de \soporte mínimo en este fichero reside en que un 23\% de sus ítems tienen soporte menor al 1\% -- aparecen en 812 \transacciones o menos -- con lo que este umbral provoca que en todas las investigaciones revisadas no se obtenga información sobre al menos 27 ítems de los 119 presentes en el \dataset. Al usar estas colecciones como meros contenedores de \transacciones para demostrar la eficiencia de nuevos algoritmos los investigadores renuncian a obtener información de mayor calidad, si se pudieran repetir todos los experimentos realizados utilizando la información descrita en este capítulo cambiarían notablemente todos los resultados y en muchos casos se podría llegar a conclusiones que van más allá del objetivo de esta tesis.
 
-\citet{Borgelt-EfficientImplementationsOfAprioriAndEclat-2004} usa \mushroom con \soporte absoluto de entre 200 y 1\,000 \transacciones, prescindiendo de gran parte de la información contenida en el \dataset.
 
-\citet{Suzuki-DiscoveringInterestingExceptionRulesWithRulePair-2004} 
+\citet{Borgelt-EfficientImplementationsOfAprioriAndEclat-2004} usa \mushroom para mostrar la eficiencia de sus implementaciones de \apriori y \algoritmo{Eclat} con un \soporte mínimo absoluto fijado entre 200 y 1\,000 \transacciones (equivalente a un \soporte relativo del 2.46\% y 12.31\% respectivamente), prescindiendo de gran parte de la información contenida en el \dataset.
 
-\citet{ThabtahCowlingHammoud-ImprovingRuleSorting-2006} hacen énfasis en la utilidad del \soporte mínimo:
+\citet{Suzuki-DiscoveringInterestingExceptionRulesWithRulePair-2004} busca reglas inesperadas en su investigación por lo que tendrá que lidiar con soportes bajos. Apunta que \mushroom puede tratarse sin \soporte mínimo pero su experimento tarda 80 días en dar resultados por lo que opta por prescindir de parte de la información disponible en el fichero.
+
+\citet{ThabtahCowlingHammoud-ImprovingRuleSorting-2006} hacen énfasis en la utilidad teórica del \soporte mínimo:
 \begin{quote}
 Given a history or a training data set, the task of an AC algorithm is to discover the complete class association rules with significant supports and high confidences (attributes values that have frequencies above user specified constraints, denoted by minimum support (minsup) and minimum confidence (minconf) thresholds).
 \end{quote}
 
+\citet{LuoZhang-AnEfficientFIMAlgorithm-2007} usan \mushroom para probar su nuevo algoritmo, \emph{DiffsetHybrid}, con el que aseguran reducir las necesidades de uso de memoria. A pesar de ello utilizan \soportes mínimos del 10\%, 20\% y 30\%.
+
 \citet{WangXinCoenen-MiningEfficientlySignificantCAR-2008} analizan \mushroom con un 1\% de \soporte mínimo a pesar de reducir el número de ítems a considerar de los 119 del \dataset original a 90, con lo que ya reducen las dimensiones del problema original, perdiendo incluso algo más de información que no está demostrado que sea más o menos valiosa que la información recogida en el \dataset original.
 
+\citet{JinMcCallenBreitbartFuhryWang-EstimatingTheNumberOfFIInLargeDB-2009} hacen un estudio sobre el umbral de \soporte mínimo adecuado para este fichero utilizando valores para este umbral entre el 8\% y el 40\%.
 
 \citet{LiChen-MiningNonDerivableFIOverDataStream-2009} califican a \mushroom como una colección densa y con alta correlación, lo que según los autores dificulta su estudio con niveles bajos de \soporte mínimo.
 
 \citet{LiZhang-MiningMaximalFIOnGraphicsProcessors-2010} proponen el uso de "`Maximal Frequent Itemsets"' como una representación compacta de los \itemsets frecuentes contenidos en un \dataset, con lo que se necesita menos memoria para su almacenamiento y se puede aliviar el \dilemaIR. A pesar de ello también recurren al uso de \soporte mínimo en el análisis de esta colección de datos.
 
-\borrar{Añadir cita}
-Hernández León utiliza esta colección de datos en su tesis, con 90 ítems distintos en lugar de los 119 originales. Propone la medida de calidad \emph{Netconf} como sustituto del \soporte mínimo, que fijan en el 1\% para hacer comparables sus aportaciones con las de otros investigadores.
-%\citet{HLeonCarrascoHPalancarMTrinidad-DesarrolloDeClasificadoresBasadosEnRA-2010} utilizan también un \soporte mínimo del 1\% para hacer comparables sus aportaciones con las de otros científicos.
+\citet{HLeon-DesarrolloDeClasificadoresBasadosEnCAR-2011} utiliza esta colección de datos, con 90 ítems distintos en lugar de los 119 originales. Propone la medida de calidad \emph{Netconf} como sustituto del \soporte mínimo, que fijan en el 1\% para hacer comparables sus aportaciones con las de otros investigadores.
 
 \citet{MalikRaheja-ImprovingPerformanceOfFrequentItemsetAlgorithm-2013} y \citet{RituArora-IntensificationOfExecutionOfFrequentItemSetAlgorithms-2014} presentan el mismo trabajo bajo diferentes títulos. Utilizan esta colección de datos para comparar la eficiencia de tres algoritmos de \ARM aplicando \soporte mínimo del 10\%, 20\%\ldots 100\%.
 
@@ -33,13 +35,14 @@ Hernández León utiliza esta colección de datos en su tesis, con 90 ítems dis
 	\label{fig:Seta}
 \end{wrapfigure}
 Al revisar la documentación sobre \mushroom\footnote{Ilustración obtenida en {\scriptsize\url{https://openclipart.org/detail/900/two-mushrooms-by-johnny_automatic}}} pudimos plantear mejor el problema que queríamos resolver, encontrar todas las \ARs presentes en un fichero "`pequeño"' que presenta estas características. En \urlConNotaAlPie{https://archive.ics.uci.edu/ml/datasets/Mushroom}{UCI - Machine Learning Repository} describen su origen como
-
 \selectlanguage{english}
 \begin{quote}
    Mushroom records drawn from The Audubon Society Field Guide to North American Mushrooms (1981). G. H. Lincoff (Pres.), New York: Alfred A. Knopf 
 \end{quote}
 \selectlanguage{spanish}
 
+%TODO: Esta línea aparece con demasiado margen
+%\noindent 
 Describen brevemente el contenido del fichero, indicando que se trata de setas clasificadas como comestibles o venenosas (primer valor de cada fila).
 \selectlanguage{english}
 \begin{quote}
