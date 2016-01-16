@@ -138,16 +138,16 @@ sympy-plots-for-*.tex/
 
 *.tui
 
-bib/no-publicar/1-s2.0-S0957417412005805-main.pdf
-
-bib/no-publicar/1-s2.0-S0957417413004363-main.pdf
-
 *.loe
 
 Lazcorreta.Tesis.loe
 
 bib/revisar/thesis.pdf
 
-bib/no-publicar/1-s2.0-S0957417414006812-main.pdf
+# Ignorar el contenido de las carpetas
+bib/revisar/
+bib/no-publicar/
+borrar/
 
-bib/no-publicar/04370245.pdf
+agradecimiento.tex
+

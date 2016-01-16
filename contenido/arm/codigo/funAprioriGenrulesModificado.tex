@@ -11,7 +11,7 @@ x)  static a_m_processed; // set containing the sets of $l_k$ processed
                           // in previous  calls to genrules
 x)  if ($m == k$)
 x)    a_m_processed.clear(); // Initialize a_m_processed for each new $l_k$
-1)    $A = \{(m-1){\rm -itemsets}\  a_{m-1} \ | \ a_{m-1} \subset a_m\}$;
+1)    $A = \{(m-1)\textrm{-itemsets}\  a_{m-1} \ | \ a_{m-1} \subset a_m\}$;
 2)    forall $a_{m-1} \in A$ do begin
 x)      if $a_{m-1} \in$ a_m_processed then
 x)        continue;

@@ -161,7 +161,7 @@
 %\AtBeginDocument{%
 %  \renewcommand\tablename{Tabla}
 %}
-
+%\renewcommand{\abstractname}{Resumen}
 
 \begin{document}
 %\selectlanguage{spanish}
@@ -169,10 +169,22 @@
 
 %\lstset{language=C++}
 
+%\frontmatter
 
+%\addcontentsline{toc}{chapter}{Resumen}
+%\begin{abstract}
+% %Hola, tesis doctoral en informática !!!
+% \input{contenido/abstract}
+%\end{abstract}
+%\newpage
 
-Hola, tesis doctoral en informática !!!
-\newpage
+\chapter*{\centering \begin{normalsize}Resumen\end{normalsize}}
+\begin{quotation}
+\noindent % abstract text
+ \input{contenido/abstract}
+\end{quotation}
+\clearpage
+
 
 %\section*{Agradecimientos}
 %\input{agradecimiento}
@@ -183,12 +195,29 @@ Hola, tesis doctoral en informática !!!
 %\input{borrar/tesis-Enrique-2015}
 \tableofcontents
 
+\listoffigures
+
+\renewcommand{\listtablename}{Índice de tablas}%
+\listoftables
+
+%\listofalgorithms
+%\addcontentsline{toc}{chapter}{Índice de algoritmos}
+
+\renewcommand{\listtheoremname}{Índice de definiciones}%
+\listoftheorems
+%\addcontentsline{toc}{chapter}{Índice de definiciones}
+
+
+\lstlistoflistings
+\addcontentsline{toc}{chapter}{Índice de listados}
+
 \chapter*{Motivación}
+\addcontentsline{toc}{chapter}{Motivación}
 \label{chap:motivacion}
 \input{contenido/motivacion}
 
 
-
+\mainmatter
 
 %\chapter[SRW]{\srw}
 \chapter{\srw}
@@ -220,6 +249,7 @@ Hola, tesis doctoral en informática !!!
 
 
 \appendix
+
 \chapter{Notación}
 \label{apdx:notacion}
 \input{apendice/notacion}
@@ -231,30 +261,6 @@ Hola, tesis doctoral en informática !!!
 \chapter{Datos utilizados}
 \label{apdx:datos-utilizados}
 \input{apendice/datos-utilizados}
-
-\listoffigures
-
-\renewcommand{\listtablename}{Índice de tablas}%
-\listoftables
-
-%\listofalgorithms
-%\addcontentsline{toc}{chapter}{Índice de algoritmos}
-
-\renewcommand{\listtheoremname}{Índice de definiciones}%
-\listoftheorems
-%\addcontentsline{toc}{chapter}{Índice de definiciones}
-
-
-\lstlistoflistings
-\addcontentsline{toc}{chapter}{Índice de listados}
-
-% {
-\cleardoublepage
-% \small
-% \stepcounter{chapter}
-\phantomsection
-\printindex
-% }
 
 \chapter{Sobre la bibliografía}
 \thispagestyle{empty}
@@ -269,6 +275,15 @@ Hola, tesis doctoral en informática !!!
 % \thispagestyle{empty}
 \printbibliography
 \addcontentsline{toc}{chapter}{Bibliografía}
+
+
+% {
+\cleardoublepage
+% \small
+% \stepcounter{chapter}
+\phantomsection
+\printindex
+% }
 
 
 \end{document}
