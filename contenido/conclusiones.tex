@@ -1,5 +1,17 @@
 % !TEX root = ../Lazcorreta.Tesis.tex
-\noindent Las mejores ideas expuestas en esta tesis son muy simples. Desde el primer algoritmo que entra en juego, Apriori, hasta la elaboración de \catalogos completos ínfimos son ideas muy simples que implementadas de forma eficiente pueden hacer lo que se le pide a la Minería de Datos: buscar una aguja en un pajar.
+\noindent Las mejores ideas expuestas en esta tesis son muy simples. Desde el primer algoritmo que entra en juego, \apriori, hasta la elaboración de \CCs son ideas muy simples que implementadas de forma eficiente pueden hacer lo que se le pide a la \emph{\dm} (\DM): buscar una aguja en un pajar.
+
+La \DM busca descubrir de un modo eficiente y en el tiempo adecuado la mejor información que contienen enormes \datasets. Sus resultados se pueden guardar con forma de \datasets que resumen, en algún sentido y con algún significado, la máxima información del \dataset original que puede ser tratada de un modo eficiente para un problema determinado. La \DM es la parte del \kdd (\KDD) especializada en transformar enormes cantidades de datos en otro tipo de datos del que se pueden obtener conclusiones correctas e incorrectas cuando son interpretados. \arm (\ARM) es un área de \DM que sólo busca co-ocurrencias de ítems en \datasets formados por conjuntos de esos ítems.
+
+Hoy en día la lectura de un \dataset \D puede hacerse muy rápidamente a pesar de que éste sea muy grande, sin embargo si podemos resumir sin pérdidas la información que vamos a buscar en él tendremos un nuevo \dataset \D' mucho más pequeño y que podrá leerse todavía más rápido. Luego el principal problema que tiene ahora la \ARM es el tratamiento de los datos, con algoritmos como \apriori que pueden necesitar demasiados recursos para gestionar con rapidez los candidatos que son realmente variables temporales mientras no se descubra que son frecuentes. La \ARM sólo recorre \datasets y cuenta la co-ocurrencia de los ítems que tiene, para que \apriori no emplee demasiados recursos en la gestión de candidatos podemos preparar esos \datasets de modo que contengan la misma información que los originales\ldots
+
+
+
+
+
+
+
+\vspace{77pt}
 
 Los \CCs tienen un potencial fácil de descubrir mediante sencillas técnicas informáticas de Minería de Datos. Este trabajo presenta una teoría en torno a un tipo de datos muy utilizado que posibilita la obtención extrema de la información que contienen grandes colecciones de datos utilizando la tecnología actual en tiempo real. 
 

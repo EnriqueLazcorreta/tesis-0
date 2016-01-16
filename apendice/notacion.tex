@@ -2,19 +2,46 @@
 La notación usada en este informe se ha intentado ajustar a la más utilizada en la bibliografía revisada a lo largo de estos años de investigación. Por este motivo no es uniforme en los tres capítulos de investigación en que se divide esta tesis.
 
 \section{Sistemas de Recomendación Web}
+\label{sec:notacion:srw}
 En este capítulo\ldots
 
 
 
 
 \section{Minería de Reglas de Asociación}
+\label{sec:notacion:arm}
 En este capítulo\ldots
 
 
 
 
-\section{Catálogos}
-En este capítulo\ldots
+\section{\Catalogos}
+\label{sec:notacion:catalogos}
+
+\begin{longtable}{cp{0.75\textwidth}}
+   \caption{Notación sobre \Catalogos}\\
+   Símbolo & Descripción \\\hline
+\endfirsthead
+   \multicolumn{2}{c}{\tablename\ \thetable\ -- \textit{\ldots continuación}} \\\hline
+   Símbolo & Descripción \\\hline
+\endhead
+\hline
+\multicolumn{2}{r}{\textit{Continúa en la página siguiente\ldots}} \\
+\endfoot
+\hline
+\endlastfoot
+\centering
+  \D & \dataset  con todos los ejemplos que conocemos, generalmente es una muestra de individuos de la población en estudio pero también puede contener otro tipo de observaciones \\
+  $M=|\D|$ & Número de ejemplos del \dataset \D \\
+  $N$         & Número de \atributos en estudio \\
+  $X = \{X_1, \ldots, X_N\}$      & Variable $X$ \\
+  $X_i,\ 1\leq i\leq N$ & \Atributo $i$-ésimo \\
+  $x_j = \{x_{1j},\ldots,x_{Nj}\}$ & realización de $X_j$, ejemplo, individuo de la población en estudio, \registro\ldots \\
+  $x_{ij} \in \alpha_i,\ i\in\{1\ldots N\},\ j\in\{1\ldots M\}$ & Valor que toma el individuo $j$ en el \atributo $i$ \\
+  $\alpha_i = \{\alpha_i^1, \ldots, \alpha_i^{m_i}\}$ & Alfabeto del \atributo $i$-ésimo \\
+  $m_i = |\alpha_i|$ & Tamaño del alfabeto $\alpha_i$ \\
+\label{tab:notacion:catalogos}
+\end{longtable}
 
 
 

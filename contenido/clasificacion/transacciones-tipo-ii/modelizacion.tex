@@ -1,6 +1,53 @@
 % !TEX root = ../../../Lazcorreta.Tesis.tex
 \ABIERTO
-Definir \atributos, \clases\ldots
+\clearpage
+A partir de esta sección usaré la notación de \citet{WangWong-FromAssociationToClassificationInferenceUsingWeightOfEvidence-2003} adaptada a la que ya he utilizado en este libro.
+
+\borrar{Definir \atributos, \clases\ldots}
+
+%TODO: Considerar añadir ejemplo a indice-alfabetico pero CREO QUE NO.
+Consideremos que tenemos un \dataset \D con $M$ ejemplos. Cada ejemplo está representado por $N$ \atributos, cada uno de los cuales puede tomar valores en un alfabeto discreto finito. Sea $X = \{X_1,\ldots,X_N\}$ una representación de este conjunto de \atributos. Entonces, cada atributo $X_i,\ 1\leq i\leq N$, podría considerarse una variable aleatoria que toma valores de su alfabeto $\alpha_i = \{\alpha_i^1,\ldots,\alpha_i^{m_i}\}$, donde $m_i$ representa la cardinalidad del alfabeto del $i$-ésimo \atributo. Entonces, una realización de $X$ se puede denotar mediante $x_j = \{x_{1j},\ldots,x_{Nj}\}$, donde $x_{ij} \in \alpha_i$. Así, cada ejemplo de \D es una observación de $X$
+
+\begin{Definition}[Evento primario]
+   Un \emph{evento primario} de una variable aleatoria $X_i, 1\leq i\leq N$, es una realización de $X_i$, que toma un valor de $\alpha_i$.
+\label{def:evento-primario}
+\end{Definition}
+
+Denotaremos el $p$ ($1\leq p\leq m_i$) evento primario de $X_i$ con $[X_i = \alpha_i^p]$, o simplemente $x_{ip}$. Asumimos que dos eventos primarios, $x_{ip}$ y $x_{iq}$ de la misma variable $X_i$ son mutuamente excluyentes si $p\neq q$.
+
+Sea $s$ un subconjunto de $k$ enteros distintos entre 1 y $N$, $k\leq N$, y sea $X^s$ un subconjunto de $X$ tal que $X^s = \{X_i | i\in s\}$. Así, $x^s$ es una realización de $X^s$.
+
+\begin{Definition}[Evento compuesto]
+   Un \emph{evento compuesto} de un conjunto de variables aleatorias $X^s$, es un conjunto de eventos primarios representados por la realización $x^s$. El orden del evento compuesto es $|s|$. Un sub-evento\borrar{La traducción literal sería evento sub-compuesto.} de $x_j^s$\borrar{$x^s$} es un evento compuesto $x_j^{s'}\ \forall s'\subset s$ y $s'\neq\emptyset$.
+\label{def:evento-compuesto}
+\end{Definition}
+
+Un evento 1-compuesto es un evento primario. Un evento $k$-compuesto está formado por $k$ eventos primarios de $k$ variables distintas. Cada ejemplo de un \dataset es un evento $N$-compuesto.
+
+\begin{Definition}[Patrón de asociación significativo]
+   Sea $\mathcal{T}$ un test de significancia estadística. Si la ocurrencia de un evento compuesto $x_j^s$ es significativamente diferente de su estimación basada en un modelo probabilístico por defecto, diremos que $x_j^s$ es un \emph{patrón de asociación significativo}, o simplemente una \emph{asociación}, de orden $|s|$, y que los eventos primarios de $x_j^s$ tienen una asociación estadísticamente significativa de acuerdo con $\mathcal{T}$ o simplemente están \emph{asociados}.
+\label{def:patron-de-asociación-significativo}
+\end{Definition}
+
+
+
+Utilizaremos los términos \emph{patrón}, \emph{asociación significativa} y \emph{asociación} como sinónimos.
+
+
+
+
+\clearpage
+
+
+
+
+
+
+
+
+
+
+
 
 %TODO: Ver cómo mejoro esta definición cuando haya introducido la de Atributo, Valor...
 \begin{Definition}[\Registro]
