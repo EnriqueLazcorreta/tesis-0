@@ -18,7 +18,9 @@ En este capítulo\ldots
 \section{\Catalogos}
 \label{sec:notacion:catalogos}
 
-\begin{longtable}{cp{0.75\textwidth}}
+Si no se indica explícitamente se usarán los subíndices $i$, $j$ y $p\ldots$ para denotar \atributo, ejemplo y orden respectivamente, con lo que, en la tabla~\ref{tab:notacion:catalogos}, $1\leq i\leq N$ y $1\leq j\leq M$ y $p\ldots$ dependerá del subíndice al que represente.
+
+\begin{longtable}[c]{p{.3\textwidth}p{.7\textwidth}}
    \caption{Notación sobre \Catalogos}\\
    Símbolo & Descripción \\\hline
 \endfirsthead
@@ -30,16 +32,20 @@ En este capítulo\ldots
 \endfoot
 \hline
 \endlastfoot
-\centering
-  \D & \dataset  con todos los ejemplos que conocemos, generalmente es una muestra de individuos de la población en estudio pero también puede contener otro tipo de observaciones \\
-  $M=|\D|$ & Número de ejemplos del \dataset \D \\
-  $N$         & Número de \atributos en estudio \\
-  $X = \{X_1, \ldots, X_N\}$      & Variable $X$ \\
-  $X_i,\ 1\leq i\leq N$ & \Atributo $i$-ésimo \\
-  $x_j = \{x_{1j},\ldots,x_{Nj}\}$ & realización de $X_j$, ejemplo, individuo de la población en estudio, \registro\ldots \\
-  $x_{ij} \in \alpha_i,\ i\in\{1\ldots N\},\ j\in\{1\ldots M\}$ & Valor que toma el individuo $j$ en el \atributo $i$ \\
-  $\alpha_i = \{\alpha_i^1, \ldots, \alpha_i^{m_i}\}$ & Alfabeto del \atributo $i$-ésimo \\
+  $\D = \{x_1,\ldots,x_M\}$                                      & \dataset  con todos los ejemplos que vamos a analizar, generalmente es una muestra de individuos de la población en estudio pero también puede contener otro tipo de observaciones \\
+  $M=|\D|$                                                               & Número de ejemplos del \dataset \D \\
+  $\A = \{\A_1,\ldots,\A_N\}$                                     & Conjunto de \atributos en estudio \\
+  $N = |\A|$                                                              & Número de \atributos en estudio \\
+  $X = \{X_1, \ldots, X_N\}$                                      & Variable $X$ \\
+  $X_i$                                                                      & \Atributo $i$-ésimo \\
+  $\alpha_i = \{\alpha_i^1, \ldots, \alpha_i^{m_i}\}$   & Alfabeto del \atributo $i$-ésimo \\
   $m_i = |\alpha_i|$ & Tamaño del alfabeto $\alpha_i$ \\
+  $x_{ij} \in \alpha_i$                                                 & Valor que toma el individuo $j$ en $\A_i$ \\
+  $x_j = \{x^1_j,\ldots,x_j^N\}$                                 & Realización de $X_j$, suceso $\left[(X_1 = x_j^1) \wedge\ \ldots \wedge (X_N = x_j^N)\right]$, ejemplo, individuo $j$-ésimo del \dataset, \registro $j$-ésimo, \ldots \\
+  $X_i$                                                                    & Suceso atómico, evento primario \\
+  $x_{ip} \simeq \left[X_i = \alpha_i^p\right]$            & Realización de suceso atómico \\
+  $X^s \subset X$                                                     & Subconjunto de $X$ formado sólo con los \atributos del subconjunto $s \subset\{1\ldots N\}$, suceso compuesto, conjunto de sucesos atómicos $X^s = \{X_i\ |\ i\in s\}$ \\
+  $x^s = \{x_i\ |\ i\in s\}$                                           & Realización del suceso compuesto $X^s$ \\
 \label{tab:notacion:catalogos}
 \end{longtable}
 

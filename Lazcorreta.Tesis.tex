@@ -158,10 +158,10 @@
 \makeindex
 
 
-%\AtBeginDocument{%
-%  \renewcommand\tablename{Tabla}
-%}
 %\renewcommand{\abstractname}{Resumen}
+\AtBeginDocument{%
+  \renewcommand\tablename{Tabla}
+}
 
 \begin{document}
 %\selectlanguage{spanish}
@@ -197,7 +197,11 @@
 
 \listoffigures
 
-\renewcommand{\listtablename}{Índice de tablas}%
+\renewcommand{\listtablename}{Índice de tablas}
+\renewcommand{\tablename}{Tabla}
+%\AtBeginDocument{%
+%  \renewcommand\tablename{Tabla}
+%}
 \listoftables
 
 %\listofalgorithms
