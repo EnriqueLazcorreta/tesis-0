@@ -125,12 +125,7 @@ sympy-plots-for-*.tex/
 *.bak
 *.sav
 
-
-*.log
-
 *.gz
-
-*.out
 
 *.mp
 
@@ -139,10 +134,6 @@ sympy-plots-for-*.tex/
 *.tui
 
 *.loe
-
-Lazcorreta.Tesis.loe
-
-bib/revisar/thesis.pdf
 
 # Ignorar el contenido de las carpetas
 bib/revisar/

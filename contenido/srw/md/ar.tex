@@ -16,33 +16,33 @@ Según su propia experiencia, tras generar gran número de \ars a partir de gran
 
 Formalicemos su propuesta para poder entenderla mejor. El punto de partida es un conjunto de $M$ \emph{ítems} al que llamaremos \I. Tenemos muchas \transacciones, subconjuntos de \I obtenidos en determinadas circunstancias, y nos preguntamos qué ítems están presentes de forma conjunta en las \transacciones. 
 
-\begin{Definition}[Población de ítems]
+\begin{defn}[Población de ítems]
    Sea \I un conjunto con $M$ \emph{ítems} distintos. Llamaremos \itemset a cualquier subconjunto de \I, o bien \kitemset si queremos indicar en su nombre su tamaño.
    \begin{equation}\label{eq:1-3-2-poblacionDeItems}
      \I = \left\{\I_1,\ldots, \I_M\right\}
    \end{equation}
 \label{def:1-3-2-poblacionDeItems}
-\end{Definition}
+\end{defn}
 
 En la cesta de la compra, \I es el conjunto de todos los productos existentes en el comercio. En una tarea de \clasificacion se suelen codificar todos los pares \texttt{atributo=valor} mediante números enteros consecutivos, con lo que \I contiene únicamente un conjunto de números que representan todos los valores que pueden tomarse en los diferentes atributos en estudio. En \wum es el conjunto de páginas del sitio web (ver definición~\ref{def:1-2-4-cjto-paginasSW}, pág.~\pageref{def:1-2-4-cjto-paginasSW}).
 
-\begin{Definition}[\Transaccion]
+\begin{defn}[\Transaccion]
    Una \transaccion \T es un \itemset, un subconjunto de \I, obtenido en determinadas circunstancias.
    \begin{equation}\label{eq:1-3-2-transaccion}
      \T \subseteq \I = \left\{I_j\ | \ I_j \in \I,\ j = 1 \ldots k\right\}
    \end{equation}
 \label{def:1:3:2:transaccion}
-\end{Definition}
+\end{defn}
 
 En la cesta de la compra una \transaccion es parte de la información recogida en un ticket, es el conjunto de productos que ha comprado el cliente en una compra. O podríamos crear las \transacciones con el conjunto de productos que han comprado los clientes identificados durante el último mes, con lo que tendríamos menos transacciones y podríamos buscar \patrones de compra entre nuestros clientes, no entre cada una de sus compras individuales. En un problema de \clasificacion cada registro en el que se han anotado los valores que toma un individuo para cada uno de los atributos en estudio es una \transaccion. En \WUM una \transaccion es el conjunto de páginas que ha visitado un usuario en una \sn.
 
-\begin{Definition}[Almacén \D]
+\begin{defn}[Almacén \D]
    Un almacén \D es un conjunto de \transacciones.
    \begin{equation}\label{eq:1-3-2-D}
      \D = \left\{\T\right\}
    \end{equation}
 \label{def:1:3:2:D}
-\end{Definition}
+\end{defn}
 
 He definido el almacén de \transacciones, \D, para diferenciarlo de la \DB que contiene todos los datos que podemos tener recogidos. La \arm, como técnica de \dm sólo es una fase de un proceso de \KDD por lo que se aplicará después de seleccionar, pre-procesar y transformar los datos originales. Cualquier cambio en los parámetros usados en estas fases provocará la obtención de un almacén \D diferente al que habría que analizar por completo.
 
@@ -52,21 +52,21 @@ Al poder crear \D de un modo rápido y con diferentes criterios se abre el campo
 
 El objetivo del análisis es encontrar las \ARs que contiene el almacén \D, reglas con la forma $X\rightarrow Y$ que nos informan sobre el número de veces que aparece el \itemset $Y$ en las transacciones que contienen el \itemset $X$.
 
-\begin{Definition}[\AR]
+\begin{defn}[\AR]
    Una \AR es una expresión del tipo $a_i \rightarrow c_i$ , donde $a_i$ y $c_i$ son dos \itemsets mutuamente excluyentes ($a_i \cap c_i = \emptyset$).
   \begin{equation}\label{eqARi}
       R_i = \{a_i\rightarrow c_i\}
   \end{equation}
    \noindent $a_i$ recibe el nombre de \antecedente y $c_i$ el de \consecuente de la \ar.
 \label{def:1-3-2-AR}
-\end{Definition}
+\end{defn}
 
 Las \ars se obtienen al examinar a fondo un almacén de \transacciones y lo único que nos dirán es qué relaciones de co-ocurrencia existen entre los ítems en estudio. La aportación de la \arm es la posibilidad real de hacer el análisis de tremendas colecciones de conjuntos de datos. Algo tan aparentemente simple se ha de llevar a la práctica con cierta prudencia pues los recursos disponibles en la mayoría de dispositivos informáticos son limitados. A pesar de contar con muchas herramientas derivadas de la \emph{Teoría de Conjuntos}, al tratar de implementarlas en un dispositivo informático y manipular grandes cantidades de datos aparecerán enseguida problemas de desbordamiento de memoria, por lo que se entiende que la \arm sea una disciplina más investigada en el ámbito de la Informática que en el de la Estadística.
 
-\begin{Definition}[Minería de Reglas de Asociación]
+\begin{defn}[Minería de Reglas de Asociación]
    La \arm es el proceso de búsqueda de \ARs en grandes almacenes de \transacciones utilizando los recursos informáticos disponibles y en un tiempo apropiado.
 \label{def:1-3-2-ARM}
-\end{Definition}
+\end{defn}
 
 El análisis propuesto es útil para muchas disciplinas en la época de la tecnología y el \emph{Big Data}. Las \transacciones sirven para modelar gran cantidad de estudios y las \ars puede convertirse en conocimiento muy útil en distintas áreas de investigación si se adquiere a tiempo de poder ser utilizado.
 
@@ -85,7 +85,7 @@ El análisis propuesto es útil para muchas disciplinas en la época de la tecno
 
 Para medir la calidad de las \ARs se utilizan dos valores, el \soporte y la \confianza de la regla. Antes de definirlas hemos de exponer el significado de \soporte de un \itemset, que siempre tendrá relación con el tamaño del almacén de \transacciones, $|\D|$.
 
-\begin{Definition}[\Soporte de un \itemset]
+\begin{defn}[\Soporte de un \itemset]
   El \soporte de un \itemset es su frecuencia en \D, el número de veces que aparece el \itemset en el almacén de \transacciones.
   \begin{equation}\label{eq:1-3-2-soporte-absoluto-itemset}
     soporte(X) = |\T_X| = n_X,\ \textrm{ siendo }\ \T_X =\left\{\T \in \D\ / \ X \in \T\right\}
@@ -95,7 +95,7 @@ Para medir la calidad de las \ARs se utilizan dos valores, el \soporte y la \con
     soporte_{relativo}(X) = \frac{n_X}{|\D|}
   \end{equation}
 \label{def:1-3-2-soporte-itemset}
-\end{Definition}
+\end{defn}
 
 En muchos estudios se supone que el \soporte de un \itemset es representativo de la frecuencia de ese \itemset en la población de la que procede la muestra analizada. Si esta suposición fuera correcta sería más probable encontrar este \itemset en esta población que cualquier otro con menor \soporte por lo que se utiliza para estimar probabilidades sobre la población de origen de la muestra \D.
 
@@ -105,30 +105,30 @@ La limitación de recursos en los dispositivos en que se ejecutan los algoritmos
 La primera solución propuesta consiste en ignorar los ítems que tengan menor \soporte para aprovechar la memoria sólo para guardar los ítems más frecuentes, lo que se supone que aportará información para un conjunto más amplio de individuos de la población. Es una suposición que no debe satisfacer las inquietudes del analista ya que cuando trabajamos con colecciones muy grandes de \transacciones puede darse el caso que decidamos ignorar los ítems cuyo \soporte sea inferior al 0.5\%, lo que muchos investigadores califican como "`poco representativo"' de la población en estudio. Si ese aparentemente pequeño 0.5\% supone que ignoremos la información que proporciona un ítem que aparece en miles de transacciones no deberíamos dar por terminado el estudio.
 
 
-\begin{Definition}[\Soporte mínimo]
+\begin{defn}[\Soporte mínimo]
    El \soporte mínimo, $minSup$, es un valor fijado antes de llevar a cabo la \emph{búsqueda de} \itemsets \emph{frecuentes}. Si el almacén \D es muy grande y el equipo en que se ejecute el algoritmo de \arm tiene recursos insuficientes para el análisis completo de \D se debe fijar un \soporte mínimo para que no se produzcan desbordamientos de memoria RAM, lo que se logrará ignorando los \itemsets cuyo \soporte sea inferior a $minSup$.
 \label{def:1-3-2-soporte-minimo}
-\end{Definition}
+\end{defn}
 
 
-\begin{Definition}[\Itemset frecuente]
+\begin{defn}[\Itemset frecuente]
    Un \itemset frecuente es un \itemset con \soporte en \D igual o superior a $minSup$.
    % $$X \in \ap
 \label{def:1-3-2-itemset-frecuente}
-\end{Definition}
+\end{defn}
 
-\begin{Definition}[Conjunto de \itemsets frecuentes, {\aprioriL}]
+\begin{defn}[Conjunto de \itemsets frecuentes, {\aprioriL}]
    Sea \aprioriL es el conjunto de todos los \itemsets frecuentes de \D. Sean \aprioriL[k] los conjuntos de \kitemsets frecuentes de \D.
   \begin{equation}\label{eq:1-3-2-cjto-kitemsets}
     \aprioriL = \cup_k{\aprioriL[k]}
   \end{equation}
 \label{def:1-3-2-cjto-itemsets-frecuente}
-\end{Definition}
+\end{defn}
 
 Técnicamente el valor más grande que puede tomar $k$ coincide con la longitud de la \transaccion más larga de \D. Sin embargo al trabajar con \soporte mínimo es muy probable que $k$ no alcance dicho valor.
 
 
-\begin{Definition}[\Soporte de una \AR]
+\begin{defn}[\Soporte de una \AR]
   El \soporte de la \AR $X \rightarrow Y$ es la frecuencia del \itemset que la forma, $X \cup Y$, en \D.
   \begin{equation}\label{eq:1-3-2-soporte-AR-absoluto}
     soporte(X \rightarrow Y) = soporte(X \cup Y) = n_{XY}
@@ -137,17 +137,17 @@ Técnicamente el valor más grande que puede tomar $k$ coincide con la longitud 
     soporte_{relativo}(X \rightarrow Y) = \frac{soporte(X \cup Y)}{|\D|} = \frac{n_{XY}}{|\D|}
   \end{equation}
 \label{def:1-3-2-soporte-AR}
-\end{Definition}
+\end{defn}
 
 El \soporte de una \ar nos indica con qué frecuencia se encuentra esta regla entre las transacciones de la muestra \D.
 
-\begin{Definition}[\Confianza de una \AR]
+\begin{defn}[\Confianza de una \AR]
    La \confianza de una regla es la frecuencia con que aparece el \consecuente, $Y$, en las transacciones en que está el \antecedente, $X$.
   \begin{equation}\label{eq:1-3-2-confianza-AR}
     confianza(X \rightarrow Y) = \frac{soporte(X \cup Y)}{soporte(X)} = \frac{n_{XY}}{n_X}
   \end{equation}
 \label{def:1-3-2-confianza}
-\end{Definition}
+\end{defn}
 
 Si la \ar $X \rightarrow Y$ tiene \soporte $s$ y confianza $c$ su lectura es sencilla de comprender: 
 \begin{quote}
@@ -156,10 +156,10 @@ Si la \ar $X \rightarrow Y$ tiene \soporte $s$ y confianza $c$ su lectura es sen
 
 Se utilizan mucho en tareas de \prediccion interpretando la \confianza como una probabilidad aunque para hacerlo correctamente debería estudiarse más a fondo la población de origen de los datos.
 
-\begin{Definition}[\Confianza mínima]
+\begin{defn}[\Confianza mínima]
    La \confianza mínima, $minConf$, es un valor fijado antes de llevar a cabo la \emph{generación de} \ars para evitar problemas de desbordamiento de memoria {RAM}, lo que se logrará ignorando las \ars cuya confianza sea inferior a $minConf$.
 \label{def:1-3-2-confianza-minima}
-\end{Definition}
+\end{defn}
 
 En todo proceso de \arm hay dos fases bien diferenciadas, la \fim (\FIM) y la obtención de las \ars a partir de los \itemsets frecuentes encontrados. La parte más costosa del proceso es la primera pues se ha de recorrer por completo el almacén \D para comprobar qué ítems se relacionan entre sí y cuáles lo hacen de manera frecuente (superando el \soporte mínimo fijado en el estudio). En esta fase se guarda la información obtenida conforme se va leyendo \D, con el riesgo de tener desbordamiento de memoria RAM si no se hacen costosas operaciones de comprobación cada vez que se va a necesitar algo más de RAM. En la segunda fase se utiliza el conjunto de \itemsets frecuentes encontrado en la primera y se comprueban todas las reglas que se pueden derivar de ellos, ofreciendo como resultado las reglas que superen la \confianza mínima fijada para el estudio.
 
@@ -186,10 +186,10 @@ Entre todos ellos hemos seleccionado \apriori por tratarse de un algoritmo senci
 \end{enumerate}
 
 
-\begin{Definition}[Conjunto de candidatos a \kitemsets frecuentes, \aprioriC]
+\begin{defn}[Conjunto de candidatos a \kitemsets frecuentes, \aprioriC]
    \aprioriC es el conjunto de todos los \kitemsets que podrían ser frecuentes en \D. Se genera a partir de \aprioriL[k-1].
 \label{def:1-3-2-cjto-candidatos}
-\end{Definition}
+\end{defn}
 
 
 \lstinputlisting[style=miSQL,

@@ -64,7 +64,7 @@ Incluso la información sobre $\overrightarrow{u}_j$ se podría sustituir por un
 
 Con todas estas transformaciones hemos definido el \mnw (\MNW), mostrado en la figura~\ref{fig:1-3-1-MNW}, del que queremos extraer toda la información posible sobre el uso del sitio web en estudio.
 
-\begin{Definition}[\emph{Mapa de Navegación Web}]\label{def:1-3-1-MNW}
+\begin{defn}[\emph{Mapa de Navegación Web}]\label{def:1-3-1-MNW}
   \begin{equation}\label{eq:1-3-1-MNW}
      \begin{array}{ll}
         MNW_i = & \left( P', E' \right) \ | \\
@@ -72,7 +72,7 @@ Con todas estas transformaciones hemos definido el \mnw (\MNW), mostrado en la f
               & E' = \left\{ \left( E'_{jk}, n_{jk} \right), 1 \leq j \leq n_{i-1}, 1 \leq k \leq n_i \right\} 
      \end{array}
   \end{equation}
-\end{Definition}
+\end{defn}
 
 
 \begin{wrapfigure}{o}{0.35\textwidth}
@@ -85,12 +85,12 @@ Si tenemos el mapa del sitio web podemos comprobar qué enlaces existentes en $E
 
 La unión de todos los \mnws de un mismo usuario proporciona su \mpnw, mostrado en la figura~\ref{fig:1-3-1-MPNW}.
 
-\begin{Definition}[\emph{Mapa Personal de Navegación Web}]\label{def:1-3-1-MPNW}
+\begin{defn}[\emph{Mapa Personal de Navegación Web}]\label{def:1-3-1-MPNW}
   \begin{equation}
      \label{eq:1-MPNW}
      MPNW_{userID} = \bigcup_{i=1}^{N}{MNW_i}\ | \ {sesion}_i.user = userID 
   \end{equation}
-\end{Definition}
+\end{defn}
 
 
 En el \emph{Mapa Personal de Navegación Web} está recogida toda la información sobre las \sns realizadas por el usuario por lo que cada vez que el usuario solicita una página del sitio web se busca dicha página en su ${MPNW}_{userID}$ y, si está, se recomendarán algunas de las páginas que estén conectadas con la solicitada mediante un eje o un camino, de dos ejes como máximo para no ralentizar esta fase, ordenando las recomendaciones en función del tiempo de permanencia que tiene cada una de las páginas sugeridas en su ${MPNW}_{userID}$. Podemos ir más allá y extender la búsqueda de páginas a recomendar a otro nivel utilizando caminos más largos y comprobando si las nuevas sugerencias son mejor acogidas por los usuarios del sitio web.
@@ -108,11 +108,11 @@ En el \emph{Mapa Personal de Navegación Web} está recogida toda la informació
 
 Si tenemos $m$ usuarios, $userID = 1\ldots m$, podemos modelizar el uso general del sitio web mediante la unión de todos sus $MPNW$, obteniendo un \musw (\MUSW).
 
-\begin{Definition}[\emph{Mapa de Uso del Sitio Web}]\label{def:1-3-1-MUSW}
+\begin{defn}[\emph{Mapa de Uso del Sitio Web}]\label{def:1-3-1-MUSW}
   \begin{equation}\label{eq:1-3-1-MUSW}
     MUSW = \bigcup_{userID=1}^{m}{MPNW_{userID}} 
   \end{equation}
-\end{Definition}
+\end{defn}
 
 El \MUSW se puede utilizar para hacer recomendaciones a usuarios que no hayan estado antes en nuestro sitio web, ya que no tendremos información sobre su \MPNW$_{userID}$. Se usará del mismo modo que usamos los mapas personales, buscando en el \grafo la página solicitada por el usuario y añadiéndole enlaces con recomendaciones basadas en los ejes que salen de dicha página en el \grafo, ponderadas por el tiempo de permanencia de las páginas destino de cada eje.
 

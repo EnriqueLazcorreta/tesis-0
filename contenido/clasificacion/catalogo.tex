@@ -2,11 +2,11 @@
 \ABIERTO
 
 
-\begin{Definition}[Individuo]
+\begin{defn}[Individuo]
    Sean $A_i, i = 1 \ldots n$ un conjunto de atributos, siendo $n_i$ el número de valores distintos que puede tomar el atributo $A_i$. Definimos un \emph{individuo} como una $n$-túpla, un conjunto de $n$ valores obtenidos ordenadamente de los atributos $A_i$.
    $$individuo = \left(a_1, a_2\ldots a_n\right), a_i \in A_i$$
 \label{def:individuo}
-\end{Definition}
+\end{defn}
 
 El propósito de recoger esta información suele ser el de \clasificacion, clasificar al \emph{individuo} en función de los valores observados en los atributos en estudio. Esta asignación se hace en función de la información que tenemos sobre esta población, generalmente un almacén \D como \mushroom, que contiene datos sobre muchos individuos de esta población correctamente clasificados.
 
@@ -51,16 +51,16 @@ Un \catalogo tiene una estructura muy rígida. Si hay valores missing se puede a
 
 En un \catalogo todos los registros contienen $n$ datos, y si forma parte de una tarea de \clasificacion uno o varios de esos datos representan una \clase, generalmente el "`\atributo"' cuyo valor queremos determinar a partir de la observación de los valores del resto de \atributos.
 
-\begin{Definition}[Registro]
+\begin{defn}[Registro]
    Sean $A_i, i = 1 \ldots n$ un conjunto de atributos, siendo $n_i$ el número de valores distintos que puede tomar el atributo $A_i$. Definimos un registro como una $n$-túpla, un conjunto de $n$ valores obtenidos ordenadamente de los atributos $A_i$.
    $$registro = \left(item_1, item_2\ldots item_n\right), item_i \in A_i$$
 \label{def:registro}
-\end{Definition}
+\end{defn}
 
-\begin{Definition}[\Catalogo] Un \catalogo es un conjunto de $N$ registros diferentes.
+\begin{defn}[\Catalogo] Un \catalogo es un conjunto de $N$ registros diferentes.
    $$\catalogo = \left\{registro_i, i = 1\ldots N\ | \ registro_i \neq registro_j \forall i \neq j\right\}$$
 \label{def:catalogo}
-\end{Definition}
+\end{defn}
 % \borrar{Buscar una definición mejor, en \clasificacion}
 
 

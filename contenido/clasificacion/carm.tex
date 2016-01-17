@@ -15,11 +15,11 @@
 El problema de \Clasificacion tiene ya su propia notación, igual que el de \arm (definida en el capítulo~\ref{chap:arm}), en esta sección intentaremos unificarla y discutiremos algunos aspectos de ambas disciplinas que no han sido considerados en la bibliografía usada para este trabajo, lo que nos llevará también a definir nuevos conceptos e intentar caracterizarlos.
 
 
-%\begin{Definition}[Individuo]
+%\begin{defn}[Individuo]
 %   Sean $A_i, i = 1 \ldots n$ un conjunto de atributos, siendo $n_i$ el número de valores distintos que puede tomar el atributo $A_i$. Definimos un \emph{individuo} como una $n$-túpla, un conjunto de $n$ valores obtenidos ordenadamente de los atributos $A_i$.
 %   $$individuo = \left(a_1, a_2\ldots a_n\right), a_i \in A_i$$
 %\label{def:individuo}
-%\end{Definition}
+%\end{defn}
 
 \borrar{Esto no va aquí}
 \citet{DeshpandeKarypis-UsingConjunctionofAttributeValuesforClassification-2002} proponen la "`conjunción de atributos"' para designar a un conjunto de pares \atributo=valor que mejoran el proceso de \Clasificacion. La notación usada en este artículo\ldots
@@ -30,56 +30,56 @@ El problema de \Clasificacion tiene ya su propia notación, igual que el de \arm
 
 \borrar{[HLeon-2010\ldots]}
 Sean $\I = \{i_1,i_2,\ldots,l_n\}$ un conjunto de $n$ ítems y \T un conjunto de transacciones. Cada \transaccion en \T está formada por un conjunto de ítems $X$ tal que $X\in\I$.
-\begin{Definition}[\Itemset]
+\begin{defn}[\Itemset]
   El tamaño de un conjunto de ítems está dado por su cardinalidad; un conjunto de ítems de cardinalidad $k$ se denomina $k$-itemset.
 \label{def:itemset}
-\end{Definition}
+\end{defn}
 
-\begin{Definition}[Soporte]
+\begin{defn}[Soporte]
   El \soporte de un conjunto de ítems $X$, en adelante $Sop(X)$, se define como la fracción de \transacciones en \T que contienen a $X$. El \soporte toma valores en el intervalo $[0,1]$.
 \label{def:soporte}
-\end{Definition}
+\end{defn}
 
-\begin{Definition}[$minSup$]
+\begin{defn}[$minSup$]
   Sea $minSup$ un umbral previamente establecido, un conjunto de ítems $X$ se denomina \emph{frecuente} (FI por sus siglas en inglés) si $Sop(X) \geq minSup$.
 \label{def:flujo-de-datos}
-\end{Definition}
+\end{defn}
 
-\begin{Definition}[\AR]
+\begin{defn}[\AR]
   Una \AR (AR por sus siglas en inglés) sobre el conjunto de transacciones \T es una implicación $X\Rightarrow Y$ tal que $X\subset\I, Y\subset\I$ y $X\cap Y=\emptyset$.
 \label{def:reglas-de-asociacion}
-\end{Definition}
+\end{defn}
 
-\begin{Definition}[Especificidad]
+\begin{defn}[Especificidad]
   Dadas dos reglas $R_1: X_1\Rightarrow Y$ y $R_2: X_2\Rightarrow Y$, se dice que $R_1$ es más específica que $R_2$ si $X_2\subset X_1$.
 \label{def:especificidad}
-\end{Definition}
+\end{defn}
 
 Las medidas más usadas en la literatura para evaluar la calidad de una \AR son el \soporte y la \confianza.
 
-\begin{Definition}[Soporte de una regla]
+\begin{defn}[Soporte de una regla]
   El \soporte de una \ar $X\Rightarrow Y$ es igual a $Sop(X\cup Y)$.
 \label{def:soporte-de-una-AR}
-\end{Definition}
+\end{defn}
 
-\begin{Definition}[Confianza de una regla]
+\begin{defn}[Confianza de una regla]
   La \confianza de una \ar $X\Rightarrow Y$, en adelante $Conf(X\Rightarrow Y)$ se define en función del \soporte como $\frac{Sop(X\cup Y)}{Sop(X)}$. La \confianza toma valores en el intervalo $[0,1]$.
 \label{def:confianza-de-una-AR}
-\end{Definition}
+\end{defn}
 
 Es importante aclarar que cuando se haga referencia a un conjunto de ítems $X$ se estará hablando de un subconjunto de \I y se supondrá, sin pérdida de generalidad, que existe un orden lexicográfico entre los ítems del conjunto \I.
 
 Para extender las definiciones anteriores al problema de \clasificacion basada en \sCARs, además del conjunto \I, se tiene un conjunto de \clases \C y un conjunto de transacciones etiquetadas $\T_\C$ (conjunto de entrenamiento). Las \transacciones del conjunto $\T_\C$ están formadas por un conjunto de ítems $X$ y una \clase $c\in \C$. Esta extensión no afecta las definiciones de \soporte y \confianza enunciadas previamente.
 
-\begin{Definition}[\CAR]
+\begin{defn}[\CAR]
   Una \CAR (\sCAR) es una implicación $X\Rightarrow c$ tal que $X\subseteq\I$ y $c\in\D$. El \soporte de una \CAR $X\Rightarrow c$ es igual a $Sop(X\cup\{c\})$ y la confianza es igual a $\frac{Sop(X\cup\{c\})}{Sop(X)}$.
 \label{def:CAR}
-\end{Definition}
+\end{defn}
 
-\begin{Definition}
+\begin{defn}
   Una \CAR $X\Rightarrow c$ ($X\subseteq\I$ y $c\in\D$) satisface o cubre a una \transaccion $t\subseteq\I$ si $X\subseteq t$.
 \label{def:cubrimiento-CAR}
-\end{Definition}
+\end{defn}
 
 Los clasificadores desarrollados basados en \CARs seleccionan, para cada \transaccion $t$ que se desee clasificar, el subconjunto de \sCARs que la cubren y con este subconjunto determinan la \clase que se asignará a $t$.
 
@@ -121,20 +121,20 @@ based on Association Rules), PRM (Predictive Rule Mining), CPAR (Classification 
 %\input{contenido/clasificacion/conceptos-basicos/tal}
 Para poder adaptar la notación de Hernández León necesitamos definir antes algunos conceptos.
 
-\begin{Definition}[Individuo]
+\begin{defn}[Individuo]
    Sean $A_i, i = 1 \ldots n$ un conjunto de atributos, siendo $n_i$ el número de valores distintos que puede tomar el atributo $A_i$. Definimos un \emph{individuo} como una $n$-túpla, un conjunto de $n$ valores obtenidos ordenadamente de los atributos $A_i$.
    $$individuo = \left(a_1, a_2\ldots a_n\right), a_i \in A_i$$
 \label{def:individuo}
-\end{Definition}
+\end{defn}
 
 
-\begin{Definition}[Registro]
+\begin{defn}[Registro]
    Sean $A_i, i = 1 \ldots n$, un conjunto de atributos, siendo $n_i$ el número de valores distintos que puede tomar el atributo $A_i$. Definimos un registro como una $n$-túpla, un conjunto de $n$ valores obtenidos ordenadamente de los atributos $A_i$.
    $$registro = \left(item_1, item_2\ldots item_n\right), item_i \in A_i$$
 \label{def:registro}
-\end{Definition}
+\end{defn}
 
-\begin{Definition}[\Catalogo] Un \catalogo es un conjunto de $N$ registros diferentes.
+\begin{defn}[\Catalogo] Un \catalogo es un conjunto de $N$ registros diferentes.
    $$\catalogo = \left\{registro_i, i = 1\ldots N\ | \ registro_i \neq registro_j \forall i \neq j\right\}$$
 \label{def:catalogo}
-\end{Definition}
+\end{defn}

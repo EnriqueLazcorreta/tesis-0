@@ -20,13 +20,13 @@ Si un usuario está visitando el grupo de páginas $X$ y disponemos de reglas cu
 
 Existen otras medidas como el \lift, que hace intervenir el \soporte del \consecuente.
 
-\begin{Definition}[\lift]
+\begin{defn}[\lift]
    El \lift de una \AR compara la frecuencia de la regla con la frecuencia del \consecuente. Si llamamos $n_{XY}$ al número de veces que aparece el \itemset $(X \cup Y)$ en \D, su \lift sería
   \begin{equation}\label{eq:1-3-2-lift-AR}
     lift(X \rightarrow Y) = \frac{soporte(X \rightarrow Y)}{n_Y} = \frac{n_{XY}}{n_X\cdot n_Y}
   \end{equation}
 \label{def:1:3:2:lift:ar}
-\end{Definition}
+\end{defn}
 
 Su interpretación se hace en términos de probabilidad. Si hubiera independencia estadística entre los sucesos $A$ ("`la transacción contiene el \itemset $X$"') y $B$ ("`la transacción contiene el \itemset $Y$"') podríamos comprobarlo a partir de las probabilidades $P(A)$, $P(B)$ y $P(A \cap B)$ debido a que dos sucesos independientes cumplen que $P(A \cap B) = P(A)\cdot P(B)$. Utilizando las frecuencias observadas en \D podríamos pensar que dos sucesos son independientes si el producto de sus frecuencias coincide con la frecuencia conjunta de ambos. Utilizando $n_X$, $n_Y$ y $n_{XY}$ para expresar estas frecuencias si detectamos que $n_X\cdot n_Y = n_{XY}$ podemos pensar que la presencia de $Y$ en las \transacciones de \D es independiente de que también esté presente $X$. Si ocurriera esto tendríamos que $lift(X \rightarrow Y) = \frac{n_{XY}}{n_X\cdot n_Y} = 1$ por lo que el $lift$ debe compararse con la unidad para que nos proporcione alguna información.
 

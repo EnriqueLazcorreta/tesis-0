@@ -16,19 +16,19 @@ Todo proceso de \KDD se retroalimenta de cada conocimiento (parcial) adquirido e
 
 Volviendo a centrarnos en el proceso de \WUM, los datos que vamos a procesar son básicamente las páginas que se han visitado y los enlaces utilizados para ello. Los definiré formalmente para ir exponiendo la notación usada en este informe.
 
-\begin{Definition}[\emph{Páginas} del sitio web]\label{def:1-2-4-cjto-paginasSW}
+\begin{defn}[\emph{Páginas} del sitio web]\label{def:1-2-4-cjto-paginasSW}
    Sea $P$ el conjunto de las $M$ páginas del sitio web.
   \begin{equation}\label{eq:1-2-4-cjto-paginasSW}
     P = \left\{P_i,\ i=1\ldots M\right\}
   \end{equation}
-\end{Definition}
+\end{defn}
 
-\begin{Definition}[\emph{Enlaces internos} del sitio web]\label{def:1-2-4-cjto-enlacesInternos}
+\begin{defn}[\emph{Enlaces internos} del sitio web]\label{def:1-2-4-cjto-enlacesInternos}
    Sea $E$ el conjunto de todos los enlaces internos del sitio web.
   \begin{equation}\label{eq:1-2-4-cjto-enlacesSW}
     E = \left\{E_{ij},\ i\neq j,\ i,j\in\{1\ldots M\}\right\}
   \end{equation}
-\end{Definition}
+\end{defn}
 
 Ambos conjuntos son parte de la estructura física del sitio web. La forma más natural de representarlos nos la proporciona la \emph{Teoría de Grafos}. Un \grafo es una estructura con muchas propiedades que permiten hacer sobre ellos gran cantidad de cálculos y, sobre todo, su representación gráfica es muy fácil de interpretar y manipular con aplicaciones informáticas. Básicamente son colecciones de \emph{nodos} unidos (o no) entre sí mediante \emph{ejes}. Si representamos ambos conjuntos utilizando las páginas como nodos los ejes serán los enlaces de $E$, como muestra la figura~\ref{fig:grafoMEW}.
 
@@ -63,21 +63,21 @@ Para estudiar el comportamiento de nuestros usuarios hay que construir las \sns 
 
 Un problema que presenta la obtención de \sns es que no suele haber información precisa sobre las mismas en el \flog ya que el protocolo \texttt{html} carece de estado. Los usuarios de un sitio web son en su mayoría anónimos por lo que la finalización de una \sn se determina de forma heurística. Se han propuesto diversas alternativas: fijando un umbral a la duración máxima de una sesión (2, 4 u 8 horas, p.ej.), o al intervalo de tiempo máximo entre dos clickstream consecutivos (10 o 30 minutos, p.ej.), o una combinación de ambas, o incluso si ya se tienen clasificadas las páginas del sitio web en diferentes temáticas un cambio de temática podría interpretarse como un final de sesión. Existen muchos trabajos que abordan este tema (\cite{HeGoker-DetectingSessionBoundaries-2000,HuangPengAnSchuurmansCercone-SessionBoundaryDetection-2003}; \citeauthor{HuangPengAnSchuurmans-DynamicWebLogSessionBoundaryDetection-2004}, \cite*{HuangPengAnSchuurmans-DynamicWebLogSessionBoundaryDetection-2004}, \cite*{HuangPengAnSchuurmans-DynamicWebLogSessionIdentification-2004}).
 
-\begin{Definition}[\Sn]\label{def:1-2-4-sesion}
+\begin{defn}[\Sn]\label{def:1-2-4-sesion}
   Una \sn es un vector ordenado de las páginas visitadas por un usuario en un intervalo de tiempo determinado por $maxClick$ y $maxSession$ con información sobre el tiempo transcurrido entre la visita de cada par de páginas del vector
   \begin{equation}\label{eq:1-2-4-primerasSesiones}
     s_i = \left({userID}, p_1, u_1, p_2, u_2\ldots p_{n_i-1}, u_{n_i-1}, p_{n_i}\right)
   \end{equation}
-\end{Definition}
+\end{defn}
 
 Con este procedimiento obtendremos $N$ vectores como el expuesto en la ecuación~\ref{eq:1-2-4-primerasSesiones}, donde $i$ enumera las diferentes sesiones, $userID$ identifica al usuario que ha hecho la solicitud, $p_j$ representa la página solicitada y $u_j$ el tiempo que permanece en ella o, mejor dicho, el tiempo transcurrido entre la solicitud de la página $p_j$ y la de $p_{j+1}$ (realmente no sabemos qué hizo el usuario durante ese tiempo). $n_i$ es el número de páginas visitadas en la sesión $i$-ésima, con lo que el número de registros del \flog reducido coincide con $\sum_{i=1}^N{n_i}$. Nótese que desconocemos $u_{n_i}$ pues tras la visita de la página $p_{n_i}$ finaliza la sesión, si quisiéramos usar el tiempo de permanencia en todas las páginas de una sesión deberíamos estimar $u_{n_i}$.
 
-\begin{Definition}[Conjunto de \sns]\label{def:1-2-4-cjto-sesion}
+\begin{defn}[Conjunto de \sns]\label{def:1-2-4-cjto-sesion}
   Sea $S$ el conjunto de todas las \sns obtenidas tras la fase de transformación
   \begin{equation}\label{eq:1-2-4-cjto-sesiones}
     S = \left\{s_i, i = 1\ldots N\right\}
   \end{equation}
-\end{Definition}
+\end{defn}
 
 % \afterpage{\clearpage}
 \lstinputlisting[style=miSQL,
@@ -120,34 +120,34 @@ La Estadística y la Informática llevan muchos años trabajando conjuntamente, 
 
 Nosotros estamos trabajando desde la perspectiva de la \WUM por lo que nos centraremos en la información que tenemos sobre el uso del sitio web, las \sns. Es inmediato deducir que podemos extraer dos nuevos conjuntos de datos, para conocer qué páginas de $P$ y qué enlaces de $E$ se utilizan en realidad en nuestro sitio web. De hecho el conjunto de páginas visitadas lo podríamos obtener antes de haber creado las \sns.
 
-\begin{Definition}[\emph{Páginas visitadas} del sitio web]\label{def:1-2-4-cjto-paginasVisitadasSW}
+\begin{defn}[\emph{Páginas visitadas} del sitio web]\label{def:1-2-4-cjto-paginasVisitadasSW}
    Sea $P' \subseteq P$ el conjunto de todas las páginas visitadas en el sitio web y $flog_{red}$ el \flog reducido.
   \begin{equation}\label{eq:1-2-4-cjto-paginasVisitadasSW}
      P' = \left\{P_i \in P \ | \ P_i \in flog_{red}\right\} = \left\{P_i \in P \ | \ P_i \in S\right\}
   \end{equation}
-\end{Definition}
+\end{defn}
 
 El primer análisis que se puede llevar a cabo es el estudio de $\neg P'$, las páginas de $P$ que nunca visitan nuestros usuarios. Si son irrelevantes o su contenido ya está en otra página de $P'$ sería bueno eliminarlas, junto a los enlaces que apuntan a ellas, para reducir las dimensiones del sitio web sin perder su verdadera utilidad, ganando en usabilidad. Si son importantes habrá que plantear si debe mejorarse $E$ o simplemente mejorar el texto de los mensajes de los enlaces que apuntan a estas páginas para que sean comprendidos por los usuarios del sitio web. Deben anotarse para poder comprobar en futuros análisis del sitio web si ha tenido efecto el cambio realizado.
 
 La frecuencia de uso de cada página, $N_i$, es un indicador de su popularidad, pero aún no sabemos si una página es popular por ser el \emph{objetivo} de muchos de nuestros usuarios o simplemente lo es como página de \emph{transición} entre otras páginas. Si el conocimiento adquirido al final del proceso de \WUM se integra adecuadamente se podrá observar un cambio en estas frecuencias, en tal caso es posible que páginas que sólo se usan como \emph{transición} desaparecen de muchas las nuevas \sns.
 
-\begin{Definition}[Tiempo de permanencia en las \emph{páginas visitadas}]\label{def:1-2-4-tiempoPermanencia:paginasVisitadasSW}
+\begin{defn}[Tiempo de permanencia en las \emph{páginas visitadas}]\label{def:1-2-4-tiempoPermanencia:paginasVisitadasSW}
    Sea $\overrightarrow{u}_i$ el conjunto de tiempos de permanencia en la página $P_i$.
   \begin{equation}\label{eq:1-2-4-tiempoPermanencia}
     \overrightarrow{u}_i = \left(u_{1}, \ldots u_{N_i}\right)
   \end{equation}
-\end{Definition}
+\end{defn}
 
 En $\overrightarrow{u}_i$ guardamos el tiempo de permanencia de algunas de las $N_i$ visitas que ha recibido la pagina $P_i$. Si $P_i$ es la última página de una \sn no sabemos cuánto tiempo ha permanecido el usuario en esa página durante esa sesión por lo que no es un dato que conozcamos. Se pueden hacer rápidas estimaciones a partir de \overrightarrow{u_i}. Su media, moda o intervalos de confianza podrían darnos información sobre el uso de las páginas del sitio web y orientarnos hacia la siguiente fase, la aplicación de una técnica de \DM para extraer conocimientos más profundos sobre los datos en estudio.
 
 El conjunto de enlaces de $E$ realmente utilizados por nuestros usuarios forma parte de la información que contienen las \sns.
 
-\begin{Definition}[\emph{Enlaces internos utilizados} en el sitio web]\label{def:1-2-4-cjto-enlacesInternosUsados}
+\begin{defn}[\emph{Enlaces internos utilizados} en el sitio web]\label{def:1-2-4-cjto-enlacesInternosUsados}
    Sea $E' \subset E$ el conjunto de todos los enlaces internos \emph{utilizados} por los usuarios del sitio web. Se define $E'_{jk}$ cuando existe alguna sesión que contiene la secuencia $P_j, n_j, P_k$.
   \begin{equation}\label{eq:1-2-4-cjto-enlacesUsados}
     E' = \left\{E_{jk} \in E,\ | \ \exists s_i \in S \ | \ (P_j, n_j, P_k) \in s_i,\ j\neq k,\ j,k\in\{1\ldots M\}\right\}
   \end{equation}
-\end{Definition}
+\end{defn}
 
 La comparación entre $E$ y $E'$ nos permitirá preguntarnos por qué no se usan los enlaces de $\neg E'$. Para reducir las dimensiones de $\neg E'$ basta con aplicar lo que ya podemos inferir de $P'$, que si $P_i \notin P' \Leftarrow E_{ij} \wedge E_{ji} \notin E'$. El uso de enlaces está estrechamente relacionado con el uso de las páginas del sitio web, la mayoría de información obtenida al analizar $P'$ coincidirá con la obtenida al analizar $E'$, sin embargo en $E'$ podemos observar la relación encontrada por los usuarios entre las páginas de nuestro sitio web sin recurrir a técnicas de \DM.
 

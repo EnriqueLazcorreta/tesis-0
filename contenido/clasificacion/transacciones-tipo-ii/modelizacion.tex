@@ -1,33 +1,54 @@
 % !TEX root = ../../../Lazcorreta.Tesis.tex
 \ABIERTO
-\clearpage
-A partir de esta sección usaré la notación de \citet{WangWong-FromAssociationToClassificationInferenceUsingWeightOfEvidence-2003} adaptada a la que ya he utilizado en este libro.
+La notación usada en todos los artículos revisados sobre esta materia es muy dispersa, a lo que hay que sumar que no soy experto en \Clasificacion por lo que no tengo asimilado el vocabulario de esta disciplina. En este capítulo se ha usar una notación que permita desarrollar definiciones, teoremas, propiedades o lemas en un escenario que no he encontrado en la basta bibliografía que he consultado, por lo que necesitará el uso de nuevos términos o la adaptación de términos existentes a este escenario.
+
+%A partir de esta sección usaré la notación de \citet{WangWong-FromAssociationToClassificationInferenceUsingWeightOfEvidence-2003} adaptada a la que ya he utilizado en este libro.
+
+Tenemos grandes \DBs a nuestra disposición pero generalmente no nos interesa toda la información que contienen para realizar cierta investigación. En estos casos se debe obtener sólo aquellas partes de la(s) DB(s) que contienen información relevante para el estudio concreto que estamos llevando a cabo. De ahí que podemos encontrar millones de \datasets que pueden provenir de la misma \DB pero tienen información diferente. Ya se mencionó en la sección~\ref{sec:srw:muw} la importancia de filtrar y transformar adecuadamente los datos originales para no trabajar con información que no sabremos interpretar y sólo ralentizarán o imposibilitarán la ejecución del algoritmo.
+
+En esta fase de la investigación trabajaremos exclusivamente con \datasets públicos de \Clasificacion, a los que me referiré como \emph{\dataset-original}. A partir de cada \dataset-original, tras el análisis de \dm correspondiente, se obtendrán nuevos \datasets que representarán de algún modo al \dataset-original. Para diferenciarlos hablaremos de \emph{\dataset-compacto} o \emph{\dataset-reducido} o \emph{\dataset} en general.
+
+\begin{defn}[Experimento de \Clasificacion]
+   Un \emph{Experimento de \Clasificacion} se define por las \clases y \atributos seleccionados (y su agrupamiento) para realizar el experimento. También está ligado a una población y a la(s) muestra(s) y \dataset(s) que tenemos.
+\label{def:evento-primario}
+\end{defn}
+
+
+
+
+
+
 
 \borrar{Definir \atributos, \clases\ldots}
 
 %TODO: Considerar añadir ejemplo a indice-alfabetico pero CREO QUE NO.
 Consideremos que tenemos un \dataset \D con $M$ ejemplos. Cada ejemplo está representado por $N$ \atributos, cada uno de los cuales puede tomar valores en un alfabeto discreto finito. Sea $X = \{X_1,\ldots,X_N\}$ una representación de este conjunto de \atributos. Entonces, cada atributo $X_i,\ 1\leq i\leq N$, podría considerarse una variable aleatoria que toma valores de su alfabeto $\alpha_i = \{\alpha_i^1,\ldots,\alpha_i^{m_i}\}$, donde $m_i$ representa la cardinalidad del alfabeto del $i$-ésimo \atributo. Entonces, una realización de $X$ se puede denotar mediante $x_j = \{x_{1j},\ldots,x_{Nj}\}$, donde $x_{ij} \in \alpha_i$. Así, cada ejemplo de \D es una observación de $X$
 
-\begin{Definition}[Evento primario]
+\begin{defn}[Evento primario]
    Un \emph{evento primario} de una variable aleatoria $X_i, 1\leq i\leq N$, es una realización de $X_i$, que toma un valor de $\alpha_i$.
 \label{def:evento-primario}
-\end{Definition}
+\end{defn}
 
-Denotaremos el $p$ ($1\leq p\leq m_i$) evento primario de $X_i$ con $[X_i = \alpha_i^p]$, o simplemente $x_{ip}$. Asumimos que dos eventos primarios, $x_{ip}$ y $x_{iq}$ de la misma variable $X_i$ son mutuamente excluyentes si $p\neq q$.
+Denotaremos el $p$ ($1\leq p\leq m_i$) evento primario de $X_i$ con $[X_i = \alpha_i^p]$, o simplemente $x_{ip}$. 
+
+\begin{prop}[Unicidad]
+   Asumimos que dos eventos primarios, $x_{ip}$ y $x_{iq}$ de la misma variable $X_i$ son mutuamente excluyentes si $p\neq q$.
+\label{prop:unicidad}
+\end{prop}
 
 Sea $s$ un subconjunto de $k$ enteros distintos entre 1 y $N$, $k\leq N$, y sea $X^s$ un subconjunto de $X$ tal que $X^s = \{X_i | i\in s\}$. Así, $x^s$ es una realización de $X^s$.
 
-\begin{Definition}[Evento compuesto]
+\begin{defn}[Evento compuesto]
    Un \emph{evento compuesto} de un conjunto de variables aleatorias $X^s$, es un conjunto de eventos primarios representados por la realización $x^s$. El orden del evento compuesto es $|s|$. Un sub-evento\borrar{La traducción literal sería evento sub-compuesto.} de $x_j^s$\borrar{$x^s$} es un evento compuesto $x_j^{s'}\ \forall s'\subset s$ y $s'\neq\emptyset$.
 \label{def:evento-compuesto}
-\end{Definition}
+\end{defn}
 
 Un evento 1-compuesto es un evento primario. Un evento $k$-compuesto está formado por $k$ eventos primarios de $k$ variables distintas. Cada ejemplo completo de un \dataset es un evento $N$-compuesto.
 
-\begin{Definition}[Patrón de asociación significativo]
+\begin{defn}[Patrón de asociación significativo]
    Sea $\mathcal{T}$ un test de significancia estadística. Si la ocurrencia de un evento compuesto $x_j^s$ es significativamente diferente de su estimación basada en un modelo probabilístico por defecto, diremos que $x_j^s$ es un \emph{patrón de asociación significativo}, o simplemente una \emph{asociación}, de orden $|s|$, y que los eventos primarios de $x_j^s$ tienen una asociación estadísticamente significativa de acuerdo con $\mathcal{T}$ o simplemente están \emph{asociados}.
 \label{def:patron-de-asociación-significativo}
-\end{Definition}
+\end{defn}
 
 
 
@@ -50,19 +71,19 @@ Utilizaremos los términos \emph{patrón}, \emph{asociación significativa} y \e
 
 
 %TODO: Ver cómo mejoro esta definición cuando haya introducido la de Atributo, Valor...
-\begin{Definition}[\Registro]
+\begin{defn}[\Registro]
    En un problema de \Clasificacion con $k$ \atributos en estudio, un \registro \reg es un $k$-\itemset, un subconjunto ordenado de $k$ elementos de \I en el que el $i$-ésimo ítem representa el valor tomado por un individuo en el \atributo $\A_i$.
    \begin{equation}\label{eq:def-registro}
      \reg \subseteq \I = \left\{I_j\ | \ I_j \in \I,\ j = 1 \ldots k\right\}
    \end{equation}
 \label{def:registro}
-\end{Definition}
+\end{defn}
 
-\begin{Definition}[\RegClas]
+\begin{defn}[\RegClas]
    En un problema de \Clasificacion con $k$ \atributos en estudio, un \RegClas es un ($k$+1)-\itemset, un subconjunto ordenado de $k$+1 elementos de \I formado por un \registro y la clase a la que pertenece.
 %   \begin{equation}\label{eq:1-3-2-transaccion}
 %     \T \subseteq \I = \left\{I_j\ | \ I_j \in \I,\ j = 1 \ldots k\right\}
 %   \end{equation}
 \label{def:registro-clasificado}
-\end{Definition}
+\end{defn}
 
