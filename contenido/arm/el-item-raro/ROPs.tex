@@ -26,35 +26,12 @@ Las \ROPs son \ARs interpretadas en sentido inverso. Pueden ser útiles cuando a
 
 
 
-En un Sistema de Recomendación Web se utiliza
-información sobre taxonomías, contenido
-semántico y uso del portal para hacer sugerencias
-a sus usuarios. Sin embargo cuando un ítem es
-nuevo no puede obtenerse información de su uso
-hasta que no logra un cierto \soporte. Las reglas de
-oportunidad permiten incorporar en el sistema la
-información de uso de los ítems nuevos de modo
-automático.
+En un \srw se utiliza información sobre taxonomías, contenido semántico y uso del portal para hacer sugerencias a sus usuarios. Sin embargo cuando un ítem es nuevo no puede obtenerse información de su uso hasta que no logra un cierto \soporte. Las \ROPs permiten incorporar en el sistema la información de uso de los ítems nuevos de modo automático.
 
-Las RO contienen los ítems frecuentes que son
-visitados conjuntamente con los ítems sin \soporte
-mínimo. Esto nos permite sugerir un \ir a
-los usuarios que visitan alguna de las páginas que
-más favorecen la presencia de dicho ítem, p.ej. la
-página A.
+Las \rops contienen los ítems frecuentes que son visitados conjuntamente con los ítems que no alcanzan el \soporte mínimo. Esto nos permite sugerir un \ir a los usuarios que visitan alguna de las páginas que más favorecen la presencia de dicho ítem, p.ej. la página $A$.
 
-Si la sugerencia es acertada es de esperar que el
-\ir vaya aumentando su \soporte y se incorpore
-de modo natural al proceso de estudio de
-reglas de asociación, mostrando una asociación
-cada vez más fuerte a la página A.
+\begin{itemize}
+  \item Si la sugerencia es acertada es de esperar que el \ir vaya aumentando su \soporte y se incorpore de modo natural al proceso de estudio de \ars, mostrando una asociación vez más fuerte a la página $A$.
+  \item Si la sugerencia no es acertada el ítem seguirá siendo raro y su asociación con la página $A$ se irá diluyendo a favor de una asociación con otras páginas con las que realmente sea más afín. Esto se debe a que el número de veces que aparece el \ir en \D es pequeño y cualquier aparición nueva del ítem modificará sustancialmente los porcentajes en que se basan los algoritmos de búsqueda de \ARs y \ROPs.
+\end{itemize}
 
-Si la sugerencia no es acertada el ítem seguirá
-siendo raro y su asociación con la página A se irá
-diluyendo a favor de una asociación con otras
-páginas con las que realmente sea más afín. Esto
-se debe a que el número de veces que aparece el
-\ir en \D es pequeño y cualquier aparición
-nueva del ítem modificará sustancialmente los
-porcentajes en que se basan los algoritmos de
-búsqueda de \ARs y \ROPs.
